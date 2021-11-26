@@ -1,8 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter_test/flutter_test.dart';
-import 'package:fraction/fraction.dart';
 import 'package:music_xml/music_xml.dart';
+import 'package:test/test.dart';
 
 final file = File('test/assets/musicXML.xml');
 
@@ -12,7 +11,7 @@ void main() {
     test('MusicXmlDocument.parse', () {
       expect(document.scoreParts.length, 1);
       expect(document.parts.length, 1);
-      expect(document.totalTimeSecs, moreOrLessEquals(49.5));
+      expect(document.totalTimeSecs, closeTo(49.5, 1E-1));
     });
 
     test('ScorePart.parse', () {
@@ -55,18 +54,18 @@ void main() {
       final duration =
           document.parts.single.measures.first.notes.last.noteDuration;
       expect(duration.duration, 2);
-      expect(duration.midiTicks, moreOrLessEquals(73.33333333333333));
-      expect(duration.seconds, moreOrLessEquals(0.16666666666666666));
-      expect(duration.timePosition, moreOrLessEquals(1.3333333333333333));
+      expect(duration.midiTicks, closeTo(73.33333333333333, 0));
+      expect(duration.seconds, closeTo(0.16666666666666666, 0));
+      expect(duration.timePosition, closeTo(1.3333333333333333, 0));
       expect(duration.dots, 0);
       expect(duration.type, 'eighth');
-      expect(duration.tupletRatio, Fraction(3, 2));
+      expect(duration.tupletRatio, closeTo(1.5, 0));
       expect(duration.isGraceNote, false);
     });
 
     test('ChordSymbol.parse', () {
       final chordSymbol = document.parts.single.measures[1].chordSymbols.single;
-      expect(chordSymbol.timePosition, moreOrLessEquals(1.5));
+      expect(chordSymbol.timePosition, closeTo(1.5, 0));
       expect(chordSymbol.root, 'F');
       expect(chordSymbol.kind, '');
       expect(chordSymbol.degrees.length, 0);

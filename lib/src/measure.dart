@@ -1,4 +1,3 @@
-import 'package:fraction/fraction.dart';
 import 'package:xml/xml.dart';
 
 import 'chord_symbol.dart';
@@ -159,7 +158,7 @@ class Measure {
     // Multiply divisions by 4 because division is always parts per quarter note
     final numerator = duration;
     final denominator = state.divisions * 4;
-    final fractionalTimeSignature = Fraction(numerator, denominator);
+    final fractionalTimeSignature = numerator / denominator;
 
     if (state.timeSignature == null && timeSignature == null) {
       // No global time signature yet and no measure time signature defined
@@ -171,10 +170,8 @@ class Measure {
       timeSignature!.denominator = denominator;
       state.timeSignature = timeSignature;
     } else {
-      final fractionalStateTimeSignature = Fraction(
-        state.timeSignature!.numerator,
-        state.timeSignature!.denominator,
-      );
+      final fractionalStateTimeSignature =
+          state.timeSignature!.numerator / state.timeSignature!.denominator;
 
       // Check for pickup measure. Reset time signature to smaller numerator
       final pickupMeasure = numerator < state.timeSignature!.numerator;
@@ -196,7 +193,7 @@ class Measure {
         newTimeSignature.numerator = numerator;
         newTimeSignature.denominator = denominator;
 
-        final newTimeSigFraction = Fraction(numerator, denominator);
+        final newTimeSigFraction = numerator / denominator;
         if (newTimeSigFraction == fractionalTimeSignature) {
           newTimeSignature.numerator = numerator;
           newTimeSignature.denominator = denominator;

@@ -1,5 +1,3 @@
-import 'package:fraction/fraction.dart';
-
 import 'music_xml_parser_state.dart';
 
 /// Standard pulses per quarter.
@@ -26,7 +24,7 @@ class NoteDuration {
   String type = 'quarter';
 
   /// Ratio for tuplets (default to 1)
-  Fraction tupletRatio = Fraction(1);
+  double tupletRatio = 1.0;
 
   bool isGraceNote = true;
 

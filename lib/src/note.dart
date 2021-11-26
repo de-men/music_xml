@@ -1,4 +1,3 @@
-import 'package:fraction/fraction.dart';
 import 'package:xml/xml.dart';
 
 import 'music_xml_parser_state.dart';
@@ -119,7 +118,7 @@ class Note {
         int.parse(xmlTimeModification.getElement('actual-notes')!.text);
     final denominator =
         int.parse(xmlTimeModification.getElement('normal-notes')!.text);
-    noteDuration.tupletRatio = Fraction(numerator, denominator);
+    noteDuration.tupletRatio = numerator / denominator;
   }
 }
 
