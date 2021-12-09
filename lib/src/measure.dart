@@ -17,16 +17,19 @@ class Measure {
   KeySignature? keySignature;
   int duration = 0;
 
+  Measure._();
+
   /// Parse the <measure> element.
-  Measure(XmlElement xmlMeasure, MusicXMLParserState state) {
-    // Cumulative duration in MusicXML duration.
-    // Used for time signature calculations
-    // Record the starting time of this measure so that time signatures
-    // can be inserted at the beginning of the measure
+  factory Measure.parse(XmlElement xmlMeasure, MusicXMLParserState state) {
     final startTimePosition = state.timePosition;
-    _parse(xmlMeasure, state);
-    // Update the time signature if a partial or pickup measure
-    _fixTimeSignature(state, startTimePosition);
+    return Measure._()
+      // Cumulative duration in MusicXML duration.
+      // Used for time signature calculations
+      // Record the starting time of this measure so that time signatures
+      // can be inserted at the beginning of the measure
+      .._parse(xmlMeasure, state)
+      // Update the time signature if a partial or pickup measure
+      .._fixTimeSignature(state, startTimePosition);
   }
 
   void _parse(XmlElement xmlMeasure, MusicXMLParserState state) {
@@ -45,7 +48,7 @@ class Measure {
           _parseForward(child, state);
           break;
         case 'note':
-          final note = Note(child, state);
+          final note = Note.parse(child, state);
           notes.add(note);
           // Keep track of current note as previous note for chord timings
           state.previousNote = note;
@@ -56,7 +59,7 @@ class Measure {
           }
           break;
         case 'harmony':
-          final chordSymbol = ChordSymbol(child, state);
+          final chordSymbol = ChordSymbol.parse(child, state);
           chordSymbols.add(chordSymbol);
           break;
         default:
@@ -73,7 +76,7 @@ class Measure {
           state.divisions = int.parse(child.text);
           break;
         case 'key':
-          keySignature = KeySignature(state, child);
+          keySignature = KeySignature.parse(state, child);
           break;
         case 'time':
           if (timeSignature == null) {

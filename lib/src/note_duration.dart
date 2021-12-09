@@ -21,50 +21,82 @@ class NoteDuration {
   int dots = 0;
 
   /// MusicXML duration type
-  String type = 'quarter';
+  String type;
 
   /// Ratio for tuplets (default to 1)
-  double tupletRatio = 1.0;
+  double tupletRatio;
 
-  bool isGraceNote = true;
+  bool isGraceNote;
 
-  late final MusicXMLParserState _state;
-
-  NoteDuration(MusicXMLParserState state) {
-    _state = state;
-  }
+  NoteDuration._(
+    this.duration,
+    this.midiTicks,
+    this.seconds,
+    this.timePosition,
+    this.dots,
+    this.type,
+    this.tupletRatio,
+    this.isGraceNote,
+  );
 
   /// Parse the duration of a note and compute timings.
-  void parseDuration(bool isInChord, bool isGraceNote, String duration) {
-    this.duration = int.parse(duration);
+  factory NoteDuration.parse(
+    bool isInChord,
+    bool isGraceNote,
+    String? durationText,
+    int dots,
+    String? type,
+    double? tupletRatio,
+    MusicXMLParserState state,
+  ) {
+    int? duration;
+    double? midiTicks;
+    double? seconds;
+    double? timePosition;
+    bool? _isGraceNote;
 
-    // Due to an error in Sibelius' export, force this note to have the
-    // duration of the previous note if it is in a chord
-    if (isInChord) {
-      this.duration = _state.previousNote?.noteDuration.duration;
+    if (durationText != null) {
+      duration = int.parse(durationText);
+
+      // Due to an error in Sibelius' export, force this note to have the
+      // duration of the previous note if it is in a chord
+      if (isInChord) {
+        duration = state.previousNote?.noteDuration.duration;
+      }
+
+      midiTicks = duration?.toDouble() ?? 0.0;
+      midiTicks = midiTicks * (standardPpq / state.divisions);
+
+      seconds = midiTicks / standardPpq;
+      seconds = seconds * state.secondsPerQuarter;
+
+      timePosition = state.timePosition;
+
+      // Not sure how to handle durations of grace notes yet as they
+      // steal time from subsequent notes and they do not have a
+      // <duration> tag in the MusicXML
+      _isGraceNote = isGraceNote;
+
+      if (isInChord) {
+        // If this is a chord, set the time position to the time position
+        // of the previous note (i.e. all the notes in the chord will have
+        // the same time position)
+        timePosition = state.previousNote?.noteDuration.timePosition;
+      } else {
+        // Only increment time positions once in chord
+        state.timePosition += seconds;
+      }
     }
 
-    midiTicks = this.duration?.toDouble() ?? 0.0;
-    midiTicks = midiTicks! * (standardPpq / _state.divisions);
-
-    seconds = midiTicks! / standardPpq;
-    seconds = seconds! * _state.secondsPerQuarter;
-
-    timePosition = _state.timePosition;
-
-    // Not sure how to handle durations of grace notes yet as they
-    // steal time from subsequent notes and they do not have a
-    // <duration> tag in the MusicXML
-    this.isGraceNote = isGraceNote;
-
-    if (isInChord) {
-      // If this is a chord, set the time position to the time position
-      // of the previous note (i.e. all the notes in the chord will have
-      // the same time position)
-      timePosition = _state.previousNote?.noteDuration.timePosition;
-    } else {
-      // Only increment time positions once in chord
-      _state.timePosition += seconds!;
-    }
+    return NoteDuration._(
+      duration,
+      midiTicks,
+      seconds,
+      timePosition,
+      dots,
+      type ?? 'quarter',
+      tupletRatio ?? 1.0,
+      _isGraceNote ?? true,
+    );
   }
 }

@@ -5,38 +5,38 @@ import 'note_duration.dart';
 
 /// Internal representation of a MusicXML <note> element.
 class Note {
-  late final int midiChannel;
-  late final int midiProgram;
-  late final int velocity;
-  late final int voice;
-  late final bool isRest;
-  late final bool isInChord;
-  late final bool isGraceNote;
-  late final NoteDuration noteDuration;
+  final int midiChannel;
+  final int midiProgram;
+  final int velocity;
+  final int voice;
+  final bool isRest;
+  final bool isInChord;
+  final bool isGraceNote;
+  final NoteDuration noteDuration;
   MapEntry<String, int>? pitch;
 
   /// Parse the MusicXML <note> element.
-  Note(XmlElement xmlNote, MusicXMLParserState state) {
+  factory Note.parse(XmlElement xmlNote, MusicXMLParserState state) {
     var voice = 1;
     var isRest = false;
     var isInChord = false;
     var isGraceNote = false;
-    noteDuration = NoteDuration(state);
+    String? duration;
+    var dots = 0;
+    String? type;
+    double? tupletRatio;
 
-    midiChannel = state.midiChannel;
-    midiProgram = state.midiProgram;
-    velocity = state.velocity;
-
+    MapEntry<String, int>? pitch;
     for (final child in xmlNote.childElements) {
       switch (child.name.local) {
         case 'chord':
           isInChord = true;
           break;
         case 'duration':
-          noteDuration.parseDuration(isInChord, isGraceNote, child.text);
+          duration = child.text;
           break;
         case 'pitch':
-          _parsePitch(child, state);
+          pitch = _parsePitch(child, state);
           break;
         case 'rest':
           isRest = true;
@@ -45,14 +45,14 @@ class Note {
           voice = int.parse(child.text);
           break;
         case 'dot':
-          noteDuration.dots += 1;
+          dots++;
           break;
         case 'type':
-          noteDuration.type = child.text;
+          type = child.text;
           break;
         case 'time-modification':
           // A time-modification element represents a tuplet_ratio
-          _parseTuplet(child);
+          tupletRatio = _parseTuplet(child);
           break;
         case 'unpitched':
           throw UnsupportedError('Unpitched notes are not supported');
@@ -60,15 +60,46 @@ class Note {
         // Ignore other tag types because they are not relevant to Magenta.
       }
     }
+    final noteDuration = NoteDuration.parse(
+      isInChord,
+      isGraceNote,
+      duration,
+      dots,
+      type,
+      tupletRatio,
+      state,
+    );
 
-    this.voice = voice;
-    this.isRest = isRest;
-    this.isInChord = isInChord;
-    this.isGraceNote = isGraceNote;
+    return Note._(
+      state.midiChannel,
+      state.midiProgram,
+      state.velocity,
+      voice,
+      isRest,
+      isInChord,
+      isGraceNote,
+      noteDuration,
+      pitch,
+    );
   }
 
+  Note._(
+    this.midiChannel,
+    this.midiProgram,
+    this.velocity,
+    this.voice,
+    this.isRest,
+    this.isInChord,
+    this.isGraceNote,
+    this.noteDuration,
+    this.pitch,
+  );
+
   /// Parse the MusicXML <pitch> element.
-  void _parsePitch(XmlElement xmlPitch, MusicXMLParserState state) {
+  static MapEntry<String, int> _parsePitch(
+    XmlElement xmlPitch,
+    MusicXMLParserState state,
+  ) {
     final step = xmlPitch.getElement('step')?.text ?? '';
     var alterText = '';
     var alter = 0.0;
@@ -105,7 +136,7 @@ class Note {
     var midiPitch = pitchToMidiPitch(step, alter, octave);
     // Transpose MIDI pitch
     midiPitch += state.transpose;
-    pitch = MapEntry(pitchString, midiPitch);
+    return MapEntry(pitchString, midiPitch);
   }
 
   /// Parses a tuplet ratio.
@@ -113,12 +144,12 @@ class Note {
   /// Represented in MusicXML by the <time-modification> element.
   /// Args:
   ///   xmlTimeModification: An xml time-modification element.
-  void _parseTuplet(XmlElement xmlTimeModification) {
+  static double _parseTuplet(XmlElement xmlTimeModification) {
     final numerator =
         int.parse(xmlTimeModification.getElement('actual-notes')!.text);
     final denominator =
         int.parse(xmlTimeModification.getElement('normal-notes')!.text);
-    noteDuration.tupletRatio = numerator / denominator;
+    return numerator / denominator;
   }
 }
 

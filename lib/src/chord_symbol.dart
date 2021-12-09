@@ -93,13 +93,15 @@ class ChordSymbol {
   final degrees = <String>[];
   String? bass;
 
-  ChordSymbol(XmlElement xmlHarmony, MusicXMLParserState state) {
-    timePosition = state.timePosition;
+  ChordSymbol._();
+
+  factory ChordSymbol.parse(XmlElement xmlHarmony, MusicXMLParserState state) {
+    final instance = ChordSymbol._()..timePosition = state.timePosition;
 
     for (final XmlElement child in xmlHarmony.childElements) {
       switch (child.name.local) {
         case 'root':
-          _parseRoot(child, state);
+          instance._parseRoot(child, state);
           break;
         case 'kind':
           // Seems like this shouldn't happen but frequently does in the wild...
@@ -107,13 +109,13 @@ class ChordSymbol {
           if (!chordKindAbbreviations.containsKey(kindText)) {
             throw XmlParserException('Unknown chord kind: $kindText');
           }
-          kind = chordKindAbbreviations[kindText];
+          instance.kind = chordKindAbbreviations[kindText];
           break;
         case 'degree':
-          degrees.add(_parseDegree(child));
+          instance.degrees.add(instance._parseDegree(child));
           break;
         case 'bass':
-          _parseBass(child, state);
+          instance._parseBass(child, state);
           break;
         case 'offset':
           // Offset tag moves chord symbol time position.
@@ -121,7 +123,7 @@ class ChordSymbol {
             final offset = int.parse(child.text);
             final midiTicks = offset * standardPpq / state.divisions;
             final seconds = midiTicks / standardPpq * state.secondsPerQuarter;
-            timePosition += seconds;
+            instance.timePosition += seconds;
           } catch (e) {
             throw XmlParserException('Non-integer offset: ${child.text}');
           }
@@ -130,9 +132,11 @@ class ChordSymbol {
         // Ignore other tag types because they are not relevant to Magenta.
       }
     }
-    if (root == null && kind != 'N.C.') {
+    if (instance.root == null && instance.kind != 'N.C.') {
       throw XmlParserException('Chord symbol must have a root');
     }
+
+    return instance;
   }
 
   /// Parse the <root> tag for a chord symbol.

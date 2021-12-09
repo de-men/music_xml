@@ -40,7 +40,7 @@ class MusicXmlDocument extends XmlDocument {
     final state = MusicXMLParserState();
     var totalTimeSecs = 0.0;
     final parts = score.findAllElements('part').map((element) {
-      final part = Part(element, scoreParts, state);
+      final part = Part.parse(element, scoreParts, state);
       totalTimeSecs = max(totalTimeSecs, state.timePosition);
       return part;
     }).toList();

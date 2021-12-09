@@ -8,14 +8,19 @@ class KeySignature {
   late String mode;
   late double timePosition;
 
-  KeySignature(MusicXMLParserState state, [XmlElement? xmlKey]) {
-    // MIDI and MusicXML identify key by using "fifths":
-    // -1 = F, 0 = C, 1 = G etc.
-    key = 0;
-    // # mode is "major" or "minor" only: MIDI only supports major and minor
-    mode = 'major';
-    timePosition = -1;
-    if (xmlKey != null) _parse(xmlKey, state);
+  KeySignature._();
+
+  factory KeySignature.parse(MusicXMLParserState state, [XmlElement? xmlKey]) {
+    final instance = KeySignature._()
+      // MIDI and MusicXML identify key by using "fifths":
+      // -1 = F, 0 = C, 1 = G etc.
+      ..key = 0
+      // # mode is "major" or "minor" only: MIDI only supports major and minor
+      ..mode = 'major'
+      ..timePosition = -1;
+
+    if (xmlKey != null) instance._parse(xmlKey, state);
+    return instance;
   }
 
   /// Parse the MusicXML <key> element into a MIDI compatible key.

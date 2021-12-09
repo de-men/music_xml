@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Refactor constructors with factory
+
 ## 1.0.1
 
 * Remove redundant dependencies
