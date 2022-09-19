@@ -93,10 +93,10 @@ class ChordSymbol {
   final degrees = <String>[];
   String? bass;
 
-  ChordSymbol._();
+  ChordSymbol();
 
   factory ChordSymbol.parse(XmlElement xmlHarmony, MusicXMLParserState state) {
-    final instance = ChordSymbol._()..timePosition = state.timePosition;
+    final instance = ChordSymbol()..timePosition = state.timePosition;
 
     for (final XmlElement child in xmlHarmony.childElements) {
       switch (child.name.local) {

@@ -28,7 +28,7 @@ class NoteDuration {
 
   bool isGraceNote;
 
-  NoteDuration._(
+  NoteDuration(
     this.duration,
     this.midiTicks,
     this.seconds,
@@ -88,7 +88,7 @@ class NoteDuration {
       }
     }
 
-    return NoteDuration._(
+    return NoteDuration(
       duration,
       midiTicks,
       seconds,

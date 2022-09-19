@@ -9,7 +9,7 @@ class Tempo {
   final double qpm;
   final double timePosition;
 
-  Tempo._(this.qpm, this.timePosition);
+  Tempo(this.qpm, this.timePosition);
 
   /// Parse the MusicXML <sound> element and retrieve the tempo.
   ///
@@ -22,6 +22,6 @@ class Tempo {
       qpm = defaultQuartersPerMinute;
     }
 
-    return Tempo._(qpm, state.timePosition);
+    return Tempo(qpm, state.timePosition);
   }
 }

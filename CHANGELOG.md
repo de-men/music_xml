@@ -1,3 +1,7 @@
+## 1.0.4
+
+* Public constructor
+
 ## 1.0.3
 
 * Upgrade dependencies

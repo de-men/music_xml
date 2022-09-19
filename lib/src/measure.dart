@@ -17,12 +17,12 @@ class Measure {
   KeySignature? keySignature;
   int duration = 0;
 
-  Measure._();
+  Measure();
 
   /// Parse the <measure> element.
   factory Measure.parse(XmlElement xmlMeasure, MusicXMLParserState state) {
     final startTimePosition = state.timePosition;
-    return Measure._()
+    return Measure()
       // Cumulative duration in MusicXML duration.
       // Used for time signature calculations
       // Record the starting time of this measure so that time signatures

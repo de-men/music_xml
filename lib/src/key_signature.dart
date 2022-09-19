@@ -8,10 +8,10 @@ class KeySignature {
   late String mode;
   late double timePosition;
 
-  KeySignature._();
+  KeySignature();
 
   factory KeySignature.parse(MusicXMLParserState state, [XmlElement? xmlKey]) {
-    final instance = KeySignature._()
+    final instance = KeySignature()
       // MIDI and MusicXML identify key by using "fifths":
       // -1 = F, 0 = C, 1 = G etc.
       ..key = 0
