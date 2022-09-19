@@ -25,8 +25,10 @@ class MusicXmlDocument extends XmlDocument {
 
   /// Parse the uncompressed MusicXML document.
   factory MusicXmlDocument.parse(String input) {
-    final score = XmlDocument.parse(input);
+    return MusicXmlDocument.fromXml(XmlDocument.parse(input));
+  }
 
+  factory MusicXmlDocument.fromXml(XmlDocument score) {
     // Parse part-list
     final scoreParts = <String, ScorePart>{};
     score
@@ -45,10 +47,10 @@ class MusicXmlDocument extends XmlDocument {
       return part;
     }).toList();
 
-    return MusicXmlDocument._(score, scoreParts, parts, totalTimeSecs);
+    return MusicXmlDocument(score, scoreParts, parts, totalTimeSecs);
   }
 
-  MusicXmlDocument._(
+  MusicXmlDocument(
     this.score,
     this.scoreParts,
     this.parts,

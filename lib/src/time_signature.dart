@@ -12,7 +12,7 @@ class TimeSignature {
   int denominator;
   double timePosition;
 
-  TimeSignature._([
+  TimeSignature([
     this.numerator = -1,
     this.denominator = -1,
     this.timePosition = 0,
@@ -45,6 +45,6 @@ class TimeSignature {
       timePosition = state.timePosition;
     }
 
-    return TimeSignature._(numerator, denominator, timePosition);
+    return TimeSignature(numerator, denominator, timePosition);
   }
 }

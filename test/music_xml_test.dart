@@ -2,12 +2,94 @@ import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
 import 'package:test/test.dart';
+import 'package:xml/xml.dart';
 
 final file = File('test/assets/musicXML.xml');
 
 void main() {
-  final document = MusicXmlDocument.parse(file.readAsStringSync());
+  group('constructor', () {
+    test('ChordSymbol', () {
+      expect(ChordSymbol(), isNotNull);
+    });
+    test('KeySignature', () {
+      expect(KeySignature(), isNotNull);
+    });
+    test('MusicXMLParserState', () {
+      expect(MusicXMLParserState(), isNotNull);
+    });
+    test('ScorePart', () {
+      expect(ScorePart(), isNotNull);
+    });
+    test('Measure', () {
+      expect(Measure(), isNotNull);
+    });
+    test('NoteDuration', () {
+      expect(
+          NoteDuration(
+            null,
+            null,
+            null,
+            null,
+            0,
+            '',
+            0.0,
+            false,
+          ),
+          isNotNull);
+    });
+    test('Note', () {
+      expect(
+          Note(
+            0,
+            0,
+            0,
+            0,
+            false,
+            false,
+            false,
+            NoteDuration(
+              null,
+              null,
+              null,
+              null,
+              0,
+              '',
+              0.0,
+              false,
+            ),
+            null,
+          ),
+          isNotNull);
+    });
+    test('Part', () {
+      expect(Part('id', ScorePart(), [Measure()]), isNotNull);
+    });
+    test('Tempo', () {
+      expect(Tempo(0, 0), isNotNull);
+    });
+    test('TimeSignature', () {
+      expect(TimeSignature(), isNotNull);
+    });
+    test('MusicXmlDocument', () {
+      expect(
+        MusicXmlDocument(
+          XmlDocument([]),
+          {'scorePart': ScorePart()},
+          [
+            Part('id', ScorePart(), [Measure()]),
+          ],
+          0.0,
+        ),
+        isNotNull,
+      );
+      expect(
+        MusicXmlDocument.fromXml(XmlDocument([])),
+        isNotNull,
+      );
+    });
+  });
   group('parse', () {
+    final document = MusicXmlDocument.parse(file.readAsStringSync());
     test('MusicXmlDocument.parse', () {
       expect(document.scoreParts.length, 1);
       expect(document.parts.length, 1);

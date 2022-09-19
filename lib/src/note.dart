@@ -70,7 +70,7 @@ class Note {
       state,
     );
 
-    return Note._(
+    return Note(
       state.midiChannel,
       state.midiProgram,
       state.velocity,
@@ -83,7 +83,7 @@ class Note {
     );
   }
 
-  Note._(
+  Note(
     this.midiChannel,
     this.midiProgram,
     this.velocity,

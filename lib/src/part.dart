@@ -32,10 +32,10 @@ class Part {
       _repairEmptyMeasure(measure);
       return Measure.parse(measure, state);
     }).toList();
-    return Part._(id, scorePart, measures);
+    return Part(id, scorePart, measures);
   }
 
-  Part._(this.id, this.scorePart, this.measures);
+  Part(this.id, this.scorePart, this.measures);
 
   /// Repair a measure if it is empty by inserting a whole measure rest.
   /// If a <measure> only consists of a <forward> element that advances
