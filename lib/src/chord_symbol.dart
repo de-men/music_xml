@@ -1,3 +1,7 @@
+import 'package:music_xml/src/bass.dart';
+import 'package:music_xml/src/degree.dart';
+import 'package:music_xml/src/kind.dart';
+import 'package:music_xml/src/root.dart';
 import 'package:xml/xml.dart';
 
 import 'music_xml_parser_state.dart';
@@ -70,14 +74,18 @@ const chordKindAbbreviations = <String, String>{
 /// Internal representation of a MusicXML chord symbol <harmony> element.
 /// This represents a chord symbol with four components:
 /// 1) Root: a string representing the chord root pitch class, e.g. "C#".
+///     Use [rootTypeSafe] to get a detailed representation of root.
 /// 2) Kind: a string representing the chord kind, e.g. "m7" for minor-seventh,
 ///     "9" for dominant-ninth, or the empty string for major triad.
+///     Use [kindTypeSafe] to get a type save representation of kind.
 /// 3) Scale degree modifications: a list of strings representing scale degree
 ///     modifications for the chord, e.g. "add9" to add an unaltered ninth scale
 ///     degree (without the seventh), "b5" to flatten the fifth scale degree,
 ///     "no3" to remove the third scale degree, etc.
+///     Use [degreesTypeSafe] to get a type safe representation of root.
 /// 4) Bass: a string representing the chord bass pitch class, or None if the bass
 ///     pitch class is the same as the root pitch class.
+///     Use [bassTypeSafe] to get a type safe representation of bass.
 /// There's also a special chord kind "N.C." representing no harmony, for which
 /// all other fields should be None.
 /// Use the `get_figure_string` method to get a string representation of the chord
@@ -89,9 +97,13 @@ const chordKindAbbreviations = <String, String>{
 class ChordSymbol {
   late final double timePosition;
   String? root;
+  Root? rootTypeSafe;
   String? kind;
+  Kind? kindTypeSafe;
   final degrees = <String>[];
+  final degreesTypeSafe = <Degree>[];
   String? bass;
+  Bass? bassTypeSafe;
 
   ChordSymbol();
 
@@ -102,6 +114,7 @@ class ChordSymbol {
       switch (child.name.local) {
         case 'root':
           instance._parseRoot(child, state);
+          instance.rootTypeSafe = Root.parse(child, state);
           break;
         case 'kind':
           // Seems like this shouldn't happen but frequently does in the wild...
@@ -110,12 +123,15 @@ class ChordSymbol {
             throw XmlParserException('Unknown chord kind: $kindText');
           }
           instance.kind = chordKindAbbreviations[kindText];
+          instance.kindTypeSafe = parseKind(kindText);
           break;
         case 'degree':
           instance.degrees.add(instance._parseDegree(child));
+          instance.degreesTypeSafe.add(Degree.parse(child, state));
           break;
         case 'bass':
           instance._parseBass(child, state);
+          instance.bassTypeSafe = Bass.parse(child, state);
           break;
         case 'offset':
           // Offset tag moves chord symbol time position.

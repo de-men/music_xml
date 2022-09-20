@@ -1,3 +1,5 @@
+import 'package:music_xml/src/barline.dart';
+import 'package:music_xml/src/print.dart';
 import 'package:xml/xml.dart';
 
 import 'chord_symbol.dart';
@@ -13,9 +15,11 @@ class Measure {
   final notes = <Note>[];
   final chordSymbols = <ChordSymbol>[];
   final tempos = <Tempo>[];
+  final prints = <Print>[];
   TimeSignature? timeSignature;
   KeySignature? keySignature;
   int duration = 0;
+  Barline? barline;
 
   Measure();
 
@@ -61,6 +65,12 @@ class Measure {
         case 'harmony':
           final chordSymbol = ChordSymbol.parse(child, state);
           chordSymbols.add(chordSymbol);
+          break;
+        case 'print':
+          prints.add(Print.parse(child, state));
+          break;
+        case 'barline':
+          barline = Barline.parse(child, state);
           break;
         default:
         // Ignore other tag types because they are not relevant to Magenta.

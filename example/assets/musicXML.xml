@@ -59,7 +59,7 @@
     </part-list>
     <part id="P1">
         <measure width="492.75" number="1">
-            <print>
+            <print page-number="1">
                 <system-layout>
                     <system-margins>
                         <left-margin>3.00</left-margin>
@@ -84,7 +84,7 @@
                 </clef>
             </attributes>
             <note>
-                <rest/>
+                <rest />
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -104,11 +104,18 @@
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tuplet type="start" bracket="no"/>
+                    <tuplet type="start" bracket="no" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
+                    <syllabic>single</syllabic>
+                    <text>1.</text>
+                    <elision> </elision>
                     <syllabic>begin</syllabic>
                     <text>Ma</text>
+                </lyric>
+                <lyric number="2" name="verse2">
+                    <syllabic>begin</syllabic>
+                    <text>Mo</text>
                 </lyric>
             </note>
             <note default-y="-20.00" default-x="237.10">
@@ -126,9 +133,13 @@
                 </time-modification>
                 <stem>down</stem>
                 <beam number="1">continue</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>ny</text>
+                </lyric>
+                <lyric number="2" name="verse2">
+                    <syllabic>end</syllabic>
+                    <text>re ...</text>
                 </lyric>
             </note>
             <note default-y="-15.00" default-x="287.91">
@@ -146,9 +157,9 @@
                 <stem>down</stem>
                 <beam number="1">end</beam>
                 <notations>
-                    <tuplet type="stop"/>
+                    <tuplet type="stop" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>a</text>
                 </lyric>
@@ -168,9 +179,9 @@
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tuplet type="start" bracket="no"/>
+                    <tuplet type="start" bracket="no" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>tear</text>
                 </lyric>
@@ -189,7 +200,7 @@
                 </time-modification>
                 <stem>down</stem>
                 <beam number="1">continue</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>has</text>
                 </lyric>
@@ -210,9 +221,9 @@
                 <stem>down</stem>
                 <beam number="1">end</beam>
                 <notations>
-                    <tuplet type="stop"/>
+                    <tuplet type="stop" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>to</text>
                 </lyric>
@@ -234,7 +245,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>fall</text>
                 </lyric>
@@ -249,7 +260,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>but</text>
                 </lyric>
@@ -264,7 +275,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>it's</text>
                 </lyric>
@@ -287,7 +298,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>all</text>
                 </lyric>
@@ -308,7 +319,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>in</text>
                 </lyric>
@@ -323,7 +334,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>the</text>
                 </lyric>
@@ -344,9 +355,9 @@
                 <duration>18</duration>
                 <voice>1</voice>
                 <type>half</type>
-                <dot/>
+                <dot />
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>game</text>
                 </lyric>
@@ -363,7 +374,7 @@
                 </system-layout>
             </print>
             <note>
-                <rest/>
+                <rest />
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -383,9 +394,9 @@
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tuplet type="start" bracket="no"/>
+                    <tuplet type="start" bracket="no" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>All</text>
                 </lyric>
@@ -405,7 +416,7 @@
                 </time-modification>
                 <stem>down</stem>
                 <beam number="1">continue</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>in</text>
                 </lyric>
@@ -425,9 +436,9 @@
                 <stem>down</stem>
                 <beam number="1">end</beam>
                 <notations>
-                    <tuplet type="stop"/>
+                    <tuplet type="stop" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>the</text>
                 </lyric>
@@ -454,9 +465,9 @@
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tuplet type="start" bracket="no"/>
+                    <tuplet type="start" bracket="no" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>won</text>
                 </lyric>
@@ -475,7 +486,7 @@
                 </time-modification>
                 <stem>down</stem>
                 <beam number="1">continue</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>middle</syllabic>
                     <text>der</text>
                 </lyric>
@@ -496,9 +507,9 @@
                 <stem>down</stem>
                 <beam number="1">end</beam>
                 <notations>
-                    <tuplet type="stop"/>
+                    <tuplet type="stop" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>ful</text>
                 </lyric>
@@ -520,7 +531,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>game</text>
                 </lyric>
@@ -535,7 +546,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>that</text>
                 </lyric>
@@ -550,7 +561,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>we</text>
                 </lyric>
@@ -573,7 +584,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>know</text>
                 </lyric>
@@ -587,7 +598,7 @@
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>as</text>
                 </lyric>
@@ -606,15 +617,15 @@
                     <octave>4</octave>
                 </pitch>
                 <duration>18</duration>
-                <tie type="start"/>
+                <tie type="start" />
                 <voice>1</voice>
                 <type>half</type>
-                <dot/>
+                <dot />
                 <stem>up</stem>
                 <notations>
-                    <tied type="start"/>
+                    <tied type="start" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>love.</text>
                 </lyric>
@@ -636,16 +647,16 @@
                     <octave>4</octave>
                 </pitch>
                 <duration>6</duration>
-                <tie type="stop"/>
+                <tie type="stop" />
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
                 <notations>
-                    <tied type="stop"/>
+                    <tied type="stop" />
                 </notations>
             </note>
             <note>
-                <rest/>
+                <rest />
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -660,7 +671,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>You</text>
                 </lyric>
@@ -676,7 +687,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>have</text>
                 </lyric>
@@ -692,7 +703,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>words</text>
                 </lyric>
@@ -706,7 +717,7 @@
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>with</text>
                 </lyric>
@@ -728,7 +739,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>him</text>
                 </lyric>
@@ -743,7 +754,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>and</text>
                 </lyric>
@@ -759,7 +770,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>your</text>
                 </lyric>
@@ -778,14 +789,14 @@
                     <octave>5</octave>
                 </pitch>
                 <duration>6</duration>
-                <tie type="start"/>
+                <tie type="start" />
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
                 <notations>
-                    <tied type="start"/>
+                    <tied type="start" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>fu</text>
                 </lyric>
@@ -796,13 +807,13 @@
                     <octave>5</octave>
                 </pitch>
                 <duration>3</duration>
-                <tie type="stop"/>
+                <tie type="stop" />
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tied type="stop"/>
+                    <tied type="stop" />
                 </notations>
             </note>
             <note default-y="-10.00" default-x="181.99">
@@ -815,7 +826,7 @@
                 <type>eighth</type>
                 <stem>down</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>ture's</text>
                 </lyric>
@@ -837,7 +848,7 @@
                 <accidental>natural</accidental>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>look</text>
                 </lyric>
@@ -852,7 +863,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>ing</text>
                 </lyric>
@@ -883,7 +894,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>dim,</text>
                 </lyric>
@@ -898,7 +909,7 @@
                 <type>eighth</type>
                 <stem>down</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>but</text>
                 </lyric>
@@ -913,7 +924,7 @@
                 <type>eighth</type>
                 <stem>down</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>these</text>
                 </lyric>
@@ -926,14 +937,14 @@
                     <octave>4</octave>
                 </pitch>
                 <duration>6</duration>
-                <tie type="start"/>
+                <tie type="start" />
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
                 <notations>
-                    <tied type="start"/>
+                    <tied type="start" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>things</text>
                 </lyric>
@@ -944,13 +955,13 @@
                     <octave>4</octave>
                 </pitch>
                 <duration>3</duration>
-                <tie type="stop"/>
+                <tie type="stop" />
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tied type="stop"/>
+                    <tied type="stop" />
                 </notations>
             </note>
             <note default-y="-25.00" default-x="221.04">
@@ -963,7 +974,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>your</text>
                 </lyric>
@@ -986,7 +997,7 @@
                 <accidental>sharp</accidental>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>hearts</text>
                 </lyric>
@@ -1001,7 +1012,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>can</text>
                 </lyric>
@@ -1023,7 +1034,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>rise</text>
                 </lyric>
@@ -1043,7 +1054,7 @@
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>a</text>
                 </lyric>
@@ -1064,9 +1075,9 @@
                 <duration>18</duration>
                 <voice>1</voice>
                 <type>half</type>
-                <dot/>
+                <dot />
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>bove</text>
                 </lyric>
@@ -1083,7 +1094,7 @@
                 </system-layout>
             </print>
             <note>
-                <rest/>
+                <rest />
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1109,9 +1120,9 @@
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tuplet type="start" bracket="no"/>
+                    <tuplet type="start" bracket="no" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>Once</text>
                 </lyric>
@@ -1131,7 +1142,7 @@
                 </time-modification>
                 <stem>down</stem>
                 <beam number="1">continue</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>in</text>
                 </lyric>
@@ -1151,9 +1162,9 @@
                 <stem>down</stem>
                 <beam number="1">end</beam>
                 <notations>
-                    <tuplet type="stop"/>
+                    <tuplet type="stop" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>a</text>
                 </lyric>
@@ -1180,9 +1191,9 @@
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tuplet type="start" bracket="no"/>
+                    <tuplet type="start" bracket="no" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>while</text>
                 </lyric>
@@ -1201,7 +1212,7 @@
                 </time-modification>
                 <stem>down</stem>
                 <beam number="1">continue</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>he</text>
                 </lyric>
@@ -1222,9 +1233,9 @@
                 <stem>down</stem>
                 <beam number="1">end</beam>
                 <notations>
-                    <tuplet type="stop"/>
+                    <tuplet type="stop" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>won't</text>
                 </lyric>
@@ -1246,7 +1257,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>call</text>
                 </lyric>
@@ -1261,7 +1272,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>but</text>
                 </lyric>
@@ -1276,7 +1287,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>it's</text>
                 </lyric>
@@ -1299,7 +1310,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>all</text>
                 </lyric>
@@ -1320,7 +1331,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>in</text>
                 </lyric>
@@ -1335,7 +1346,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>the</text>
                 </lyric>
@@ -1356,9 +1367,9 @@
                 <duration>18</duration>
                 <voice>1</voice>
                 <type>half</type>
-                <dot/>
+                <dot />
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>game</text>
                 </lyric>
@@ -1375,7 +1386,7 @@
                 </system-layout>
             </print>
             <note>
-                <rest/>
+                <rest />
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1395,9 +1406,9 @@
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tuplet type="start" bracket="no"/>
+                    <tuplet type="start" bracket="no" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>Soon</text>
                 </lyric>
@@ -1417,7 +1428,7 @@
                 </time-modification>
                 <stem>down</stem>
                 <beam number="1">continue</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>he'll</text>
                 </lyric>
@@ -1437,9 +1448,9 @@
                 <stem>down</stem>
                 <beam number="1">end</beam>
                 <notations>
-                    <tuplet type="stop"/>
+                    <tuplet type="stop" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>be</text>
                 </lyric>
@@ -1466,9 +1477,9 @@
                 <stem>down</stem>
                 <beam number="1">begin</beam>
                 <notations>
-                    <tuplet type="start" bracket="no"/>
+                    <tuplet type="start" bracket="no" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>there</text>
                 </lyric>
@@ -1487,7 +1498,7 @@
                 </time-modification>
                 <stem>down</stem>
                 <beam number="1">continue</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>at</text>
                 </lyric>
@@ -1508,9 +1519,9 @@
                 <stem>down</stem>
                 <beam number="1">end</beam>
                 <notations>
-                    <tuplet type="stop"/>
+                    <tuplet type="stop" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>your</text>
                 </lyric>
@@ -1532,7 +1543,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>side</text>
                 </lyric>
@@ -1547,7 +1558,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>with</text>
                 </lyric>
@@ -1562,7 +1573,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>a</text>
                 </lyric>
@@ -1585,7 +1596,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>sweet</text>
                 </lyric>
@@ -1599,7 +1610,7 @@
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>bou</text>
                 </lyric>
@@ -1618,15 +1629,15 @@
                     <octave>4</octave>
                 </pitch>
                 <duration>18</duration>
-                <tie type="start"/>
+                <tie type="start" />
                 <voice>1</voice>
                 <type>half</type>
-                <dot/>
+                <dot />
                 <stem>up</stem>
                 <notations>
-                    <tied type="start"/>
+                    <tied type="start" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>quet,</text>
                 </lyric>
@@ -1639,12 +1650,12 @@
                     <octave>4</octave>
                 </pitch>
                 <duration>12</duration>
-                <tie type="stop"/>
+                <tie type="stop" />
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
                 <notations>
-                    <tied type="stop"/>
+                    <tied type="stop" />
                 </notations>
             </note>
             <note default-y="-25.00" default-x="136.44">
@@ -1657,7 +1668,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>And</text>
                 </lyric>
@@ -1673,7 +1684,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>he'll</text>
                 </lyric>
@@ -1698,7 +1709,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>kiss</text>
                 </lyric>
@@ -1718,7 +1729,7 @@
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>tour</text>
                 </lyric>
@@ -1740,7 +1751,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>lips</text>
                 </lyric>
@@ -1755,7 +1766,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>and</text>
                 </lyric>
@@ -1770,7 +1781,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>ca</text>
                 </lyric>
@@ -1793,7 +1804,7 @@
                 <type>eighth</type>
                 <stem>down</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>ress</text>
                 </lyric>
@@ -1808,7 +1819,7 @@
                 <type>eighth</type>
                 <stem>down</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>your</text>
                 </lyric>
@@ -1823,7 +1834,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>wai</text>
                 </lyric>
@@ -1838,7 +1849,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>ting</text>
                 </lyric>
@@ -1853,7 +1864,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>fin</text>
                 </lyric>
@@ -1868,7 +1879,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>ger</text>
                 </lyric>
@@ -1890,7 +1901,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>tips;</text>
                 </lyric>
@@ -1905,7 +1916,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">begin</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>And</text>
                 </lyric>
@@ -1921,7 +1932,7 @@
                 <type>eighth</type>
                 <stem>up</stem>
                 <beam number="1">end</beam>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>your</text>
                 </lyric>
@@ -1943,7 +1954,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>hearts</text>
                 </lyric>
@@ -1957,7 +1968,7 @@
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>will</text>
                 </lyric>
@@ -1988,7 +1999,7 @@
                 <voice>1</voice>
                 <type>half</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>single</syllabic>
                     <text>fly</text>
                 </lyric>
@@ -2002,7 +2013,7 @@
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>begin</syllabic>
                     <text>a</text>
                 </lyric>
@@ -2020,15 +2031,15 @@
                     <octave>4</octave>
                 </pitch>
                 <duration>18</duration>
-                <tie type="start"/>
+                <tie type="start" />
                 <voice>1</voice>
                 <type>half</type>
-                <dot/>
+                <dot />
                 <stem>up</stem>
                 <notations>
-                    <tied type="start"/>
+                    <tied type="start" />
                 </notations>
-                <lyric number="1">
+                <lyric number="1" name="verse1">
                     <syllabic>end</syllabic>
                     <text>way.</text>
                 </lyric>
@@ -2041,22 +2052,22 @@
                     <octave>4</octave>
                 </pitch>
                 <duration>6</duration>
-                <tie type="stop"/>
+                <tie type="stop" />
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
                 <notations>
-                    <tied type="stop"/>
+                    <tied type="stop" />
                 </notations>
             </note>
             <note>
-                <rest/>
+                <rest />
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
             </note>
             <note>
-                <rest/>
+                <rest />
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
