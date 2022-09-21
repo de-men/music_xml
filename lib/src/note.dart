@@ -1,3 +1,5 @@
+import 'package:music_xml/src/lyric.dart';
+import 'package:music_xml/src/tie.dart';
 import 'package:xml/xml.dart';
 
 import 'music_xml_parser_state.dart';
@@ -14,6 +16,8 @@ class Note {
   final bool isGraceNote;
   final NoteDuration noteDuration;
   MapEntry<String, int>? pitch;
+  Iterable<Lyric>? lyrics;
+  Tie? tie;
 
   /// Parse the MusicXML <note> element.
   factory Note.parse(XmlElement xmlNote, MusicXMLParserState state) {
@@ -25,6 +29,9 @@ class Note {
     var dots = 0;
     String? type;
     double? tupletRatio;
+
+    final List<Lyric> lyrics = [];
+    Tie? tie;
 
     MapEntry<String, int>? pitch;
     for (final child in xmlNote.childElements) {
@@ -54,6 +61,12 @@ class Note {
           // A time-modification element represents a tuplet_ratio
           tupletRatio = _parseTuplet(child);
           break;
+        case 'lyric':
+          lyrics.add(Lyric.parse(child, state));
+          break;
+        case 'tie':
+          tie = Tie.parse(child, state);
+          break;
         case 'unpitched':
           throw UnsupportedError('Unpitched notes are not supported');
         default:
@@ -80,6 +93,8 @@ class Note {
       isGraceNote,
       noteDuration,
       pitch,
+      lyrics.isNotEmpty ? lyrics : null,
+      tie,
     );
   }
 
@@ -93,6 +108,8 @@ class Note {
     this.isGraceNote,
     this.noteDuration,
     this.pitch,
+    this.lyrics,
+    this.tie,
   );
 
   /// Parse the MusicXML <pitch> element.

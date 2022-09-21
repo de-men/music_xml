@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
+import 'package:music_xml/src/barline.dart';
+import 'package:music_xml/src/kind.dart';
+import 'package:music_xml/src/basic_attributes.dart';
 import 'package:test/test.dart';
 import 'package:xml/xml.dart';
 
@@ -57,6 +60,8 @@ void main() {
               0.0,
               false,
             ),
+            null,
+            null,
             null,
           ),
           isNotNull);
@@ -119,6 +124,19 @@ void main() {
       expect(measure.duration, 18);
     });
 
+    test('Print.parse', () {
+      final measures = document.parts.single.measures;
+      expect(measures.first.prints.first.pageNumber, 1);
+      expect(measures.first.prints.first.newSystem, false);
+      expect(measures[4].prints.first.newSystem, true);
+    });
+
+    test('Barline.parse', () {
+      final measures = document.parts.single.measures;
+      expect(measures.last.barline?.location, RightLeftMiddle.right);
+      expect(measures.last.barline?.barStyle, BarStyle.lightHeavy);
+    });
+
     test('Note.parse', () {
       final note = document.parts.single.measures.first.notes.last;
       expect(note.midiChannel, 1);
@@ -130,6 +148,39 @@ void main() {
       expect(note.isGraceNote, false);
       expect(note.pitch?.key, 'Bb4');
       expect(note.pitch?.value, 70);
+    });
+
+    group('Lyric.parse', () {
+      test('with a note containing multiple lyrics', () {
+        final note3 = document.parts.single.measures.first.notes[2];
+        expect(note3.lyrics?.first.syllabic, Syllabic.end);
+        expect(note3.lyrics?.first.text, 'ny');
+        expect(note3.lyrics?.first.name, 'verse1');
+
+        expect(note3.lyrics?.last.syllabic, Syllabic.end);
+        expect(note3.lyrics?.last.text, 're ...');
+        expect(note3.lyrics?.last.name, 'verse2');
+      });
+
+      test('with a note containing one lyric with multiple text items', () {
+        final lyric =
+            document.parts.single.measures.first.notes[1].lyrics!.first;
+        expect(lyric.name, 'verse1');
+
+        final firstTextItem = lyric.items.first;
+        expect(firstTextItem.syllabic, Syllabic.single);
+        expect(firstTextItem.text, '1.');
+
+        final secondTextItem = lyric.items.last;
+        expect(secondTextItem.syllabic, Syllabic.begin);
+        expect(secondTextItem.text, 'Ma');
+      });
+    });
+
+    test('Tie.parse', () {
+      final measures = document.parts.single.measures;
+      expect(measures[7].notes.first.tie?.type, StartStop.start);
+      expect(measures[8].notes.first.tie?.type, StartStop.stop);
     });
 
     test('Duration.parse', () {
@@ -152,6 +203,13 @@ void main() {
       expect(chordSymbol.kind, '');
       expect(chordSymbol.degrees.length, 0);
       expect(chordSymbol.bass, null);
+    });
+
+    test('Root.parse', () {
+      final chordSymbol = document.parts.single.measures[2].chordSymbols.first;
+      expect(chordSymbol.rootTypeSafe?.alter, -1);
+      expect(chordSymbol.rootTypeSafe?.step, Step.b);
+      expect(chordSymbol.kindTypeSafe, Kind.major);
     });
 
     test('TimeSignature.parse', () {

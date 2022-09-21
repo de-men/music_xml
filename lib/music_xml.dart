@@ -1,11 +1,14 @@
 export 'src/chord_symbol.dart';
 export 'src/key_signature.dart';
+export 'src/lyric.dart';
 export 'src/measure.dart';
 export 'src/music_xml_document.dart';
 export 'src/music_xml_parser_state.dart';
 export 'src/note.dart';
 export 'src/note_duration.dart';
 export 'src/part.dart';
+export 'src/print.dart';
 export 'src/score_part.dart';
 export 'src/tempo.dart';
 export 'src/time_signature.dart';
+export 'src/tie.dart';
