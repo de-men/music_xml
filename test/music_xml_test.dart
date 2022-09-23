@@ -73,7 +73,17 @@ void main() {
       expect(Tempo(0, 0), isNotNull);
     });
     test('TimeSignature', () {
-      expect(TimeSignature(), isNotNull);
+      final timeSignature = TimeSignature(
+        divisions: 2,
+        numerator: 4,
+        denominator: 8,
+        timePosition: 0,
+      );
+
+      expect(timeSignature.beats, 2);
+      expect(timeSignature.beatType, 4);
+      expect(timeSignature.numerator, 4);
+      expect(timeSignature.denominator, 8);
     });
     test('MusicXmlDocument', () {
       expect(
