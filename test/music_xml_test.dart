@@ -24,7 +24,7 @@ void main() {
       expect(ScorePart(), isNotNull);
     });
     test('Measure', () {
-      expect(Measure(), isNotNull);
+      expect(Measure(number: 0), isNotNull);
     });
     test('NoteDuration', () {
       expect(
@@ -67,7 +67,7 @@ void main() {
           isNotNull);
     });
     test('Part', () {
-      expect(Part('id', ScorePart(), [Measure()]), isNotNull);
+      expect(Part('id', ScorePart(), [Measure(number: 0)]), isNotNull);
     });
     test('Tempo', () {
       expect(Tempo(0, 0), isNotNull);
@@ -91,7 +91,7 @@ void main() {
           XmlDocument([]),
           {'scorePart': ScorePart()},
           [
-            Part('id', ScorePart(), [Measure()]),
+            Part('id', ScorePart(), [Measure(number: 0)]),
           ],
           0.0,
         ),
@@ -128,6 +128,7 @@ void main() {
 
     test('Measure.parse', () {
       final measure = document.parts.single.measures.first;
+      expect(measure.number, 1);
       expect(measure.notes.length, 7);
       expect(measure.chordSymbols.length, 0);
       expect(measure.tempos.length, 0);
