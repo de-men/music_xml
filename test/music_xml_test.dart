@@ -62,7 +62,7 @@ void main() {
             ),
             null,
             null,
-            null,
+            [],
           ),
           isNotNull);
     });
@@ -190,8 +190,8 @@ void main() {
 
     test('Tie.parse', () {
       final measures = document.parts.single.measures;
-      expect(measures[7].notes.first.tie?.type, StartStop.start);
-      expect(measures[8].notes.first.tie?.type, StartStop.stop);
+      expect(measures[7].notes.first.ties.first.type, StartStop.start);
+      expect(measures[8].notes.first.ties.first.type, StartStop.stop);
     });
 
     test('Duration.parse', () {

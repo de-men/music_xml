@@ -17,7 +17,7 @@ class Note {
   final NoteDuration noteDuration;
   MapEntry<String, int>? pitch;
   Iterable<Lyric>? lyrics;
-  Tie? tie;
+  List<Tie> ties;
 
   /// Parse the MusicXML <note> element.
   factory Note.parse(XmlElement xmlNote, MusicXMLParserState state) {
@@ -31,7 +31,7 @@ class Note {
     double? tupletRatio;
 
     final List<Lyric> lyrics = [];
-    Tie? tie;
+    List<Tie> ties = [];
 
     MapEntry<String, int>? pitch;
     for (final child in xmlNote.childElements) {
@@ -65,7 +65,7 @@ class Note {
           lyrics.add(Lyric.parse(child, state));
           break;
         case 'tie':
-          tie = Tie.parse(child, state);
+          ties.add(Tie.parse(child, state));
           break;
         case 'unpitched':
           throw UnsupportedError('Unpitched notes are not supported');
@@ -94,7 +94,7 @@ class Note {
       noteDuration,
       pitch,
       lyrics.isNotEmpty ? lyrics : null,
-      tie,
+      ties,
     );
   }
 
@@ -109,7 +109,7 @@ class Note {
     this.noteDuration,
     this.pitch,
     this.lyrics,
-    this.tie,
+    this.ties,
   );
 
   /// Parse the MusicXML <pitch> element.
