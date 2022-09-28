@@ -65,7 +65,7 @@ class Measure {
 
           // Sum up the MusicXML durations in voice 1 of this measure
           if (note.voice == 1 && !note.isInChord) {
-            duration += note.noteDuration.duration ?? 0;
+            duration += note.noteDuration.duration;
           }
           break;
         case 'harmony':

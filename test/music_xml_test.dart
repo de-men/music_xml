@@ -29,10 +29,10 @@ void main() {
     test('NoteDuration', () {
       expect(
           NoteDuration(
-            null,
-            null,
-            null,
-            null,
+            1,
+            1,
+            1.0,
+            0,
             0,
             '',
             0.0,
@@ -51,10 +51,10 @@ void main() {
             false,
             false,
             NoteDuration(
-              null,
-              null,
-              null,
-              null,
+              0,
+              0,
+              0,
+              0,
               0,
               '',
               0.0,
