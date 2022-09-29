@@ -1,3 +1,5 @@
+import 'package:music_xml/music_xml.dart';
+import 'package:music_xml/src/note.dart';
 import 'package:xml/xml.dart';
 
 import 'measure.dart';
@@ -32,7 +34,66 @@ class Part {
       _repairEmptyMeasure(measure);
       return Measure.parse(measure, state);
     }).toList();
+
+    // Update durations of tied notes
+    _updateDurationsOfTiedNotes(measures);
+
     return Part(id, scorePart, measures);
+  }
+
+  static void _updateDurationsOfTiedNotes(List<Measure> measures) {
+    // Collect all tied notes
+    final tiedNotes = Map<int, Map<int, List<Note>>>();
+
+    for (final measure in measures) {
+      final notes = measure.notes;
+      for (final currentNote in notes) {
+        // Skip untied notes
+        if (currentNote.ties.isEmpty) {
+          continue;
+        }
+
+        // If note is note on, create a new entry in tiedNotes
+        if (currentNote.isNoteOn) {
+          tiedNotes[currentNote.voice] = {
+            currentNote.pitch!.value: [currentNote],
+          };
+        }
+
+        // If note is a continuing note, add the note to tiedNotes
+        else if (currentNote.continuesOtherNote) {
+          final notes = tiedNotes[currentNote.voice]?[currentNote.pitch!.value];
+          assert(notes != null);
+          notes?.add(currentNote);
+        }
+
+        // If note ends, calculate tied duration
+        if (currentNote.isNoteOff) {
+          final notesForVoice = tiedNotes[currentNote.voice]!;
+          final pitch = currentNote.pitch!.value;
+          final notes = notesForVoice[pitch]!;
+          notesForVoice.remove(pitch);
+          final first = notes.first.noteDuration;
+          final tiedDuration = NoteDuration(
+            0,
+            0,
+            0,
+            first.timePosition,
+            first.dots,
+            first.type,
+            first.tupletRatio,
+            first.isGraceNote,
+          );
+
+          for (final tiedNote in notes) {
+            tiedDuration.duration += tiedNote.noteDuration.duration;
+            tiedDuration.midiTicks += tiedNote.noteDuration.midiTicks;
+            tiedDuration.seconds += tiedNote.noteDuration.seconds;
+            tiedNote.noteDurationTied = tiedDuration;
+          }
+        }
+      }
+    }
   }
 
   Part(this.id, this.scorePart, this.measures);

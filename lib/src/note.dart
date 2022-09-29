@@ -16,6 +16,7 @@ class Note {
   final bool isInChord;
   final bool isGraceNote;
   final NoteDuration noteDuration;
+  NoteDuration? _noteDurationTied;
   MapEntry<String, int>? pitch;
   Iterable<Lyric>? lyrics;
   List<Tie> ties;
@@ -113,11 +114,23 @@ class Note {
     this.ties,
   );
 
+  /// Returns the combined duration of tied notes
+  NoteDuration get noteDurationTied => _noteDurationTied ?? noteDuration;
+
+  /// Update the combined duration of tied notes
+  void set noteDurationTied(NoteDuration d) => _noteDurationTied = d;
+
   /// Returns true if this note is not tied to a previous note
   bool get isNoteOn => ties.isEmpty || ties.first.type != StartStop.stop;
 
   /// Returns true if this note is not tied to a following note
   bool get isNoteOff => ties.isEmpty || ties.last.type != StartStop.start;
+
+  /// Returns true if this note is tied to a previous note
+  bool get continuesOtherNote => !isNoteOn;
+
+  /// Returns true if this note is tied to a following note
+  bool get isContinuedByOtherNote => !isNoteOff;
 
   /// Parse the MusicXML <pitch> element.
   static MapEntry<String, int> _parsePitch(

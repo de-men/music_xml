@@ -186,17 +186,48 @@ void main() {
     });
 
     test('Tie.parse', () {
+      // Get two notes that are tied together
       final measures = document.parts.single.measures;
       final startNote = measures[7].notes.first;
       final stopNote = measures[8].notes.first;
       expect(startNote.ties.first.type, StartStop.start);
       expect(stopNote.ties.first.type, StartStop.stop);
 
+      // Check isNoteOn, isNoteOff
       expect(startNote.isNoteOn, isTrue);
       expect(startNote.isNoteOff, isFalse);
 
       expect(stopNote.isNoteOn, isFalse);
       expect(stopNote.isNoteOff, isTrue);
+
+      // Check continuesOtherNote and isContinuedByOtherNote
+      expect(startNote.continuesOtherNote, isFalse);
+      expect(startNote.isContinuedByOtherNote, isTrue);
+
+      expect(stopNote.continuesOtherNote, isTrue);
+      expect(stopNote.isContinuedByOtherNote, isFalse);
+
+      // Tied duration should be the sum of the durations of tied notes
+      expect(
+        startNote.noteDurationTied.seconds,
+        startNote.noteDuration.seconds + stopNote.noteDuration.seconds,
+      );
+
+      expect(
+        stopNote.noteDurationTied.seconds,
+        startNote.noteDuration.seconds + stopNote.noteDuration.seconds,
+      );
+
+      // Time position should be the position of the first note
+      expect(
+        startNote.noteDurationTied.timePosition,
+        startNote.noteDuration.timePosition,
+      );
+
+      expect(
+        stopNote.noteDurationTied.timePosition,
+        startNote.noteDuration.timePosition,
+      );
     });
 
     test('Duration.parse', () {
