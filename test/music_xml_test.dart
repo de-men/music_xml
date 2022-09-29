@@ -1,9 +1,6 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
-import 'package:music_xml/src/barline.dart';
-import 'package:music_xml/src/kind.dart';
-import 'package:music_xml/src/basic_attributes.dart';
 import 'package:test/test.dart';
 import 'package:xml/xml.dart';
 

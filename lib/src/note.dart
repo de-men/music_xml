@@ -1,4 +1,4 @@
-import 'package:music_xml/music_xml.dart';
+import 'package:music_xml/src/basic_attributes.dart';
 import 'package:music_xml/src/lyric.dart';
 import 'package:music_xml/src/tie.dart';
 import 'package:xml/xml.dart';

@@ -1,6 +1,8 @@
 export 'src/basic_attributes.dart';
+export 'src/barline.dart';
 export 'src/chord_symbol.dart';
 export 'src/key_signature.dart';
+export 'src/kind.dart';
 export 'src/lyric.dart';
 export 'src/measure.dart';
 export 'src/music_xml_document.dart';
