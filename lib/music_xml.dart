@@ -1,3 +1,4 @@
+export 'src/basic_attributes.dart';
 export 'src/chord_symbol.dart';
 export 'src/key_signature.dart';
 export 'src/lyric.dart';

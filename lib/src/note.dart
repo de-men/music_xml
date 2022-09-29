@@ -1,3 +1,4 @@
+import 'package:music_xml/music_xml.dart';
 import 'package:music_xml/src/lyric.dart';
 import 'package:music_xml/src/tie.dart';
 import 'package:xml/xml.dart';
@@ -111,6 +112,12 @@ class Note {
     this.lyrics,
     this.ties,
   );
+
+  /// Returns true if this note is not tied to a previous note
+  bool get isNoteOn => ties.isEmpty || ties.first.type != StartStop.stop;
+
+  /// Returns true if this note is not tied to a following note
+  bool get isNoteOff => ties.isEmpty || ties.last.type != StartStop.start;
 
   /// Parse the MusicXML <pitch> element.
   static MapEntry<String, int> _parsePitch(

@@ -190,8 +190,16 @@ void main() {
 
     test('Tie.parse', () {
       final measures = document.parts.single.measures;
-      expect(measures[7].notes.first.ties.first.type, StartStop.start);
-      expect(measures[8].notes.first.ties.first.type, StartStop.stop);
+      final startNote = measures[7].notes.first;
+      final stopNote = measures[8].notes.first;
+      expect(startNote.ties.first.type, StartStop.start);
+      expect(stopNote.ties.first.type, StartStop.stop);
+
+      expect(startNote.isNoteOn, isTrue);
+      expect(startNote.isNoteOff, isFalse);
+
+      expect(stopNote.isNoteOn, isFalse);
+      expect(stopNote.isNoteOff, isTrue);
     });
 
     test('Duration.parse', () {
