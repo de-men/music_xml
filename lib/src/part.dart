@@ -1,5 +1,5 @@
-import 'package:music_xml/music_xml.dart';
 import 'package:music_xml/src/note.dart';
+import 'package:music_xml/src/note_duration.dart';
 import 'package:xml/xml.dart';
 
 import 'measure.dart';

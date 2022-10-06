@@ -9,7 +9,7 @@ final file = File('test/assets/musicXML.xml');
 void main() {
   group('constructor', () {
     test('ChordSymbol', () {
-      expect(ChordSymbol(), isNotNull);
+      expect(ChordSymbol.noChord, isNotNull);
     });
     test('KeySignature', () {
       expect(KeySignature(), isNotNull);
@@ -254,8 +254,8 @@ void main() {
 
     test('Root.parse', () {
       final chordSymbol = document.parts.single.measures[2].chordSymbols.first;
-      expect(chordSymbol.rootTypeSafe?.alter, -1);
-      expect(chordSymbol.rootTypeSafe?.step, Step.b);
+      expect(chordSymbol.rootTypeSafe.alter, -1);
+      expect(chordSymbol.rootTypeSafe.step, Step.b);
       expect(chordSymbol.kindTypeSafe, Kind.major);
     });
 

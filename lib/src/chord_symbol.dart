@@ -1,3 +1,4 @@
+import 'package:music_xml/src/basic_attributes.dart';
 import 'package:music_xml/src/bass.dart';
 import 'package:music_xml/src/degree.dart';
 import 'package:music_xml/src/kind.dart';
@@ -95,26 +96,56 @@ const chordKindAbbreviations = <String, String>{
 /// string provides more flexibility and allows us to ingest chords from other
 /// sources, e.g. guitar tabs on the web.
 class ChordSymbol {
-  late final double timePosition;
-  String? root;
-  Root? rootTypeSafe;
-  String? kind;
-  Kind? kindTypeSafe;
-  final degrees = <String>[];
-  final degreesTypeSafe = <Degree>[];
-  String? bass;
-  Bass? bassTypeSafe;
+  final double timePosition;
+  final String root;
+  final Root rootTypeSafe;
+  final String kind;
+  final Kind kindTypeSafe;
+  final List<String> degrees;
+  final List<Degree> degreesTypeSafe;
+  final String? bass;
+  final Bass? bassTypeSafe;
 
-  ChordSymbol();
+  ChordSymbol({
+    required this.timePosition,
+    required this.root,
+    required this.rootTypeSafe,
+    required this.kind,
+    required this.kindTypeSafe,
+    required this.degrees,
+    required this.degreesTypeSafe,
+    this.bass,
+    this.bassTypeSafe,
+  });
+
+  static ChordSymbol get noChord => ChordSymbol(
+        timePosition: 0.0,
+        root: '',
+        rootTypeSafe: Root(Step.undefined),
+        kind: chordKindAbbreviations['none']!,
+        kindTypeSafe: Kind.undefined,
+        degrees: [],
+        degreesTypeSafe: [],
+        bass: null,
+        bassTypeSafe: null,
+      );
 
   factory ChordSymbol.parse(XmlElement xmlHarmony, MusicXMLParserState state) {
-    final instance = ChordSymbol()..timePosition = state.timePosition;
+    var timePosition = state.timePosition;
+    var rootTypeSafe = Root(Step.undefined);
+    String root = '';
+    late String kind;
+    late Kind kindTypeSafe;
+    final degrees = <String>[];
+    final degreesTypeSafe = <Degree>[];
+    String? bass = null;
+    Bass? bassTypeSafe;
 
     for (final XmlElement child in xmlHarmony.childElements) {
       switch (child.name.local) {
         case 'root':
-          instance._parseRoot(child, state);
-          instance.rootTypeSafe = Root.parse(child, state);
+          root = ChordSymbol.parseRoot(child, state);
+          rootTypeSafe = Root.parse(child, state);
           break;
         case 'kind':
           // Seems like this shouldn't happen but frequently does in the wild...
@@ -122,16 +153,16 @@ class ChordSymbol {
           if (!chordKindAbbreviations.containsKey(kindText)) {
             throw XmlParserException('Unknown chord kind: $kindText');
           }
-          instance.kind = chordKindAbbreviations[kindText];
-          instance.kindTypeSafe = parseKind(kindText);
+          kind = chordKindAbbreviations[kindText]!;
+          kindTypeSafe = parseKind(kindText);
           break;
         case 'degree':
-          instance.degrees.add(instance._parseDegree(child));
-          instance.degreesTypeSafe.add(Degree.parse(child, state));
+          degrees.add(parseDegree(child));
+          degreesTypeSafe.add(Degree.parse(child, state));
           break;
         case 'bass':
-          instance._parseBass(child, state);
-          instance.bassTypeSafe = Bass.parse(child, state);
+          bass = parseBass(child, state);
+          bassTypeSafe = Bass.parse(child, state);
           break;
         case 'offset':
           // Offset tag moves chord symbol time position.
@@ -139,7 +170,7 @@ class ChordSymbol {
             final offset = int.parse(child.text);
             final midiTicks = offset * standardPpq / state.divisions;
             final seconds = midiTicks / standardPpq * state.secondsPerQuarter;
-            instance.timePosition += seconds;
+            timePosition += seconds;
           } catch (e) {
             throw XmlParserException('Non-integer offset: ${child.text}');
           }
@@ -148,25 +179,35 @@ class ChordSymbol {
         // Ignore other tag types because they are not relevant to Magenta.
       }
     }
-    if (instance.root == null && instance.kind != 'N.C.') {
+    if (rootTypeSafe.step == Step.undefined && kind != 'N.C.') {
       throw XmlParserException('Chord symbol must have a root');
     }
 
-    return instance;
+    return ChordSymbol(
+      degrees: degrees,
+      degreesTypeSafe: degreesTypeSafe,
+      kind: kind,
+      kindTypeSafe: kindTypeSafe,
+      root: root,
+      rootTypeSafe: rootTypeSafe,
+      timePosition: timePosition,
+      bass: bass,
+      bassTypeSafe: bassTypeSafe,
+    );
   }
 
   /// Parse the <root> tag for a chord symbol.
-  void _parseRoot(XmlElement child, MusicXMLParserState state) {
-    root = _parsePitch(child, 'root-step', 'root-alter', state);
+  static String parseRoot(XmlElement child, MusicXMLParserState state) {
+    return parsePitch(child, 'root-step', 'root-alter', state);
   }
 
   /// Parse the <bass> tag for a chord symbol.
-  void _parseBass(XmlElement xmlBass, MusicXMLParserState state) {
-    bass = _parsePitch(xmlBass, 'bass-step', 'bass-alter', state);
+  static String parseBass(XmlElement xmlBass, MusicXMLParserState state) {
+    return parsePitch(xmlBass, 'bass-step', 'bass-alter', state);
   }
 
   /// Parse and return the pitch-like <root> or <bass> element.
-  String _parsePitch(
+  static String parsePitch(
     XmlElement xmlPitch,
     String stepTag,
     String alterTag,
@@ -181,7 +222,7 @@ class ChordSymbol {
     var alterString = '';
     final xmlAlterTag = xmlPitch.getElement(alterTag);
     if (xmlAlterTag != null) {
-      alterString = _alterToString(xmlAlterTag.text);
+      alterString = alterToString(xmlAlterTag.text);
     }
 
     if (state.transpose != 0) {
@@ -204,7 +245,7 @@ class ChordSymbol {
   ///   ChordSymbolParseError: If `alter_text` cannot be parsed to an integer,
   ///   or if the integer is not a valid number of semitones between -2 and 2
   ///   inclusive.
-  String _alterToString(String alterText) {
+  static String alterToString(String alterText) {
     // Parse alter text to an integer number of semitones.
     try {
       final alterSemitones = int.parse(alterText);
@@ -229,7 +270,7 @@ class ChordSymbol {
   }
 
   /// Parse and return the <degree> scale degree modification element.
-  String _parseDegree(XmlElement xmlDegree) {
+  static String parseDegree(XmlElement xmlDegree) {
     final xmlDegreeValue = xmlDegree.getElement('degree-value');
     if (xmlDegreeValue == null) {
       throw XmlParserException('Missing scale degree value in harmony');
@@ -245,7 +286,7 @@ class ChordSymbol {
       final xmlDegreeAlter = xmlDegree.getElement('degree-alter');
       if (xmlDegreeAlter != null) {
         final alterText = xmlDegreeAlter.text;
-        alterString = _alterToString(alterText);
+        alterString = alterToString(alterText);
       }
 
       final xmlDegreeType = xmlDegree.getElement('degree-type');

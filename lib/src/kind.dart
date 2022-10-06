@@ -2,6 +2,7 @@
 import 'package:music_xml/src/camel_case.dart';
 
 enum Kind {
+  undefined,
   augmented,
   augmentedSeventh,
   diminished,

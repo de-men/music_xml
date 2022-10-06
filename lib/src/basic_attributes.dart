@@ -29,6 +29,7 @@ enum Step {
   e,
   f,
   g,
+  undefined,
 }
 
 Step parseStep(String str) =>
