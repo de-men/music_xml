@@ -274,5 +274,42 @@ void main() {
       expect(keySignature.mode, 'major');
       expect(keySignature.timePosition, 0);
     });
+
+    test('Kind', () {
+      expect(Kind.undefined.simple, SimpleKind.other);
+      expect(Kind.augmented.simple, SimpleKind.augmented);
+      expect(Kind.augmentedSeventh.simple, SimpleKind.augmented);
+      expect(Kind.diminished.simple, SimpleKind.diminished);
+      expect(Kind.diminishedSeventh.simple, SimpleKind.diminished);
+      expect(Kind.dominant.simple, SimpleKind.major);
+      expect(Kind.dominant11th.simple, SimpleKind.major);
+      expect(Kind.dominant13th.simple, SimpleKind.major);
+      expect(Kind.dominantNinth.simple, SimpleKind.major);
+      expect(Kind.trench.simple, SimpleKind.other);
+      expect(Kind.german.simple, SimpleKind.other);
+      expect(Kind.halfDiminished.simple, SimpleKind.diminished);
+      expect(Kind.italian.simple, SimpleKind.other);
+      expect(Kind.major.simple, SimpleKind.major);
+      expect(Kind.major11th.simple, SimpleKind.major);
+      expect(Kind.major13th.simple, SimpleKind.major);
+      expect(Kind.majorMinor.simple, SimpleKind.major);
+      expect(Kind.majorNinth.simple, SimpleKind.major);
+      expect(Kind.majorSeventh.simple, SimpleKind.major);
+      expect(Kind.majorSixth.simple, SimpleKind.major);
+      expect(Kind.minor.simple, SimpleKind.minor);
+      expect(Kind.minor11th.simple, SimpleKind.minor);
+      expect(Kind.minor13th.simple, SimpleKind.minor);
+      expect(Kind.minorNinth.simple, SimpleKind.minor);
+      expect(Kind.minorSeventh.simple, SimpleKind.minor);
+      expect(Kind.minorSixth.simple, SimpleKind.minor);
+      expect(Kind.neapolitan.simple, SimpleKind.major);
+      expect(Kind.none.simple, SimpleKind.other);
+      expect(Kind.other.simple, SimpleKind.other);
+      expect(Kind.pedal.simple, SimpleKind.other);
+      expect(Kind.power.simple, SimpleKind.other);
+      expect(Kind.suspendedFourth.simple, SimpleKind.sus);
+      expect(Kind.suspendedSecond.simple, SimpleKind.sus);
+      expect(Kind.tristan.simple, SimpleKind.other);
+    });
   });
 }
