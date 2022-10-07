@@ -1,5 +1,6 @@
 import 'package:music_xml/src/basic_attributes.dart';
 import 'package:music_xml/src/lyric.dart';
+import 'package:music_xml/src/pitch.dart';
 import 'package:music_xml/src/tie.dart';
 import 'package:xml/xml.dart';
 
@@ -18,6 +19,7 @@ class Note {
   final NoteDuration noteDuration;
   NoteDuration? _noteDurationTied;
   MapEntry<String, int>? pitch;
+  Pitch? pitchTypeSafe;
   Iterable<Lyric>? lyrics;
   List<Tie> ties;
 
@@ -36,6 +38,7 @@ class Note {
     List<Tie> ties = [];
 
     MapEntry<String, int>? pitch;
+    Pitch? pitchTypeSafe;
     for (final child in xmlNote.childElements) {
       switch (child.name.local) {
         case 'chord':
@@ -46,6 +49,7 @@ class Note {
           break;
         case 'pitch':
           pitch = _parsePitch(child, state);
+          pitchTypeSafe = Pitch.parse(child);
           break;
         case 'rest':
           isRest = true;
@@ -95,6 +99,7 @@ class Note {
       isGraceNote,
       noteDuration,
       pitch,
+      pitchTypeSafe,
       lyrics.isNotEmpty ? lyrics : null,
       ties,
     );
@@ -110,6 +115,7 @@ class Note {
     this.isGraceNote,
     this.noteDuration,
     this.pitch,
+    this.pitchTypeSafe,
     this.lyrics,
     this.ties,
   );

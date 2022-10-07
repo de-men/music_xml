@@ -106,7 +106,7 @@ class ChordSymbol {
   final String? bass;
   final Bass? bassTypeSafe;
 
-  ChordSymbol({
+  const ChordSymbol({
     required this.timePosition,
     required this.root,
     required this.rootTypeSafe,

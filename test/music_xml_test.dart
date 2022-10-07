@@ -59,6 +59,7 @@ void main() {
             ),
             null,
             null,
+            null,
             [],
           ),
           isNotNull);
@@ -156,6 +157,14 @@ void main() {
       expect(note.isGraceNote, false);
       expect(note.pitch?.key, 'Bb4');
       expect(note.pitch?.value, 70);
+    });
+
+    test('Pitch.parse', () {
+      final pitch =
+          document.parts.single.measures.first.notes.last.pitchTypeSafe!;
+      expect(pitch.step, Step.b);
+      expect(pitch.octave, 4);
+      expect(pitch.alter, -1.0);
     });
 
     group('Lyric.parse', () {
