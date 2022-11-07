@@ -64,7 +64,9 @@ class Part {
         else if (currentNote.continuesOtherNote) {
           final notes = tiedNotes[currentNote.voice]?[currentNote.pitch!.value];
           assert(notes != null);
-          notes?.add(currentNote);
+          final startNote = notes!.first;
+          currentNote.updateNoteId(startNote.noteId);
+          notes.add(currentNote);
         }
 
         // If note ends, calculate tied duration

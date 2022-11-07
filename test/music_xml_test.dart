@@ -199,8 +199,14 @@ void main() {
       final measures = document.parts.single.measures;
       final startNote = measures[7].notes.first;
       final stopNote = measures[8].notes.first;
+      final anotherNote = measures[6].notes.first;
       expect(startNote.ties.first.type, StartStop.start);
       expect(stopNote.ties.first.type, StartStop.stop);
+
+      // Tied notes should have the same noteId
+      expect(startNote.noteId != 0, isTrue);
+      expect(startNote.noteId, stopNote.noteId);
+      expect(anotherNote.noteId, isNot(startNote.noteId));
 
       // Check isNoteOn, isNoteOff
       expect(startNote.isNoteOn, isTrue);

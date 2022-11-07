@@ -17,6 +17,12 @@ class Note {
   final bool isInChord;
   final bool isGraceNote;
   final NoteDuration noteDuration;
+
+  /// Tied notes will have the same note id.
+  int get noteId => _noteId;
+  int _noteId = ++_noteIdCounter;
+  static int _noteIdCounter = 0;
+
   NoteDuration? _noteDurationTied;
   MapEntry<String, int>? pitch;
   Pitch? pitchTypeSafe;
@@ -125,6 +131,12 @@ class Note {
 
   /// Update the combined duration of tied notes
   void set noteDurationTied(NoteDuration d) => _noteDurationTied = d;
+
+  /// Initialize the id of the tied note
+  void updateNoteId(int id) {
+    assert(continuesOtherNote); // id can only be updated on tied notes
+    _noteId = id;
+  }
 
   /// Returns true if this note is not tied to a previous note
   bool get isNoteOn => ties.isEmpty || ties.first.type != StartStop.stop;
