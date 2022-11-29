@@ -1,6 +1,6 @@
 ## 1.1.0
 
-* Add lyric, tie, print ([#3](https://github.com/de-men/music_xml/pull/3))
+* Add lyric, tie, print, title ([#3](https://github.com/de-men/music_xml/pull/3))
 
 ## 1.0.4
 

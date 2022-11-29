@@ -86,6 +86,7 @@ void main() {
     test('MusicXmlDocument', () {
       expect(
         MusicXmlDocument(
+          'Title',
           XmlDocument([]),
           {'scorePart': ScorePart()},
           [
@@ -107,6 +108,11 @@ void main() {
       expect(document.scoreParts.length, 1);
       expect(document.parts.length, 1);
       expect(document.totalTimeSecs, closeTo(49.5, 1E-1));
+    });
+
+    test('title', () {
+      final title = document.title;
+      expect(title, 'It\'s All In The Game');
     });
 
     test('ScorePart.parse', () {
