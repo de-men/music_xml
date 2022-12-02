@@ -10,19 +10,25 @@ import 'music_xml_parser_state.dart';
 class TimeSignature {
   int numerator;
   int denominator;
+  int divisions;
   double timePosition;
 
-  TimeSignature([
+  TimeSignature({
+    required this.divisions,
     this.numerator = -1,
     this.denominator = -1,
     this.timePosition = 0,
-  ]);
+  });
+
+  int get beats => numerator ~/ divisions;
+  int get beatType => denominator ~/ divisions;
 
   /// Parse the MusicXML <time> element.
   factory TimeSignature.parse(MusicXMLParserState state,
       [XmlElement? xmlTime]) {
     int numerator = -1;
     int denominator = -1;
+
     double timePosition = 0;
 
     if (xmlTime != null) {
@@ -45,6 +51,11 @@ class TimeSignature {
       timePosition = state.timePosition;
     }
 
-    return TimeSignature(numerator, denominator, timePosition);
+    return TimeSignature(
+      divisions: state.divisions,
+      numerator: numerator,
+      denominator: denominator,
+      timePosition: timePosition,
+    );
   }
 }

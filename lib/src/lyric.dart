@@ -59,7 +59,7 @@ class Lyric {
     }
 
     if (text == null) {
-      throw XmlParserException('Missing child: text');
+      text = '';
     }
     items.add(LyricItem(syllabic, text, elision));
 

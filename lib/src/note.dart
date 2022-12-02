@@ -1,4 +1,6 @@
+import 'package:music_xml/src/basic_attributes.dart';
 import 'package:music_xml/src/lyric.dart';
+import 'package:music_xml/src/pitch.dart';
 import 'package:music_xml/src/tie.dart';
 import 'package:xml/xml.dart';
 
@@ -15,9 +17,17 @@ class Note {
   final bool isInChord;
   final bool isGraceNote;
   final NoteDuration noteDuration;
+
+  /// Tied notes will have the same note id.
+  int get noteId => _noteId;
+  int _noteId = ++_noteIdCounter;
+  static int _noteIdCounter = 0;
+
+  NoteDuration? _noteDurationTied;
   MapEntry<String, int>? pitch;
+  Pitch? pitchTypeSafe;
   Iterable<Lyric>? lyrics;
-  Tie? tie;
+  List<Tie> ties;
 
   /// Parse the MusicXML <note> element.
   factory Note.parse(XmlElement xmlNote, MusicXMLParserState state) {
@@ -31,9 +41,10 @@ class Note {
     double? tupletRatio;
 
     final List<Lyric> lyrics = [];
-    Tie? tie;
+    List<Tie> ties = [];
 
     MapEntry<String, int>? pitch;
+    Pitch? pitchTypeSafe;
     for (final child in xmlNote.childElements) {
       switch (child.name.local) {
         case 'chord':
@@ -44,6 +55,7 @@ class Note {
           break;
         case 'pitch':
           pitch = _parsePitch(child, state);
+          pitchTypeSafe = Pitch.parse(child);
           break;
         case 'rest':
           isRest = true;
@@ -65,7 +77,7 @@ class Note {
           lyrics.add(Lyric.parse(child, state));
           break;
         case 'tie':
-          tie = Tie.parse(child, state);
+          ties.add(Tie.parse(child, state));
           break;
         case 'unpitched':
           throw UnsupportedError('Unpitched notes are not supported');
@@ -93,8 +105,9 @@ class Note {
       isGraceNote,
       noteDuration,
       pitch,
+      pitchTypeSafe,
       lyrics.isNotEmpty ? lyrics : null,
-      tie,
+      ties,
     );
   }
 
@@ -108,9 +121,34 @@ class Note {
     this.isGraceNote,
     this.noteDuration,
     this.pitch,
+    this.pitchTypeSafe,
     this.lyrics,
-    this.tie,
+    this.ties,
   );
+
+  /// Returns the combined duration of tied notes
+  NoteDuration get noteDurationTied => _noteDurationTied ?? noteDuration;
+
+  /// Update the combined duration of tied notes
+  void set noteDurationTied(NoteDuration d) => _noteDurationTied = d;
+
+  /// Initialize the id of the tied note
+  void updateNoteId(int id) {
+    assert(continuesOtherNote); // id can only be updated on tied notes
+    _noteId = id;
+  }
+
+  /// Returns true if this note is not tied to a previous note
+  bool get isNoteOn => ties.isEmpty || ties.first.type != StartStop.stop;
+
+  /// Returns true if this note is not tied to a following note
+  bool get isNoteOff => ties.isEmpty || ties.last.type != StartStop.start;
+
+  /// Returns true if this note is tied to a previous note
+  bool get continuesOtherNote => !isNoteOn;
+
+  /// Returns true if this note is tied to a following note
+  bool get isContinuedByOtherNote => !isNoteOff;
 
   /// Parse the MusicXML <pitch> element.
   static MapEntry<String, int> _parsePitch(

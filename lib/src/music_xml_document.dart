@@ -13,6 +13,8 @@ import 'score_part.dart';
 /// After the file is loaded, this class then parses the document into memory
 /// using the parse method.
 class MusicXmlDocument extends XmlDocument {
+  final String title;
+
   final XmlDocument score;
 
   /// ScoreParts indexed by id.
@@ -47,10 +49,18 @@ class MusicXmlDocument extends XmlDocument {
       return part;
     }).toList();
 
-    return MusicXmlDocument(score, scoreParts, parts, totalTimeSecs);
+    // Parse title
+    var title = 'Unknown Piece';
+    for (final element in score.findAllElements('movement-title')) {
+      title = element.innerText;
+      break;
+    }
+
+    return MusicXmlDocument(title, score, scoreParts, parts, totalTimeSecs);
   }
 
   MusicXmlDocument(
+    this.title,
     this.score,
     this.scoreParts,
     this.parts,

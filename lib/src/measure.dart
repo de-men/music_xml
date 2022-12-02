@@ -20,13 +20,19 @@ class Measure {
   KeySignature? keySignature;
   int duration = 0;
   Barline? barline;
+  int number;
 
-  Measure();
+  Measure({required this.number});
 
   /// Parse the <measure> element.
   factory Measure.parse(XmlElement xmlMeasure, MusicXMLParserState state) {
     final startTimePosition = state.timePosition;
-    return Measure()
+
+    final int number = int.parse(xmlMeasure.attributes
+        .firstWhere((p0) => p0.localName == 'number')
+        .value);
+
+    return Measure(number: number)
       // Cumulative duration in MusicXML duration.
       // Used for time signature calculations
       // Record the starting time of this measure so that time signatures
@@ -59,7 +65,7 @@ class Measure {
 
           // Sum up the MusicXML durations in voice 1 of this measure
           if (note.voice == 1 && !note.isInChord) {
-            duration += note.noteDuration.duration ?? 0;
+            duration += note.noteDuration.duration;
           }
           break;
         case 'harmony':
