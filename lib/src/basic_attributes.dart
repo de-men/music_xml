@@ -44,4 +44,4 @@ enum DegreeType {
 }
 
 DegreeType parseDegreeType(String str) =>
-    DegreeType.values.firstWhere((e) => e.toString() == 'RootStep.' + str);
+    DegreeType.values.firstWhere((e) => e.toString() == 'DegreeType.' + str);
