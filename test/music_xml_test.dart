@@ -333,4 +333,10 @@ void main() {
       expect(Kind.tristan.simple, SimpleKind.other);
     });
   });
+
+  test('parseDegreeType(str)', () {
+    expect(parseDegreeType('add'), DegreeType.add);
+    expect(parseDegreeType('alter'), DegreeType.alter);
+    expect(parseDegreeType('subtract'), DegreeType.subtract);
+  });
 }
