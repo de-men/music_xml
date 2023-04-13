@@ -35,8 +35,9 @@ class MusicXmlDocument extends XmlDocument {
     final scoreParts = <String, ScorePart>{};
     score
         .findAllElements('part-list')
-        .first
-        .findAllElements('score-part')
+        .map((element) => element.findAllElements('score-part'))
+        .where((element) => element.isNotEmpty)
+        .map((e) => e.single)
         .map((element) => ScorePart.parse(element))
         .forEach((ScorePart element) => scoreParts[element.id] = element);
 

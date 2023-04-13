@@ -2,14 +2,14 @@
 // Consider linking that package directly.
 
 /// Convert strings like "British-music" into britishMusic
-String lowerCamelCase(text, {String separator: ''}) {
+String lowerCamelCase(text, {String separator = ''}) {
   var result = camelCase(text, separator: separator);
   result = "${result[0].toLowerCase()}${result.substring(1)}";
   return result;
 }
 
 /// Convert strings like "light-light" into lightLight
-String camelCase(text, {String separator: ''}) {
+String camelCase(text, {String separator = ''}) {
   final _words = _groupIntoWords(text);
 
   List<String> words = _words.map(_upperCaseFirstLetter).toList();
