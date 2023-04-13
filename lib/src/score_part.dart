@@ -28,7 +28,7 @@ class ScorePart {
     }
     return ScorePart(
       element.getAttribute('id') ?? '',
-      element.getAttribute('part-name') ?? '',
+      element.getElement('part-name')?.text ?? '',
       midiChannel ?? defaultMidiChannel,
       midiProgram ?? defaultMidiProgram,
     );
