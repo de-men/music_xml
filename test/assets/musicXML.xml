@@ -45,7 +45,7 @@
   </credit>
   <part-list>
     <score-part id="P1">
-      <part-name></part-name>
+      <part-name>name</part-name>
       <score-instrument id="P1-I3">
         <instrument-name></instrument-name>
       </score-instrument>
