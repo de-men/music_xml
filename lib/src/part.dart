@@ -55,9 +55,7 @@ class Part {
 
         // If note is note on, create a new entry in tiedNotes
         if (currentNote.isNoteOn) {
-          if (!tiedNotes.containsKey(currentNote.voice)) {
-            tiedNotes[currentNote.voice] = {};
-          }
+          tiedNotes.putIfAbsent(currentNote.voice, () => {});
           tiedNotes[currentNote.voice]!
               .putIfAbsent(currentNote.pitch!.value, () => [currentNote]);
         }

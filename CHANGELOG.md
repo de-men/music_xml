@@ -1,3 +1,9 @@
+## 1.2.1
+
+* fix: doubled ties [#9](https://github.com/de-men/music_xml/pull/9)
+* fix: parse part-name [#9](https://github.com/de-men/music_xml/pull/9)
+* fix: parse list part [#10](https://github.com/de-men/music_xml/pull/10)
+
 ## 1.2.0
 
 * Don't throw an exception when the lyric has no text

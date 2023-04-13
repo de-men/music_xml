@@ -118,7 +118,7 @@ void main() {
     test('ScorePart.parse', () {
       final scorePart = document.scoreParts.values.single;
       expect(scorePart.id, 'P1');
-      expect(scorePart.name, '');
+      expect(scorePart.name, 'name');
       expect(scorePart.midiChannel, 1);
       expect(scorePart.midiProgram, 41);
     });
@@ -126,6 +126,7 @@ void main() {
     test('Part.parse', () {
       final part = document.parts.single;
       expect(part.id, 'P1');
+      expect(part.scorePart.name, 'name');
       expect(part.scorePart, document.scoreParts.values.single);
       expect(part.measures.length, 33);
     });
