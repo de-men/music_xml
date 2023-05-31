@@ -13,7 +13,7 @@ and the Flutter guide for
 # music_xml
 
 ![Build](https://github.com/de-men/music_xml/workflows/ci/badge.svg)
-[![pub package](https://img.shields.io/pub/v/music_xml.svg)](https://pub.dev/packages/draft_widget)
+[![pub package](https://img.shields.io/pub/v/music_xml.svg)](https://pub.dev/packages/music_xml)
 
 Simple MusicXML parser used to convert MusicXML into NoteSequence.
 
