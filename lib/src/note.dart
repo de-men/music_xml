@@ -51,7 +51,7 @@ class Note {
           isInChord = true;
           break;
         case 'duration':
-          duration = child.text;
+          duration = child.innerText;
           break;
         case 'pitch':
           pitch = _parsePitch(child, state);
@@ -61,13 +61,13 @@ class Note {
           isRest = true;
           break;
         case 'voice':
-          voice = int.parse(child.text);
+          voice = int.parse(child.innerText);
           break;
         case 'dot':
           dots++;
           break;
         case 'type':
-          type = child.text;
+          type = child.innerText;
           break;
         case 'time-modification':
           // A time-modification element represents a tuplet_ratio
@@ -155,13 +155,13 @@ class Note {
     XmlElement xmlPitch,
     MusicXMLParserState state,
   ) {
-    final step = xmlPitch.getElement('step')?.text ?? '';
+    final step = xmlPitch.getElement('step')?.innerText ?? '';
     var alterText = '';
     var alter = 0.0;
     final xmlAlter = xmlPitch.getElement('alter');
-    if (xmlAlter != null) alterText = xmlAlter.text;
+    if (xmlAlter != null) alterText = xmlAlter.innerText;
 
-    final octave = xmlPitch.getElement('octave')?.text ?? '';
+    final octave = xmlPitch.getElement('octave')?.innerText ?? '';
 
     // Parse alter string to a float (floats represent microtonal alterations)
     if (alterText.isNotEmpty) alter = double.parse(alterText);
@@ -201,9 +201,9 @@ class Note {
   ///   xmlTimeModification: An xml time-modification element.
   static double _parseTuplet(XmlElement xmlTimeModification) {
     final numerator =
-        int.parse(xmlTimeModification.getElement('actual-notes')!.text);
+        int.parse(xmlTimeModification.getElement('actual-notes')!.innerText);
     final denominator =
-        int.parse(xmlTimeModification.getElement('normal-notes')!.text);
+        int.parse(xmlTimeModification.getElement('normal-notes')!.innerText);
     return numerator / denominator;
   }
 }

@@ -23,12 +23,12 @@ class ScorePart {
     if (midiInstrument != null) {
       final midiChannelElement = midiInstrument.getElement('midi-channel');
       final midiProgramElement = midiInstrument.getElement('midi-program');
-      midiChannel = int.tryParse(midiChannelElement?.text ?? '');
-      midiProgram = int.tryParse(midiProgramElement?.text ?? '');
+      midiChannel = int.tryParse(midiChannelElement?.innerText ?? '');
+      midiProgram = int.tryParse(midiProgramElement?.innerText ?? '');
     }
     return ScorePart(
       element.getAttribute('id') ?? '',
-      element.getElement('part-name')?.text ?? '',
+      element.getElement('part-name')?.innerText ?? '',
       midiChannel ?? defaultMidiChannel,
       midiProgram ?? defaultMidiProgram,
     );

@@ -42,14 +42,14 @@ class Lyric {
       switch (child.name.local) {
         case 'syllabic':
           syllabic = Syllabic.values
-              .firstWhere((e) => e.toString() == 'Syllabic.' + child.text);
+              .firstWhere((e) => e.toString() == 'Syllabic.' + child.innerText);
           break;
         case 'text':
-          text = child.text;
+          text = child.innerText;
           break;
         case 'elision':
           items.add(LyricItem(syllabic, text!, elision));
-          elision = child.text;
+          elision = child.innerText;
           syllabic = null;
           text = null;
           break;

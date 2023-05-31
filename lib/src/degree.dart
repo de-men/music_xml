@@ -20,13 +20,13 @@ class Degree {
     for (final child in xmlDegree.childElements) {
       switch (child.name.local) {
         case 'degree-value':
-          value = int.parse(child.text);
+          value = int.parse(child.innerText);
           break;
         case 'degree-alter':
-          alter = double.parse(child.text);
+          alter = double.parse(child.innerText);
           break;
         case 'degree-type':
-          type = parseDegreeType(child.text);
+          type = parseDegreeType(child.innerText);
           break;
         default:
         // Ignore other tag types because they are not relevant to Magenta.

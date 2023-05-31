@@ -18,10 +18,10 @@ class Root {
     for (final child in xmlRoot.childElements) {
       switch (child.name.local) {
         case 'root-step':
-          rootStep = parseStep(child.text);
+          rootStep = parseStep(child.innerText);
           break;
         case 'root-alter':
-          rootAlter = double.parse(child.text);
+          rootAlter = double.parse(child.innerText);
           break;
         default:
         // Ignore other tag types because they are not relevant to Magenta.

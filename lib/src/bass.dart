@@ -20,13 +20,13 @@ class Bass {
     for (final child in xmlBass.childElements) {
       switch (child.name.local) {
         case 'bass-step':
-          step = parseStep(child.text);
+          step = parseStep(child.innerText);
           break;
         case 'bass-alter':
-          alter = double.parse(child.text);
+          alter = double.parse(child.innerText);
           break;
         case 'bass-separator':
-          separator = child.text;
+          separator = child.innerText;
           break;
         default:
         // Ignore other tag types because they are not relevant to Magenta.

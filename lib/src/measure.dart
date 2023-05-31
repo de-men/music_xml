@@ -89,7 +89,7 @@ class Measure {
     for (final child in xmlAttributes.childElements) {
       switch (child.name.local) {
         case 'divisions':
-          state.divisions = int.parse(child.text);
+          state.divisions = int.parse(child.innerText);
           break;
         case 'key':
           keySignature = KeySignature.parse(state, child);
@@ -103,7 +103,7 @@ class Measure {
           }
           break;
         case 'transpose':
-          final transpose = int.parse(child.getElement('chromatic')!.text);
+          final transpose = int.parse(child.getElement('chromatic')!.innerText);
           state.transpose = transpose;
           if (keySignature != null) {
             // Transposition is chromatic. Every half step up is 5 steps backward
@@ -131,7 +131,7 @@ class Measure {
   ///   xml_backup: XML element with tag type 'backup'.
   void _parseBackup(XmlElement xmlBackup, MusicXMLParserState state) {
     final xmlDuration = xmlBackup.getElement('duration');
-    final backupDuration = int.parse(xmlDuration!.text);
+    final backupDuration = int.parse(xmlDuration!.innerText);
     final midiTicks = backupDuration * standardPpq / state.divisions;
     final seconds = midiTicks / standardPpq * state.secondsPerQuarter;
     state.timePosition -= seconds;
@@ -163,7 +163,7 @@ class Measure {
   ///   xml_forward: XML element with tag type 'forward'.
   void _parseForward(XmlElement xmlForward, MusicXMLParserState state) {
     final xmlDuration = xmlForward.getElement('duration');
-    final forwardDuration = int.parse(xmlDuration!.text);
+    final forwardDuration = int.parse(xmlDuration!.innerText);
     final midiTicks = forwardDuration * standardPpq / state.divisions;
     final seconds = midiTicks / standardPpq * state.secondsPerQuarter;
     state.timePosition += seconds;

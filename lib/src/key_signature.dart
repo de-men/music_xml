@@ -36,7 +36,7 @@ class KeySignature {
       throw XmlParserException(
           'Could not find fifths attribute in key signature.');
     }
-    key = int.parse(fifths.text);
+    key = int.parse(fifths.innerText);
     var mode = xmlKey.getAttribute('mode');
     // # Anything not minor will be interpreted as major
     if (mode != 'minor') mode = 'major';
