@@ -11,10 +11,10 @@ class Pitch {
   });
 
   factory Pitch.parse(XmlElement xmlPitch) {
-    final step = xmlPitch.getElement('step')!.text;
-    final alterText = xmlPitch.getElement('alter')?.text;
+    final step = xmlPitch.getElement('step')!.innerText;
+    final alterText = xmlPitch.getElement('alter')?.innerText;
     final alter = alterText != null ? double.parse(alterText) : 0.0;
-    final octave = int.parse(xmlPitch.getElement('octave')!.text);
+    final octave = int.parse(xmlPitch.getElement('octave')!.innerText);
 
     return Pitch(step: parseStep(step), alter: alter, octave: octave);
   }

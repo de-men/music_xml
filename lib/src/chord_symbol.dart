@@ -149,7 +149,7 @@ class ChordSymbol {
           break;
         case 'kind':
           // Seems like this shouldn't happen but frequently does in the wild...
-          final kindText = child.text.trim();
+          final kindText = child.innerText.trim();
           if (!chordKindAbbreviations.containsKey(kindText)) {
             throw XmlParserException('Unknown chord kind: $kindText');
           }
@@ -167,12 +167,12 @@ class ChordSymbol {
         case 'offset':
           // Offset tag moves chord symbol time position.
           try {
-            final offset = int.parse(child.text);
+            final offset = int.parse(child.innerText);
             final midiTicks = offset * standardPpq / state.divisions;
             final seconds = midiTicks / standardPpq * state.secondsPerQuarter;
             timePosition += seconds;
           } catch (e) {
-            throw XmlParserException('Non-integer offset: ${child.text}');
+            throw XmlParserException('Non-integer offset: ${child.innerText}');
           }
           break;
         default:
@@ -217,12 +217,12 @@ class ChordSymbol {
     if (xmlStepTag == null) {
       throw XmlParserException('Missing pitch step');
     }
-    final step = xmlStepTag.text;
+    final step = xmlStepTag.innerText;
 
     var alterString = '';
     final xmlAlterTag = xmlPitch.getElement(alterTag);
     if (xmlAlterTag != null) {
-      alterString = alterToString(xmlAlterTag.text);
+      alterString = alterToString(xmlAlterTag.innerText);
     }
 
     if (state.transpose != 0) {
@@ -275,7 +275,7 @@ class ChordSymbol {
     if (xmlDegreeValue == null) {
       throw XmlParserException('Missing scale degree value in harmony');
     }
-    final valueText = xmlDegreeValue.text;
+    final valueText = xmlDegreeValue.innerText;
     if (valueText.isEmpty) {
       throw XmlParserException('Missing scale degree');
     }
@@ -285,7 +285,7 @@ class ChordSymbol {
       var alterString = '';
       final xmlDegreeAlter = xmlDegree.getElement('degree-alter');
       if (xmlDegreeAlter != null) {
-        final alterText = xmlDegreeAlter.text;
+        final alterText = xmlDegreeAlter.innerText;
         alterString = alterToString(alterText);
       }
 
@@ -293,7 +293,7 @@ class ChordSymbol {
       if (xmlDegreeType == null) {
         throw XmlParserException('Missing degree modification type');
       }
-      final typeText = xmlDegreeType.text;
+      final typeText = xmlDegreeType.innerText;
       String typeString;
       switch (typeText) {
         case 'add':

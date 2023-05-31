@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:music_xml/music_xml.dart';
+import 'package:xml/xml.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,7 +64,7 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('movement-title: ${movementTitle?.text}'),
+                  Text('movement-title: ${movementTitle?.innerText}'),
                   const SizedBox(height: 16),
                   Text('totalTimeSecs: ${document.totalTimeSecs}'),
                 ],

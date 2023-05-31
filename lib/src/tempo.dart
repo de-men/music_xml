@@ -15,7 +15,7 @@ class Tempo {
   ///
   /// If no tempo is specified, default to DEFAULT_QUARTERS_PER_MINUTE
   factory Tempo.parse(XmlElement xmlSound, MusicXMLParserState state) {
-    var qpm = double.tryParse(xmlSound.getElement('tempo')!.text) ??
+    var qpm = double.tryParse(xmlSound.getElement('tempo')!.innerText) ??
         defaultQuartersPerMinute;
     if (qpm == 0) {
       // If tempo is 0, set it to default

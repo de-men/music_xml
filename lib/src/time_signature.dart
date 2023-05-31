@@ -39,8 +39,8 @@ class TimeSignature {
         throw Exception('Alternating Time Signature');
       }
 
-      final beats = xmlTime.getElement('beats')?.text;
-      final beatType = xmlTime.getElement('beat-type')?.text;
+      final beats = xmlTime.getElement('beats')?.innerText;
+      final beatType = xmlTime.getElement('beat-type')?.innerText;
       try {
         numerator = int.parse(beats!);
         denominator = int.parse(beatType!);

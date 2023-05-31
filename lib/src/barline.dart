@@ -35,7 +35,7 @@ class Barline {
     for (final child in xmlBarline.childElements) {
       switch (child.name.local) {
         case 'bar-style':
-          barStyle = _parseBarStyle(child.text);
+          barStyle = _parseBarStyle(child.innerText);
           break;
         default:
         // Ignore other tag types because they are not relevant to Magenta.
