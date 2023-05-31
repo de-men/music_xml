@@ -1,10 +1,10 @@
 name: music_xml
 description: A Dart package project to parse MusicXML. Inspired from Google's magenta.
-version: 1.2.1
+version: 1.2.2
 homepage: https://github.com/de-men/music_xml
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   xml: ^6.1.0

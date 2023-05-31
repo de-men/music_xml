@@ -1,3 +1,7 @@
+## 1.2.2
+
+* fix: Xml documents with multiple score parts were not read anymore [#13](https://github.com/de-men/music_xml/pull/13)
+
 ## 1.2.1
 
 * fix: doubled ties [#9](https://github.com/de-men/music_xml/pull/9)
