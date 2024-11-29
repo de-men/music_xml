@@ -1,4 +1,5 @@
 import 'package:music_xml/src/barline.dart';
+import 'package:music_xml/src/clef_signature.dart';
 import 'package:music_xml/src/print.dart';
 import 'package:xml/xml.dart';
 
@@ -16,6 +17,7 @@ class Measure {
   final chordSymbols = <ChordSymbol>[];
   final tempos = <Tempo>[];
   final prints = <Print>[];
+  ClefSignature? clefSignature;
   TimeSignature? timeSignature;
   KeySignature? keySignature;
   int duration = 0;
@@ -90,6 +92,9 @@ class Measure {
       switch (child.name.local) {
         case 'divisions':
           state.divisions = int.parse(child.innerText);
+          break;
+        case 'clef':
+          clefSignature = ClefSignature.parse(state, child);
           break;
         case 'key':
           keySignature = KeySignature.parse(state, child);
