@@ -1,3 +1,7 @@
+## 1.3.0
+
+* Read [`<clef>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/clef/) element
+
 ## 1.2.2
 
 * fix: Xml documents with multiple score parts were not read anymore [#13](https://github.com/de-men/music_xml/pull/13)
