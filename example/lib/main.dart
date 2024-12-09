@@ -49,31 +49,56 @@ class MyHomePage extends StatelessWidget {
         // the App.build method, and use it to set our appbar title.
         title: const Text('Flutter Demo Home Page'),
       ),
-      body: FutureBuilder<MusicXmlDocument>(
-        future: rootBundle
-            .loadString('assets/musicXML.xml')
-            .then((value) => MusicXmlDocument.parse(value)),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final document = snapshot.data!;
-            final score = document.score;
-            final scorePartwise = score.getElement('score-partwise');
-            final movementTitle = scorePartwise?.getElement('movement-title');
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('movement-title: ${movementTitle?.innerText}'),
-                  const SizedBox(height: 16),
-                  Text('totalTimeSecs: ${document.totalTimeSecs}'),
-                ],
-              ),
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
+      body: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MusicItem(
+            xmlFile: 'musicXML.xml',
+          ),
+          MusicItem(
+            xmlFile: 'test.xml',
+          ),
+        ],
+      )
+    );
+  }
+}
+
+class MusicItem extends StatelessWidget {
+
+  final String xmlFile;
+
+  const MusicItem({
+    required this.xmlFile,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<MusicXmlDocument>(
+      future: rootBundle
+          .loadString('assets/$xmlFile')
+          .then((value) => MusicXmlDocument.parse(value)),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final document = snapshot.data!;
+          final score = document.score;
+          final scorePartwise = score.getElement('score-partwise');
+          final movementTitle = scorePartwise?.getElement('movement-title');
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('movement-title: ${movementTitle?.innerText}'),
+                const SizedBox(height: 16),
+                Text('totalTimeSecs: ${document.totalTimeSecs}'),
+              ],
+            ),
+          );
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
     );
   }
 }

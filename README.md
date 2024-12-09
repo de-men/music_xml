@@ -32,6 +32,19 @@ start using the package.
 final document = MusicXmlDocument.parse(file.readAsStringSync());
 ```
 
+## Deployment
+
+Run the publish command in dry-run mode to see if everything passes analysis
+```shell
+flutter pub publish --dry-run
+```
+
+The next step is publishing to pub.dev, but be sure that you are ready because publishing is forever:
+
+```shell
+flutter pub publish
+```
+
 ## Additional information
 
 Inspired from Google's magenta [musicxml_parser.py](https://github.com/magenta/note-seq/blob/main/note_seq/musicxml_parser.py)
