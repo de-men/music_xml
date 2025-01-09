@@ -2,7 +2,8 @@ import 'package:music_xml/src/basic_attributes.dart';
 import 'package:music_xml/src/camel_case.dart';
 import 'package:xml/xml.dart';
 
-import 'music_xml_parser_state.dart';
+import '../../../local.dart';
+import '../../../music_xml_parser_state.dart';
 
 enum BarStyle {
   dashed,
@@ -22,7 +23,7 @@ BarStyle _parseBarStyle(String str) => BarStyle.values
     .firstWhere((e) => e.toString() == 'BarStyle.' + camelCase(str));
 
 /// Internal representation of a MusicXML <barline> element.
-class Barline {
+class Barline extends XmlElement {
   BarStyle? barStyle;
   RightLeftMiddle? location;
 
@@ -59,5 +60,5 @@ class Barline {
     return Barline(barStyle, location);
   }
 
-  Barline(this.barStyle, this.location);
+  Barline(this.barStyle, this.location) : super(XmlName(Local.barline));
 }

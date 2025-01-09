@@ -1,5 +1,5 @@
-import 'note.dart';
-import 'time_signature.dart';
+import 'element/part/measure/note/note.dart';
+import 'element/part/measure/attributes/time/time.dart';
 
 /// Default MIDI Program (0 = grand piano)
 const defaultMidiChannel = 0;
@@ -48,5 +48,5 @@ class MusicXMLParserState {
   var transpose = 0;
 
   // Keep track of current time signature. Does not support polymeter.
-  TimeSignature? timeSignature;
+  Time? time;
 }

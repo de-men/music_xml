@@ -4,11 +4,12 @@ import 'package:music_xml/src/pitch.dart';
 import 'package:music_xml/src/tie.dart';
 import 'package:xml/xml.dart';
 
-import 'music_xml_parser_state.dart';
-import 'note_duration.dart';
+import '../../../../local.dart';
+import '../../../../music_xml_parser_state.dart';
+import '../../../../note_duration.dart';
 
 /// Internal representation of a MusicXML <note> element.
-class Note {
+class Note extends XmlElement {
   final int midiChannel;
   final int midiProgram;
   final int velocity;
@@ -124,7 +125,7 @@ class Note {
     this.pitchTypeSafe,
     this.lyrics,
     this.ties,
-  );
+  ) : super(XmlName(Local.note), [], []);
 
   /// Returns the combined duration of tied notes
   NoteDuration get noteDurationTied => _noteDurationTied ?? noteDuration;

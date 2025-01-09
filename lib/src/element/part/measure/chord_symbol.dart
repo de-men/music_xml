@@ -5,8 +5,9 @@ import 'package:music_xml/src/kind.dart';
 import 'package:music_xml/src/root.dart';
 import 'package:xml/xml.dart';
 
-import 'music_xml_parser_state.dart';
-import 'note_duration.dart';
+import '../../../local.dart';
+import '../../../music_xml_parser_state.dart';
+import '../../../note_duration.dart';
 
 /// The below dictionary maps chord kinds to an abbreviated string as would
 /// appear in a chord symbol in a standard lead sheet. There are often multiple
@@ -95,7 +96,7 @@ const chordKindAbbreviations = <String, String>{
 /// While the MusicXML representation has more structure, using an unstructured
 /// string provides more flexibility and allows us to ingest chords from other
 /// sources, e.g. guitar tabs on the web.
-class ChordSymbol {
+class ChordSymbol extends XmlElement {
   final double timePosition;
   final String root;
   final Root rootTypeSafe;
@@ -105,18 +106,6 @@ class ChordSymbol {
   final List<Degree> degreesTypeSafe;
   final String? bass;
   final Bass? bassTypeSafe;
-
-  const ChordSymbol({
-    required this.timePosition,
-    required this.root,
-    required this.rootTypeSafe,
-    required this.kind,
-    required this.kindTypeSafe,
-    required this.degrees,
-    required this.degreesTypeSafe,
-    this.bass,
-    this.bassTypeSafe,
-  });
 
   static ChordSymbol get noChord => ChordSymbol(
         timePosition: 0.0,
@@ -195,6 +184,18 @@ class ChordSymbol {
       bassTypeSafe: bassTypeSafe,
     );
   }
+
+  ChordSymbol({
+    required this.timePosition,
+    required this.root,
+    required this.rootTypeSafe,
+    required this.kind,
+    required this.kindTypeSafe,
+    required this.degrees,
+    required this.degreesTypeSafe,
+    this.bass,
+    this.bassTypeSafe,
+  }) : super(XmlName(Local.harmony), [], []);
 
   /// Parse the <root> tag for a chord symbol.
   static String parseRoot(XmlElement child, MusicXMLParserState state) {

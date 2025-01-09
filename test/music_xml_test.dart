@@ -2,112 +2,22 @@ import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
 import 'package:test/test.dart';
-import 'package:xml/xml.dart';
 
 final file = File('test/assets/musicXML.xml');
 
 void main() {
-  group('constructor', () {
-    test('ChordSymbol', () {
-      expect(ChordSymbol.noChord, isNotNull);
-    });
-    test('KeySignature', () {
-      expect(KeySignature(), isNotNull);
-    });
-    test('MusicXMLParserState', () {
-      expect(MusicXMLParserState(), isNotNull);
-    });
-    test('ScorePart', () {
-      expect(ScorePart(), isNotNull);
-    });
-    test('Measure', () {
-      expect(Measure(number: 0), isNotNull);
-    });
-    test('NoteDuration', () {
-      expect(
-          NoteDuration(
-            1,
-            1,
-            1.0,
-            0,
-            0,
-            '',
-            0.0,
-            false,
-          ),
-          isNotNull);
-    });
-    test('Note', () {
-      expect(
-          Note(
-            0,
-            0,
-            0,
-            0,
-            false,
-            false,
-            false,
-            NoteDuration(
-              0,
-              0,
-              0,
-              0,
-              0,
-              '',
-              0.0,
-              false,
-            ),
-            null,
-            null,
-            null,
-            [],
-          ),
-          isNotNull);
-    });
-    test('Part', () {
-      expect(Part('id', ScorePart(), [Measure(number: 0)]), isNotNull);
-    });
-    test('Tempo', () {
-      expect(Tempo(0, 0), isNotNull);
-    });
-    test('TimeSignature', () {
-      final timeSignature = TimeSignature(
-        divisions: 2,
-        numerator: 4,
-        denominator: 8,
-        timePosition: 0,
-      );
-
-      expect(timeSignature.beats, 2);
-      expect(timeSignature.beatType, 4);
-      expect(timeSignature.numerator, 4);
-      expect(timeSignature.denominator, 8);
-    });
-    test('MusicXmlDocument', () {
-      expect(
-        MusicXmlDocument(
-          'Title',
-          XmlDocument([]),
-          {'scorePart': ScorePart()},
-          [
-            Part('id', ScorePart(), [Measure(number: 0)]),
-          ],
-          0.0,
-        ),
-        isNotNull,
-      );
-      expect(
-        MusicXmlDocument.fromXml(XmlDocument([])),
-        isNotNull,
-      );
-    });
-  });
   group('parse', () {
     final document = MusicXmlDocument.parse(file.readAsStringSync());
     test('MusicXmlDocument.parse', () {
-      expect(document.scoreParts.length, 1);
-      expect(document.parts.length, 1);
+      expect(document.score.partList.scoreParts.length, 1);
+      expect(document.score.parts.length, 1);
       expect(document.totalTimeSecs, closeTo(49.5, 1E-1));
+    });
+
+    test('Version.parse', () {
+      final version = document.score.version;
+      expect(version, isNotNull);
+      expect(version!.value, '2.0');
     });
 
     test('title', () {
@@ -116,24 +26,22 @@ void main() {
     });
 
     test('ScorePart.parse', () {
-      final scorePart = document.scoreParts.values.single;
-      expect(scorePart.id, 'P1');
-      expect(scorePart.name, 'name');
+      final scorePart = document.score.partList.scoreParts.values.single;
+      expect(scorePart.id.value, 'P1');
+      expect(scorePart.partName.content, 'name');
       expect(scorePart.midiChannel, 1);
       expect(scorePart.midiProgram, 41);
     });
 
     test('Part.parse', () {
-      final part = document.parts.single;
-      expect(part.id, 'P1');
-      expect(part.scorePart.name, 'name');
-      expect(part.scorePart, document.scoreParts.values.single);
+      final part = document.score.parts.single;
+      expect(part.id.value, 'P1');
       expect(part.measures.length, 33);
     });
 
     test('Measure.parse', () {
-      final measure = document.parts.single.measures.first;
-      expect(measure.number, 1);
+      final measure = document.score.parts.single.measures.first;
+      expect(measure.number.value, '1');
       expect(measure.notes.length, 7);
       expect(measure.chordSymbols.length, 0);
       expect(measure.tempos.length, 0);
@@ -141,20 +49,20 @@ void main() {
     });
 
     test('Print.parse', () {
-      final measures = document.parts.single.measures;
+      final measures = document.score.parts.single.measures;
       expect(measures.first.prints.first.pageNumber, 1);
       expect(measures.first.prints.first.newSystem, false);
       expect(measures[4].prints.first.newSystem, true);
     });
 
     test('Barline.parse', () {
-      final measures = document.parts.single.measures;
-      expect(measures.last.barline?.location, RightLeftMiddle.right);
-      expect(measures.last.barline?.barStyle, BarStyle.lightHeavy);
+      final measures = document.score.parts.single.measures;
+      expect(measures.last.barlines.first.location, RightLeftMiddle.right);
+      expect(measures.last.barlines.first.barStyle, BarStyle.lightHeavy);
     });
 
     test('Note.parse', () {
-      final note = document.parts.single.measures.first.notes.last;
+      final note = document.score.parts.single.measures.first.notes.last;
       expect(note.midiChannel, 1);
       expect(note.midiProgram, 41);
       expect(note.velocity, 64);
@@ -168,7 +76,7 @@ void main() {
 
     test('Pitch.parse', () {
       final pitch =
-          document.parts.single.measures.first.notes.last.pitchTypeSafe!;
+          document.score.parts.single.measures.first.notes.last.pitchTypeSafe!;
       expect(pitch.step, Step.b);
       expect(pitch.octave, 4);
       expect(pitch.alter, -1.0);
@@ -176,7 +84,7 @@ void main() {
 
     group('Lyric.parse', () {
       test('with a note containing multiple lyrics', () {
-        final note3 = document.parts.single.measures.first.notes[2];
+        final note3 = document.score.parts.single.measures.first.notes[2];
         expect(note3.lyrics?.first.syllabic, Syllabic.end);
         expect(note3.lyrics?.first.text, 'ny');
         expect(note3.lyrics?.first.name, 'verse1');
@@ -188,7 +96,7 @@ void main() {
 
       test('with a note containing one lyric with multiple text items', () {
         final lyric =
-            document.parts.single.measures.first.notes[1].lyrics!.first;
+            document.score.parts.single.measures.first.notes[1].lyrics!.first;
         expect(lyric.name, 'verse1');
 
         final firstTextItem = lyric.items.first;
@@ -203,7 +111,7 @@ void main() {
 
     test('Tie.parse', () {
       // Get two notes that are tied together
-      final measures = document.parts.single.measures;
+      final measures = document.score.parts.single.measures;
       final startNote = measures[7].notes.first;
       final stopNote = measures[8].notes.first;
       final anotherNote = measures[6].notes.first;
@@ -254,7 +162,7 @@ void main() {
 
     test('Duration.parse', () {
       final duration =
-          document.parts.single.measures.first.notes.last.noteDuration;
+          document.score.parts.single.measures.first.notes.last.noteDuration;
       expect(duration.duration, 2);
       expect(duration.midiTicks, closeTo(73.33333333333333, 0));
       expect(duration.seconds, closeTo(0.16666666666666666, 0));
@@ -266,7 +174,8 @@ void main() {
     });
 
     test('ChordSymbol.parse', () {
-      final chordSymbol = document.parts.single.measures[1].chordSymbols.single;
+      final chordSymbol =
+          document.score.parts.single.measures[1].chordSymbols.single;
       expect(chordSymbol.timePosition, closeTo(1.5, 0));
       expect(chordSymbol.root, 'F');
       expect(chordSymbol.kind, '');
@@ -275,25 +184,26 @@ void main() {
     });
 
     test('Root.parse', () {
-      final chordSymbol = document.parts.single.measures[2].chordSymbols.first;
+      final chordSymbol =
+          document.score.parts.single.measures[2].chordSymbols.first;
       expect(chordSymbol.rootTypeSafe.alter, -1);
       expect(chordSymbol.rootTypeSafe.step, Step.b);
       expect(chordSymbol.kindTypeSafe, Kind.major);
     });
 
     test('TimeSignature.parse', () {
-      final timeSignature = document.parts.single.measures.first.timeSignature;
-      assert(timeSignature != null);
-      expect(timeSignature!.numerator, 3);
+      final timeSignature = document
+          .score.parts.single.measures.first.attributesList.first.times.first;
+      expect(timeSignature.numerator, 3);
       expect(timeSignature.denominator, 4);
       expect(timeSignature.timePosition, 0);
     });
 
     test('KeySignature.parse', () {
-      final keySignature = document.parts.single.measures.first.keySignature;
-      assert(keySignature != null);
-      expect(keySignature!.key, -1);
-      expect(keySignature.mode, 'major');
+      final keySignature = document
+          .score.parts.single.measures.first.attributesList.first.keys.first;
+      expect(keySignature.key, -1);
+      expect(keySignature.mode!.mode, 'major');
       expect(keySignature.timePosition, 0);
     });
 

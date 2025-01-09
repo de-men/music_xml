@@ -1,10 +1,11 @@
 import 'package:music_xml/src/basic_attributes.dart';
 import 'package:xml/xml.dart';
 
-import 'music_xml_parser_state.dart';
+import '../../../local.dart';
+import '../../../music_xml_parser_state.dart';
 
 /// Internal representation of a MusicXML <print> element.
-class Print {
+class Print extends XmlElement {
   final int? blankPage;
   bool newPage;
   bool newSystem;
@@ -58,5 +59,5 @@ class Print {
     this.newSystem,
     this.pageNumber,
     this.staffSpacing,
-  );
+  ) : super(XmlName(Local.print));
 }

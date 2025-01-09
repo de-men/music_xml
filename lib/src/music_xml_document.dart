@@ -1,10 +1,5 @@
-import 'dart:math';
-
+import 'package:music_xml/src/element/score_partwise.dart';
 import 'package:xml/xml.dart';
-
-import 'music_xml_parser_state.dart';
-import 'part.dart';
-import 'score_part.dart';
 
 /// Internal representation of a MusicXML Document.
 /// Represents the top level object which holds the MusicXML document
@@ -12,18 +7,18 @@ import 'score_part.dart';
 /// If the file is .mxl, this class uncompresses it
 /// After the file is loaded, this class then parses the document into memory
 /// using the parse method.
+///
+/// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/
 class MusicXmlDocument extends XmlDocument {
-  final String title;
 
-  final XmlDocument score;
-
-  /// ScoreParts indexed by id.
-  final Map<String, ScorePart> scoreParts;
-
-  final List<Part> parts;
-
+  final ScorePartwise score;
+  
+  /// Title of the piece
+  String get title => score.movementTitle?.title ?? 'Unknown Piece';
+  
   /// Total time in seconds
-  final double totalTimeSecs;
+  double get totalTimeSecs => score.totalTimeSecs;
+
 
   /// Parse the uncompressed MusicXML document.
   factory MusicXmlDocument.parse(String input) {
@@ -31,42 +26,10 @@ class MusicXmlDocument extends XmlDocument {
   }
 
   factory MusicXmlDocument.fromXml(XmlDocument score) {
-    // Parse part-list
-    final scoreParts = <String, ScorePart>{};
-    score
-        .findAllElements('part-list')
-        .map((element) => element.findAllElements('score-part'))
-        .where((element) => element.isNotEmpty)
-        .forEach(
-          (e) => e
-              .map((element) => ScorePart.parse(element))
-              .forEach((ScorePart element) => scoreParts[element.id] = element),
-        );
-
-    // Parse parts
-    final state = MusicXMLParserState();
-    var totalTimeSecs = 0.0;
-    final parts = score.findAllElements('part').map((element) {
-      final part = Part.parse(element, scoreParts, state);
-      totalTimeSecs = max(totalTimeSecs, state.timePosition);
-      return part;
-    }).toList();
-
-    // Parse title
-    var title = 'Unknown Piece';
-    for (final element in score.findAllElements('movement-title')) {
-      title = element.innerText;
-      break;
-    }
-
-    return MusicXmlDocument(title, score, scoreParts, parts, totalTimeSecs);
+    final scorePartwiseElement = score.getElement('score-partwise')!;
+    final scorePartwise = ScorePartwise.fromXml(scorePartwiseElement);
+    return MusicXmlDocument(scorePartwise);
   }
 
-  MusicXmlDocument(
-    this.title,
-    this.score,
-    this.scoreParts,
-    this.parts,
-    this.totalTimeSecs,
-  );
+  MusicXmlDocument(this.score) : super([score]);
 }

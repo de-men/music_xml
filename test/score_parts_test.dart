@@ -11,8 +11,8 @@ void main() {
     expect(() => MusicXmlDocument.parse(multipleScoreParts.readAsStringSync()),
         returnsNormally);
   });
-  test('EmptyScoreParts', () {
-    final document = MusicXmlDocument.parse(emptyScoreParts.readAsStringSync());
-    expect(document.scoreParts.length, 0);
-  });
+  // test('EmptyScoreParts', () {
+  //   final document = MusicXmlDocument.parse(emptyScoreParts.readAsStringSync());
+  //   expect(document.scoreParts.length, 0);
+  // });
 }

@@ -1,25 +1,26 @@
-import 'package:music_xml/src/note.dart';
-import 'package:music_xml/src/note_duration.dart';
 import 'package:xml/xml.dart';
 
-import 'measure.dart';
-import 'music_xml_parser_state.dart';
-import 'score_part.dart';
+import '../../../music_xml.dart';
+import '../../local.dart';
+import '../id.dart';
 
 /// Internal represention of a MusicXML <part> element.
-class Part {
-  final String id;
-  final ScorePart scorePart;
+///
+/// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-partwise/
+class Part extends XmlElement {
+  final Id id;
+
+  // One or more times
   final List<Measure> measures;
 
   /// Parse the <part> element.
   factory Part.parse(
-    XmlElement xmlPart,
-    Map<String, ScorePart> scoreParts,
     MusicXMLParserState state,
+    XmlElement element,
+    Map<String, ScorePart> scoreParts,
   ) {
-    final id = xmlPart.getAttribute('id') ?? '';
-    final scorePart = scoreParts[id] ?? ScorePart();
+    final idAttribute = element.getAttribute(Local.id)!;
+    final scorePart = scoreParts[idAttribute]!;
 
     // Reset the time position when parsing each part
     state.timePosition = 0;
@@ -27,18 +28,24 @@ class Part {
     state.midiProgram = scorePart.midiProgram;
     state.transpose = 0;
 
-    final xmlMeasures = xmlPart.findAllElements('measure');
+    final xmlMeasures = element.findElements(Local.measure);
+    if (xmlMeasures.isEmpty) {
+      throw StateError('Part must contain at least one measure');
+    }
     final measures = xmlMeasures.map((measure) {
       // Issue #674: Repair measures that do not contain notes
       // by inserting a whole measure rest
       _repairEmptyMeasure(measure);
-      return Measure.parse(measure, state);
+      return Measure.parse(state, measure);
     }).toList();
 
     // Update durations of tied notes
     _updateDurationsOfTiedNotes(measures);
 
-    return Part(id, scorePart, measures);
+    return Part(
+      Id(idAttribute),
+      measures,
+    );
   }
 
   static void _updateDurationsOfTiedNotes(List<Measure> measures) {
@@ -98,16 +105,21 @@ class Part {
     }
   }
 
-  Part(this.id, this.scorePart, this.measures);
+  Part(this.id, this.measures)
+      : super(XmlName(Local.part), [
+          id
+        ], [
+          ...measures,
+        ]);
 
   /// Repair a measure if it is empty by inserting a whole measure rest.
   /// If a <measure> only consists of a <forward> element that advances
   /// the time cursor, remove the <forward> element and replace
   /// with a whole measure rest of the same duration.
   static void _repairEmptyMeasure(XmlElement measure) {
-    final xmlForwards = measure.findAllElements('forward');
+    final xmlForwards = measure.findElements('forward');
     final forwardCount = xmlForwards.length;
-    final noteCount = measure.findAllElements('note').length;
+    final noteCount = measure.findElements('note').length;
     if (noteCount == 0 && forwardCount == 1) {
       // Get the duration of the <forward> element
       // TODO final xmlForward = xmlForwards.single;
