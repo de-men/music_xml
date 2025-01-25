@@ -1,4 +1,5 @@
 import 'package:music_xml/src/basic_attributes.dart';
+import 'package:music_xml/src/element/part/measure/note/grace/grace.dart';
 import 'package:music_xml/src/lyric.dart';
 import 'package:music_xml/src/pitch.dart';
 import 'package:music_xml/src/tie.dart';
@@ -9,14 +10,16 @@ import '../../../../music_xml_parser_state.dart';
 import '../../../../note_duration.dart';
 
 /// Internal representation of a MusicXML <note> element.
+/// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/
 class Note extends XmlElement {
+  final Grace? grace;
+
   final int midiChannel;
   final int midiProgram;
   final int velocity;
   final int voice;
   final bool isRest;
   final bool isInChord;
-  final bool isGraceNote;
   final NoteDuration noteDuration;
 
   /// Tied notes will have the same note id.
@@ -30,12 +33,14 @@ class Note extends XmlElement {
   Iterable<Lyric>? lyrics;
   List<Tie> ties;
 
+  bool get isGraceNote => grace != null;
+
   /// Parse the MusicXML <note> element.
   factory Note.parse(XmlElement xmlNote, MusicXMLParserState state) {
+    Grace? grace;
     var voice = 1;
     var isRest = false;
     var isInChord = false;
-    var isGraceNote = false;
     String? duration;
     var dots = 0;
     String? type;
@@ -48,6 +53,9 @@ class Note extends XmlElement {
     Pitch? pitchTypeSafe;
     for (final child in xmlNote.childElements) {
       switch (child.name.local) {
+        case Local.grace:
+          grace = Grace.parse(child);
+          break;
         case 'chord':
           isInChord = true;
           break;
@@ -88,7 +96,7 @@ class Note extends XmlElement {
     }
     final noteDuration = NoteDuration.parse(
       isInChord,
-      isGraceNote,
+      grace != null,
       duration,
       dots,
       type,
@@ -97,13 +105,13 @@ class Note extends XmlElement {
     );
 
     return Note(
+      grace,
       state.midiChannel,
       state.midiProgram,
       state.velocity,
       voice,
       isRest,
       isInChord,
-      isGraceNote,
       noteDuration,
       pitch,
       pitchTypeSafe,
@@ -113,13 +121,13 @@ class Note extends XmlElement {
   }
 
   Note(
+    this.grace,
     this.midiChannel,
     this.midiProgram,
     this.velocity,
     this.voice,
     this.isRest,
     this.isInChord,
-    this.isGraceNote,
     this.noteDuration,
     this.pitch,
     this.pitchTypeSafe,

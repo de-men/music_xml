@@ -17,6 +17,11 @@ class Local {
   static const measure = 'measure';
   static const number = 'number';
   static const note = 'note';
+  static const grace = 'grace';
+  static const makeTime = 'make-time';
+  static const slash = 'slash';
+  static const stealTimeFollowing	 = 'steal-time-following';
+  static const stealTimePrevious	 = 'steal-time-previous';
   static const backup = 'backup';
   static const forward = 'forward';
   static const duration = 'duration';
