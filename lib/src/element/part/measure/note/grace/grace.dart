@@ -1,9 +1,10 @@
-import 'package:music_xml/src/element/part/measure/note/grace/make_time.dart';
-import 'package:music_xml/src/element/part/measure/note/grace/slash.dart';
-import 'package:music_xml/src/element/part/measure/note/grace/steal_time_following.dart';
-import 'package:music_xml/src/element/part/measure/note/grace/steal_time_previous.dart';
-import 'package:music_xml/src/local.dart';
 import 'package:xml/xml.dart';
+
+import 'make_time.dart';
+import 'slash.dart';
+import 'steal_time_following.dart';
+import 'steal_time_previous.dart';
+import '../../../../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grace/
 class Grace extends XmlElement {
@@ -49,9 +50,9 @@ class Grace extends XmlElement {
     this.slash,
     this.stealTimeFollowing,
     this.stealTimePrevious,
-  ) : super(
-          XmlName(Local.grace),
-          [
+  ) : super.tag(
+          Local.grace,
+          attributes: [
             if (makeTime != null) makeTime,
             if (slash != null) slash,
             if (stealTimeFollowing != null) stealTimeFollowing,

@@ -64,12 +64,12 @@ class Part extends XmlElement {
         if (currentNote.isNoteOn) {
           tiedNotes.putIfAbsent(currentNote.voice, () => {});
           tiedNotes[currentNote.voice]!
-              .putIfAbsent(currentNote.pitch!.value, () => [currentNote]);
+              .putIfAbsent(currentNote.pitchMap!.value, () => [currentNote]);
         }
 
         // If note is a continuing note, add the note to tiedNotes
         else if (currentNote.continuesOtherNote) {
-          final notes = tiedNotes[currentNote.voice]?[currentNote.pitch!.value];
+          final notes = tiedNotes[currentNote.voice]?[currentNote.pitchMap!.value];
           assert(notes != null);
           final startNote = notes!.first;
           currentNote.updateNoteId(startNote.noteId);
@@ -79,7 +79,7 @@ class Part extends XmlElement {
         // If note ends, calculate tied duration
         if (currentNote.isNoteOff) {
           final notesForVoice = tiedNotes[currentNote.voice]!;
-          final pitch = currentNote.pitch!.value;
+          final pitch = currentNote.pitchMap!.value;
           final notes = notesForVoice[pitch]!;
           notesForVoice.remove(pitch);
           final first = notes.first.noteDuration;

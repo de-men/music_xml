@@ -10,7 +10,6 @@ export 'src/music_xml_parser_state.dart';
 export 'src/element/part/measure/note/note.dart';
 export 'src/note_duration.dart';
 export 'src/element/part/part.dart';
-export 'src/pitch.dart';
 export 'src/element/part/measure/print.dart';
 export 'src/root.dart';
 export 'src/element/partlist/scorepart/score_part.dart';

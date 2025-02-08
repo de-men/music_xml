@@ -19,6 +19,10 @@ class Local {
   static const note = 'note';
   static const grace = 'grace';
   static const chord = 'chord';
+  static const pitch = 'pitch';
+  static const step = 'step';
+  static const alter = 'alter';
+  static const octave = 'octave';
   static const makeTime = 'make-time';
   static const slash = 'slash';
   static const stealTimeFollowing	 = 'steal-time-following';

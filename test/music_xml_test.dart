@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:music_xml/music_xml.dart';
 import 'package:test/test.dart';
 
+import 'package:music_xml/src/data_types/step.dart' as dts;
+
 final file = File('test/assets/musicXML.xml');
 
 void main() {
@@ -70,16 +72,16 @@ void main() {
       expect(note.isRest, false);
       expect(note.isInChord, false);
       expect(note.isGraceNote, false);
-      expect(note.pitch?.key, 'Bb4');
-      expect(note.pitch?.value, 70);
+      expect(note.pitchMap?.key, 'Bb4');
+      expect(note.pitchMap?.value, 70);
     });
 
     test('Pitch.parse', () {
       final pitch =
-          document.score.parts.single.measures.first.notes.last.pitchTypeSafe!;
-      expect(pitch.step, Step.b);
-      expect(pitch.octave, 4);
-      expect(pitch.alter, -1.0);
+          document.score.parts.single.measures.first.notes.last.pitch;
+      expect(pitch!.step.step, dts.Step.B);
+      expect(pitch.octave.octave, 4);
+      expect(pitch.alter!.alter, -1.0);
     });
 
     group('Lyric.parse', () {

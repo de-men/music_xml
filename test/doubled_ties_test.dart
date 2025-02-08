@@ -44,7 +44,7 @@ void main() {
     expect(stopNote1.ties.single.type, StartStop.stop);
     expect(stopNote2.ties.single.type, StartStop.stop);
 
-    expect(startNote1.pitch!.value, stopNote1.pitch!.value);
-    expect(startNote2.pitch!.value, stopNote2.pitch!.value);
+    expect(startNote1.pitchMap!.value, stopNote1.pitchMap!.value);
+    expect(startNote2.pitchMap!.value, stopNote2.pitchMap!.value);
   });
 }

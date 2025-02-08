@@ -1,20 +1,21 @@
-import 'package:music_xml/src/basic_attributes.dart';
-import 'package:music_xml/src/element/part/measure/note/chore.dart';
-import 'package:music_xml/src/element/part/measure/note/grace/grace.dart';
-import 'package:music_xml/src/lyric.dart';
-import 'package:music_xml/src/pitch.dart';
-import 'package:music_xml/src/tie.dart';
 import 'package:xml/xml.dart';
 
+import 'chore.dart';
+import 'grace/grace.dart';
+import 'pitch/pitch.dart';
+import '../../../../basic_attributes.dart';
 import '../../../../local.dart';
+import '../../../../lyric.dart';
 import '../../../../music_xml_parser_state.dart';
 import '../../../../note_duration.dart';
+import '../../../../tie.dart';
 
 /// Internal representation of a MusicXML <note> element.
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/
 class Note extends XmlElement {
   final Grace? grace;
   final Chord? chord;
+  final Pitch? pitch;
 
   final int midiChannel;
   final int midiProgram;
@@ -29,18 +30,19 @@ class Note extends XmlElement {
   static int _noteIdCounter = 0;
 
   NoteDuration? _noteDurationTied;
-  MapEntry<String, int>? pitch;
-  Pitch? pitchTypeSafe;
+  MapEntry<String, int>? pitchMap;
   Iterable<Lyric>? lyrics;
   List<Tie> ties;
 
   bool get isGraceNote => grace != null;
+
   bool get isInChord => chord != null;
 
   /// Parse the MusicXML <note> element.
   factory Note.parse(XmlElement xmlNote, MusicXMLParserState state) {
     Grace? grace;
     Chord? chord;
+    Pitch? pitch;
     var voice = 1;
     var isRest = false;
     String? duration;
@@ -51,8 +53,7 @@ class Note extends XmlElement {
     final List<Lyric> lyrics = [];
     List<Tie> ties = [];
 
-    MapEntry<String, int>? pitch;
-    Pitch? pitchTypeSafe;
+    MapEntry<String, int>? pitchMap;
     for (final child in xmlNote.childElements) {
       switch (child.name.local) {
         case Local.grace:
@@ -64,9 +65,9 @@ class Note extends XmlElement {
         case 'duration':
           duration = child.innerText;
           break;
-        case 'pitch':
-          pitch = _parsePitch(child, state);
-          pitchTypeSafe = Pitch.parse(child);
+        case Local.pitch:
+          pitchMap = _parsePitch(child, state);
+          pitch = Pitch.parse(child);
           break;
         case 'rest':
           isRest = true;
@@ -109,14 +110,14 @@ class Note extends XmlElement {
     return Note(
       grace,
       chord,
+      pitch,
       state.midiChannel,
       state.midiProgram,
       state.velocity,
       voice,
       isRest,
       noteDuration,
-      pitch,
-      pitchTypeSafe,
+      pitchMap,
       lyrics.isNotEmpty ? lyrics : null,
       ties,
     );
@@ -125,18 +126,20 @@ class Note extends XmlElement {
   Note(
     this.grace,
     this.chord,
+    this.pitch,
     this.midiChannel,
     this.midiProgram,
     this.velocity,
     this.voice,
     this.isRest,
     this.noteDuration,
-    this.pitch,
-    this.pitchTypeSafe,
+    this.pitchMap,
     this.lyrics,
     this.ties,
-  ) : super(XmlName(Local.note), [], [
+  ) : super.tag(Local.note, children: [
           if (grace != null) grace,
+          if (chord != null) chord,
+          if (pitch != null) pitch,
         ]);
 
   /// Returns the combined duration of tied notes
