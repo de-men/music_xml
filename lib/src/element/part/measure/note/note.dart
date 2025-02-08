@@ -1,4 +1,5 @@
 import 'package:music_xml/src/basic_attributes.dart';
+import 'package:music_xml/src/element/part/measure/note/chore.dart';
 import 'package:music_xml/src/element/part/measure/note/grace/grace.dart';
 import 'package:music_xml/src/lyric.dart';
 import 'package:music_xml/src/pitch.dart';
@@ -13,13 +14,13 @@ import '../../../../note_duration.dart';
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/
 class Note extends XmlElement {
   final Grace? grace;
+  final Chord? chord;
 
   final int midiChannel;
   final int midiProgram;
   final int velocity;
   final int voice;
   final bool isRest;
-  final bool isInChord;
   final NoteDuration noteDuration;
 
   /// Tied notes will have the same note id.
@@ -34,13 +35,14 @@ class Note extends XmlElement {
   List<Tie> ties;
 
   bool get isGraceNote => grace != null;
+  bool get isInChord => chord != null;
 
   /// Parse the MusicXML <note> element.
   factory Note.parse(XmlElement xmlNote, MusicXMLParserState state) {
     Grace? grace;
+    Chord? chord;
     var voice = 1;
     var isRest = false;
-    var isInChord = false;
     String? duration;
     var dots = 0;
     String? type;
@@ -56,8 +58,8 @@ class Note extends XmlElement {
         case Local.grace:
           grace = Grace.parse(child);
           break;
-        case 'chord':
-          isInChord = true;
+        case Local.chord:
+          chord = Chord();
           break;
         case 'duration':
           duration = child.innerText;
@@ -95,7 +97,7 @@ class Note extends XmlElement {
       }
     }
     final noteDuration = NoteDuration.parse(
-      isInChord,
+      chord != null,
       grace != null,
       duration,
       dots,
@@ -106,12 +108,12 @@ class Note extends XmlElement {
 
     return Note(
       grace,
+      chord,
       state.midiChannel,
       state.midiProgram,
       state.velocity,
       voice,
       isRest,
-      isInChord,
       noteDuration,
       pitch,
       pitchTypeSafe,
@@ -122,18 +124,20 @@ class Note extends XmlElement {
 
   Note(
     this.grace,
+    this.chord,
     this.midiChannel,
     this.midiProgram,
     this.velocity,
     this.voice,
     this.isRest,
-    this.isInChord,
     this.noteDuration,
     this.pitch,
     this.pitchTypeSafe,
     this.lyrics,
     this.ties,
-  ) : super(XmlName(Local.note), [], []);
+  ) : super(XmlName(Local.note), [], [
+          if (grace != null) grace,
+        ]);
 
   /// Returns the combined duration of tied notes
   NoteDuration get noteDurationTied => _noteDurationTied ?? noteDuration;
