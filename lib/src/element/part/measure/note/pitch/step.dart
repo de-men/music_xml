@@ -8,31 +8,7 @@ class Step extends XmlElement {
   final dt.Step step;
 
   factory Step.parse(XmlElement element) {
-    late dt.Step step;
-    switch (element.innerText) {
-      case 'A':
-        step = dt.Step.A;
-        break;
-      case 'B':
-        step = dt.Step.B;
-        break;
-      case 'C':
-        step = dt.Step.C;
-        break;
-      case 'D':
-        step = dt.Step.D;
-        break;
-      case 'E':
-        step = dt.Step.E;
-        break;
-      case 'F':
-        step = dt.Step.F;
-        break;
-      case 'G':
-        step = dt.Step.G;
-        break;
-    }
-    return Step(step);
+    return Step(dt.parseStep(element.innerText));
   }
 
   Step(this.step) : super.tag(Local.step);

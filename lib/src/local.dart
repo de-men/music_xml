@@ -23,6 +23,9 @@ class Local {
   static const step = 'step';
   static const alter = 'alter';
   static const octave = 'octave';
+  static const unpitched = 'unpitched';
+  static const displayStep = 'display-step';
+  static const displayOctave = 'display-octave';
   static const makeTime = 'make-time';
   static const slash = 'slash';
   static const stealTimeFollowing	 = 'steal-time-following';

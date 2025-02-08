@@ -1,3 +1,4 @@
+import 'package:music_xml/src/element/part/measure/note/unpitched/unpitched.dart';
 import 'package:xml/xml.dart';
 
 import 'chore.dart';
@@ -16,6 +17,7 @@ class Note extends XmlElement {
   final Grace? grace;
   final Chord? chord;
   final Pitch? pitch;
+  final Unpitched? unpitched;
 
   final int midiChannel;
   final int midiProgram;
@@ -43,6 +45,7 @@ class Note extends XmlElement {
     Grace? grace;
     Chord? chord;
     Pitch? pitch;
+    Unpitched? unpitched;
     var voice = 1;
     var isRest = false;
     String? duration;
@@ -62,12 +65,15 @@ class Note extends XmlElement {
         case Local.chord:
           chord = Chord();
           break;
-        case 'duration':
-          duration = child.innerText;
-          break;
         case Local.pitch:
           pitchMap = _parsePitch(child, state);
           pitch = Pitch.parse(child);
+          break;
+        case Local.unpitched:
+          unpitched = Unpitched.parse(child);
+          break;
+        case 'duration':
+          duration = child.innerText;
           break;
         case 'rest':
           isRest = true;
@@ -91,8 +97,6 @@ class Note extends XmlElement {
         case 'tie':
           ties.add(Tie.parse(child, state));
           break;
-        case 'unpitched':
-          throw UnsupportedError('Unpitched notes are not supported');
         default:
         // Ignore other tag types because they are not relevant to Magenta.
       }
@@ -111,6 +115,7 @@ class Note extends XmlElement {
       grace,
       chord,
       pitch,
+      unpitched,
       state.midiChannel,
       state.midiProgram,
       state.velocity,
@@ -127,6 +132,7 @@ class Note extends XmlElement {
     this.grace,
     this.chord,
     this.pitch,
+    this.unpitched,
     this.midiChannel,
     this.midiProgram,
     this.velocity,
@@ -140,6 +146,7 @@ class Note extends XmlElement {
           if (grace != null) grace,
           if (chord != null) chord,
           if (pitch != null) pitch,
+          if (unpitched != null) unpitched,
         ]);
 
   /// Returns the combined duration of tied notes

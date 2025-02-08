@@ -8,3 +8,6 @@ enum Step {
   F,
   G,
 }
+
+Step parseStep(String str) =>
+    Step.values.firstWhere((e) => e.toString() == 'Step.$str');
