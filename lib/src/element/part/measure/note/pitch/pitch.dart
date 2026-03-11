@@ -4,6 +4,7 @@ import 'alter.dart';
 import 'octave.dart';
 import 'step.dart';
 import '../../../../../local.dart';
+import '../../../../../data_types/step.dart' as dt;
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pitch/
 class Pitch extends XmlElement {
@@ -38,4 +39,43 @@ class Pitch extends XmlElement {
           Local.pitch,
           children: [step, if (alter != null) alter, octave],
         );
+
+  static const _stepToPitchClass = {
+    dt.Step.C: 0,
+    dt.Step.D: 2,
+    dt.Step.E: 4,
+    dt.Step.F: 5,
+    dt.Step.G: 7,
+    dt.Step.A: 9,
+    dt.Step.B: 11,
+  };
+
+  /// Compute MIDI pitch number (C4 = 60, C1 = 24, C0 = 12).
+  int toMidiPitch({int transpose = 0}) {
+    final alterValue = alter?.alter ?? 0.0;
+    var pitchClass = (_stepToPitchClass[step.step]! + alterValue.toInt()) % 12;
+    return (12 + pitchClass) + (octave.octave * 12) + transpose;
+  }
+
+  /// Human-readable pitch string like "Bb4", "C#5", "G3".
+  String toPitchString() {
+    final alterValue = alter?.alter ?? 0.0;
+    final alterSemitones = alterValue.toInt();
+    final isMicrotonal = alterValue != alterSemitones;
+
+    var alterStr = '';
+    if (alterSemitones == -2) {
+      alterStr = 'bb';
+    } else if (alterSemitones == -1) {
+      alterStr = 'b';
+    } else if (alterSemitones == 1) {
+      alterStr = '#';
+    } else if (alterSemitones == 2) {
+      alterStr = 'x';
+    }
+    if (isMicrotonal) alterStr += ' (microtones) ';
+
+    final stepStr = step.step.toString().split('.').last;
+    return '$stepStr$alterStr${octave.octave}';
+  }
 }

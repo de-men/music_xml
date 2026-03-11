@@ -56,7 +56,6 @@ class Note extends XmlElement {
     final List<Lyric> lyrics = [];
     List<Tie> ties = [];
 
-    MapEntry<String, int>? pitchMap;
     for (final child in xmlNote.childElements) {
       switch (child.name.local) {
         case Local.grace:
@@ -66,7 +65,6 @@ class Note extends XmlElement {
           chord = Chord();
           break;
         case Local.pitch:
-          pitchMap = _parsePitch(child, state);
           pitch = Pitch.parse(child);
           break;
         case Local.unpitched:
@@ -110,6 +108,11 @@ class Note extends XmlElement {
       tupletRatio,
       state,
     );
+
+    final pitchMap = pitch != null
+        ? MapEntry(pitch.toPitchString(),
+            pitch.toMidiPitch(transpose: state.transpose))
+        : null;
 
     return Note(
       grace,
@@ -176,55 +179,6 @@ class Note extends XmlElement {
   /// Returns true if this note is tied to a following note
   bool get isContinuedByOtherNote => !isNoteOff;
 
-  /// Parse the MusicXML <pitch> element.
-  static MapEntry<String, int> _parsePitch(
-    XmlElement xmlPitch,
-    MusicXMLParserState state,
-  ) {
-    final step = xmlPitch.getElement('step')?.innerText ?? '';
-    var alterText = '';
-    var alter = 0.0;
-    final xmlAlter = xmlPitch.getElement('alter');
-    if (xmlAlter != null) alterText = xmlAlter.innerText;
-
-    final octave = xmlPitch.getElement('octave')?.innerText ?? '';
-
-    // Parse alter string to a float (floats represent microtonal alterations)
-    if (alterText.isNotEmpty) alter = double.parse(alterText);
-
-    // Check if this is a semitone alter (i.e. an integer) or microtonal (float)
-    final alterSemitones = alter.toInt(); // Number of semitones
-    final isMicrotonalAlter = (alter != alterSemitones);
-
-    // Visual pitch representation
-    var alterString = '';
-    if (alterSemitones == -2) {
-      alterString = 'bb';
-    } else if (alterSemitones == -1) {
-      alterString = 'b';
-    } else if (alterSemitones == 1) {
-      alterString = '#';
-    } else if (alterSemitones == 2) {
-      alterString = 'x';
-    }
-
-    if (isMicrotonalAlter) alterString += ' (microtones) ';
-
-    // N.B. - pitch_string does not account for transposition
-    final pitchString = '$step$alterString$octave';
-
-    // Compute MIDI pitch number (C4 = 60, C1 = 24, C0 = 12)
-    var midiPitch = pitchToMidiPitch(step, alter, octave);
-    // Transpose MIDI pitch
-    midiPitch += state.transpose;
-    return MapEntry(pitchString, midiPitch);
-  }
-
-  /// Parses a tuplet ratio.
-  ///
-  /// Represented in MusicXML by the <time-modification> element.
-  /// Args:
-  ///   xmlTimeModification: An xml time-modification element.
   static double _parseTuplet(XmlElement xmlTimeModification) {
     final numerator = int.parse(
       xmlTimeModification.getElement('actual-notes')!.innerText,
@@ -234,38 +188,4 @@ class Note extends XmlElement {
     );
     return numerator / denominator;
   }
-}
-
-/// Convert MusicXML pitch representation to MIDI pitch number.
-int pitchToMidiPitch(String step, double alter, String octave) {
-  var pitchClass = 0;
-  switch (step) {
-    case 'C':
-      pitchClass = 0;
-      break;
-    case 'D':
-      pitchClass = 2;
-      break;
-    case 'E':
-      pitchClass = 4;
-      break;
-    case 'F':
-      pitchClass = 5;
-      break;
-    case 'G':
-      pitchClass = 7;
-      break;
-    case 'A':
-      pitchClass = 9;
-      break;
-    case 'B':
-      pitchClass = 11;
-      break;
-    default:
-      // Raise exception for unknown step (ex: 'Q')
-      throw XmlParserException('Unable to parse pitch step $step');
-  }
-
-  pitchClass = (pitchClass + alter.toInt()) % 12;
-  return (12 + pitchClass) + (int.parse(octave) * 12);
 }
