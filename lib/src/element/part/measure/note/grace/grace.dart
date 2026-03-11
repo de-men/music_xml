@@ -19,9 +19,6 @@ class Grace extends XmlElement {
     StealTimeFollowing? stealTimeFollowing;
     StealTimePrevious? stealTimePrevious;
     for (final attribute in element.attributes) {
-      if (attribute.name.local == Local.makeTime) {
-        makeTime = MakeTime.parse(attribute);
-      }
       switch (attribute.name.local) {
         case Local.makeTime:
           makeTime = MakeTime.parse(attribute);
