@@ -176,6 +176,9 @@ class KeyAccidental extends XmlElement {
       case 'other':
         accidentalValue = AccidentalValue.other;
         break;
+      default:
+        accidentalValue = AccidentalValue.other;
+        break;
     }
 
     return KeyAccidental(accidentalValue);
