@@ -8,7 +8,7 @@ const defaultQuartersPerMinute = 120.0;
 class Tempo extends XmlAttribute {
   final double nonNegativeDecimal;
 
-  get qpm =>
+  double get qpm =>
       nonNegativeDecimal == 0 ? defaultQuartersPerMinute : nonNegativeDecimal;
 
   /// Parse the MusicXML <sound> element and retrieve the tempo.
