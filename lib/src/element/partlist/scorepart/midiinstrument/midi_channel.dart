@@ -6,7 +6,7 @@ import '../../../../local.dart';
 class MidiChannel extends XmlElement {
   final int content;
 
-  factory MidiChannel.fromXml(XmlElement element) {
+  factory MidiChannel.parse(XmlElement element) {
     return MidiChannel(int.parse(element.innerText));
   }
 

@@ -11,7 +11,7 @@ class MidiInstrument extends XmlElement {
   final MidiChannel? midiChannel;
   final MidiProgram? midiProgram;
 
-  factory MidiInstrument.fromXml(XmlElement element) {
+  factory MidiInstrument.parse(XmlElement element) {
     final idAttribute = element.getAttribute(Local.id)!;
 
     MidiChannel? midiChannel;
@@ -19,10 +19,10 @@ class MidiInstrument extends XmlElement {
     element.childElements.forEach((e) {
       switch (e.name.local) {
         case Local.midiChannel:
-          midiChannel = MidiChannel.fromXml(e);
+          midiChannel = MidiChannel.parse(e);
           break;
         case Local.midiProgram:
-          midiProgram = MidiProgram.fromXml(e);
+          midiProgram = MidiProgram.parse(e);
           break;
       }
     });

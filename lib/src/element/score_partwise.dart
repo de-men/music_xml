@@ -30,7 +30,7 @@ class ScorePartwise extends XmlElement {
   final double totalTimeSecs;
 
   /// Parse the uncompressed MusicXML document.
-  factory ScorePartwise.fromXml(XmlElement element) {
+  factory ScorePartwise.parse(XmlElement element) {
     final versionAttribute = element.getAttribute(Local.version);
     final version = versionAttribute != null ? Version(versionAttribute) : null;
 
@@ -39,15 +39,15 @@ class ScorePartwise extends XmlElement {
 
     MovementNumber? movementNumber = null;
     MovementTitle? movementTitle = null;
-    final partList = PartList.fromXml(element.getElement(Local.partList)!);
+    final partList = PartList.parse(element.getElement(Local.partList)!);
     final parts = <Part>[];
     element.childElements.forEach((e) {
       switch (e.name.local) {
         case Local.movementNumber:
-          movementNumber = MovementNumber.fromXml(e);
+          movementNumber = MovementNumber.parse(e);
           break;
         case Local.movementTitle:
-          movementTitle = MovementTitle.fromXml(e);
+          movementTitle = MovementTitle.parse(e);
           break;
         case Local.part:
           parts.add(Part.parse(state, e, partList.scoreParts));

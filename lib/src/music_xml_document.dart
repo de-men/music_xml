@@ -25,7 +25,7 @@ class MusicXmlDocument extends XmlDocument {
 
   factory MusicXmlDocument.fromXml(XmlDocument score) {
     final scorePartwiseElement = score.getElement('score-partwise')!;
-    final scorePartwise = ScorePartwise.fromXml(scorePartwiseElement);
+    final scorePartwise = ScorePartwise.parse(scorePartwiseElement);
     return MusicXmlDocument(scorePartwise);
   }
 

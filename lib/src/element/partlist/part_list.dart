@@ -8,7 +8,7 @@ class PartList extends XmlElement {
   // TODO final Map<PartGroup> partGroups; // Zero or more times
   final Map<String, ScorePart> scoreParts;
 
-  factory PartList.fromXml(XmlElement element) {
+  factory PartList.parse(XmlElement element) {
     return PartList(
       scoreParts: Map.fromIterable(
         element.findElements(Local.scorePart).map((e) => ScorePart.parse(e)),

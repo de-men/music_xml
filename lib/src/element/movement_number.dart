@@ -5,7 +5,7 @@ import '../local.dart';
 class MovementNumber extends XmlElement {
   final String number;
 
-  factory MovementNumber.fromXml(XmlElement element) {
+  factory MovementNumber.parse(XmlElement element) {
     return MovementNumber(element.innerText);
   }
 
