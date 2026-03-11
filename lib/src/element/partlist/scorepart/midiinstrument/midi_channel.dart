@@ -7,9 +7,7 @@ class MidiChannel extends XmlElement {
   final int content;
 
   factory MidiChannel.fromXml(XmlElement element) {
-    return MidiChannel(
-      int.parse(element.innerText),
-    );
+    return MidiChannel(int.parse(element.innerText));
   }
 
   MidiChannel(this.content) : super(XmlName(Local.midiChannel));

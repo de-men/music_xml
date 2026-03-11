@@ -11,8 +11,9 @@ final percussionClef = File('test/assets/percussion-clef.xml');
 
 void main() {
   test('Bass Clef Down Octave', () {
-    final document =
-        MusicXmlDocument.parse(bassClefDownOctave.readAsStringSync());
+    final document = MusicXmlDocument.parse(
+      bassClefDownOctave.readAsStringSync(),
+    );
 
     final clef = document
         .score.parts.single.measures.single.attributesList.single.clefs.single;

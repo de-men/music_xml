@@ -34,11 +34,8 @@ class MidiInstrument extends XmlElement {
     );
   }
 
-  MidiInstrument(
-    this.id, {
-    this.midiChannel,
-    this.midiProgram,
-  }) : super(
+  MidiInstrument(this.id, {this.midiChannel, this.midiProgram})
+      : super(
           XmlName(Local.midiInstrument),
           [id],
           [

@@ -10,8 +10,5 @@ class StealTimePrevious extends XmlAttribute {
   }
 
   StealTimePrevious(this.percent)
-      : super(
-          XmlName(Local.stealTimePrevious),
-          '$percent',
-        );
+      : super(XmlName(Local.stealTimePrevious), '$percent');
 }

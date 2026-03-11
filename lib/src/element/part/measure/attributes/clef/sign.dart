@@ -3,15 +3,7 @@ import 'package:xml/xml.dart';
 import '../../../../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/clef-sign/
-enum ClefSign {
-  G,
-  F,
-  C,
-  percussion,
-  TAB,
-  jianpu,
-  none,
-}
+enum ClefSign { G, F, C, percussion, TAB, jianpu, none }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sign/
 class Sign extends XmlElement {

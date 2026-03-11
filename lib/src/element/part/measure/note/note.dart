@@ -142,12 +142,15 @@ class Note extends XmlElement {
     this.pitchMap,
     this.lyrics,
     this.ties,
-  ) : super.tag(Local.note, children: [
-          if (grace != null) grace,
-          if (chord != null) chord,
-          if (pitch != null) pitch,
-          if (unpitched != null) unpitched,
-        ]);
+  ) : super.tag(
+          Local.note,
+          children: [
+            if (grace != null) grace,
+            if (chord != null) chord,
+            if (pitch != null) pitch,
+            if (unpitched != null) unpitched,
+          ],
+        );
 
   /// Returns the combined duration of tied notes
   NoteDuration get noteDurationTied => _noteDurationTied ?? noteDuration;
@@ -223,10 +226,12 @@ class Note extends XmlElement {
   /// Args:
   ///   xmlTimeModification: An xml time-modification element.
   static double _parseTuplet(XmlElement xmlTimeModification) {
-    final numerator =
-        int.parse(xmlTimeModification.getElement('actual-notes')!.innerText);
-    final denominator =
-        int.parse(xmlTimeModification.getElement('normal-notes')!.innerText);
+    final numerator = int.parse(
+      xmlTimeModification.getElement('actual-notes')!.innerText,
+    );
+    final denominator = int.parse(
+      xmlTimeModification.getElement('normal-notes')!.innerText,
+    );
     return numerator / denominator;
   }
 }

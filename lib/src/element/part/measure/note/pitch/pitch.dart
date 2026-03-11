@@ -30,23 +30,12 @@ class Pitch extends XmlElement {
         }
       }
     }
-    return Pitch(
-      step: step,
-      alter: alter,
-      octave: octave,
-    );
+    return Pitch(step: step, alter: alter, octave: octave);
   }
 
-  Pitch({
-    required this.step,
-    this.alter,
-    required this.octave,
-  }) : super.tag(
+  Pitch({required this.step, this.alter, required this.octave})
+      : super.tag(
           Local.pitch,
-          children: [
-            step,
-            if (alter != null) alter,
-            octave,
-          ],
+          children: [step, if (alter != null) alter, octave],
         );
 }

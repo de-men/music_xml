@@ -23,7 +23,8 @@ class Tie {
       return parseStartStop(value);
     } catch (e) {
       throw throw XmlParserException(
-          'Invalid <tie>. "type" attribute missing or invalid.');
+        'Invalid <tie>. "type" attribute missing or invalid.',
+      );
     }
   }
 }

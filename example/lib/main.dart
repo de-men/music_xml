@@ -52,26 +52,18 @@ class MyHomePage extends StatelessWidget {
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MusicItem(
-            xmlFile: 'musicXML.xml',
-          ),
-          MusicItem(
-            xmlFile: 'test.xml',
-          ),
+          MusicItem(xmlFile: 'musicXML.xml'),
+          MusicItem(xmlFile: 'test.xml'),
         ],
-      )
+      ),
     );
   }
 }
 
 class MusicItem extends StatelessWidget {
-
   final String xmlFile;
 
-  const MusicItem({
-    required this.xmlFile,
-    Key? key,
-  }) : super(key: key);
+  const MusicItem({required this.xmlFile, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

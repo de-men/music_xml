@@ -69,11 +69,7 @@ class Attributes extends XmlElement {
             // when there are enharmonic equivalents.
             if (newKey > 6) newKey %= -6;
             keys.removeLast();
-            keys.add(
-              Key(
-                fifths: Fifths(newKey),
-              ),
-            );
+            keys.add(Key(fifths: Fifths(newKey)));
           }
           break;
         default:

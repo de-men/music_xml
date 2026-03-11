@@ -10,8 +10,5 @@ class Dynamics extends XmlAttribute {
   }
 
   Dynamics(this.nonNegativeDecimal)
-      : super(
-          XmlName(Local.dynamics),
-          '$nonNegativeDecimal',
-        );
+      : super(XmlName(Local.dynamics), '$nonNegativeDecimal');
 }

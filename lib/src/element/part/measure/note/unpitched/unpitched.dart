@@ -24,20 +24,9 @@ class Unpitched extends XmlElement {
         }
       }
     }
-    return Unpitched(
-      displayStep: displayStep,
-      displayOctave: displayOctave,
-    );
+    return Unpitched(displayStep: displayStep, displayOctave: displayOctave);
   }
 
-  Unpitched({
-    required this.displayStep,
-    required this.displayOctave,
-  }) : super.tag(
-          Local.unpitched,
-          children: [
-            displayStep,
-            displayOctave,
-          ],
-        );
+  Unpitched({required this.displayStep, required this.displayOctave})
+      : super.tag(Local.unpitched, children: [displayStep, displayOctave]);
 }

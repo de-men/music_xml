@@ -69,9 +69,6 @@ class ScorePart extends XmlElement {
   }) : super.tag(
           Local.scorePart,
           attributes: [id],
-          children: [
-            partName,
-            ...midiInstruments,
-          ],
+          children: [partName, ...midiInstruments],
         );
 }

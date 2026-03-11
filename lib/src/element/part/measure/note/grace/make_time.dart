@@ -9,9 +9,5 @@ class MakeTime extends XmlAttribute {
     return MakeTime(int.tryParse(attribute.value) ?? 0);
   }
 
-  MakeTime(this.divisions)
-      : super(
-          XmlName(Local.makeTime),
-          '$divisions',
-        );
+  MakeTime(this.divisions) : super(XmlName(Local.makeTime), '$divisions');
 }

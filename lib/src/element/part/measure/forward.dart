@@ -18,10 +18,5 @@ class Forward extends XmlElement {
     return Forward(duration);
   }
 
-  Forward(this.duration)
-      : super(
-          XmlName(Local.forward),
-          [],
-          [duration],
-        );
+  Forward(this.duration) : super(XmlName(Local.forward), [], [duration]);
 }

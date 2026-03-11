@@ -10,8 +10,5 @@ class StealTimeFollowing extends XmlAttribute {
   }
 
   StealTimeFollowing(this.percent)
-      : super(
-          XmlName(Local.stealTimeFollowing),
-          '$percent',
-        );
+      : super(XmlName(Local.stealTimeFollowing), '$percent');
 }

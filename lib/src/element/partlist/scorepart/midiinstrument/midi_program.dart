@@ -7,9 +7,7 @@ class MidiProgram extends XmlElement {
   final int content;
 
   factory MidiProgram.fromXml(XmlElement element) {
-    return MidiProgram(
-      int.parse(element.innerText),
-    );
+    return MidiProgram(int.parse(element.innerText));
   }
 
   MidiProgram(this.content) : super.tag(Local.midiProgram);

@@ -77,8 +77,7 @@ void main() {
     });
 
     test('Pitch.parse', () {
-      final pitch =
-          document.score.parts.single.measures.first.notes.last.pitch;
+      final pitch = document.score.parts.single.measures.first.notes.last.pitch;
       expect(pitch!.step.step, dts.Step.B);
       expect(pitch.octave.octave, 4);
       expect(pitch.alter!.alter, -1.0);

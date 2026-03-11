@@ -37,12 +37,7 @@ class Grace extends XmlElement {
           break;
       }
     }
-    return Grace(
-      makeTime,
-      slash,
-      stealTimeFollowing,
-      stealTimePrevious,
-    );
+    return Grace(makeTime, slash, stealTimeFollowing, stealTimePrevious);
   }
 
   Grace(

@@ -46,11 +46,13 @@ class Key extends XmlElement {
             if (keyAlter == null) {
               throw StateError('KeyStep must be followed by KeyAlter');
             }
-            stepAlterAccidentals.add(StepAlterAccidental(
-              keyStep: keyStep,
-              keyAlter: keyAlter,
-              keyAccidental: keyAccidental,
-            ));
+            stepAlterAccidentals.add(
+              StepAlterAccidental(
+                keyStep: keyStep,
+                keyAlter: keyAlter,
+                keyAccidental: keyAccidental,
+              ),
+            );
           }
           keyStep = KeyStep.parse(child);
           keyAlter = null;

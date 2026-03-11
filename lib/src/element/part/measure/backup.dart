@@ -18,10 +18,5 @@ class Backup extends XmlElement {
     return Backup(duration);
   }
 
-  Backup(this.duration)
-      : super(
-          XmlName(Local.backup),
-          [],
-          [duration],
-        );
+  Backup(this.duration) : super(XmlName(Local.backup), [], [duration]);
 }
