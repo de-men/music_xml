@@ -27,7 +27,7 @@ void main() {
   });
 
   test('score without <work> has null work', () {
-    final noWork = File('test/assets/musicXML.xml');
+    final noWork = File('test/assets/pitch-element.xml');
     final document = MusicXmlDocument.parse(noWork.readAsStringSync());
 
     expect(document.score.work, isNull);
