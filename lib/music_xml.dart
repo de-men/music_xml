@@ -6,7 +6,6 @@ export 'src/kind.dart';
 export 'src/lyric.dart';
 export 'src/element/part/measure/measure.dart';
 export 'src/music_xml_document.dart';
-export 'src/music_xml_parser_state.dart';
 export 'src/element/part/measure/note/note.dart';
 export 'src/note_duration.dart';
 export 'src/element/part/part.dart';

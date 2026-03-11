@@ -165,7 +165,7 @@ class ChordSymbol extends XmlElement {
           }
           break;
         default:
-        // Ignore other tag types because they are not relevant to Magenta.
+        // TODO: support remaining <harmony> child elements
       }
     }
     if (rootTypeSafe.step == Step.undefined && kind != 'N.C.') {

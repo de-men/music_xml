@@ -50,7 +50,7 @@ class Lyric {
           text = null;
           break;
         default:
-        // Ignore other tag types because they are not relevant to Magenta.
+        // TODO: support remaining <lyric> child elements
       }
     }
 

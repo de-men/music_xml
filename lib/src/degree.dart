@@ -29,7 +29,7 @@ class Degree {
           type = parseDegreeType(child.innerText);
           break;
         default:
-        // Ignore other tag types because they are not relevant to Magenta.
+        // TODO: support remaining <degree> child elements
       }
     }
 

@@ -29,7 +29,7 @@ class Bass {
           separator = child.innerText;
           break;
         default:
-        // Ignore other tag types because they are not relevant to Magenta.
+        // TODO: support remaining <bass> child elements
       }
     }
 

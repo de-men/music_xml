@@ -4,6 +4,7 @@ import 'package:music_xml/src/element/movement_title.dart';
 import 'package:xml/xml.dart';
 
 import '../../music_xml.dart';
+import '../music_xml_parser_state.dart';
 import '../local.dart';
 import 'movement_number.dart';
 import 'partlist/part_list.dart';
