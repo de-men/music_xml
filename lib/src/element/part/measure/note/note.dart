@@ -1,7 +1,7 @@
 import 'package:music_xml/src/element/part/measure/note/unpitched/unpitched.dart';
 import 'package:xml/xml.dart';
 
-import 'chore.dart';
+import 'chord.dart';
 import 'grace/grace.dart';
 import 'pitch/pitch.dart';
 import '../../../../basic_attributes.dart';

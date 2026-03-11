@@ -5,7 +5,7 @@ import '../local.dart';
 class MovementTitle extends XmlElement {
   final String title;
 
-  factory MovementTitle.fromXml(XmlElement element) {
+  factory MovementTitle.parse(XmlElement element) {
     return MovementTitle(element.innerText);
   }
 

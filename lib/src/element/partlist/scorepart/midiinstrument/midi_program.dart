@@ -6,7 +6,7 @@ import '../../../../local.dart';
 class MidiProgram extends XmlElement {
   final int content;
 
-  factory MidiProgram.fromXml(XmlElement element) {
+  factory MidiProgram.parse(XmlElement element) {
     return MidiProgram(int.parse(element.innerText));
   }
 

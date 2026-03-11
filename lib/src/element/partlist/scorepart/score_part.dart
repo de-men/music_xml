@@ -43,7 +43,7 @@ class ScorePart extends XmlElement {
           partName = PartName.parse(e);
           break;
         case Local.midiInstrument:
-          final midiInstrument = MidiInstrument.fromXml(e);
+          final midiInstrument = MidiInstrument.parse(e);
           midiInstruments.add(midiInstrument);
           midiChannel ??= midiInstrument.midiChannel?.content;
           midiProgram ??= midiInstrument.midiProgram?.content;
