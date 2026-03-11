@@ -26,11 +26,10 @@ class Attributes extends XmlElement {
   factory Attributes.parse(
     MusicXMLParserState state,
     XmlElement element,
-    Iterable<Time> times,
+    List<Time> times,
   ) {
     Divisions? divisions;
     final keys = <Key>[];
-    final times = <Time>[];
     final clefs = <Clef>[];
     final transposes = <Transpose>[];
     for (final child in element.childElements) {
@@ -53,27 +52,26 @@ class Attributes extends XmlElement {
         case Local.clef:
           clefs.add(Clef.parse(child));
           break;
-
         case Local.transpose:
           final transpose = Transpose.parse(child);
-          transposes.add(Transpose.parse(child));
+          transposes.add(transpose);
           state.transpose = transpose.chromatic.semitones;
           if (keys.isNotEmpty) {
-            // Transposition is chromatic. Every half step up is 5 steps backward
-            // on the circle of fifths, which has 12 positions.
+            // Transposition is chromatic. Every half step up is 5 steps
+            // backward on the circle of fifths, which has 12 positions.
             final keyTranspose = (state.transpose * -5) % 12;
-
             var newKey = keys.last.key + keyTranspose;
             // If the new key has >6 sharps, translate to flats.
-            // TODO(fjord): Could be more smart about when to use sharps vs. flats
-            // when there are enharmonic equivalents.
+            // TODO: be smarter about when to use sharps vs. flats
+            // for enharmonic equivalents.
             if (newKey > 6) newKey %= -6;
             keys.removeLast();
             keys.add(Key(fifths: Fifths(newKey)));
           }
           break;
         default:
-        // Ignore other tag types because they are not relevant to Magenta.
+          // TODO: support remaining <attributes> child elements
+          break;
       }
     }
     return Attributes(
