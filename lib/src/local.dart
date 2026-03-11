@@ -5,6 +5,10 @@ class Local {
 
   // elements
   static const scorePartwise = 'score-partwise';
+  static const work = 'work';
+  static const workNumber = 'work-number';
+  static const workTitle = 'work-title';
+  static const opus = 'opus';
   static const movementNumber = 'movement-number';
   static const movementTitle = 'movement-title';
   static const partList = 'part-list';
