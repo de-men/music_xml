@@ -174,54 +174,37 @@ class Measure extends XmlElement {
     // Multiply divisions by 4 because division is always parts per quarter note
     final numerator = duration;
     final denominator = state.divisions * 4;
-    final fractionalTimeSignature = numerator / denominator;
 
     Time? result = timeSignature;
     if (state.time == null && timeSignature == null) {
-      // No global time signature yet and no measure time signature defined
-      // in this measure (no time signature or senza misura).
-      // Insert the fractional time signature as the time signature
-      // for this measure
       timeSignature = Time.parse(state);
       timeSignature.numerator = numerator;
       timeSignature.denominator = denominator;
       state.time = timeSignature;
       result = timeSignature;
     } else {
-      final fractionalStateTimeSignature =
-          state.time!.numerator / state.time!.denominator;
-
-      // Check for pickup measure. Reset time signature to smaller numerator
       final pickupMeasure = numerator < state.time!.numerator;
-
-      // Get the current time signature denominator
       final globalTimeSignatureDenominator = state.time!.denominator;
 
-      // If the fractional time signature = 1 (e.g. 4/4),
-      // make the numerator the same as the global denominator
+      // Use integer cross-multiplication instead of float division
+      // to avoid floating-point precision issues.
+      // numerator/denominator == 1 iff numerator == denominator
       Time newTimeSignature = Time.parse(state);
-      if (fractionalTimeSignature.toDouble() == 1 && !pickupMeasure) {
+      if (numerator == denominator && !pickupMeasure) {
         newTimeSignature.numerator = globalTimeSignatureDenominator;
         newTimeSignature.denominator = globalTimeSignatureDenominator;
       } else {
-        // # Otherwise, set the time signature to the fractional time signature
-        // # Issue #674 - Use the original numerator and denominator
-        // # instead of the fractional one
         newTimeSignature = Time.parse(state);
         newTimeSignature.numerator = numerator;
         newTimeSignature.denominator = denominator;
-
-        final newTimeSigFraction = numerator / denominator;
-        if (newTimeSigFraction == fractionalTimeSignature) {
-          newTimeSignature.numerator = numerator;
-          newTimeSignature.denominator = denominator;
-        }
       }
 
       // Insert a new time signature only if it does not equal the global
       // time signature.
-      if (pickupMeasure ||
-          (fractionalTimeSignature != fractionalStateTimeSignature)) {
+      // Cross-multiply: a/b != c/d iff a*d != b*c
+      final fractionsNotEqual = numerator * state.time!.denominator !=
+          denominator * state.time!.numerator;
+      if (pickupMeasure || fractionsNotEqual) {
         newTimeSignature.timePosition = startTimePosition;
         timeSignature = newTimeSignature;
         state.time = newTimeSignature;
