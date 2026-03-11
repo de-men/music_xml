@@ -1,0 +1,18 @@
+<score-partwise>
+    <work>
+        <work-number>D. 911</work-number>
+        <work-title>Winterreise</work-title>
+    </work>
+    <movement-number>22</movement-number>
+    <movement-title>Mut</movement-title>
+    <identification>
+        <creator type="composer">Franz Schubert</creator>
+        <creator type="poet">Wilhelm Müller</creator>
+    </identification>
+    <part-list>
+        <score-part id="P1">
+        </score-part>
+    </part-list>
+    <part id="P1">
+    </part>
+</score-partwise>

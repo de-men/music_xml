@@ -1,14 +1,7 @@
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/kind-value/
 import 'package:music_xml/src/camel_case.dart';
 
-enum SimpleKind {
-  major,
-  minor,
-  augmented,
-  diminished,
-  sus,
-  other,
-}
+enum SimpleKind { major, minor, augmented, diminished, sus, other }
 
 enum Kind {
   undefined,
@@ -80,5 +73,6 @@ extension SimpleKindExtension on Kind {
                       : SimpleKind.other;
 }
 
-Kind parseKind(String str) => Kind.values
-    .firstWhere((e) => e.toString() == 'Kind.' + lowerCamelCase(str));
+Kind parseKind(String str) => Kind.values.firstWhere(
+      (e) => e.toString() == 'Kind.' + lowerCamelCase(str),
+    );

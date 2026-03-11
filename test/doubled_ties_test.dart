@@ -9,7 +9,7 @@ void main() {
   test('DoubledTies', () {
     final document = MusicXmlDocument.parse(file.readAsStringSync());
     // Get 4 notes that are tied together
-    final notes = document.parts.single.measures.single.notes;
+    final notes = document.score.parts.single.measures.single.notes;
     final startNote1 = notes.first;
     final startNote2 = notes[1];
     final stopNote1 = notes[2];
@@ -44,7 +44,7 @@ void main() {
     expect(stopNote1.ties.single.type, StartStop.stop);
     expect(stopNote2.ties.single.type, StartStop.stop);
 
-    expect(startNote1.pitch!.value, stopNote1.pitch!.value);
-    expect(startNote2.pitch!.value, stopNote2.pitch!.value);
+    expect(startNote1.pitchMap!.value, stopNote1.pitchMap!.value);
+    expect(startNote2.pitchMap!.value, stopNote2.pitchMap!.value);
   });
 }

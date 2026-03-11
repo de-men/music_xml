@@ -3,12 +3,7 @@ import 'package:xml/xml.dart';
 import 'music_xml_parser_state.dart';
 
 /// The value of the <syllabic> child element.
-enum Syllabic {
-  single,
-  begin,
-  end,
-  middle,
-}
+enum Syllabic { single, begin, end, middle }
 
 class LyricItem {
   Syllabic? syllabic;
@@ -41,8 +36,9 @@ class Lyric {
     for (final child in xmlLyric.childElements) {
       switch (child.name.local) {
         case 'syllabic':
-          syllabic = Syllabic.values
-              .firstWhere((e) => e.toString() == 'Syllabic.' + child.innerText);
+          syllabic = Syllabic.values.firstWhere(
+            (e) => e.toString() == 'Syllabic.' + child.innerText,
+          );
           break;
         case 'text':
           text = child.innerText;
@@ -54,7 +50,7 @@ class Lyric {
           text = null;
           break;
         default:
-        // Ignore other tag types because they are not relevant to Magenta.
+        // TODO: support remaining <lyric> child elements
       }
     }
 
