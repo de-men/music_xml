@@ -33,9 +33,9 @@ class Clef extends XmlElement {
   }
 
   Clef(this.sign, this.line, this.clefOctaveChange)
-    : super(XmlName(Local.clef), [], [
-        sign,
-        if (line != null) line,
-        if (clefOctaveChange != null) clefOctaveChange,
-      ]);
+      : super(XmlName(Local.clef), [], [
+          sign,
+          if (line != null) line,
+          if (clefOctaveChange != null) clefOctaveChange,
+        ]);
 }

@@ -25,5 +25,5 @@ class Tempo extends XmlAttribute {
   }
 
   Tempo(this.nonNegativeDecimal)
-    : super(XmlName(Local.tempo), '$nonNegativeDecimal');
+      : super(XmlName(Local.tempo), '$nonNegativeDecimal');
 }

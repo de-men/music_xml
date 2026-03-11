@@ -16,15 +16,7 @@ void main() {
     );
 
     final clef = document
-        .score
-        .parts
-        .single
-        .measures
-        .single
-        .attributesList
-        .single
-        .clefs
-        .single;
+        .score.parts.single.measures.single.attributesList.single.clefs.single;
     expect(clef, isNotNull);
     expect(clef.sign.content, ClefSign.F);
     expect(clef.line?.staffLinePosition, 4);
@@ -35,15 +27,7 @@ void main() {
     final document = MusicXmlDocument.parse(percussionClef.readAsStringSync());
 
     final clef = document
-        .score
-        .parts
-        .single
-        .measures
-        .single
-        .attributesList
-        .single
-        .clefs
-        .single;
+        .score.parts.single.measures.single.attributesList.single.clefs.single;
     expect(clef, isNotNull);
     expect(clef.sign.content, ClefSign.percussion);
     expect(clef.line, isNull);

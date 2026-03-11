@@ -92,10 +92,10 @@ class Attributes extends XmlElement {
     this.clefs = const [],
     this.transposes = const [],
   }) : super(XmlName(Local.attributes), [], [
-         if (divisions != null) divisions,
-         ...keys,
-         ...times,
-         ...clefs,
-         ...transposes,
-       ]);
+          if (divisions != null) divisions,
+          ...keys,
+          ...times,
+          ...clefs,
+          ...transposes,
+        ]);
 }

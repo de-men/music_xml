@@ -23,8 +23,8 @@ class Sound extends XmlElement {
   }
 
   Sound(this.tempo, this.dynamics)
-    : super(XmlName(Local.sound), [
-        if (dynamics != null) dynamics,
-        if (tempo != null) tempo,
-      ], []);
+      : super(XmlName(Local.sound), [
+          if (dynamics != null) dynamics,
+          if (tempo != null) tempo,
+        ], []);
 }

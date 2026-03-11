@@ -143,14 +143,14 @@ class Note extends XmlElement {
     this.lyrics,
     this.ties,
   ) : super.tag(
-        Local.note,
-        children: [
-          if (grace != null) grace,
-          if (chord != null) chord,
-          if (pitch != null) pitch,
-          if (unpitched != null) unpitched,
-        ],
-      );
+          Local.note,
+          children: [
+            if (grace != null) grace,
+            if (chord != null) chord,
+            if (pitch != null) pitch,
+            if (unpitched != null) unpitched,
+          ],
+        );
 
   /// Returns the combined duration of tied notes
   NoteDuration get noteDurationTied => _noteDurationTied ?? noteDuration;

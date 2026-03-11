@@ -108,16 +108,16 @@ class ChordSymbol extends XmlElement {
   final Bass? bassTypeSafe;
 
   static ChordSymbol get noChord => ChordSymbol(
-    timePosition: 0.0,
-    root: '',
-    rootTypeSafe: Root(Step.undefined),
-    kind: chordKindAbbreviations['none']!,
-    kindTypeSafe: Kind.undefined,
-    degrees: [],
-    degreesTypeSafe: [],
-    bass: null,
-    bassTypeSafe: null,
-  );
+        timePosition: 0.0,
+        root: '',
+        rootTypeSafe: Root(Step.undefined),
+        kind: chordKindAbbreviations['none']!,
+        kindTypeSafe: Kind.undefined,
+        degrees: [],
+        degreesTypeSafe: [],
+        bass: null,
+        bassTypeSafe: null,
+      );
 
   factory ChordSymbol.parse(XmlElement xmlHarmony, MusicXMLParserState state) {
     var timePosition = state.timePosition;

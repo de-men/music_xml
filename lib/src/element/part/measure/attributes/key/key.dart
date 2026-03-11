@@ -81,15 +81,15 @@ class Key extends XmlElement {
     this.stepAlterAccidentals = const [],
     this.timePosition = -1,
   }) : super(XmlName(Local.key), [], [
-         fifths,
-         if (mode != null) mode,
-         ...stepAlterAccidentals.map((e) => e.keyStep),
-         ...stepAlterAccidentals.map((e) => e.keyAlter),
-         ...stepAlterAccidentals
-             .map((e) => e.keyAccidental)
-             .where((e) => e != null)
-             .cast<KeyAccidental>(),
-       ]);
+          fifths,
+          if (mode != null) mode,
+          ...stepAlterAccidentals.map((e) => e.keyStep),
+          ...stepAlterAccidentals.map((e) => e.keyAlter),
+          ...stepAlterAccidentals
+              .map((e) => e.keyAccidental)
+              .where((e) => e != null)
+              .cast<KeyAccidental>(),
+        ]);
 }
 
 class StepAlterAccidental {

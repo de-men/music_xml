@@ -20,8 +20,8 @@ enum BarStyle {
 }
 
 BarStyle _parseBarStyle(String str) => BarStyle.values.firstWhere(
-  (e) => e.toString() == 'BarStyle.' + camelCase(str),
-);
+      (e) => e.toString() == 'BarStyle.' + camelCase(str),
+    );
 
 /// Internal representation of a MusicXML <barline> element.
 class Barline extends XmlElement {

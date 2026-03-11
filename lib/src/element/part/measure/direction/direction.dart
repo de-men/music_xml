@@ -18,5 +18,5 @@ class Direction extends XmlElement {
   }
 
   Direction(this.sound)
-    : super(XmlName(Local.direction), [], [if (sound != null) sound]);
+      : super(XmlName(Local.direction), [], [if (sound != null) sound]);
 }

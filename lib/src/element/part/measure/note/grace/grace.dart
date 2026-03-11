@@ -46,12 +46,12 @@ class Grace extends XmlElement {
     this.stealTimeFollowing,
     this.stealTimePrevious,
   ) : super.tag(
-        Local.grace,
-        attributes: [
-          if (makeTime != null) makeTime,
-          if (slash != null) slash,
-          if (stealTimeFollowing != null) stealTimeFollowing,
-          if (stealTimePrevious != null) stealTimePrevious,
-        ],
-      );
+          Local.grace,
+          attributes: [
+            if (makeTime != null) makeTime,
+            if (slash != null) slash,
+            if (stealTimeFollowing != null) stealTimeFollowing,
+            if (stealTimePrevious != null) stealTimePrevious,
+          ],
+        );
 }

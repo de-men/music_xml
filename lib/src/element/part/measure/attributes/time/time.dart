@@ -84,9 +84,9 @@ class Time extends XmlElement {
     this.denominator = -1,
     this.timePosition = 0,
   }) : super(XmlName(Local.time), [], [
-         ...beatsBeatTypes.map((e) => e.beats),
-         ...beatsBeatTypes.map((e) => e.beatType),
-       ]);
+          ...beatsBeatTypes.map((e) => e.beats),
+          ...beatsBeatTypes.map((e) => e.beatType),
+        ]);
 }
 
 class BeatsBeatType {

@@ -105,7 +105,7 @@ class Part extends XmlElement {
   }
 
   Part(this.id, this.measures)
-    : super(XmlName(Local.part), [id], [...measures]);
+      : super(XmlName(Local.part), [id], [...measures]);
 
   /// Repair a measure if it is empty by inserting a whole measure rest.
   /// If a <measure> only consists of a <forward> element that advances
