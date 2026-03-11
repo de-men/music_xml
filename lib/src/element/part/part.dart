@@ -108,29 +108,30 @@ class Part extends XmlElement {
       : super(XmlName(Local.part), [id], [...measures]);
 
   /// Repair a measure if it is empty by inserting a whole measure rest.
+  ///
   /// If a <measure> only consists of a <forward> element that advances
   /// the time cursor, remove the <forward> element and replace
   /// with a whole measure rest of the same duration.
   static void _repairEmptyMeasure(XmlElement measure) {
-    final xmlForwards = measure.findElements('forward');
-    final forwardCount = xmlForwards.length;
+    final xmlForwards = measure.findElements('forward').toList();
     final noteCount = measure.findElements('note').length;
-    if (noteCount == 0 && forwardCount == 1) {
-      // Get the duration of the <forward> element
-      // TODO final xmlForward = xmlForwards.single;
-      // final xmlDuration = xmlForward.getElement('duration');
-      // final forwardDuration = int.tryParse(xmlDuration?.text ?? '') ?? 0;
+    if (noteCount == 0 && xmlForwards.length == 1) {
+      final xmlForward = xmlForwards.single;
+      final forwardDuration =
+          xmlForward.getElement('duration')?.innerText ?? '0';
 
-      // # Delete the <forward> element
-      // measure.remove(xml_forward)
-      //
-      // # Insert the new note
-      // new_note = '<note>'
-      // new_note += '<rest /><duration>' + str(forward_duration) + '</duration>'
-      // new_note += '<voice>1</voice><type>whole</type><staff>1</staff>'
-      // new_note += '</note>'
-      // new_note_xml = ET.fromstring(new_note)
-      // measure.append(new_note_xml)
+      xmlForward.parent!.children.remove(xmlForward);
+
+      final restNote = XmlDocument.parse(
+        '<note>'
+        '<rest/>'
+        '<duration>$forwardDuration</duration>'
+        '<voice>1</voice>'
+        '<type>whole</type>'
+        '<staff>1</staff>'
+        '</note>',
+      ).rootElement.copy();
+      measure.children.add(restNote);
     }
   }
 }
