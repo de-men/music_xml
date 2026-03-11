@@ -25,9 +25,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2.21.0
         with:
           channel: stable
+          cache: true
 
       - name: Removing example folder
         run: rm -rf example
