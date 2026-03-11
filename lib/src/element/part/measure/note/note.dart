@@ -98,7 +98,7 @@ class Note extends XmlElement {
           ties.add(Tie.parse(child, state));
           break;
         default:
-        // Ignore other tag types because they are not relevant to Magenta.
+        // TODO: support remaining <note> child elements
       }
     }
     final noteDuration = NoteDuration.parse(

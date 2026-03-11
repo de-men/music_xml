@@ -17,7 +17,7 @@ class MusicXMLParserState {
   var divisions = 1;
 
   // Default to a tempo of 120 quarter notes per minute
-  // MusicXML calls this tempo, but Magenta calls this qpm
+  // MusicXML calls this tempo; qpm = quarter notes per minute
   // Therefore, the variable is called qpm, but reads the
   // MusicXML tempo attribute
   // (120 qpm is the default tempo according to the
