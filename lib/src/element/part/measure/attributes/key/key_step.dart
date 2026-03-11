@@ -1,15 +1,7 @@
 import 'package:music_xml/src/local.dart';
 import 'package:xml/xml.dart';
 
-enum Step {
-  A,
-  B,
-  C,
-  D,
-  E,
-  F,
-  G,
-}
+enum Step { A, B, C, D, E, F, G }
 
 class KeyStep extends XmlElement {
   final Step step;

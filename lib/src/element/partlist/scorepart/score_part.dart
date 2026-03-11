@@ -67,11 +67,8 @@ class ScorePart extends XmlElement {
     this.midiChannel = defaultMidiChannel,
     this.midiProgram = defaultMidiProgram,
   }) : super.tag(
-          Local.scorePart,
-          attributes: [id],
-          children: [
-            partName,
-            ...midiInstruments,
-          ],
-        );
+         Local.scorePart,
+         attributes: [id],
+         children: [partName, ...midiInstruments],
+       );
 }

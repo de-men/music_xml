@@ -48,10 +48,9 @@ class Time extends XmlElement {
           beats = Beats.parse(e);
           break;
         case Local.beatType:
-          beatsBeatTypes.add(BeatsBeatType(
-            beats: beats!,
-            beatType: BeatType.parse(e),
-          ));
+          beatsBeatTypes.add(
+            BeatsBeatType(beats: beats!, beatType: BeatType.parse(e)),
+          );
           break;
       }
     });
@@ -84,22 +83,15 @@ class Time extends XmlElement {
     this.numerator = -1,
     this.denominator = -1,
     this.timePosition = 0,
-  }) : super(
-          XmlName(Local.time),
-          [],
-          [
-            ...beatsBeatTypes.map((e) => e.beats),
-            ...beatsBeatTypes.map((e) => e.beatType),
-          ],
-        );
+  }) : super(XmlName(Local.time), [], [
+         ...beatsBeatTypes.map((e) => e.beats),
+         ...beatsBeatTypes.map((e) => e.beatType),
+       ]);
 }
 
 class BeatsBeatType {
   final Beats beats;
   final BeatType beatType;
 
-  BeatsBeatType({
-    required this.beats,
-    required this.beatType,
-  });
+  BeatsBeatType({required this.beats, required this.beatType});
 }

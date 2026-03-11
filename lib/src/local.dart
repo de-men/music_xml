@@ -28,8 +28,8 @@ class Local {
   static const displayOctave = 'display-octave';
   static const makeTime = 'make-time';
   static const slash = 'slash';
-  static const stealTimeFollowing	 = 'steal-time-following';
-  static const stealTimePrevious	 = 'steal-time-previous';
+  static const stealTimeFollowing = 'steal-time-following';
+  static const stealTimePrevious = 'steal-time-previous';
   static const backup = 'backup';
   static const forward = 'forward';
   static const duration = 'duration';

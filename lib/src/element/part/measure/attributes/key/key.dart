@@ -46,11 +46,13 @@ class Key extends XmlElement {
             if (keyAlter == null) {
               throw StateError('KeyStep must be followed by KeyAlter');
             }
-            stepAlterAccidentals.add(StepAlterAccidental(
-              keyStep: keyStep,
-              keyAlter: keyAlter,
-              keyAccidental: keyAccidental,
-            ));
+            stepAlterAccidentals.add(
+              StepAlterAccidental(
+                keyStep: keyStep,
+                keyAlter: keyAlter,
+                keyAccidental: keyAccidental,
+              ),
+            );
           }
           keyStep = KeyStep.parse(child);
           keyAlter = null;
@@ -79,15 +81,15 @@ class Key extends XmlElement {
     this.stepAlterAccidentals = const [],
     this.timePosition = -1,
   }) : super(XmlName(Local.key), [], [
-          fifths,
-          if (mode != null) mode,
-          ...stepAlterAccidentals.map((e) => e.keyStep),
-          ...stepAlterAccidentals.map((e) => e.keyAlter),
-          ...stepAlterAccidentals
-              .map((e) => e.keyAccidental)
-              .where((e) => e != null)
-              .cast<KeyAccidental>(),
-        ]);
+         fifths,
+         if (mode != null) mode,
+         ...stepAlterAccidentals.map((e) => e.keyStep),
+         ...stepAlterAccidentals.map((e) => e.keyAlter),
+         ...stepAlterAccidentals
+             .map((e) => e.keyAccidental)
+             .where((e) => e != null)
+             .cast<KeyAccidental>(),
+       ]);
 }
 
 class StepAlterAccidental {

@@ -42,10 +42,7 @@ class Part extends XmlElement {
     // Update durations of tied notes
     _updateDurationsOfTiedNotes(measures);
 
-    return Part(
-      Id(idAttribute),
-      measures,
-    );
+    return Part(Id(idAttribute), measures);
   }
 
   static void _updateDurationsOfTiedNotes(List<Measure> measures) {
@@ -63,13 +60,15 @@ class Part extends XmlElement {
         // If note is note on, create a new entry in tiedNotes
         if (currentNote.isNoteOn) {
           tiedNotes.putIfAbsent(currentNote.voice, () => {});
-          tiedNotes[currentNote.voice]!
-              .putIfAbsent(currentNote.pitchMap!.value, () => [currentNote]);
+          tiedNotes[currentNote.voice]!.putIfAbsent(
+            currentNote.pitchMap!.value,
+            () => [currentNote],
+          );
         }
-
         // If note is a continuing note, add the note to tiedNotes
         else if (currentNote.continuesOtherNote) {
-          final notes = tiedNotes[currentNote.voice]?[currentNote.pitchMap!.value];
+          final notes =
+              tiedNotes[currentNote.voice]?[currentNote.pitchMap!.value];
           assert(notes != null);
           final startNote = notes!.first;
           currentNote.updateNoteId(startNote.noteId);
@@ -106,11 +105,7 @@ class Part extends XmlElement {
   }
 
   Part(this.id, this.measures)
-      : super(XmlName(Local.part), [
-          id
-        ], [
-          ...measures,
-        ]);
+    : super(XmlName(Local.part), [id], [...measures]);
 
   /// Repair a measure if it is empty by inserting a whole measure rest.
   /// If a <measure> only consists of a <forward> element that advances

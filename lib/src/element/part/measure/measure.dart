@@ -148,18 +148,18 @@ class Measure extends XmlElement {
     this.tempos = const [],
     this.duration = 0,
   }) : super(
-          XmlName(Local.measure),
-          [number],
-          [
-            ...notes,
-            ...backups,
-            ...forwards,
-            ...attributesList,
-            ...chordSymbols,
-            ...prints,
-            ...barlines,
-          ],
-        );
+         XmlName(Local.measure),
+         [number],
+         [
+           ...notes,
+           ...backups,
+           ...forwards,
+           ...attributesList,
+           ...chordSymbols,
+           ...prints,
+           ...barlines,
+         ],
+       );
 
   /// Correct the time signature for incomplete measures.
   /// If the measure is incomplete or a pickup, insert an appropriate

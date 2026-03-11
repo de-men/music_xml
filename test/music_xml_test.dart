@@ -77,8 +77,7 @@ void main() {
     });
 
     test('Pitch.parse', () {
-      final pitch =
-          document.score.parts.single.measures.first.notes.last.pitch;
+      final pitch = document.score.parts.single.measures.first.notes.last.pitch;
       expect(pitch!.step.step, dts.Step.B);
       expect(pitch.octave.octave, 4);
       expect(pitch.alter!.alter, -1.0);
@@ -195,7 +194,15 @@ void main() {
 
     test('TimeSignature.parse', () {
       final timeSignature = document
-          .score.parts.single.measures.first.attributesList.first.times.first;
+          .score
+          .parts
+          .single
+          .measures
+          .first
+          .attributesList
+          .first
+          .times
+          .first;
       expect(timeSignature.numerator, 3);
       expect(timeSignature.denominator, 4);
       expect(timeSignature.timePosition, 0);
@@ -203,7 +210,15 @@ void main() {
 
     test('KeySignature.parse', () {
       final keySignature = document
-          .score.parts.single.measures.first.attributesList.first.keys.first;
+          .score
+          .parts
+          .single
+          .measures
+          .first
+          .attributesList
+          .first
+          .keys
+          .first;
       expect(keySignature.key, -1);
       expect(keySignature.mode!.mode, 'major');
       expect(keySignature.timePosition, 0);

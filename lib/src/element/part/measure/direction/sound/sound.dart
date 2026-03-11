@@ -19,17 +19,12 @@ class Sound extends XmlElement {
         dynamics = Dynamics.parse(child.value);
       }
     }
-    return Sound(
-      tempo,
-      dynamics,
-    );
+    return Sound(tempo, dynamics);
   }
 
-  Sound(
-    this.tempo,
-    this.dynamics,
-  ) : super(XmlName(Local.sound), [
-          if (dynamics != null) dynamics,
-          if (tempo != null) tempo,
-        ], []);
+  Sound(this.tempo, this.dynamics)
+    : super(XmlName(Local.sound), [
+        if (dynamics != null) dynamics,
+        if (tempo != null) tempo,
+      ], []);
 }

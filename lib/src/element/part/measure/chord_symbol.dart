@@ -19,7 +19,7 @@ import '../../../note_duration.dart';
 /// The MusicXML-defined chord kinds are listed here:
 /// http://usermanuals.musicxml.com/MusicXML/Content/ST-MusicXML-kind-value.htm
 const chordKindAbbreviations = <String, String>{
-// These chord kinds are in the MusicXML spec.
+  // These chord kinds are in the MusicXML spec.
   'major': '',
   'minor': 'm',
   'augmented': 'aug',
@@ -48,12 +48,12 @@ const chordKindAbbreviations = <String, String>{
   'power': '5',
   'none': 'N.C.',
 
-// These are not in the spec, but show up frequently in the wild.
+  // These are not in the spec, but show up frequently in the wild.
   'dominant-seventh': '7',
   'augmented-ninth': 'aug9',
   'minor-major': 'm(maj7)',
 
-// Some abbreviated kinds also show up frequently in the wild.
+  // Some abbreviated kinds also show up frequently in the wild.
   '': '',
   'min': 'm',
   'aug': 'aug',
@@ -70,7 +70,7 @@ const chordKindAbbreviations = <String, String>{
   '9': '9',
   'maj9': 'maj9',
   'min9': 'm9',
-  'sus47': 'sus7'
+  'sus47': 'sus7',
 };
 
 /// Internal representation of a MusicXML chord symbol <harmony> element.
@@ -108,16 +108,16 @@ class ChordSymbol extends XmlElement {
   final Bass? bassTypeSafe;
 
   static ChordSymbol get noChord => ChordSymbol(
-        timePosition: 0.0,
-        root: '',
-        rootTypeSafe: Root(Step.undefined),
-        kind: chordKindAbbreviations['none']!,
-        kindTypeSafe: Kind.undefined,
-        degrees: [],
-        degreesTypeSafe: [],
-        bass: null,
-        bassTypeSafe: null,
-      );
+    timePosition: 0.0,
+    root: '',
+    rootTypeSafe: Root(Step.undefined),
+    kind: chordKindAbbreviations['none']!,
+    kindTypeSafe: Kind.undefined,
+    degrees: [],
+    degreesTypeSafe: [],
+    bass: null,
+    bassTypeSafe: null,
+  );
 
   factory ChordSymbol.parse(XmlElement xmlHarmony, MusicXMLParserState state) {
     var timePosition = state.timePosition;
@@ -228,7 +228,8 @@ class ChordSymbol extends XmlElement {
 
     if (state.transpose != 0) {
       throw XmlParserException(
-          'Transposition of chord symbols currently unsupported');
+        'Transposition of chord symbols currently unsupported',
+      );
     }
 
     return step + alterString;
@@ -320,7 +321,8 @@ class ChordSymbol extends XmlElement {
           break;
         default:
           throw XmlParserException(
-              'Invalid degree modification type: $typeText');
+            'Invalid degree modification type: $typeText',
+          );
       }
 
       // Return a scale degree modification string that can be appended to a chord

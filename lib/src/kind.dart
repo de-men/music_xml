@@ -1,14 +1,7 @@
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/kind-value/
 import 'package:music_xml/src/camel_case.dart';
 
-enum SimpleKind {
-  major,
-  minor,
-  augmented,
-  diminished,
-  sus,
-  other,
-}
+enum SimpleKind { major, minor, augmented, diminished, sus, other }
 
 enum Kind {
   undefined,
@@ -48,7 +41,8 @@ enum Kind {
 }
 
 extension SimpleKindExtension on Kind {
-  SimpleKind get simple => this == Kind.major ||
+  SimpleKind get simple =>
+      this == Kind.major ||
           this == Kind.major ||
           this == Kind.major11th ||
           this == Kind.major13th ||
@@ -63,22 +57,23 @@ extension SimpleKindExtension on Kind {
           this == Kind.neapolitan
       ? SimpleKind.major
       : this == Kind.minor ||
-              this == Kind.minor11th ||
-              this == Kind.minor13th ||
-              this == Kind.minorNinth ||
-              this == Kind.minorSeventh ||
-              this == Kind.minorSixth
-          ? SimpleKind.minor
-          : this == Kind.suspendedFourth || this == Kind.suspendedSecond
-              ? SimpleKind.sus
-              : this == Kind.diminished ||
-                      this == Kind.diminishedSeventh ||
-                      this == Kind.halfDiminished
-                  ? SimpleKind.diminished
-                  : this == Kind.augmented || this == Kind.augmentedSeventh
-                      ? SimpleKind.augmented
-                      : SimpleKind.other;
+            this == Kind.minor11th ||
+            this == Kind.minor13th ||
+            this == Kind.minorNinth ||
+            this == Kind.minorSeventh ||
+            this == Kind.minorSixth
+      ? SimpleKind.minor
+      : this == Kind.suspendedFourth || this == Kind.suspendedSecond
+      ? SimpleKind.sus
+      : this == Kind.diminished ||
+            this == Kind.diminishedSeventh ||
+            this == Kind.halfDiminished
+      ? SimpleKind.diminished
+      : this == Kind.augmented || this == Kind.augmentedSeventh
+      ? SimpleKind.augmented
+      : SimpleKind.other;
 }
 
-Kind parseKind(String str) => Kind.values
-    .firstWhere((e) => e.toString() == 'Kind.' + lowerCamelCase(str));
+Kind parseKind(String str) => Kind.values.firstWhere(
+  (e) => e.toString() == 'Kind.' + lowerCamelCase(str),
+);

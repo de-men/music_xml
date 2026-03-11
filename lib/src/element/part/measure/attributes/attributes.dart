@@ -69,11 +69,7 @@ class Attributes extends XmlElement {
             // when there are enharmonic equivalents.
             if (newKey > 6) newKey %= -6;
             keys.removeLast();
-            keys.add(
-              Key(
-                fifths: Fifths(newKey),
-              ),
-            );
+            keys.add(Key(fifths: Fifths(newKey)));
           }
           break;
         default:
@@ -96,10 +92,10 @@ class Attributes extends XmlElement {
     this.clefs = const [],
     this.transposes = const [],
   }) : super(XmlName(Local.attributes), [], [
-          if (divisions != null) divisions,
-          ...keys,
-          ...times,
-          ...clefs,
-          ...transposes,
-        ]);
+         if (divisions != null) divisions,
+         ...keys,
+         ...times,
+         ...clefs,
+         ...transposes,
+       ]);
 }

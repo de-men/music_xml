@@ -10,15 +10,13 @@ import 'package:xml/xml.dart';
 ///
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/
 class MusicXmlDocument extends XmlDocument {
-
   final ScorePartwise score;
-  
+
   /// Title of the piece
   String get title => score.movementTitle?.title ?? 'Unknown Piece';
-  
+
   /// Total time in seconds
   double get totalTimeSecs => score.totalTimeSecs;
-
 
   /// Parse the uncompressed MusicXML document.
   factory MusicXmlDocument.parse(String input) {

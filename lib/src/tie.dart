@@ -18,12 +18,14 @@ class Tie {
   /// Parses a type attribute
   static StartStop _parseType(XmlElement xmlTie) {
     try {
-      final value =
-          xmlTie.attributes.firstWhere((e) => e.name.local == 'type').value;
+      final value = xmlTie.attributes
+          .firstWhere((e) => e.name.local == 'type')
+          .value;
       return parseStartStop(value);
     } catch (e) {
       throw throw XmlParserException(
-          'Invalid <tie>. "type" attribute missing or invalid.');
+        'Invalid <tie>. "type" attribute missing or invalid.',
+      );
     }
   }
 }
