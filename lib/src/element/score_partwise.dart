@@ -9,6 +9,7 @@ import '../local.dart';
 import 'movement_number.dart';
 import 'partlist/part_list.dart';
 import 'version.dart';
+import 'identification/identification.dart';
 import 'work/work.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/
@@ -19,7 +20,8 @@ class ScorePartwise extends XmlElement {
   final MovementNumber? movementNumber;
   final MovementTitle? movementTitle;
 
-  // TODO final Identification? identification;
+  final Identification? identification;
+
   // TODO final Defaults? defaults;
 
   // TODO final List<Credit> credits; // Zero or more times
@@ -40,6 +42,7 @@ class ScorePartwise extends XmlElement {
     var totalTimeSecs = 0.0;
 
     Work? work;
+    Identification? identification;
     MovementNumber? movementNumber = null;
     MovementTitle? movementTitle = null;
     final partList = PartList.parse(element.getElement(Local.partList)!);
@@ -48,6 +51,9 @@ class ScorePartwise extends XmlElement {
       switch (e.name.local) {
         case Local.work:
           work = Work.parse(e);
+          break;
+        case Local.identification:
+          identification = Identification.parse(e);
           break;
         case Local.movementNumber:
           movementNumber = MovementNumber.parse(e);
@@ -65,6 +71,7 @@ class ScorePartwise extends XmlElement {
     return ScorePartwise(
       version: version,
       work: work,
+      identification: identification,
       movementNumber: movementNumber,
       movementTitle: movementTitle,
       partList: partList,
@@ -76,9 +83,9 @@ class ScorePartwise extends XmlElement {
   ScorePartwise({
     this.version,
     this.work,
+    this.identification,
     this.movementNumber,
     this.movementTitle,
-    // this.identification,
     // this.defaults,
     // this.credits = const [],
     required this.partList,
@@ -89,6 +96,7 @@ class ScorePartwise extends XmlElement {
           attributes: [if (version != null) version],
           children: [
             if (work != null) work,
+            if (identification != null) identification,
             if (movementNumber != null) movementNumber,
             if (movementTitle != null) movementTitle,
             partList,

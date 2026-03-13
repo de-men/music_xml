@@ -1,6 +1,10 @@
+## 2.2.0
+
+* [`<identification>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/) element with `creator`, `rights`, `encoding`, `source`, `relation`, `miscellaneous`, and [`<supports>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/supports/)
+
 ## 2.1.0
 
-* [`<work>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work/) element with `work-number`, `work-title`, and [`<opus>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/opus-reference/) (XLink) [#31](https://github.com/de-men/music_xml/issues/31)
+* [`<work>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work/) element with `work-number`, `work-title`, and [`<opus>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/opus-reference/) (XLink) [#42](https://github.com/de-men/music_xml/pull/42)
 
 ## 2.0.0
 
