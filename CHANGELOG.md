@@ -1,3 +1,8 @@
+## 2.3.0
+
+* [`<defaults>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/) element with `scaling`, `concert-score`, `page-layout`, `system-layout`, `staff-layout`, `appearance`, `system-dividers`, `music-font`, `word-font`, `lyric-font`, `lyric-language`
+* Data type enums: `MarginType`, `LineWidthType`, `NoteSizeType`, `DistanceType`, `GlyphType`, `FontStyle`, `FontWeight`, `FontSize`
+
 ## 2.2.0
 
 * [`<identification>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/) element with `creator`, `rights`, `encoding`, `source`, `relation`, `miscellaneous`, and [`<supports>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/supports/)
