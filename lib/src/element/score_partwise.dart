@@ -9,6 +9,7 @@ import '../local.dart';
 import 'movement_number.dart';
 import 'partlist/part_list.dart';
 import 'version.dart';
+import 'defaults/defaults.dart';
 import 'identification/identification.dart';
 import 'work/work.dart';
 
@@ -21,8 +22,7 @@ class ScorePartwise extends XmlElement {
   final MovementTitle? movementTitle;
 
   final Identification? identification;
-
-  // TODO final Defaults? defaults;
+  final Defaults? defaults;
 
   // TODO final List<Credit> credits; // Zero or more times
   final PartList partList;
@@ -43,6 +43,7 @@ class ScorePartwise extends XmlElement {
 
     Work? work;
     Identification? identification;
+    Defaults? defaults;
     MovementNumber? movementNumber = null;
     MovementTitle? movementTitle = null;
     final partList = PartList.parse(element.getElement(Local.partList)!);
@@ -54,6 +55,9 @@ class ScorePartwise extends XmlElement {
           break;
         case Local.identification:
           identification = Identification.parse(e);
+          break;
+        case Local.defaults:
+          defaults = Defaults.parse(e);
           break;
         case Local.movementNumber:
           movementNumber = MovementNumber.parse(e);
@@ -72,6 +76,7 @@ class ScorePartwise extends XmlElement {
       version: version,
       work: work,
       identification: identification,
+      defaults: defaults,
       movementNumber: movementNumber,
       movementTitle: movementTitle,
       partList: partList,
@@ -84,6 +89,7 @@ class ScorePartwise extends XmlElement {
     this.version,
     this.work,
     this.identification,
+    this.defaults,
     this.movementNumber,
     this.movementTitle,
     // this.defaults,
@@ -97,6 +103,7 @@ class ScorePartwise extends XmlElement {
           children: [
             if (work != null) work,
             if (identification != null) identification,
+            if (defaults != null) defaults,
             if (movementNumber != null) movementNumber,
             if (movementTitle != null) movementTitle,
             partList,
