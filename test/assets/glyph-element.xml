@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC
+        "-//Recordare//DTD MusicXML 3.0 Partwise//EN"
+        "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.0">
+  <defaults>
+    <appearance>
+      <line-width type="stem">0.8333</line-width>
+      <line-width type="staff">1.25</line-width>
+      <line-width type="light barline">1.875</line-width>
+      <line-width type="leger">1.875</line-width>
+      <glyph type="f-clef">fClef19thCentury</glyph>
+      <glyph type="quarter-rest">restQuarterOld</glyph>
+    </appearance>
+  </defaults>
+  <part-list>
+    <score-part id="P1">
+      <part-name>name</part-name>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+      </attributes>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+    </measure>
+  </part>
+</score-partwise>
