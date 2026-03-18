@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
+import 'package:music_xml/src/data_types/xlink.dart';
 import 'package:test/test.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/work-element/
@@ -15,7 +16,7 @@ void main() {
     expect(work!.workNumber!.number, 'D. 911');
     expect(work.workTitle!.title, 'Winterreise');
     expect(work.opus!.href, 'opus/winterreise.musicxml');
-    expect(work.opus!.show, 'new');
+    expect(work.opus!.show, XLinkShow.newWindow);
   });
 
   test('<work> coexists with movement-number and movement-title', () {

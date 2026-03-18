@@ -48,6 +48,13 @@ class Local {
   static const wordFont = 'word-font';
   static const lyricFont = 'lyric-font';
   static const lyricLanguage = 'lyric-language';
+  static const credit = 'credit';
+  static const creditType = 'credit-type';
+  static const creditWords = 'credit-words';
+  static const creditSymbol = 'credit-symbol';
+  static const creditImage = 'credit-image';
+  static const link = 'link';
+  static const bookmark = 'bookmark';
   static const movementNumber = 'movement-number';
   static const movementTitle = 'movement-title';
   static const partList = 'part-list';

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC
+        "-//Recordare//DTD MusicXML 3.0 Partwise//EN"
+        "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.0">
+  <credit page="1">
+    <credit-words default-x="37" default-y="1495" font-size="12" valign="top">Practice with</credit-words>
+    <credit-symbol>fClef</credit-symbol>
+    <credit-words font-size="12">and</credit-words>
+    <credit-symbol>cClef</credit-symbol>
+    <credit-words font-size="12">clefs as well.</credit-words>
+  </credit>
+  <part-list>
+    <score-part id="P1">
+      <part-name>name</part-name>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes><divisions>1</divisions></attributes>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>4</duration><voice>1</voice><type>whole</type>
+      </note>
+    </measure>
+  </part>
+</score-partwise>

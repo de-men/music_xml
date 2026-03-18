@@ -75,7 +75,6 @@ class Pitch extends XmlElement {
     }
     if (isMicrotonal) alterStr += ' (microtones) ';
 
-    final stepStr = step.step.toString().split('.').last;
-    return '$stepStr$alterStr${octave.octave}';
+    return '${step.step.name}$alterStr${octave.octave}';
   }
 }
