@@ -6,10 +6,10 @@ import 'package:xml/xml.dart';
 import '../../../local.dart';
 import '../../../music_xml_parser_state.dart';
 
-/// Internal representation of a MusicXML <score-part>.
+/// Internal representation of a MusicXML `<score-part>`.
 ///
-/// A <score-part> element contains MIDI program and channel info
-/// for the <part> elements in the MusicXML document.
+/// A `<score-part>` element contains MIDI program and channel info
+/// for the `<part>` elements in the MusicXML document.
 ///
 /// If no MIDI info is found for the part, use the default MIDI channel (0)
 /// and default to the Grand Piano program (MIDI Program #1).
@@ -29,7 +29,7 @@ class ScorePart extends XmlElement {
   final int midiChannel;
   final int midiProgram;
 
-  /// Parse the <score-part> element to an in-memory representation.
+  /// Parse the `<score-part>` element to an in-memory representation.
   factory ScorePart.parse(XmlElement element) {
     final idAttribute = element.getAttribute(Local.id)!;
 

@@ -14,7 +14,7 @@ import 'direction/sound/tempo.dart';
 import 'attributes/time/time.dart';
 import 'number.dart';
 
-/// Internal represention of the MusicXML <measure> element.
+/// Internal represention of the MusicXML `<measure>` element.
 ///
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-partwise/
 class Measure extends XmlElement {
@@ -36,7 +36,7 @@ class Measure extends XmlElement {
   final Iterable<Tempo> tempos;
   final int duration;
 
-  /// Parse the <measure> element.
+  /// Parse the `<measure>` element.
   factory Measure.parse(MusicXMLParserState state, XmlElement element) {
     final startTimePosition = state.timePosition;
 

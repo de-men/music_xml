@@ -5,7 +5,7 @@ import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/opus-reference/
 ///
-/// The <opus> element represents a link to a MusicXML opus document
+/// The `<opus>` element represents a link to a MusicXML opus document
 /// that composes multiple MusicXML scores into a collection.
 /// Always empty, with XLink attributes.
 class Opus extends XmlElement {

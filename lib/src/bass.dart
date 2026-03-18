@@ -3,14 +3,14 @@ import 'package:xml/xml.dart';
 
 import 'music_xml_parser_state.dart';
 
-/// Internal representation of a MusicXML <bass> element.
+/// Internal representation of a MusicXML `<bass>` element.
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bass/
 class Bass {
   final Step step;
   final double alter;
   final String? separator;
 
-  /// Parse the MusicXML <bass> element.
+  /// Parse the MusicXML `<bass>` element.
   factory Bass.parse(XmlElement xmlBass, MusicXMLParserState state) {
     Step? step;
     double alter = 0.0;

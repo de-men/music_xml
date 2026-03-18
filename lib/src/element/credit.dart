@@ -15,7 +15,7 @@ export 'credit_type.dart';
 export 'credit_words.dart';
 export 'link.dart';
 
-/// Represents either <credit-words> or <credit-symbol>.
+/// Represents either `<credit-words>` or `<credit-symbol>`.
 sealed class CreditContent {}
 
 class CreditWordsContent extends CreditContent {

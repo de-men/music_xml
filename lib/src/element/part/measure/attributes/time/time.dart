@@ -14,8 +14,8 @@ import 'beats.dart';
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time/
 class Time extends XmlElement {
   /// In this order (One or more times)
-  /// <beats> (Required)
-  /// <beat-type> (Required)
+  /// `<beats>` (Required)
+  /// `<beat-type>` (Required)
   final Iterable<BeatsBeatType> beatsBeatTypes;
 
   int numerator;
@@ -27,7 +27,7 @@ class Time extends XmlElement {
 
   int get beatType => denominator ~/ divisions;
 
-  /// Parse the MusicXML <time> element.
+  /// Parse the MusicXML `<time>` element.
   factory Time.parse(MusicXMLParserState state, [XmlElement? element]) {
     int numerator = -1;
     int denominator = -1;
