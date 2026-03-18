@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC
+        "-//Recordare//DTD MusicXML 3.0 Partwise//EN"
+        "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.0">
+  <credit page="1">
+    <credit-type>title</credit-type>
+    <credit-words default-x="683" default-y="1725" font-size="24" font-weight="bold" halign="center" valign="top">Sonata, Op. 27, No. 2</credit-words>
+  </credit>
+  <credit page="1">
+    <credit-type>composer</credit-type>
+    <credit-words default-x="1200" default-y="1650" font-size="12" halign="right" valign="top">Ludwig van Beethoven</credit-words>
+  </credit>
+  <part-list>
+    <score-part id="P1">
+      <part-name>Piano</part-name>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+      </attributes>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+    </measure>
+  </part>
+</score-partwise>

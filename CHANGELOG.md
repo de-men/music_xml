@@ -1,3 +1,10 @@
+## 2.4.0
+
+* [`<credit>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/) element with `credit-type`, `credit-words`, `credit-symbol`, `credit-image`, `link`, `bookmark`
+* Sealed `CreditContent` class with `Credit.image` / `Credit.content` constructors
+* Data type enums: `CreditTypeValue`, `XLinkActuate`, `XLinkShow`, `XLinkType`, `LeftCenterRight`, `Valign`, `ValignImage`, `TextDirection`, `EnclosureShape`, `XmlSpace`
+* Bump SDK to `>=3.2.0` for sealed classes
+
 ## 2.3.0
 
 * [`<defaults>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/) element with `scaling`, `concert-score`, `page-layout`, `system-layout`, `staff-layout`, `appearance`, `system-dividers`, `music-font`, `word-font`, `lyric-font`, `lyric-language`

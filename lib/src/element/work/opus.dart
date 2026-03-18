@@ -1,5 +1,6 @@
 import 'package:xml/xml.dart';
 
+import '../../data_types/xlink.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/opus-reference/
@@ -9,22 +10,20 @@ import '../../local.dart';
 /// Always empty, with XLink attributes.
 class Opus extends XmlElement {
   final String href;
-  final String? actuate;
+  final XLinkActuate? actuate;
   final String? role;
-  final String? show;
+  final XLinkShow? show;
   final String? title;
-  final String? type;
+  final XLinkType? type;
 
   factory Opus.parse(XmlElement element) {
     return Opus(
-      href: element.getAttribute('xlink:href') ??
-          element.getAttribute('href') ??
-          '',
-      actuate: element.getAttribute('xlink:actuate'),
+      href: element.getAttribute('xlink:href') ?? '',
+      actuate: parseXLinkActuate(element.getAttribute('xlink:actuate')),
       role: element.getAttribute('xlink:role'),
-      show: element.getAttribute('xlink:show'),
+      show: parseXLinkShow(element.getAttribute('xlink:show')),
       title: element.getAttribute('xlink:title'),
-      type: element.getAttribute('xlink:type'),
+      type: parseXLinkType(element.getAttribute('xlink:type')),
     );
   }
 
