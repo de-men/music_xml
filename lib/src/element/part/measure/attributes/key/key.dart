@@ -16,13 +16,13 @@ class Key extends XmlElement {
   final Mode? mode;
 
   /// In this order (Zero or more times)
-  /// <key-step> (Required)
-  /// <key-alter> (Required)
-  /// <key-accidental> (Optional)
+  /// `<key-step>` (Required)
+  /// `<key-alter>` (Required)
+  /// `<key-accidental>` (Optional)
   final Iterable<StepAlterAccidental> stepAlterAccidentals;
 
   // Extends
-  get key => fifths.fifths;
+  int get key => fifths.fifths;
   final double timePosition;
 
   factory Key.parse(MusicXMLParserState state, XmlElement element) {

@@ -4,7 +4,7 @@ import 'package:xml/xml.dart';
 import '../../../local.dart';
 import '../../../music_xml_parser_state.dart';
 
-/// Internal representation of a MusicXML <print> element.
+/// Internal representation of a MusicXML `<print>` element.
 class Print extends XmlElement {
   final int? blankPage;
   bool newPage;
@@ -12,7 +12,7 @@ class Print extends XmlElement {
   int? pageNumber;
   double? staffSpacing;
 
-  /// Parse the MusicXML <print> element.
+  /// Parse the MusicXML `<print>` element.
   factory Print.parse(XmlElement xmlPrint, MusicXMLParserState state) {
     int? blankPage;
     bool? newPage;

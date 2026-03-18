@@ -5,7 +5,7 @@ import '../../music_xml_parser_state.dart';
 import '../../local.dart';
 import '../id.dart';
 
-/// Internal represention of a MusicXML <part> element.
+/// Internal represention of a MusicXML `<part>` element.
 ///
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-partwise/
 class Part extends XmlElement {
@@ -14,7 +14,7 @@ class Part extends XmlElement {
   // One or more times
   final List<Measure> measures;
 
-  /// Parse the <part> element.
+  /// Parse the `<part>` element.
   factory Part.parse(
     MusicXMLParserState state,
     XmlElement element,
@@ -110,8 +110,8 @@ class Part extends XmlElement {
 
   /// Repair a measure if it is empty by inserting a whole measure rest.
   ///
-  /// If a <measure> only consists of a <forward> element that advances
-  /// the time cursor, remove the <forward> element and replace
+  /// If a `<measure>` only consists of a `<forward>` element that advances
+  /// the time cursor, remove the `<forward>` element and replace
   /// with a whole measure rest of the same duration.
   static void _repairEmptyMeasure(XmlElement measure) {
     final xmlForwards = measure.findElements('forward').toList();

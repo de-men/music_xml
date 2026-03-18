@@ -11,7 +11,7 @@ import '../../../../music_xml_parser_state.dart';
 import '../../../../note_duration.dart';
 import '../../../../tie.dart';
 
-/// Internal representation of a MusicXML <note> element.
+/// Internal representation of a MusicXML `<note>` element.
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/
 class Note extends XmlElement {
   final Grace? grace;
@@ -40,7 +40,7 @@ class Note extends XmlElement {
 
   bool get isInChord => chord != null;
 
-  /// Parse the MusicXML <note> element.
+  /// Parse the MusicXML `<note>` element.
   factory Note.parse(XmlElement xmlNote, MusicXMLParserState state) {
     Grace? grace;
     Chord? chord;

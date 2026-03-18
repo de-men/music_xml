@@ -3,14 +3,14 @@ import 'package:xml/xml.dart';
 
 import 'music_xml_parser_state.dart';
 
-/// Internal representation of a MusicXML <degree> element.
+/// Internal representation of a MusicXML `<degree>` element.
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/degree/
 class Degree {
   final int value;
   final double alter;
   final DegreeType type;
 
-  /// Parse the MusicXML <degree> element.
+  /// Parse the MusicXML `<degree>` element.
   factory Degree.parse(XmlElement xmlDegree, MusicXMLParserState state) {
     int? value;
     double? alter;

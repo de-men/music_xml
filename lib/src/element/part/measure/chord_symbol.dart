@@ -73,7 +73,7 @@ const chordKindAbbreviations = <String, String>{
   'sus47': 'sus7',
 };
 
-/// Internal representation of a MusicXML chord symbol <harmony> element.
+/// Internal representation of a MusicXML chord symbol `<harmony>` element.
 /// This represents a chord symbol with four components:
 /// 1) Root: a string representing the chord root pitch class, e.g. "C#".
 ///     Use [rootTypeSafe] to get a detailed representation of root.
@@ -197,17 +197,17 @@ class ChordSymbol extends XmlElement {
     this.bassTypeSafe,
   }) : super(XmlName(Local.harmony), [], []);
 
-  /// Parse the <root> tag for a chord symbol.
+  /// Parse the `<root>` tag for a chord symbol.
   static String parseRoot(XmlElement child, MusicXMLParserState state) {
     return parsePitch(child, 'root-step', 'root-alter', state);
   }
 
-  /// Parse the <bass> tag for a chord symbol.
+  /// Parse the `<bass>` tag for a chord symbol.
   static String parseBass(XmlElement xmlBass, MusicXMLParserState state) {
     return parsePitch(xmlBass, 'bass-step', 'bass-alter', state);
   }
 
-  /// Parse and return the pitch-like <root> or <bass> element.
+  /// Parse and return the pitch-like `<root>` or `<bass>` element.
   static String parsePitch(
     XmlElement xmlPitch,
     String stepTag,
@@ -271,7 +271,7 @@ class ChordSymbol extends XmlElement {
     }
   }
 
-  /// Parse and return the <degree> scale degree modification element.
+  /// Parse and return the `<degree>` scale degree modification element.
   static String parseDegree(XmlElement xmlDegree) {
     final xmlDegreeValue = xmlDegree.getElement('degree-value');
     if (xmlDegreeValue == null) {

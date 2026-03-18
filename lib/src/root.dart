@@ -3,13 +3,13 @@ import 'package:xml/xml.dart';
 
 import 'music_xml_parser_state.dart';
 
-/// Internal representation of a MusicXML <root> element.
+/// Internal representation of a MusicXML `<root>` element.
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/root/
 class Root {
   final Step step;
   final double alter;
 
-  /// Parse the MusicXML <root> element.
+  /// Parse the MusicXML `<root>` element.
   factory Root.parse(XmlElement xmlRoot, MusicXMLParserState state) {
     Step? rootStep;
     double rootAlter = 0.0;

@@ -23,12 +23,12 @@ BarStyle _parseBarStyle(String str) => BarStyle.values.firstWhere(
       (e) => e.toString() == 'BarStyle.' + camelCase(str),
     );
 
-/// Internal representation of a MusicXML <barline> element.
+/// Internal representation of a MusicXML `<barline>` element.
 class Barline extends XmlElement {
   BarStyle? barStyle;
   RightLeftMiddle? location;
 
-  /// Parse the MusicXML <barline> element.
+  /// Parse the MusicXML `<barline>` element.
   factory Barline.parse(XmlElement xmlBarline, MusicXMLParserState state) {
     BarStyle? barStyle;
     RightLeftMiddle? location;

@@ -2,7 +2,7 @@ import 'package:xml/xml.dart';
 
 import 'music_xml_parser_state.dart';
 
-/// The value of the <syllabic> child element.
+/// The value of the `<syllabic>` child element.
 enum Syllabic { single, begin, end, middle }
 
 class LyricItem {
@@ -13,7 +13,7 @@ class LyricItem {
   LyricItem(this.syllabic, this.text, this.elision);
 }
 
-/// Internal representation of a MusicXML <lyric> element.
+/// Internal representation of a MusicXML `<lyric>` element.
 class Lyric {
   final List<LyricItem> items;
   String? name;
@@ -24,7 +24,7 @@ class Lyric {
   /// Returns the syllabic of the first item
   String get text => items.first.text;
 
-  /// Parse the MusicXML <lyric> element.
+  /// Parse the MusicXML `<lyric>` element.
   factory Lyric.parse(XmlElement xmlLyric, MusicXMLParserState state) {
     final items = <LyricItem>[];
 

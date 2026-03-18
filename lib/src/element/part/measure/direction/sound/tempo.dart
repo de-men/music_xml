@@ -11,7 +11,7 @@ class Tempo extends XmlAttribute {
   double get qpm =>
       nonNegativeDecimal == 0 ? defaultQuartersPerMinute : nonNegativeDecimal;
 
-  /// Parse the MusicXML <sound> element and retrieve the tempo.
+  /// Parse the MusicXML `<sound>` element and retrieve the tempo.
   ///
   /// If no tempo is specified, default to DEFAULT_QUARTERS_PER_MINUTE
   factory Tempo.parse(String attribute) {
