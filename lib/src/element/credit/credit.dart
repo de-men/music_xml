@@ -1,19 +1,19 @@
 import 'package:xml/xml.dart';
 
-import '../local.dart';
-import 'bookmark.dart';
+import '../../local.dart';
+import '../bookmark.dart';
+import '../link.dart';
 import 'credit_image.dart';
-import 'credit_type.dart';
 import 'credit_symbol.dart';
+import 'credit_type.dart';
 import 'credit_words.dart';
-import 'link.dart';
 
-export 'bookmark.dart';
+export '../bookmark.dart';
+export '../link.dart';
 export 'credit_image.dart';
 export 'credit_symbol.dart';
 export 'credit_type.dart';
 export 'credit_words.dart';
-export 'link.dart';
 
 /// Represents either `<credit-words>` or `<credit-symbol>`.
 sealed class CreditContent {}
