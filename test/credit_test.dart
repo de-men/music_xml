@@ -6,7 +6,6 @@ import 'package:music_xml/src/data_types/left_center_right.dart';
 import 'package:music_xml/src/data_types/valign.dart';
 import 'package:music_xml/src/data_types/xlink.dart';
 import 'package:music_xml/src/element/credit.dart';
-import 'package:music_xml/src/element/credit_type.dart';
 import 'package:test/test.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/credit-element/
