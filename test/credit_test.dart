@@ -62,21 +62,16 @@ void main() {
 
     expect(credit.contents.length, 5);
     expect(credit.contents[0], isA<CreditWordsContent>());
-    expect(
-        (credit.contents[0] as CreditWordsContent).creditWords.content,
+    expect((credit.contents[0] as CreditWordsContent).creditWords.content,
         'Practice with');
     expect(credit.contents[1], isA<CreditSymbolContent>());
-    expect(
-        (credit.contents[1] as CreditSymbolContent).creditSymbol.content,
+    expect((credit.contents[1] as CreditSymbolContent).creditSymbol.content,
         'fClef');
     expect(
-        (credit.contents[2] as CreditWordsContent).creditWords.content,
-        'and');
-    expect(
-        (credit.contents[3] as CreditSymbolContent).creditSymbol.content,
+        (credit.contents[2] as CreditWordsContent).creditWords.content, 'and');
+    expect((credit.contents[3] as CreditSymbolContent).creditSymbol.content,
         'cClef');
-    expect(
-        (credit.contents[4] as CreditWordsContent).creditWords.content,
+    expect((credit.contents[4] as CreditWordsContent).creditWords.content,
         'clefs as well.');
 
     expect(credit.creditWords.length, 3);
