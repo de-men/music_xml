@@ -9,7 +9,7 @@ import '../local.dart';
 import 'movement_number.dart';
 import 'partlist/part_list.dart';
 import 'version.dart';
-import 'credit.dart';
+import 'credit/credit.dart';
 import 'defaults/defaults.dart';
 import 'identification/identification.dart';
 import 'work/work.dart';

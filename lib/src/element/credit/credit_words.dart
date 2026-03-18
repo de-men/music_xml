@@ -1,16 +1,17 @@
 import 'package:xml/xml.dart';
 
-import '../data_types/enclosure_shape.dart';
-import '../data_types/font_size.dart';
-import '../data_types/font_style.dart';
-import '../data_types/font_weight.dart';
-import '../data_types/left_center_right.dart';
-import '../data_types/text_direction.dart';
-import '../data_types/valign.dart';
-import '../local.dart';
+import '../../data_types/enclosure_shape.dart';
+import '../../data_types/font_size.dart';
+import '../../data_types/font_style.dart';
+import '../../data_types/font_weight.dart';
+import '../../data_types/left_center_right.dart';
+import '../../data_types/text_direction.dart';
+import '../../data_types/valign.dart';
+import '../../data_types/xml_space.dart';
+import '../../local.dart';
 
-/// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-symbol/
-class CreditSymbol extends XmlElement {
+/// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-words/
+class CreditWords extends XmlElement {
   final String content;
   final String? color;
   final double? defaultX;
@@ -32,11 +33,13 @@ class CreditSymbol extends XmlElement {
   final int? overline;
   final int? underline;
   final double? rotation;
-  final String? creditSymbolId;
+  final String? lang;
+  final XmlSpace? space;
+  final String? creditWordsId;
 
-  factory CreditSymbol.parse(XmlElement element) {
+  factory CreditWords.parse(XmlElement element) {
     final sizeStr = element.getAttribute('font-size');
-    return CreditSymbol(
+    return CreditWords(
       content: element.innerText,
       color: element.getAttribute('color'),
       defaultX: _optDouble(element, 'default-x'),
@@ -58,7 +61,9 @@ class CreditSymbol extends XmlElement {
       overline: _optInt(element, 'overline'),
       underline: _optInt(element, 'underline'),
       rotation: _optDouble(element, 'rotation'),
-      creditSymbolId: element.getAttribute('id'),
+      lang: element.getAttribute('xml:lang'),
+      space: parseXmlSpace(element.getAttribute('xml:space')),
+      creditWordsId: element.getAttribute('id'),
     );
   }
 
@@ -72,7 +77,7 @@ class CreditSymbol extends XmlElement {
     return v != null ? int.tryParse(v) : null;
   }
 
-  CreditSymbol({
+  CreditWords({
     required this.content,
     this.color,
     this.defaultX,
@@ -94,6 +99,8 @@ class CreditSymbol extends XmlElement {
     this.overline,
     this.underline,
     this.rotation,
-    this.creditSymbolId,
-  }) : super.tag(Local.creditSymbol);
+    this.lang,
+    this.space,
+    this.creditWordsId,
+  }) : super.tag(Local.creditWords);
 }

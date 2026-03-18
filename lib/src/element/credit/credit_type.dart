@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import '../local.dart';
+import '../../local.dart';
 
 /// Standard values for `<credit-type>` element content.
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-type/
