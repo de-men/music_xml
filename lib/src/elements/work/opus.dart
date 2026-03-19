@@ -22,12 +22,12 @@ class Opus extends XmlElement {
   final XLinkTypeAttr? type;
 
   factory Opus.parse(XmlElement element) {
-    final href = element.getAttribute('xlink:href') ?? '';
-    final actuate = element.getAttribute('xlink:actuate');
-    final role = element.getAttribute('xlink:role');
-    final show = element.getAttribute('xlink:show');
-    final title = element.getAttribute('xlink:title');
-    final type = element.getAttribute('xlink:type');
+    final href = element.getAttribute(Local.xlinkHref) ?? '';
+    final actuate = element.getAttribute(Local.xlinkActuate);
+    final role = element.getAttribute(Local.xlinkRole);
+    final show = element.getAttribute(Local.xlinkShow);
+    final title = element.getAttribute(Local.xlinkTitle);
+    final type = element.getAttribute(Local.xlinkType);
 
     return Opus(
       href: XLinkHref(href),
