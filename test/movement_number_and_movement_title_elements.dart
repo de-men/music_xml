@@ -12,7 +12,7 @@ void main() {
   test('movement-number-and-movement-title-elements', () {
     final document = MusicXmlDocument.parse(file.readAsStringSync());
 
-    expect(document.score.movementNumber!.number, '22');
-    expect(document.score.movementTitle!.title, 'Mut');
+    expect(document.score.movementNumber!.innerText, '22');
+    expect(document.score.movementTitle!.innerText, 'Mut');
   });
 }

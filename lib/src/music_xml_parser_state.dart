@@ -1,5 +1,5 @@
-import 'element/part/measure/note/note.dart';
-import 'element/part/measure/attributes/time/time.dart';
+import 'elements/part/measure/note/note.dart';
+import 'elements/part/measure/attributes/time/time.dart';
 
 /// Default MIDI Program (0 = grand piano)
 const defaultMidiChannel = 0;

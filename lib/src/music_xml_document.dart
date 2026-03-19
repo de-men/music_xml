@@ -1,4 +1,4 @@
-import 'package:music_xml/src/element/score_partwise.dart';
+import 'package:music_xml/src/elements/score_partwise.dart';
 import 'package:xml/xml.dart';
 
 /// Internal representation of a MusicXML Document.
@@ -13,7 +13,7 @@ class MusicXmlDocument extends XmlDocument {
   final ScorePartwise score;
 
   /// Title of the piece
-  String get title => score.movementTitle?.title ?? 'Unknown Piece';
+  String get title => score.movementTitle?.innerText ?? 'Unknown Piece';
 
   /// Total time in seconds
   double get totalTimeSecs => score.totalTimeSecs;

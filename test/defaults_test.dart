@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
-import 'package:music_xml/src/data_type/distance_type.dart';
-import 'package:music_xml/src/data_type/glyph_type.dart';
-import 'package:music_xml/src/data_type/line_width_type.dart';
-import 'package:music_xml/src/data_type/margin_type.dart';
-import 'package:music_xml/src/data_type/note_size_type.dart';
+import 'package:music_xml/src/data_types/distance_type.dart';
+import 'package:music_xml/src/data_types/glyph_type.dart';
+import 'package:music_xml/src/data_types/line_width_type.dart';
+import 'package:music_xml/src/data_types/margin_type.dart';
+import 'package:music_xml/src/data_types/note_size_type.dart';
 import 'package:test/test.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/defaults-element/

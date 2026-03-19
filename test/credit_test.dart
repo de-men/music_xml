@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
-import 'package:music_xml/src/data_type/font_weight.dart';
-import 'package:music_xml/src/data_type/left_center_right.dart';
-import 'package:music_xml/src/data_type/valign.dart';
-import 'package:music_xml/src/data_type/xlink.dart';
-import 'package:music_xml/src/element/credit/credit.dart';
+import 'package:music_xml/src/data_types/font_weight.dart';
+import 'package:music_xml/src/data_types/left_center_right.dart';
+import 'package:music_xml/src/data_types/valign.dart';
+import 'package:music_xml/src/data_types/xlink.dart';
+import 'package:music_xml/src/elements/credit/credit.dart';
 import 'package:test/test.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/credit-element/
