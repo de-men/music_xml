@@ -2,6 +2,12 @@ class Local {
   // attributes
   static const id = 'id';
   static const version = 'version';
+  static const xlinkHref = 'xlink:href';
+  static const xlinkActuate = 'xlink:actuate';
+  static const xlinkRole = 'xlink:role';
+  static const xlinkShow = 'xlink:show';
+  static const xlinkTitle = 'xlink:title';
+  static const xlinkType = 'xlink:type';
 
   // elements
   static const scorePartwise = 'score-partwise';

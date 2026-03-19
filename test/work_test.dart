@@ -15,8 +15,8 @@ void main() {
     expect(work, isNotNull);
     expect(work!.workNumber!.innerText, 'D. 911');
     expect(work.workTitle!.innerText, 'Winterreise');
-    expect(work.opus!.href, 'opus/winterreise.musicxml');
-    expect(work.opus!.show, XLinkShow.newWindow);
+    expect(work.opus!.href.value, 'opus/winterreise.musicxml');
+    expect(work.opus!.show!.show, XLinkShow.newWindow);
   });
 
   test('<work> coexists with movement-number and movement-title', () {
