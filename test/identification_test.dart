@@ -18,9 +18,9 @@ void main() {
 
     expect(id!.creators.length, 2);
     expect(id.creators[0].type, 'composer');
-    expect(id.creators[0].value, 'Claude Debussy');
+    expect(id.creators[0].innerText, 'Claude Debussy');
     expect(id.creators[1].type, 'lyricist');
-    expect(id.creators[1].value, 'Paul Bourget');
+    expect(id.creators[1].innerText, 'Paul Bourget');
 
     expect(id.rights.length, 1);
     expect(id.rights.first.value, contains('Recordare LLC'));
