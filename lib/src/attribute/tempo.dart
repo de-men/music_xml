@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import '../../../../../local.dart';
+import '../local.dart';
 
 const defaultQuartersPerMinute = 120.0;
 

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
-import 'package:music_xml/src/data_types/step.dart' as dts;
+import 'package:music_xml/src/data_type/step.dart' as dts;
 import 'package:test/test.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/grace-element-appoggiatura/

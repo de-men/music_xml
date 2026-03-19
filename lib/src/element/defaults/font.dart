@@ -1,8 +1,8 @@
 import 'package:xml/xml.dart';
 
-import '../../data_types/font_size.dart';
-import '../../data_types/font_style.dart';
-import '../../data_types/font_weight.dart';
+import '../../data_type/font_size.dart';
+import '../../data_type/font_style.dart';
+import '../../data_type/font_weight.dart';
 import '../../local.dart';
 
 /// Shared font attributes used by music-font, word-font, and lyric-font.

@@ -1,13 +1,13 @@
 import 'package:xml/xml.dart';
 
-import '../../data_types/enclosure_shape.dart';
-import '../../data_types/font_size.dart';
-import '../../data_types/font_style.dart';
-import '../../data_types/font_weight.dart';
-import '../../data_types/left_center_right.dart';
-import '../../data_types/text_direction.dart';
-import '../../data_types/valign.dart';
-import '../../data_types/xml_space.dart';
+import '../../data_type/enclosure_shape.dart';
+import '../../data_type/font_size.dart';
+import '../../data_type/font_style.dart';
+import '../../data_type/font_weight.dart';
+import '../../data_type/left_center_right.dart';
+import '../../data_type/text_direction.dart';
+import '../../data_type/valign.dart';
+import '../../data_type/xml_space.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-words/

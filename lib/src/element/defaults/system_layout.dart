@@ -1,9 +1,9 @@
 import 'package:xml/xml.dart';
 
 import '../../basic_attributes.dart';
-import '../../data_types/font_size.dart';
-import '../../data_types/font_style.dart';
-import '../../data_types/font_weight.dart';
+import '../../data_type/font_size.dart';
+import '../../data_type/font_style.dart';
+import '../../data_type/font_weight.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/left-divider/

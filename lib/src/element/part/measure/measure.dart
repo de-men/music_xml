@@ -10,9 +10,9 @@ import '../../../music_xml_parser_state.dart';
 import 'attributes/attributes.dart';
 import 'forward.dart';
 import 'note/note.dart';
-import 'direction/sound/tempo.dart';
+import '../../../attribute/tempo.dart';
 import 'attributes/time/time.dart';
-import 'number.dart';
+import '../../../attribute/number.dart';
 
 /// Internal represention of the MusicXML `<measure>` element.
 ///

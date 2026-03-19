@@ -1,4 +1,4 @@
-import 'package:music_xml/src/element/id.dart';
+import 'package:music_xml/src/attribute/id.dart';
 import 'package:music_xml/src/element/partlist/scorepart/midiinstrument/midi_instrument.dart';
 import 'package:music_xml/src/element/partlist/scorepart/part_name.dart';
 import 'package:xml/xml.dart';

@@ -3,7 +3,7 @@ import 'package:xml/xml.dart';
 import '../../../music_xml.dart';
 import '../../music_xml_parser_state.dart';
 import '../../local.dart';
-import '../id.dart';
+import '../../attribute/id.dart';
 
 /// Internal represention of a MusicXML `<part>` element.
 ///

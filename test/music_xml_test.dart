@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:music_xml/music_xml.dart';
 import 'package:test/test.dart';
 
-import 'package:music_xml/src/data_types/step.dart' as dts;
+import 'package:music_xml/src/data_type/step.dart' as dts;
 
 final file = File('test/assets/musicXML.xml');
 

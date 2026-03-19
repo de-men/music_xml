@@ -4,7 +4,7 @@ import 'alter.dart';
 import 'octave.dart';
 import 'step.dart';
 import '../../../../../local.dart';
-import '../../../../../data_types/step.dart' as dt;
+import '../../../../../data_type/step.dart' as dt;
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pitch/
 class Pitch extends XmlElement {

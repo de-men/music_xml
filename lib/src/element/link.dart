@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import '../data_types/xlink.dart';
+import '../data_type/xlink.dart';
 import '../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/link/

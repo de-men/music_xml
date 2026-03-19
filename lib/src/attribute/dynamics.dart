@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import '../../../../../local.dart';
+import '../local.dart';
 
 class Dynamics extends XmlAttribute {
   final double nonNegativeDecimal;

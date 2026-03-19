@@ -1,9 +1,9 @@
 import 'package:xml/xml.dart';
 
-import '../../data_types/distance_type.dart';
-import '../../data_types/glyph_type.dart';
-import '../../data_types/line_width_type.dart';
-import '../../data_types/note_size_type.dart';
+import '../../data_type/distance_type.dart';
+import '../../data_type/glyph_type.dart';
+import '../../data_type/line_width_type.dart';
+import '../../data_type/note_size_type.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line-width/

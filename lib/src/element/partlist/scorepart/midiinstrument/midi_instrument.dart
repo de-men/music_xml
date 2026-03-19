@@ -1,7 +1,7 @@
 import 'package:xml/xml.dart';
 
 import '../../../../local.dart';
-import '../../../id.dart';
+import '../../../../attribute/id.dart';
 import 'midi_channel.dart';
 import 'midi_program.dart';
 

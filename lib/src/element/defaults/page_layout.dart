@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import '../../data_types/margin_type.dart';
+import '../../data_type/margin_type.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-margins/

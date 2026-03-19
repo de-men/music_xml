@@ -1,7 +1,7 @@
 import 'package:xml/xml.dart';
 
-import '../../data_types/left_center_right.dart';
-import '../../data_types/valign.dart';
+import '../../data_type/left_center_right.dart';
+import '../../data_type/valign.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-image/

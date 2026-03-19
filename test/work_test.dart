@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
-import 'package:music_xml/src/data_types/xlink.dart';
+import 'package:music_xml/src/data_type/xlink.dart';
 import 'package:test/test.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/work-element/

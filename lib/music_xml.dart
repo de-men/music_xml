@@ -12,6 +12,6 @@ export 'src/element/part/part.dart';
 export 'src/element/part/measure/print.dart';
 export 'src/root.dart';
 export 'src/element/partlist/scorepart/score_part.dart';
-export 'src/element/part/measure/direction/sound/tempo.dart';
+export 'src/attribute/tempo.dart';
 export 'src/element/part/measure/attributes/time/time.dart';
 export 'src/tie.dart';

@@ -1,9 +1,9 @@
 import 'package:xml/xml.dart';
 
-import 'make_time.dart';
-import 'slash.dart';
-import 'steal_time_following.dart';
-import 'steal_time_previous.dart';
+import '../../../../../attribute/make_time.dart';
+import '../../../../../attribute/slash.dart';
+import '../../../../../attribute/steal_time_following.dart';
+import '../../../../../attribute/steal_time_previous.dart';
 import '../../../../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grace/

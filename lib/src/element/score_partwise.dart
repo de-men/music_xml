@@ -8,7 +8,7 @@ import '../music_xml_parser_state.dart';
 import '../local.dart';
 import 'movement_number.dart';
 import 'partlist/part_list.dart';
-import 'version.dart';
+import '../attribute/version.dart';
 import 'credit/credit.dart';
 import 'defaults/defaults.dart';
 import 'identification/identification.dart';

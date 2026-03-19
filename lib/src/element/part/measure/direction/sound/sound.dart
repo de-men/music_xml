@@ -1,8 +1,8 @@
 import 'package:xml/xml.dart';
 
 import '../../../../../local.dart';
-import 'dynamics.dart';
-import 'tempo.dart';
+import '../../../../../attribute/dynamics.dart';
+import '../../../../../attribute/tempo.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sound/
 class Sound extends XmlElement {
