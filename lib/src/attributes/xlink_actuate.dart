@@ -10,6 +10,11 @@ class XLinkActuateAttr extends XmlAttribute {
   XLinkActuateAttr(this.actuate)
       : super(XmlName(Local.xlinkActuate), actuate.name);
 
-  factory XLinkActuateAttr.parse(String value) =>
-      XLinkActuateAttr(parseXLinkActuate(value) ?? XLinkActuate.onRequest);
+  factory XLinkActuateAttr.parse(String value) {
+    final actuate = parseXLinkActuate(value);
+    if (actuate == null) {
+      throw FormatException('Invalid xlink:actuate "$value".');
+    }
+    return XLinkActuateAttr(actuate);
+  }
 }

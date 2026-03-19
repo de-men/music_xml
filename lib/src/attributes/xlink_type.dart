@@ -5,10 +5,14 @@ import '../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xlink-type/
 class XLinkTypeAttr extends XmlAttribute {
-  final XLinkType type;
+  XLinkTypeAttr() : super(XmlName(Local.xlinkType), XLinkType.simple.name);
 
-  XLinkTypeAttr(this.type) : super(XmlName(Local.xlinkType), 'simple');
-
-  factory XLinkTypeAttr.parse(String value) =>
-      XLinkTypeAttr(parseXLinkType(value) ?? XLinkType.simple);
+  factory XLinkTypeAttr.parse(String value) {
+    if (value != XLinkType.simple.name) {
+      throw FormatException(
+        'Invalid xlink:type "$value". MusicXML only supports "simple".',
+      );
+    }
+    return XLinkTypeAttr();
+  }
 }

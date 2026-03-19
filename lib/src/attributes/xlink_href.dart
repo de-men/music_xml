@@ -6,5 +6,10 @@ import '../local.dart';
 class XLinkHref extends XmlAttribute {
   XLinkHref(String href) : super(XmlName(Local.xlinkHref), href);
 
-  factory XLinkHref.parse(String value) => XLinkHref(value);
+  factory XLinkHref.parse(String value) {
+    if (Uri.tryParse(value) == null) {
+      throw FormatException('Invalid anyURI "$value".');
+    }
+    return XLinkHref(value);
+  }
 }
