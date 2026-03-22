@@ -52,14 +52,14 @@ void main() {
 
     test('Print.parse', () {
       final measures = document.score.parts.single.measures;
-      expect(measures.first.prints.first.pageNumber, 1);
-      expect(measures.first.prints.first.newSystem, false);
-      expect(measures[4].prints.first.newSystem, true);
+      expect(measures.first.prints.first.pageNumber?.intValue, 1);
+      expect(measures.first.prints.first.newSystem, isNull);
+      expect(measures[4].prints.first.newSystem?.value, 'yes');
     });
 
     test('Barline.parse', () {
       final measures = document.score.parts.single.measures;
-      expect(measures.last.barlines.first.location, RightLeftMiddle.right);
+      expect(measures.last.barlines.first.location?.value, 'right');
       expect(measures.last.barlines.first.barStyle, BarStyle.lightHeavy);
     });
 

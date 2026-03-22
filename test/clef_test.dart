@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
-import 'package:music_xml/src/element/part/measure/attributes/clef/sign.dart';
+import 'package:music_xml/src/elements/part/measure/attributes/clef/sign.dart';
 import 'package:test/test.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/bass-clef-down-octave/

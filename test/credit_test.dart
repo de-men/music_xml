@@ -5,7 +5,7 @@ import 'package:music_xml/src/data_types/font_weight.dart';
 import 'package:music_xml/src/data_types/left_center_right.dart';
 import 'package:music_xml/src/data_types/valign.dart';
 import 'package:music_xml/src/data_types/xlink.dart';
-import 'package:music_xml/src/element/credit/credit.dart';
+import 'package:music_xml/src/elements/credit/credit.dart';
 import 'package:test/test.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/credit-element/
@@ -19,22 +19,22 @@ void main() {
     expect(credits.length, 2);
 
     final title = credits[0];
-    expect(title.page, 1);
-    expect(title.creditTypes.first.creditTypeValue, CreditTypeValue.title);
-    expect(title.creditTypes.first.content, 'title');
+    expect(title.page!.intValue, 1);
+    expect(title.creditTypes.first.content, CreditTypeValue.title);
     expect(title.creditWords.first.content, 'Sonata, Op. 27, No. 2');
-    expect(title.creditWords.first.defaultX, 683);
-    expect(title.creditWords.first.defaultY, 1725);
-    expect(title.creditWords.first.fontSize!.numericSize, 24);
-    expect(title.creditWords.first.fontWeight, FontWeight.bold);
-    expect(title.creditWords.first.halign, LeftCenterRight.center);
-    expect(title.creditWords.first.valign, Valign.top);
+    expect(title.creditWords.first.defaultX?.doubleValue, 683);
+    expect(title.creditWords.first.defaultY?.doubleValue, 1725);
+    expect(title.creditWords.first.fontSize?.fontSize.numericSize, 24);
+    expect(title.creditWords.first.fontWeight?.fontWeight, FontWeight.bold);
+    expect(title.creditWords.first.halign?.leftCenterRight,
+        LeftCenterRight.center);
+    expect(title.creditWords.first.valign?.valign, Valign.top);
 
     final composer = credits[1];
-    expect(
-        composer.creditTypes.first.creditTypeValue, CreditTypeValue.composer);
+    expect(composer.creditTypes.first.content, CreditTypeValue.composer);
     expect(composer.creditWords.first.content, 'Ludwig van Beethoven');
-    expect(composer.creditWords.first.halign, LeftCenterRight.right);
+    expect(composer.creditWords.first.halign?.leftCenterRight,
+        LeftCenterRight.right);
   });
 
   // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/credit-image-element/
@@ -43,12 +43,12 @@ void main() {
     final document = MusicXmlDocument.parse(imageAsset.readAsStringSync());
 
     final credit = document.score.credits.single;
-    expect(credit.page, 1);
+    expect(credit.page!.intValue, 1);
     expect(credit.isImageCredit, isTrue);
-    expect(credit.creditImage!.source, 'images/mmlogo.png');
-    expect(credit.creditImage!.type, 'image.png');
-    expect(credit.creditImage!.defaultX, 572);
-    expect(credit.creditImage!.defaultY, 96);
+    expect(credit.creditImage!.source?.value, 'images/mmlogo.png');
+    expect(credit.creditImage!.imageType?.value, 'image.png');
+    expect(credit.creditImage!.defaultX?.doubleValue, 572);
+    expect(credit.creditImage!.defaultY?.doubleValue, 96);
   });
 
   // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/credit-symbol-element/
@@ -87,8 +87,8 @@ void main() {
 
     final credit = document.score.credits.single;
     expect(credit.links.length, 1);
-    expect(credit.links.first.href, 'https://www.w3.org/');
-    expect(credit.links.first.show, XLinkShow.newWindow);
+    expect(credit.links.first.href.value, 'https://www.w3.org/');
+    expect(credit.links.first.show?.show, XLinkShow.newWindow);
     expect(credit.creditWords.first.content, 'Visit W3C');
   });
 

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:music_xml/music_xml.dart';
 import 'package:music_xml/src/data_types/xlink.dart';
 import 'package:test/test.dart';
+import 'package:xml/xml.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/work-element/
 final asset = File('test/assets/work-element.xml');
@@ -13,18 +14,18 @@ void main() {
 
     final work = document.score.work;
     expect(work, isNotNull);
-    expect(work!.workNumber!.number, 'D. 911');
-    expect(work.workTitle!.title, 'Winterreise');
-    expect(work.opus!.href, 'opus/winterreise.musicxml');
-    expect(work.opus!.show, XLinkShow.newWindow);
+    expect(work!.workNumber!.innerText, 'D. 911');
+    expect(work.workTitle!.innerText, 'Winterreise');
+    expect(work.opus!.href.value, 'opus/winterreise.musicxml');
+    expect(work.opus!.show!.show, XLinkShow.newWindow);
   });
 
   test('<work> coexists with movement-number and movement-title', () {
     final document = MusicXmlDocument.parse(asset.readAsStringSync());
 
-    expect(document.score.work!.workTitle!.title, 'Winterreise');
-    expect(document.score.movementNumber!.number, '22');
-    expect(document.score.movementTitle!.title, 'Mut');
+    expect(document.score.work!.workTitle!.innerText, 'Winterreise');
+    expect(document.score.movementNumber!.innerText, '22');
+    expect(document.score.movementTitle!.innerText, 'Mut');
   });
 
   test('score without <work> has null work', () {

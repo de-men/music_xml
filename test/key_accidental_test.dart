@@ -1,4 +1,4 @@
-import 'package:music_xml/src/element/part/measure/attributes/key/key_accidental.dart';
+import 'package:music_xml/src/elements/part/measure/attributes/key/key_accidental.dart';
 import 'package:test/test.dart';
 import 'package:xml/xml.dart';
 
