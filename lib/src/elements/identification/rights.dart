@@ -1,18 +1,24 @@
 import 'package:xml/xml.dart';
 
+import '../../attributes/token_attribute.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rights/
 class Rights extends XmlElement {
+  final String content;
   final String? type;
-  final String value;
 
   factory Rights.parse(XmlElement element) {
     return Rights(
-      type: element.getAttribute('type'),
-      value: element.innerText,
+      element.innerText,
+      type: element.getAttribute(Local.type),
     );
   }
 
-  Rights({this.type, required this.value}) : super.tag(Local.rights);
+  Rights(this.content, {this.type})
+      : super.tag(
+          Local.rights,
+          attributes: [if (type != null) TokenAttr(Local.type, type)],
+          children: [XmlText(content)],
+        );
 }

@@ -23,7 +23,7 @@ void main() {
     expect(id.creators[1].innerText, 'Paul Bourget');
 
     expect(id.rights.length, 1);
-    expect(id.rights.first.value, contains('Recordare LLC'));
+    expect(id.rights.first.innerText, contains('Recordare LLC'));
 
     expect(id.encoding, isNotNull);
     expect(id.encoding!.software.first, 'Finale for Windows');

@@ -1,21 +1,22 @@
 import 'package:xml/xml.dart';
 
+import '../../attributes/token_attribute.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/miscellaneous-field/
 class MiscellaneousField extends XmlElement {
-  final String fieldName;
-  final String value;
+  final String content;
+  final String? fieldName;
 
   factory MiscellaneousField.parse(XmlElement element) {
     return MiscellaneousField(
-      fieldName: element.getAttribute('name') ?? '',
-      value: element.innerText,
+      element.innerText,
+      fieldName: element.getAttribute(Local.name),
     );
   }
 
-  MiscellaneousField({required this.fieldName, required this.value})
-      : super.tag(Local.miscellaneousField);
+  MiscellaneousField(this.content, {this.fieldName})
+      : super.tag(Local.miscellaneousField, attributes: [if (fieldName != null) TokenAttr(Local.name, fieldName)], children: [XmlText(content)]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/miscellaneous/

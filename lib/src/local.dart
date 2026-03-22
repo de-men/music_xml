@@ -8,6 +8,11 @@ class Local {
   static const xlinkShow = 'xlink:show';
   static const xlinkTitle = 'xlink:title';
   static const xlinkType = 'xlink:type';
+  static const type = 'type';
+  static const name = 'name';
+  static const element = 'element';
+  static const attribute = 'attribute';
+  static const value = 'value';
 
   // elements
   static const scorePartwise = 'score-partwise';
