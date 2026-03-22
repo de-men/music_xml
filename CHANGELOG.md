@@ -1,3 +1,15 @@
+## 2.4.1
+
+* Complete element roundtripping audit — every `XmlElement` subclass now passes proper `attributes:` and `children:` to `super.tag()`
+* Typed attribute classes: `DecimalAttr`, `IntAttr`, `YesNoAttr`, `ValignAttr`, `EnclosureShapeAttr`, `TextDirectionAttr`, `XmlSpaceAttr`
+* Element fields store typed `XmlAttribute` objects directly for zero-conversion roundtripping
+* Parse methods use single-pass `for`/`switch` over attributes for O(n) instead of repeated `getAttribute` calls
+* Proper element classes for layout children: `LeftMargin`, `RightMargin`, `TopMargin`, `BottomMargin`, `PageHeight`, `PageWidth`, `StaffDistance`, `SystemDistance`, `TopSystemDistance`
+* Moved data types to `data_types/`: `AccidentalValue`, `ClefSign`
+* Fixed `Supports.parse` to read XML attributes instead of child elements
+* Added `Local` constants for common attribute names
+* Upgraded `xml` to 6.6.1, `test` to 1.31.0
+
 ## 2.4.0
 
 * [`<credit>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/) element with `credit-type`, `credit-words`, `credit-symbol`, `credit-image`, `link`, `bookmark`
