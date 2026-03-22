@@ -10,5 +10,6 @@ class MidiProgram extends XmlElement {
     return MidiProgram(int.parse(element.innerText));
   }
 
-  MidiProgram(this.content) : super.tag(Local.midiProgram);
+  MidiProgram(this.content)
+      : super.tag(Local.midiProgram, children: [XmlText('$content')]);
 }

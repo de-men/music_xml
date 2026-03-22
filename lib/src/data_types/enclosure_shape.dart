@@ -1,3 +1,5 @@
+import 'package:xml/xml.dart';
+
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/enclosure-shape/
 enum EnclosureShape {
   rectangle,
@@ -37,3 +39,28 @@ const _enclosureShapeMap = {
 
 EnclosureShape? parseEnclosureShape(String? str) =>
     str != null ? _enclosureShapeMap[str] : null;
+
+class EnclosureShapeAttr extends XmlAttribute {
+  final EnclosureShape enclosureShape;
+
+  EnclosureShapeAttr(String name, this.enclosureShape)
+      : super(XmlName(name), enclosureShapeToString[enclosureShape]!);
+}
+
+const enclosureShapeToString = {
+  EnclosureShape.rectangle: 'rectangle',
+  EnclosureShape.square: 'square',
+  EnclosureShape.oval: 'oval',
+  EnclosureShape.circle: 'circle',
+  EnclosureShape.bracket: 'bracket',
+  EnclosureShape.invertedBracket: 'inverted-bracket',
+  EnclosureShape.triangle: 'triangle',
+  EnclosureShape.diamond: 'diamond',
+  EnclosureShape.pentagon: 'pentagon',
+  EnclosureShape.hexagon: 'hexagon',
+  EnclosureShape.heptagon: 'heptagon',
+  EnclosureShape.octagon: 'octagon',
+  EnclosureShape.nonagon: 'nonagon',
+  EnclosureShape.decagon: 'decagon',
+  EnclosureShape.none: 'none',
+};

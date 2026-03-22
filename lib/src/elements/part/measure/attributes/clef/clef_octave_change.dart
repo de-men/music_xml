@@ -10,5 +10,6 @@ class ClefOctaveChange extends XmlElement {
     return ClefOctaveChange(int.parse(element.innerText));
   }
 
-  ClefOctaveChange(this.integer) : super(XmlName(Local.clefOctaveChange));
+  ClefOctaveChange(this.integer)
+      : super.tag(Local.clefOctaveChange, children: [XmlText('$integer')]);
 }

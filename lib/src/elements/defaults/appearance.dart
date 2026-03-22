@@ -1,89 +1,110 @@
+import 'package:music_xml/src/data_types/distance_type.dart';
+import 'package:music_xml/src/data_types/glyph_type.dart';
+import 'package:music_xml/src/data_types/line_width_type.dart';
+import 'package:music_xml/src/data_types/note_size_type.dart';
 import 'package:xml/xml.dart';
 
-import '../../data_types/distance_type.dart';
-import '../../data_types/glyph_type.dart';
-import '../../data_types/line_width_type.dart';
-import '../../data_types/note_size_type.dart';
+import '../../attributes/token_attribute.dart';
 import '../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line-width/
 class LineWidth extends XmlElement {
-  final LineWidthType type;
+  final LineWidthTypeAttr type;
   final double tenths;
 
   factory LineWidth.parse(XmlElement element) {
     return LineWidth(
-      type: parseLineWidthType(element.getAttribute('type') ?? ''),
+      type: LineWidthTypeAttr.parse(element.getAttribute(Local.type) ?? ''),
       tenths: double.parse(element.innerText),
     );
   }
 
   LineWidth({required this.type, required this.tenths})
-      : super.tag(Local.lineWidth);
+      : super.tag(
+          Local.lineWidth,
+          attributes: [type],
+          children: [XmlText(tenths.toString())],
+        );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note-size/
 class NoteSize extends XmlElement {
-  final NoteSizeType type;
+  final NoteSizeTypeAttr type;
   final double percentage;
 
   factory NoteSize.parse(XmlElement element) {
     return NoteSize(
-      type: parseNoteSizeType(element.getAttribute('type') ?? ''),
+      type: NoteSizeTypeAttr.parse(element.getAttribute(Local.type) ?? ''),
       percentage: double.parse(element.innerText),
     );
   }
 
   NoteSize({required this.type, required this.percentage})
-      : super.tag(Local.noteSize);
+      : super.tag(
+          Local.noteSize,
+          attributes: [type],
+          children: [XmlText(percentage.toString())],
+        );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/distance/
 class Distance extends XmlElement {
-  final DistanceType type;
+  final DistanceTypeAttr type;
   final double tenths;
 
   factory Distance.parse(XmlElement element) {
     return Distance(
-      type: parseDistanceType(element.getAttribute('type') ?? ''),
+      type: DistanceTypeAttr.parse(element.getAttribute(Local.type) ?? ''),
       tenths: double.parse(element.innerText),
     );
   }
 
   Distance({required this.type, required this.tenths})
-      : super.tag(Local.distance);
+      : super.tag(
+          Local.distance,
+          attributes: [type],
+          children: [XmlText(tenths.toString())],
+        );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/glyph/
 class Glyph extends XmlElement {
-  final GlyphType type;
+  final GlyphTypeAttr type;
   final String smuflGlyphName;
 
   factory Glyph.parse(XmlElement element) {
     return Glyph(
-      type: parseGlyphType(element.getAttribute('type') ?? ''),
+      type: GlyphTypeAttr.parse(element.getAttribute(Local.type) ?? ''),
       smuflGlyphName: element.innerText,
     );
   }
 
   Glyph({required this.type, required this.smuflGlyphName})
-      : super.tag(Local.glyph);
+      : super.tag(
+          Local.glyph,
+          attributes: [type],
+          children: [XmlText(smuflGlyphName)],
+        );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-appearance/
 class OtherAppearance extends XmlElement {
-  final String type;
+  final TokenAttr type;
   final String content;
 
   factory OtherAppearance.parse(XmlElement element) {
     return OtherAppearance(
-      type: element.getAttribute('type') ?? '',
+      type: TokenAttr(Local.type, element.getAttribute(Local.type) ?? ''),
       content: element.innerText,
     );
   }
 
   OtherAppearance({required this.type, required this.content})
-      : super.tag(Local.otherAppearance);
+      : super.tag(
+          Local.otherAppearance,
+          attributes: [type],
+          children: [XmlText(content)],
+        );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/appearance/
@@ -136,5 +157,14 @@ class Appearance extends XmlElement {
     this.distances = const [],
     this.glyphs = const [],
     this.otherAppearances = const [],
-  }) : super.tag(Local.appearance);
+  }) : super.tag(
+          Local.appearance,
+          children: [
+            ...lineWidths,
+            ...noteSizes,
+            ...distances,
+            ...glyphs,
+            ...otherAppearances,
+          ],
+        );
 }

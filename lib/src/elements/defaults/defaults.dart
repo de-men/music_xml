@@ -97,6 +97,7 @@ class Defaults extends XmlElement {
           Local.defaults,
           children: [
             if (scaling != null) scaling,
+            if (concertScore) XmlElement.tag(Local.concertScore),
             if (pageLayout != null) pageLayout,
             if (systemLayout != null) systemLayout,
             ...staffLayouts,

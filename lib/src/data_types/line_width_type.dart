@@ -1,3 +1,7 @@
+import 'package:xml/xml.dart';
+
+import '../local.dart';
+
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/line-width-type/
 enum LineWidthType {
   beam,
@@ -46,3 +50,38 @@ const _lineWidthTypeMap = {
 
 LineWidthType parseLineWidthType(String str) =>
     _lineWidthTypeMap[str] ?? LineWidthType.other;
+
+const lineWidthTypeToString = {
+  LineWidthType.beam: 'beam',
+  LineWidthType.bracket: 'bracket',
+  LineWidthType.dashes: 'dashes',
+  LineWidthType.enclosure: 'enclosure',
+  LineWidthType.ending: 'ending',
+  LineWidthType.extend: 'extend',
+  LineWidthType.heavyBarline: 'heavy barline',
+  LineWidthType.leger: 'leger',
+  LineWidthType.lightBarline: 'light barline',
+  LineWidthType.octaveShift: 'octave shift',
+  LineWidthType.pedal: 'pedal',
+  LineWidthType.slurMiddle: 'slur middle',
+  LineWidthType.slurTip: 'slur tip',
+  LineWidthType.staff: 'staff',
+  LineWidthType.stem: 'stem',
+  LineWidthType.tieMiddle: 'tie middle',
+  LineWidthType.tieTip: 'tie tip',
+  LineWidthType.tupletBracket: 'tuplet bracket',
+  LineWidthType.wedge: 'wedge',
+};
+
+class LineWidthTypeAttr extends XmlAttribute {
+  final LineWidthType lineWidthType;
+
+  factory LineWidthTypeAttr.parse(String typeValue) {
+    final parsed = parseLineWidthType(typeValue);
+    return LineWidthTypeAttr(Local.type, parsed);
+  }
+
+  LineWidthTypeAttr(String name, this.lineWidthType)
+      : super(XmlName(name),
+            lineWidthTypeToString[lineWidthType] ?? lineWidthType.name);
+}

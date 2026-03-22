@@ -16,7 +16,11 @@ class MiscellaneousField extends XmlElement {
   }
 
   MiscellaneousField(this.content, {this.fieldName})
-      : super.tag(Local.miscellaneousField, attributes: [if (fieldName != null) TokenAttr(Local.name, fieldName)], children: [XmlText(content)]);
+      : super.tag(Local.miscellaneousField, attributes: [
+          if (fieldName != null) TokenAttr(Local.name, fieldName)
+        ], children: [
+          XmlText(content)
+        ]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/miscellaneous/

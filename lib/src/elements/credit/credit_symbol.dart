@@ -1,5 +1,8 @@
 import 'package:xml/xml.dart';
 
+import '../../attributes/decimal_attribute.dart';
+import '../../attributes/int_attribute.dart';
+import '../../attributes/token_attribute.dart';
 import '../../data_types/enclosure_shape.dart';
 import '../../data_types/font_size.dart';
 import '../../data_types/font_style.dart';
@@ -12,64 +15,152 @@ import '../../local.dart';
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-symbol/
 class CreditSymbol extends XmlElement {
   final String content;
-  final String? color;
-  final double? defaultX;
-  final double? defaultY;
-  final double? relativeX;
-  final double? relativeY;
-  final String? fontFamily;
-  final FontSize? fontSize;
-  final FontStyle? fontStyle;
-  final FontWeight? fontWeight;
-  final LeftCenterRight? halign;
-  final Valign? valign;
-  final LeftCenterRight? justify;
-  final EnclosureShape? enclosure;
-  final TextDirection? dir;
-  final String? letterSpacing;
-  final String? lineHeight;
-  final int? lineThrough;
-  final int? overline;
-  final int? underline;
-  final double? rotation;
-  final String? creditSymbolId;
+  final TokenAttr? color;
+  final DecimalAttr? defaultX;
+  final DecimalAttr? defaultY;
+  final DecimalAttr? relativeX;
+  final DecimalAttr? relativeY;
+  final TokenAttr? fontFamily;
+  final FontSizeAttr? fontSize;
+  final FontStyleAttr? fontStyle;
+  final FontWeightAttr? fontWeight;
+  final LeftCenterRightAttr? halign;
+  final ValignAttr? valign;
+  final LeftCenterRightAttr? justify;
+  final EnclosureShapeAttr? enclosure;
+  final TextDirectionAttr? dir;
+  final TokenAttr? letterSpacing;
+  final TokenAttr? lineHeight;
+  final IntAttr? lineThrough;
+  final IntAttr? overline;
+  final IntAttr? underline;
+  final DecimalAttr? rotation;
+  final TokenAttr? creditSymbolId;
 
   factory CreditSymbol.parse(XmlElement element) {
-    final sizeStr = element.getAttribute('font-size');
+    TokenAttr? color;
+    DecimalAttr? defaultX;
+    DecimalAttr? defaultY;
+    DecimalAttr? relativeX;
+    DecimalAttr? relativeY;
+    TokenAttr? fontFamily;
+    FontSizeAttr? fontSize;
+    FontStyleAttr? fontStyle;
+    FontWeightAttr? fontWeight;
+    LeftCenterRightAttr? halign;
+    ValignAttr? valign;
+    LeftCenterRightAttr? justify;
+    EnclosureShapeAttr? enclosure;
+    TextDirectionAttr? dir;
+    TokenAttr? letterSpacing;
+    TokenAttr? lineHeight;
+    IntAttr? lineThrough;
+    IntAttr? overline;
+    IntAttr? underline;
+    DecimalAttr? rotation;
+    TokenAttr? creditSymbolId;
+
+    for (final attr in element.attributes) {
+      final name = attr.name.local;
+      final v = attr.value;
+      switch (name) {
+        case Local.color:
+          color = TokenAttr(name, v);
+          break;
+        case Local.defaultX:
+          defaultX = DecimalAttr(double.parse(v), name);
+          break;
+        case Local.defaultY:
+          defaultY = DecimalAttr(double.parse(v), name);
+          break;
+        case Local.relativeX:
+          relativeX = DecimalAttr(double.parse(v), name);
+          break;
+        case Local.relativeY:
+          relativeY = DecimalAttr(double.parse(v), name);
+          break;
+        case Local.fontFamily:
+          fontFamily = TokenAttr(name, v);
+          break;
+        case Local.fontSize:
+          fontSize = FontSizeAttr(name, FontSize.parse(v));
+          break;
+        case Local.fontStyle:
+          final parsed = parseFontStyle(v);
+          if (parsed != null) fontStyle = FontStyleAttr(name, parsed);
+          break;
+        case Local.fontWeight:
+          final parsed = parseFontWeight(v);
+          if (parsed != null) fontWeight = FontWeightAttr(name, parsed);
+          break;
+        case Local.halign:
+          final parsed = parseLeftCenterRight(v);
+          if (parsed != null) halign = LeftCenterRightAttr(name, parsed);
+          break;
+        case Local.valign:
+          final parsed = parseValign(v);
+          if (parsed != null) valign = ValignAttr(name, parsed);
+          break;
+        case Local.justify:
+          final parsed = parseLeftCenterRight(v);
+          if (parsed != null) justify = LeftCenterRightAttr(name, parsed);
+          break;
+        case Local.enclosure:
+          final parsed = parseEnclosureShape(v);
+          if (parsed != null) enclosure = EnclosureShapeAttr(name, parsed);
+          break;
+        case Local.dir:
+          final parsed = parseTextDirection(v);
+          if (parsed != null) dir = TextDirectionAttr(name, parsed);
+          break;
+        case Local.letterSpacing:
+          letterSpacing = TokenAttr(name, v);
+          break;
+        case Local.lineHeight:
+          lineHeight = TokenAttr(name, v);
+          break;
+        case Local.lineThrough:
+          lineThrough = IntAttr(int.parse(v), name);
+          break;
+        case Local.overline:
+          overline = IntAttr(int.parse(v), name);
+          break;
+        case Local.underline:
+          underline = IntAttr(int.parse(v), name);
+          break;
+        case Local.rotation:
+          rotation = DecimalAttr(double.parse(v), name);
+          break;
+        case Local.id:
+          creditSymbolId = TokenAttr(name, v);
+          break;
+      }
+    }
+
     return CreditSymbol(
       content: element.innerText,
-      color: element.getAttribute('color'),
-      defaultX: _optDouble(element, 'default-x'),
-      defaultY: _optDouble(element, 'default-y'),
-      relativeX: _optDouble(element, 'relative-x'),
-      relativeY: _optDouble(element, 'relative-y'),
-      fontFamily: element.getAttribute('font-family'),
-      fontSize: sizeStr != null ? FontSize.parse(sizeStr) : null,
-      fontStyle: parseFontStyle(element.getAttribute('font-style')),
-      fontWeight: parseFontWeight(element.getAttribute('font-weight')),
-      halign: parseLeftCenterRight(element.getAttribute('halign')),
-      valign: parseValign(element.getAttribute('valign')),
-      justify: parseLeftCenterRight(element.getAttribute('justify')),
-      enclosure: parseEnclosureShape(element.getAttribute('enclosure')),
-      dir: parseTextDirection(element.getAttribute('dir')),
-      letterSpacing: element.getAttribute('letter-spacing'),
-      lineHeight: element.getAttribute('line-height'),
-      lineThrough: _optInt(element, 'line-through'),
-      overline: _optInt(element, 'overline'),
-      underline: _optInt(element, 'underline'),
-      rotation: _optDouble(element, 'rotation'),
-      creditSymbolId: element.getAttribute('id'),
+      color: color,
+      defaultX: defaultX,
+      defaultY: defaultY,
+      relativeX: relativeX,
+      relativeY: relativeY,
+      fontFamily: fontFamily,
+      fontSize: fontSize,
+      fontStyle: fontStyle,
+      fontWeight: fontWeight,
+      halign: halign,
+      valign: valign,
+      justify: justify,
+      enclosure: enclosure,
+      dir: dir,
+      letterSpacing: letterSpacing,
+      lineHeight: lineHeight,
+      lineThrough: lineThrough,
+      overline: overline,
+      underline: underline,
+      rotation: rotation,
+      creditSymbolId: creditSymbolId,
     );
-  }
-
-  static double? _optDouble(XmlElement e, String attr) {
-    final v = e.getAttribute(attr);
-    return v != null ? double.tryParse(v) : null;
-  }
-
-  static int? _optInt(XmlElement e, String attr) {
-    final v = e.getAttribute(attr);
-    return v != null ? int.tryParse(v) : null;
   }
 
   CreditSymbol({
@@ -95,5 +186,31 @@ class CreditSymbol extends XmlElement {
     this.underline,
     this.rotation,
     this.creditSymbolId,
-  }) : super.tag(Local.creditSymbol);
+  }) : super.tag(
+          Local.creditSymbol,
+          attributes: [
+            if (color != null) color,
+            if (defaultX != null) defaultX,
+            if (defaultY != null) defaultY,
+            if (relativeX != null) relativeX,
+            if (relativeY != null) relativeY,
+            if (fontFamily != null) fontFamily,
+            if (fontSize != null) fontSize,
+            if (fontStyle != null) fontStyle,
+            if (fontWeight != null) fontWeight,
+            if (halign != null) halign,
+            if (valign != null) valign,
+            if (justify != null) justify,
+            if (enclosure != null) enclosure,
+            if (dir != null) dir,
+            if (letterSpacing != null) letterSpacing,
+            if (lineHeight != null) lineHeight,
+            if (lineThrough != null) lineThrough,
+            if (overline != null) overline,
+            if (underline != null) underline,
+            if (rotation != null) rotation,
+            if (creditSymbolId != null) creditSymbolId,
+          ],
+          children: [XmlText(content)],
+        );
 }

@@ -12,6 +12,10 @@ import 'mode.dart';
 ///
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key/
 class Key extends XmlElement {
+  // TODO: support attributes: color, default-x, default-y, font-family,
+  //       font-size, font-style, font-weight, id, number, print-object,
+  //       relative-x, relative-y
+  // TODO: support <cancel> (Optional, before <fifths>)
   final Fifths fifths;
   final Mode? mode;
 
@@ -20,6 +24,7 @@ class Key extends XmlElement {
   /// `<key-alter>` (Required)
   /// `<key-accidental>` (Optional)
   final Iterable<StepAlterAccidental> stepAlterAccidentals;
+  // TODO: support <key-octave> (Zero or more times)
 
   // Extends
   int get key => fifths.fifths;
@@ -80,16 +85,18 @@ class Key extends XmlElement {
     this.mode = null,
     this.stepAlterAccidentals = const [],
     this.timePosition = -1,
-  }) : super(XmlName(Local.key), [], [
-          fifths,
-          if (mode != null) mode,
-          ...stepAlterAccidentals.map((e) => e.keyStep),
-          ...stepAlterAccidentals.map((e) => e.keyAlter),
-          ...stepAlterAccidentals
-              .map((e) => e.keyAccidental)
-              .where((e) => e != null)
-              .cast<KeyAccidental>(),
-        ]);
+  }) : super.tag(
+          Local.key,
+          children: [
+            fifths,
+            if (mode != null) mode,
+            ...stepAlterAccidentals.expand((e) => [
+                  e.keyStep,
+                  e.keyAlter,
+                  if (e.keyAccidental != null) e.keyAccidental!,
+                ]),
+          ],
+        );
 }
 
 class StepAlterAccidental {

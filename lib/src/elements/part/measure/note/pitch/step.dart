@@ -11,5 +11,5 @@ class Step extends XmlElement {
     return Step(dt.parseStep(element.innerText));
   }
 
-  Step(this.step) : super.tag(Local.step);
+  Step(this.step) : super.tag(Local.step, children: [XmlText(step.name)]);
 }

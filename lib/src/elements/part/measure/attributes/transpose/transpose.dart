@@ -5,8 +5,10 @@ import 'chromatic.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/transpose/
 class Transpose extends XmlElement {
-  // Required
+  // TODO: support <diatonic> (Optional)
   final Chromatic chromatic;
+  // TODO: support <octave-change> (Optional)
+  // TODO: support <double> (Optional)
 
   factory Transpose.parse(XmlElement element) {
     late final Chromatic chromatic;
@@ -22,5 +24,5 @@ class Transpose extends XmlElement {
     return Transpose(chromatic);
   }
 
-  Transpose(this.chromatic) : super(XmlName(Local.transpose));
+  Transpose(this.chromatic) : super.tag(Local.transpose, children: [chromatic]);
 }

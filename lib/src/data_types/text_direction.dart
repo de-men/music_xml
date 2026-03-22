@@ -1,3 +1,5 @@
+import 'package:xml/xml.dart';
+
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/text-direction/
 enum TextDirection { ltr, rtl, lro, rlo }
 
@@ -15,4 +17,11 @@ TextDirection? parseTextDirection(String? str) {
     default:
       return null;
   }
+}
+
+class TextDirectionAttr extends XmlAttribute {
+  final TextDirection textDirection;
+
+  TextDirectionAttr(String name, this.textDirection)
+      : super(XmlName(name), textDirection.name);
 }

@@ -106,7 +106,7 @@ class Part extends XmlElement {
   }
 
   Part(this.id, this.measures)
-      : super(XmlName(Local.part), [id], [...measures]);
+      : super.tag(Local.part, attributes: [id], children: [...measures]);
 
   /// Repair a measure if it is empty by inserting a whole measure rest.
   ///

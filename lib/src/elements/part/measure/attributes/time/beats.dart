@@ -9,5 +9,5 @@ class Beats extends XmlElement {
     return Beats(element.innerText);
   }
 
-  Beats(this.content) : super(XmlName(Local.beats));
+  Beats(this.content) : super.tag(Local.beats, children: [XmlText(content)]);
 }

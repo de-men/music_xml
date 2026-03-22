@@ -10,5 +10,6 @@ class Duration extends XmlElement {
     return Duration(int.parse(element.innerText));
   }
 
-  Duration(this.positiveDivisions) : super(XmlName(Local.duration));
+  Duration(this.positiveDivisions)
+      : super.tag(Local.duration, children: [XmlText('$positiveDivisions')]);
 }

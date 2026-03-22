@@ -6,8 +6,13 @@ import '../../../../../attributes/tempo.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sound/
 class Sound extends XmlElement {
+  // TODO: support attributes: coda, dacapo, dalsegno, damper-pedal,
+  //       divisions, elevation, fine, forward-repeat, id, pan,
+  //       pizzicato, segno, soft-pedal, sostenuto-pedal, time-only, tocoda
   final Dynamics? dynamics;
   final Tempo? tempo;
+  // TODO: support children: <instrument-change>, <midi-device>,
+  //       <midi-instrument>, <play>, <swing>, <offset>
 
   factory Sound.parse(XmlElement element) {
     Dynamics? dynamics;
@@ -23,8 +28,11 @@ class Sound extends XmlElement {
   }
 
   Sound(this.tempo, this.dynamics)
-      : super(XmlName(Local.sound), [
-          if (dynamics != null) dynamics,
-          if (tempo != null) tempo,
-        ], []);
+      : super.tag(
+          Local.sound,
+          attributes: [
+            if (dynamics != null) dynamics,
+            if (tempo != null) tempo,
+          ],
+        );
 }

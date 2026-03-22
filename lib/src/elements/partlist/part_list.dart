@@ -17,5 +17,6 @@ class PartList extends XmlElement {
     );
   }
 
-  PartList({required this.scoreParts}) : super.tag(Local.partList);
+  PartList({required this.scoreParts})
+      : super.tag(Local.partList, children: [...scoreParts.values]);
 }

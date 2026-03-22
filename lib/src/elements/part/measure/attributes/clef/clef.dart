@@ -7,6 +7,9 @@ import 'sign.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/clef/
 class Clef extends XmlElement {
+  // TODO: support attributes: additional, after-barline, color,
+  //       default-x, default-y, font-family, font-size, font-style,
+  //       font-weight, id, number, print-object, relative-x, relative-y, size
   final Sign sign;
   final Line? line;
   final ClefOctaveChange? clefOctaveChange;
@@ -33,9 +36,12 @@ class Clef extends XmlElement {
   }
 
   Clef(this.sign, this.line, this.clefOctaveChange)
-      : super(XmlName(Local.clef), [], [
-          sign,
-          if (line != null) line,
-          if (clefOctaveChange != null) clefOctaveChange,
-        ]);
+      : super.tag(
+          Local.clef,
+          children: [
+            sign,
+            if (line != null) line,
+            if (clefOctaveChange != null) clefOctaveChange,
+          ],
+        );
 }

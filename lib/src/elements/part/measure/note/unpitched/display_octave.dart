@@ -9,5 +9,6 @@ class DisplayOctave extends XmlElement {
     return DisplayOctave(int.parse(element.innerText));
   }
 
-  DisplayOctave(this.octave) : super.tag(Local.displayOctave);
+  DisplayOctave(this.octave)
+      : super.tag(Local.displayOctave, children: [XmlText('$octave')]);
 }

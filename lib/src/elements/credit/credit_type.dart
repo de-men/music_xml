@@ -29,17 +29,17 @@ const _creditTypeValueMap = {
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-type/
 class CreditType extends XmlElement {
-  final CreditTypeValue creditTypeValue;
-  final String content;
+  final CreditTypeValue content;
 
   factory CreditType.parse(XmlElement element) {
-    final text = element.innerText;
+    final creditTypeValue =
+        _creditTypeValueMap[element.innerText] ?? CreditTypeValue.other;
     return CreditType(
-      creditTypeValue: _creditTypeValueMap[text] ?? CreditTypeValue.other,
-      content: text,
+      content: creditTypeValue,
+      text: element.innerText,
     );
   }
 
-  CreditType({required this.creditTypeValue, required this.content})
-      : super.tag(Local.creditType);
+  CreditType({required this.content, required String text})
+      : super.tag(Local.creditType, children: [XmlText(text)]);
 }

@@ -10,19 +10,15 @@ import 'transpose/transpose.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/attributes/
 class Attributes extends XmlElement {
+  // TODO: support <footnote>, <level> (editorial group)
   final Divisions? divisions;
-
-  // Zero or more times
   final Iterable<Key> keys;
-
-  // Zero or more times
   final Iterable<Time> times;
-
-  // Zero or more times
+  // TODO: support <staves>, <part-symbol>, <instruments>
   final Iterable<Clef> clefs;
-
-  // Zero or one time
+  // TODO: support <staff-details> (Zero or more times)
   final Iterable<Transpose> transposes;
+  // TODO: support <for-part>, <directive>, <measure-style>
 
   factory Attributes.parse(
     MusicXMLParserState state,
@@ -90,11 +86,14 @@ class Attributes extends XmlElement {
     this.times = const [],
     this.clefs = const [],
     this.transposes = const [],
-  }) : super(XmlName(Local.attributes), [], [
-          if (divisions != null) divisions,
-          ...keys,
-          ...times,
-          ...clefs,
-          ...transposes,
-        ]);
+  }) : super.tag(
+          Local.attributes,
+          children: [
+            if (divisions != null) divisions,
+            ...keys,
+            ...times,
+            ...clefs,
+            ...transposes,
+          ],
+        );
 }

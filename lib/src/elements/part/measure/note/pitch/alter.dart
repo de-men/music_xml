@@ -9,5 +9,5 @@ class Alter extends XmlElement {
     return Alter(double.parse(element.innerText));
   }
 
-  Alter(this.alter) : super.tag(Local.alter);
+  Alter(this.alter) : super.tag(Local.alter, children: [XmlText('$alter')]);
 }

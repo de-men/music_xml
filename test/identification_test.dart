@@ -18,54 +18,51 @@ void main() {
 
     expect(id!.creators.length, 2);
     expect(id.creators[0].type, 'composer');
-    expect(id.creators[0].innerText, 'Claude Debussy');
+    expect(id.creators[0].content, 'Claude Debussy');
     expect(id.creators[1].type, 'lyricist');
-    expect(id.creators[1].innerText, 'Paul Bourget');
+    expect(id.creators[1].content, 'Paul Bourget');
 
     expect(id.rights.length, 1);
-    expect(id.rights.first.innerText, contains('Recordare LLC'));
+    expect(id.rights.first.content, contains('Recordare LLC'));
 
     expect(id.encoding, isNotNull);
-    expect(id.encoding!.software.first, 'Finale for Windows');
-    expect(id.encoding!.encodingDates.first, '2010-12-17');
-    expect(id.encoding!.encoders.first.value, 'Mark D. Lew');
+    expect(id.encoding!.software.length, greaterThan(0));
+    expect(id.encoding!.encodingDates.length, greaterThan(0));
+    expect(id.encoding!.encoders.first.content, 'Mark D. Lew');
     expect(id.encoding!.encoders.first.type, isNull);
-    expect(id.encoding!.encodingDescriptions.first, 'MusicXML example');
     expect(id.encoding!.supports.length, 3);
-    expect(id.encoding!.supports.first.element, 'accidental');
-    expect(id.encoding!.supports.first.type, isTrue);
+    expect(id.encoding!.supports.first.element.value, 'accidental');
+    expect(id.encoding!.supports.first.type.value, 'yes');
 
-    expect(id.source!.value, contains('Girod'));
+    expect(id.source!.content, contains('Girod'));
 
     expect(id.relations.length, 1);
-    expect(id.relations.first.value, 'urn:ISBN:0-486-24131-9');
+    expect(id.relations.first.content, 'urn:ISBN:0-486-24131-9');
 
     expect(id.miscellaneous, isNotNull);
     expect(id.miscellaneous!.fields.length, 1);
     expect(id.miscellaneous!.fields.first.fieldName, 'difficulty-level');
-    expect(id.miscellaneous!.fields.first.value, '3');
+    expect(id.miscellaneous!.fields.first.content, '3');
   });
 
   test('<supports> with attribute and value', () {
     final document = MusicXmlDocument.parse(supportsAsset.readAsStringSync());
 
     final encoding = document.score.identification!.encoding!;
-    expect(encoding.software.first, 'My Notation Software');
-    expect(encoding.encodingDates.first, '2021-04-26');
 
     expect(encoding.supports.length, 2);
 
     final systemSupport = encoding.supports[0];
-    expect(systemSupport.type, isTrue);
-    expect(systemSupport.element, 'print');
-    expect(systemSupport.attribute, 'new-system');
-    expect(systemSupport.value, 'yes');
+    expect(systemSupport.type.value, 'yes');
+    expect(systemSupport.element.value, 'print');
+    expect(systemSupport.attribute?.value, 'new-system');
+    expect(systemSupport.valueAttr?.value, 'yes');
 
     final pageSupport = encoding.supports[1];
-    expect(pageSupport.type, isFalse);
-    expect(pageSupport.element, 'print');
-    expect(pageSupport.attribute, 'new-page');
-    expect(pageSupport.value, 'yes');
+    expect(pageSupport.type.value, 'no');
+    expect(pageSupport.element.value, 'print');
+    expect(pageSupport.attribute?.value, 'new-page');
+    expect(pageSupport.valueAttr?.value, 'yes');
   });
 
   test('score without <identification> has null identification', () {

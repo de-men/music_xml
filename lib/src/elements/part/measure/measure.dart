@@ -20,6 +20,7 @@ import '../../../attributes/number.dart';
 class Measure extends XmlElement {
   // Attributes
   Number number;
+  // TODO: support id, implicit, non-controlling, text, width attributes
 
   // Elements
   final List<Note> notes;
@@ -31,6 +32,7 @@ class Measure extends XmlElement {
   final Iterable<ChordSymbol> chordSymbols;
   final Iterable<Print> prints;
   final Iterable<Barline> barlines;
+  // TODO: support <figured-bass>, <sound>, <listening>, <grouping>, <link>, <bookmark>
 
   // Extends
   final Iterable<Tempo> tempos;
@@ -101,14 +103,14 @@ class Measure extends XmlElement {
         case Local.harmony:
           chordSymbols.add(ChordSymbol.parse(child, state));
           break;
-        case 'print':
+        case Local.print:
           prints.add(Print.parse(child, state));
           break;
-        case 'barline':
+        case Local.barline:
           barlines.add(Barline.parse(child, state));
           break;
         default:
-        // TODO: support remaining <measure> child elements
+          break;
       }
     }
 
@@ -147,14 +149,15 @@ class Measure extends XmlElement {
     this.barlines = const [],
     this.tempos = const [],
     this.duration = 0,
-  }) : super(
-          XmlName(Local.measure),
-          [number],
-          [
+  }) : super.tag(
+          Local.measure,
+          attributes: [number],
+          children: [
+            ...attributesList,
             ...notes,
             ...backups,
             ...forwards,
-            ...attributesList,
+            ...directions,
             ...chordSymbols,
             ...prints,
             ...barlines,

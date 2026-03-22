@@ -1,5 +1,7 @@
 import 'package:xml/xml.dart';
 
+import '../../attributes/id.dart';
+import '../../attributes/int_attribute.dart';
 import '../../local.dart';
 import '../bookmark.dart';
 import '../link.dart';
@@ -43,8 +45,8 @@ class CreditContentGroup {
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/
 class Credit extends XmlElement {
-  final int? page;
-  final String? id;
+  final IntAttr? page;
+  final Id? id;
   final List<CreditType> creditTypes;
   final List<Link> links;
   final List<Bookmark> bookmarks;
@@ -77,6 +79,22 @@ class Credit extends XmlElement {
       .toList();
 
   factory Credit.parse(XmlElement element) {
+    IntAttr? page;
+    Id? id;
+
+    for (final attr in element.attributes) {
+      final v = attr.value;
+      switch (attr.name.local) {
+        case 'page':
+          final parsed = int.tryParse(v);
+          if (parsed != null) page = IntAttr(parsed, 'page');
+          break;
+        case Local.id:
+          id = Id(v);
+          break;
+      }
+    }
+
     final creditTypes = <CreditType>[];
     final topLinks = <Link>[];
     final topBookmarks = <Bookmark>[];
@@ -142,9 +160,6 @@ class Credit extends XmlElement {
       }
     }
 
-    final page = int.tryParse(element.getAttribute('page') ?? '');
-    final id = element.getAttribute('id');
-
     if (creditImage != null) {
       return Credit.image(
         page: page,
@@ -177,6 +192,10 @@ class Credit extends XmlElement {
         rest = const [],
         super.tag(
           Local.credit,
+          attributes: [
+            if (page != null) page,
+            if (id != null) id,
+          ],
           children: [
             ...creditTypes,
             ...links,
@@ -196,6 +215,10 @@ class Credit extends XmlElement {
   })  : creditImage = null,
         super.tag(
           Local.credit,
+          attributes: [
+            if (page != null) page,
+            if (id != null) id,
+          ],
           children: [
             ...creditTypes,
             ...links,

@@ -10,5 +10,5 @@ class Mode extends XmlElement {
     return Mode(element.innerText != 'minor' ? 'major' : 'minor');
   }
 
-  Mode(this.mode) : super(XmlName(Local.mode));
+  Mode(this.mode) : super.tag(Local.mode, children: [XmlText(mode)]);
 }

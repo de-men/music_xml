@@ -8,6 +8,7 @@ import 'duration.dart';
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/backup/
 class Backup extends XmlElement {
   final Duration duration;
+  // TODO: support <footnote> and <level> (editorial group)
 
   factory Backup.parse(MusicXMLParserState state, XmlElement element) {
     final durationElement = element.getElement(Local.duration);
@@ -19,5 +20,5 @@ class Backup extends XmlElement {
     return Backup(duration);
   }
 
-  Backup(this.duration) : super(XmlName(Local.backup), [], [duration]);
+  Backup(this.duration) : super.tag(Local.backup, children: [duration]);
 }

@@ -9,5 +9,6 @@ class Chromatic extends XmlElement {
     return Chromatic(int.parse(element.innerText));
   }
 
-  Chromatic(this.semitones) : super(XmlName(Local.chromatic));
+  Chromatic(this.semitones)
+      : super.tag(Local.chromatic, children: [XmlText('$semitones')]);
 }

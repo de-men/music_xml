@@ -9,5 +9,5 @@ class Octave extends XmlElement {
     return Octave(int.parse(element.innerText));
   }
 
-  Octave(this.octave) : super.tag(Local.octave);
+  Octave(this.octave) : super.tag(Local.octave, children: [XmlText('$octave')]);
 }

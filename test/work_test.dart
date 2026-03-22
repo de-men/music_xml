@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:music_xml/music_xml.dart';
 import 'package:music_xml/src/data_types/xlink.dart';
 import 'package:test/test.dart';
+import 'package:xml/xml.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/work-element/
 final asset = File('test/assets/work-element.xml');
@@ -22,7 +23,7 @@ void main() {
   test('<work> coexists with movement-number and movement-title', () {
     final document = MusicXmlDocument.parse(asset.readAsStringSync());
 
-    expect(document.score.work!.workTitle!.title, 'Winterreise');
+    expect(document.score.work!.workTitle!.innerText, 'Winterreise');
     expect(document.score.movementNumber!.innerText, '22');
     expect(document.score.movementTitle!.innerText, 'Mut');
   });

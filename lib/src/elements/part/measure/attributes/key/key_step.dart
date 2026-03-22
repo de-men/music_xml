@@ -1,40 +1,15 @@
-import 'package:music_xml/src/local.dart';
 import 'package:xml/xml.dart';
 
-enum Step { A, B, C, D, E, F, G }
+import '../../../../../data_types/step.dart';
+import '../../../../../local.dart';
 
+/// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key-step/
 class KeyStep extends XmlElement {
   final Step step;
 
   factory KeyStep.parse(XmlElement element) {
-    late final Step step;
-    switch (element.innerText) {
-      case 'A':
-        step = Step.A;
-        break;
-      case 'B':
-        step = Step.B;
-        break;
-      case 'C':
-        step = Step.C;
-        break;
-      case 'D':
-        step = Step.D;
-        break;
-      case 'E':
-        step = Step.E;
-        break;
-      case 'F':
-        step = Step.F;
-        break;
-      case 'G':
-        step = Step.G;
-        break;
-      default:
-        throw Exception('Unknown key step: ${element.innerText}');
-    }
-    return KeyStep(step);
+    return KeyStep(parseStep(element.innerText));
   }
 
-  KeyStep(this.step) : super(XmlName(Local.keyStep));
+  KeyStep(this.step) : super.tag(Local.keyStep, children: [XmlText(step.name)]);
 }

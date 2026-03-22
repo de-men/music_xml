@@ -1,3 +1,5 @@
+import 'package:xml/xml.dart';
+
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xml-space/
 enum XmlSpace { defaultSpace, preserve }
 
@@ -11,4 +13,20 @@ XmlSpace? parseXmlSpace(String? str) {
     default:
       return null;
   }
+}
+
+String serializeXmlSpace(XmlSpace space) {
+  switch (space) {
+    case XmlSpace.defaultSpace:
+      return 'default';
+    case XmlSpace.preserve:
+      return 'preserve';
+  }
+}
+
+class XmlSpaceAttr extends XmlAttribute {
+  final XmlSpace xmlSpace;
+
+  XmlSpaceAttr(String name, this.xmlSpace)
+      : super(XmlName(name), serializeXmlSpace(xmlSpace));
 }

@@ -9,7 +9,9 @@ import 'midi_program.dart';
 class MidiInstrument extends XmlElement {
   final Id id;
   final MidiChannel? midiChannel;
+  // TODO: support <midi-name>, <midi-bank>
   final MidiProgram? midiProgram;
+  // TODO: support <midi-unpitched>, <volume>, <pan>, <elevation>
 
   factory MidiInstrument.parse(XmlElement element) {
     final idAttribute = element.getAttribute(Local.id)!;
@@ -35,10 +37,10 @@ class MidiInstrument extends XmlElement {
   }
 
   MidiInstrument(this.id, {this.midiChannel, this.midiProgram})
-      : super(
-          XmlName(Local.midiInstrument),
-          [id],
-          [
+      : super.tag(
+          Local.midiInstrument,
+          attributes: [id],
+          children: [
             if (midiChannel != null) midiChannel,
             if (midiProgram != null) midiProgram,
           ],

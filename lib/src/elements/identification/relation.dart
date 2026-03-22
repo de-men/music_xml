@@ -15,5 +15,8 @@ class Relation extends XmlElement {
     );
   }
 
-  Relation(this.content, {this.type}) : super.tag(Local.relation, attributes: [if (type != null) TokenAttr(Local.type, type)], children: [XmlText(content)]);
+  Relation(this.content, {this.type})
+      : super.tag(Local.relation,
+            attributes: [if (type != null) TokenAttr(Local.type, type)],
+            children: [XmlText(content)]);
 }

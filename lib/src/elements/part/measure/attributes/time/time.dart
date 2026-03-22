@@ -9,13 +9,16 @@ import 'beats.dart';
 /// Does not support:
 /// - Composite time signatures: 3+2/8
 /// - Alternating time signatures 2/4 + 3/8
-/// - Senza misura
+///
+/// TODO: support `<interchangeable>` (optional, after each beats/beat-type pair)
+/// TODO: support `<senza-misura>` (alternative to beats/beat-type)
 ///
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time/
 class Time extends XmlElement {
   /// In this order (One or more times)
   /// `<beats>` (Required)
   /// `<beat-type>` (Required)
+  /// `<interchangeable>` (Optional) — not yet supported
   final Iterable<BeatsBeatType> beatsBeatTypes;
 
   int numerator;
@@ -23,9 +26,9 @@ class Time extends XmlElement {
   int divisions;
   double timePosition;
 
-  int get beats => numerator ~/ divisions;
+  int get beatsPerMeasure => numerator ~/ divisions;
 
-  int get beatType => denominator ~/ divisions;
+  int get beatUnit => denominator ~/ divisions;
 
   /// Parse the MusicXML `<time>` element.
   factory Time.parse(MusicXMLParserState state, [XmlElement? element]) {
@@ -56,13 +59,13 @@ class Time extends XmlElement {
     });
 
     if (beatsBeatTypes.length == 1) {
-      final beats = beatsBeatTypes.single.beats;
-      final beatType = beatsBeatTypes.single.beatType;
+      final b = beatsBeatTypes.single.beats;
+      final bt = beatsBeatTypes.single.beatType;
       try {
-        numerator = int.parse(beats.content);
-        denominator = int.parse(beatType.content);
+        numerator = int.parse(b.content);
+        denominator = int.parse(bt.content);
       } catch (e) {
-        throw Exception('Could not parse time signature: $beats/$beatType');
+        throw Exception('Could not parse time signature: $b/$bt');
       }
 
       timePosition = state.timePosition;
@@ -83,10 +86,12 @@ class Time extends XmlElement {
     this.numerator = -1,
     this.denominator = -1,
     this.timePosition = 0,
-  }) : super(XmlName(Local.time), [], [
-          ...beatsBeatTypes.map((e) => e.beats),
-          ...beatsBeatTypes.map((e) => e.beatType),
-        ]);
+  }) : super.tag(
+          Local.time,
+          children: [
+            ...beatsBeatTypes.expand((e) => [e.beats, e.beatType]),
+          ],
+        );
 }
 
 class BeatsBeatType {
