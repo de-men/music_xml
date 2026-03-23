@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
-import 'package:music_xml/src/data_types/start_stop.dart';
 import 'package:music_xml/src/local.dart';
 import 'package:music_xml/src/elements/partlist/partgroup/group_abbreviation.dart';
 import 'package:music_xml/src/elements/partlist/partgroup/group_barline.dart';
