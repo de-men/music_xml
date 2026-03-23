@@ -29,8 +29,7 @@ class GroupNameDisplay extends XmlElement {
     });
 
     return GroupNameDisplay(
-      printObject:
-          printObjectAttr != null ? parseYesNo(printObjectAttr) : null,
+      printObject: printObjectAttr != null ? parseYesNo(printObjectAttr) : null,
       displayTexts: displayTexts,
       accidentalTexts: accidentalTexts,
     );
@@ -43,8 +42,7 @@ class GroupNameDisplay extends XmlElement {
   }) : super.tag(
           Local.groupNameDisplay,
           attributes: [
-            if (printObject != null)
-              YesNoAttr(Local.printObject, printObject),
+            if (printObject != null) YesNoAttr(Local.printObject, printObject),
           ],
           children: [...displayTexts, ...accidentalTexts],
         );

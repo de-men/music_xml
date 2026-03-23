@@ -1,3 +1,11 @@
+## 2.5.0
+
+* [`<part-group>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-group/) element with `group-name`, `group-name-display`, `group-abbreviation`, `group-abbreviation-display`, `group-symbol`, `group-barline`, `group-time`, `footnote`, `level`
+* `PartList` preserves interleaved order of `<part-group>` and `<score-part>` elements via `items`
+* Data type enums: `GroupSymbolValue`, `GroupBarlineValue`
+* Shared elements: [`<display-text>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/display-text/), [`<accidental-text>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental-text/), [`<footnote>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/footnote/), [`<level>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/level/)
+* Moved `StartStop` to `data_types/` with `StartStopAttr` class
+
 ## 2.4.1
 
 * Complete element roundtripping audit — every `XmlElement` subclass now passes proper `attributes:` and `children:` to `super.tag()`

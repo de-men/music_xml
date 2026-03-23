@@ -11,6 +11,5 @@ class Level extends XmlElement {
     return Level(element.innerText);
   }
 
-  Level(this.content)
-      : super.tag(Local.level, children: [XmlText(content)]);
+  Level(this.content) : super.tag(Local.level, children: [XmlText(content)]);
 }

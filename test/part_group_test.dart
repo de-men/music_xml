@@ -50,8 +50,7 @@ void main() {
     expect(stringsStart.number?.value, '2');
     expect(stringsStart.groupName!.content, 'Strings');
     expect(stringsStart.groupSymbol!.groupSymbolValue, GroupSymbolValue.brace);
-    expect(
-        stringsStart.groupBarline!.groupBarlineValue,
+    expect(stringsStart.groupBarline!.groupBarlineValue,
         GroupBarlineValue.mensurstrich);
     expect(stringsStart.groupTime, isA<GroupTime>());
   });
@@ -91,8 +90,7 @@ void main() {
   });
 
   test('<part-group> number attribute defaults to null when omitted', () {
-    final group = PartGroup(
-        type: StartStopAttr(Local.type, StartStop.start));
+    final group = PartGroup(type: StartStopAttr(Local.type, StartStop.start));
     expect(group.number, isNull);
   });
 
