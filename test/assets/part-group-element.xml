@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="4.0">
+  <part-list>
+    <part-group type="start" number="1">
+      <group-name>Winds</group-name>
+      <group-abbreviation>Wds.</group-abbreviation>
+      <group-symbol>bracket</group-symbol>
+      <group-barline>yes</group-barline>
+      <footnote xml:lang="de">*) See original edition.</footnote>
+      <level>2</level>
+    </part-group>
+    <score-part id="P1">
+      <part-name>Flute</part-name>
+    </score-part>
+    <score-part id="P2">
+      <part-name>Oboe</part-name>
+    </score-part>
+    <part-group type="stop" number="1"/>
+    <part-group type="start" number="2">
+      <group-name>Strings</group-name>
+      <group-symbol>brace</group-symbol>
+      <group-barline>Mensurstrich</group-barline>
+      <group-time/>
+    </part-group>
+    <score-part id="P3">
+      <part-name>Violin</part-name>
+    </score-part>
+    <score-part id="P4">
+      <part-name>Cello</part-name>
+    </score-part>
+    <part-group type="stop" number="2"/>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+      </attributes>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>5</octave>
+        </pitch>
+        <duration>4</duration>
+        <type>whole</type>
+      </note>
+    </measure>
+  </part>
+  <part id="P2">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+      </attributes>
+      <note>
+        <pitch>
+          <step>E</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <type>whole</type>
+      </note>
+    </measure>
+  </part>
+  <part id="P3">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+      </attributes>
+      <note>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <type>whole</type>
+      </note>
+    </measure>
+  </part>
+  <part id="P4">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+      </attributes>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>3</octave>
+        </pitch>
+        <duration>4</duration>
+        <type>whole</type>
+      </note>
+    </measure>
+  </part>
+</score-partwise>
