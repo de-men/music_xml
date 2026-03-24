@@ -43,14 +43,13 @@ class NoteDuration {
   factory NoteDuration.parse(
     bool isInChord,
     bool isGraceNote,
-    String? durationText,
+    int? durationValue,
     int dots,
     String? type,
     double? tupletRatio,
     MusicXMLParserState state,
   ) {
-    durationText ??= '0';
-    int duration = int.parse(durationText);
+    int duration = durationValue ?? 0;
     double? midiTicks;
     double seconds;
     double timePosition;

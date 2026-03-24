@@ -48,7 +48,7 @@ class Part extends XmlElement {
 
   static void _updateDurationsOfTiedNotes(List<Measure> measures) {
     // Collect all tied notes
-    final tiedNotes = Map<int, Map<int, List<Note>>>();
+    final tiedNotes = Map<String?, Map<int, List<Note>>>();
 
     for (final measure in measures) {
       final notes = measure.notes;
@@ -60,16 +60,16 @@ class Part extends XmlElement {
 
         // If note is note on, create a new entry in tiedNotes
         if (currentNote.isNoteOn) {
-          tiedNotes.putIfAbsent(currentNote.voice, () => {});
-          tiedNotes[currentNote.voice]!.putIfAbsent(
+          tiedNotes.putIfAbsent(currentNote.voice?.content, () => {});
+          tiedNotes[currentNote.voice?.content]!.putIfAbsent(
             currentNote.pitchMap!.value,
             () => [currentNote],
           );
         }
         // If note is a continuing note, add the note to tiedNotes
         else if (currentNote.continuesOtherNote) {
-          final notes =
-              tiedNotes[currentNote.voice]?[currentNote.pitchMap!.value];
+          final notes = tiedNotes[currentNote.voice?.content]
+              ?[currentNote.pitchMap!.value];
           assert(notes != null);
           final startNote = notes!.first;
           currentNote.updateNoteId(startNote.noteId);
@@ -78,7 +78,7 @@ class Part extends XmlElement {
 
         // If note ends, calculate tied duration
         if (currentNote.isNoteOff) {
-          final notesForVoice = tiedNotes[currentNote.voice]!;
+          final notesForVoice = tiedNotes[currentNote.voice?.content]!;
           final pitch = currentNote.pitchMap!.value;
           final notes = notesForVoice[pitch]!;
           notesForVoice.remove(pitch);

@@ -39,10 +39,10 @@ void main() {
     expect(stopNote1.ties.length, 1);
     expect(stopNote2.ties.length, 1);
 
-    expect(startNote1.ties.single.type, StartStop.start);
-    expect(startNote2.ties.single.type, StartStop.start);
-    expect(stopNote1.ties.single.type, StartStop.stop);
-    expect(stopNote2.ties.single.type, StartStop.stop);
+    expect(startNote1.ties.single.type.startStop, StartStop.start);
+    expect(startNote2.ties.single.type.startStop, StartStop.start);
+    expect(stopNote1.ties.single.type.startStop, StartStop.stop);
+    expect(stopNote2.ties.single.type.startStop, StartStop.stop);
 
     expect(startNote1.pitchMap!.value, stopNote1.pitchMap!.value);
     expect(startNote2.pitchMap!.value, stopNote2.pitchMap!.value);

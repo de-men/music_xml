@@ -1,3 +1,20 @@
+## 2.6.0
+
+### New Features
+
+* [`<notations>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notations/) element with `<tied>`, `<slur>`, `<tuplet>`, `<fermata>`, `<articulations>`, `<ornaments>`, `<dynamics>`, `<technical>`, `<accidental-mark>`
+* Direct `<note>` children: [`<beam>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beam/), [`<stem>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stem/), [`<staff>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff/), [`<accidental>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental/), [`<rest>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rest/), [`<dot>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/dot/), [`<voice>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/voice/), [`<duration>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/duration/)
+* [`<tie>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tie/) refactored to `XmlElement` with `StartStopAttr` and `time-only` attribute
+* Data type enums: `BeamValue`, `StemValue`, `StartStopContinue`, `TiedType`, `FermataShape`, `UprightInverted`
+* Shared element: [`<voice>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/voice/) (multi-parent: `<note>`, `<direction>`, `<forward>`)
+* Moved `lyric.dart`, `tie.dart`, `grace.dart` into `note/` directory
+
+### Breaking Changes
+
+* `Note.voice` changed from `int` to `Voice?` (use `.content` for the string value)
+* `Note.isRest` is now a getter (`rest != null`); `Note.rest` is a typed `Rest?` element
+* `Tie.type` changed from `StartStop` to `StartStopAttr` (use `.startStop` for the enum value)
+
 ## 2.5.0
 
 * [`<part-group>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-group/) element with `group-name`, `group-name-display`, `group-abbreviation`, `group-abbreviation-display`, `group-symbol`, `group-barline`, `group-time`, `footnote`, `level`
