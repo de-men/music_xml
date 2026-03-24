@@ -73,7 +73,7 @@ class Measure extends XmlElement {
           state.previousNote = note;
 
           // Sum up the MusicXML durations in voice 1 of this measure
-          if (note.voice == 1 && !note.isInChord) {
+          if (note.voice?.content == '1' && !note.isInChord) {
             duration += note.noteDuration.duration;
           }
           break;

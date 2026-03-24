@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import 'music_xml_parser_state.dart';
+import '../../../../music_xml_parser_state.dart';
 
 /// The value of the `<syllabic>` child element.
 enum Syllabic { single, begin, end, middle }
@@ -14,7 +14,12 @@ class LyricItem {
 }
 
 /// Internal representation of a MusicXML `<lyric>` element.
+/// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/
 class Lyric {
+  // TODO: support attributes: color, default-x, default-y, id, justify,
+  //       number, placement, print-object, relative-x, relative-y, time-only
+  // TODO: support children: <extend>, <laughing>, <humming>, <end-line>,
+  //       <end-paragraph>, <footnote>, <level>
   final List<LyricItem> items;
   String? name;
 
@@ -50,7 +55,6 @@ class Lyric {
           text = null;
           break;
         default:
-        // TODO: support remaining <lyric> child elements
       }
     }
 

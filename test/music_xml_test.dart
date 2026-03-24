@@ -68,7 +68,7 @@ void main() {
       expect(note.midiChannel, 1);
       expect(note.midiProgram, 41);
       expect(note.velocity, 64);
-      expect(note.voice, 1);
+      expect(note.voice?.content, '1');
       expect(note.isRest, false);
       expect(note.isInChord, false);
       expect(note.isGraceNote, false);
@@ -116,8 +116,8 @@ void main() {
       final startNote = measures[7].notes.first;
       final stopNote = measures[8].notes.first;
       final anotherNote = measures[6].notes.first;
-      expect(startNote.ties.first.type, StartStop.start);
-      expect(stopNote.ties.first.type, StartStop.stop);
+      expect(startNote.ties.first.type.startStop, StartStop.start);
+      expect(stopNote.ties.first.type.startStop, StartStop.stop);
 
       // Tied notes should have the same noteId
       expect(startNote.noteId != 0, isTrue);

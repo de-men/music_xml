@@ -1,10 +1,10 @@
 import 'package:xml/xml.dart';
 
-import '../../../../../attributes/make_time.dart';
-import '../../../../../attributes/slash.dart';
-import '../../../../../attributes/steal_time_following.dart';
-import '../../../../../attributes/steal_time_previous.dart';
-import '../../../../../local.dart';
+import '../../../../attributes/make_time.dart';
+import '../../../../attributes/slash.dart';
+import '../../../../attributes/steal_time_following.dart';
+import '../../../../attributes/steal_time_previous.dart';
+import '../../../../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grace/
 class Grace extends XmlElement {

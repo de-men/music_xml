@@ -13,6 +13,6 @@ void main() {
     expect(measure.notes.length, 1);
     expect(measure.notes.single.isRest, isTrue);
     expect(measure.notes.single.noteDuration.duration, 4);
-    expect(measure.notes.single.voice, 1);
+    expect(measure.notes.single.voice?.content, '1');
   });
 }
