@@ -8,6 +8,7 @@ A Dart package to parse and serialize [MusicXML 4.0](https://www.w3.org/2021/06/
 ## Features
 
 - Parse MusicXML documents into typed Dart objects
+- Support for both uncompressed `.xml` and [compressed `.mxl`](https://www.w3.org/2021/06/musicxml40/tutorial/compressed-mxl-files/) files
 - All elements extend `XmlElement` for XML roundtripping (parse and serialize)
 - Supports: notes, pitches, unpitched (percussion), grace notes, chords, lyrics, ties, key/time/clef signatures, tempo, dynamics, chord symbols, barlines, and more
 - Follows the [MusicXML 4.0 element hierarchy](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/)
@@ -26,7 +27,11 @@ dependencies:
 ```dart
 import 'package:music_xml/music_xml.dart';
 
+// Parse uncompressed XML string
 final document = MusicXmlDocument.parse(xmlString);
+
+// Parse compressed .mxl file bytes
+final mxlDocument = MusicXmlDocument.parseMxl(mxlBytes);
 
 // Access score structure
 final parts = document.score.parts;

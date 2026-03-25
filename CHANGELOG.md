@@ -1,3 +1,8 @@
+## 2.7.0
+
+* Support [compressed `.mxl` files](https://www.w3.org/2021/06/musicxml40/tutorial/compressed-mxl-files/) via `MusicXmlDocument.parseMxl(List<int> bytes)` [#37](https://github.com/de-men/music_xml/issues/37)
+* Locates root file via `META-INF/container.xml`; falls back to first `.xml` in the archive
+
 ## 2.6.0
 
 ### New Features
