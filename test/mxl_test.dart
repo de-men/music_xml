@@ -33,7 +33,7 @@ void main() {
   group('parseMxl', () {
     test('parses .mxl with META-INF/container.xml', () {
       final archive = _createMxlArchive(xmlContent);
-      final mxlBytes = ZipEncoder().encode(archive)!;
+      final mxlBytes = ZipEncoder().encode(archive);
 
       final mxlDocument = MusicXmlDocument.parseMxl(mxlBytes);
 
@@ -43,12 +43,13 @@ void main() {
         mxlDocument.score.parts.first.measures.length,
         xmlDocument.score.parts.first.measures.length,
       );
-      expect(mxlDocument.totalTimeSecs, closeTo(xmlDocument.totalTimeSecs, 0.1));
+      expect(
+          mxlDocument.totalTimeSecs, closeTo(xmlDocument.totalTimeSecs, 0.1));
     });
 
     test('falls back to first .xml file when container.xml is absent', () {
       final archive = _createMxlArchive(xmlContent, includeContainer: false);
-      final mxlBytes = ZipEncoder().encode(archive)!;
+      final mxlBytes = ZipEncoder().encode(archive);
 
       final mxlDocument = MusicXmlDocument.parseMxl(mxlBytes);
 
@@ -59,7 +60,7 @@ void main() {
     test('throws FormatException when archive has no .xml files', () {
       final archive = Archive();
       archive.addFile(ArchiveFile.bytes('readme.txt', utf8.encode('hello')));
-      final mxlBytes = ZipEncoder().encode(archive)!;
+      final mxlBytes = ZipEncoder().encode(archive);
 
       expect(
         () => MusicXmlDocument.parseMxl(mxlBytes),
@@ -76,7 +77,7 @@ void main() {
         ),
       );
       archive.addFile(ArchiveFile.bytes('score.xml', utf8.encode(xmlContent)));
-      final mxlBytes = ZipEncoder().encode(archive)!;
+      final mxlBytes = ZipEncoder().encode(archive);
 
       final mxlDocument = MusicXmlDocument.parseMxl(mxlBytes);
       expect(mxlDocument.title, xmlDocument.title);
