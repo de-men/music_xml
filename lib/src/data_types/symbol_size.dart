@@ -31,5 +31,5 @@ class SymbolSizeAttr extends XmlAttribute {
   final SymbolSize symbolSize;
 
   SymbolSizeAttr(this.symbolSize)
-    : super(XmlName(Local.size), symbolSizeToString[symbolSize]!);
+    : super(XmlName.parts(Local.size), symbolSizeToString[symbolSize]!);
 }

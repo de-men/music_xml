@@ -28,5 +28,5 @@ class LeftCenterRightAttr extends XmlAttribute {
   }
 
   LeftCenterRightAttr(String name, this.leftCenterRight)
-    : super(XmlName(name), leftCenterRight.name);
+    : super(XmlName.parts(name), leftCenterRight.name);
 }

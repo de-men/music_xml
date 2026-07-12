@@ -5,5 +5,5 @@ import '../local.dart';
 class Version extends XmlAttribute {
   final String value;
 
-  Version(this.value) : super(XmlName(Local.version), value);
+  Version(this.value) : super(XmlName.parts(Local.version), value);
 }

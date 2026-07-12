@@ -39,7 +39,8 @@ ValignImage? parseValignImage(String? str) {
 class ValignAttr extends XmlAttribute {
   final Valign valign;
 
-  ValignAttr(String name, this.valign) : super(XmlName(name), valign.name);
+  ValignAttr(String name, this.valign)
+    : super(XmlName.parts(name), valign.name);
 }
 
 class ValignImageAttr extends XmlAttribute {
@@ -53,5 +54,5 @@ class ValignImageAttr extends XmlAttribute {
   }
 
   ValignImageAttr(String name, this.valignImage)
-    : super(XmlName(name), valignImage.name);
+    : super(XmlName.parts(name), valignImage.name);
 }

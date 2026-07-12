@@ -26,5 +26,5 @@ class FontWeightAttr extends XmlAttribute {
   }
 
   FontWeightAttr(String name, this.fontWeight)
-    : super(XmlName(name), fontWeight.name);
+    : super(XmlName.parts(name), fontWeight.name);
 }

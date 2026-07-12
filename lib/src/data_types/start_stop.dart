@@ -19,5 +19,5 @@ class StartStopAttr extends XmlAttribute {
   }
 
   StartStopAttr(String name, this.startStop)
-    : super(XmlName(name), startStopToString[startStop]!);
+    : super(XmlName.parts(name), startStopToString[startStop]!);
 }

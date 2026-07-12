@@ -21,5 +21,5 @@ class DistanceTypeAttr extends XmlAttribute {
   }
 
   DistanceTypeAttr(String name, this.distanceType)
-    : super(XmlName(name), distanceType.name);
+    : super(XmlName.parts(name), distanceType.name);
 }

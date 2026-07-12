@@ -26,5 +26,5 @@ class FontStyleAttr extends XmlAttribute {
   }
 
   FontStyleAttr(String name, this.fontStyle)
-    : super(XmlName(name), fontStyle.name);
+    : super(XmlName.parts(name), fontStyle.name);
 }

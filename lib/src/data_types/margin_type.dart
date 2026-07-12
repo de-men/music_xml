@@ -28,5 +28,5 @@ class MarginTypeAttr extends XmlAttribute {
   }
 
   MarginTypeAttr(String name, this.marginType)
-    : super(XmlName(name), marginType.name);
+    : super(XmlName.parts(name), marginType.name);
 }

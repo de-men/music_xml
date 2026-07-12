@@ -29,5 +29,5 @@ class NoteSizeTypeAttr extends XmlAttribute {
   }
 
   NoteSizeTypeAttr(String name, this.noteSizeType)
-    : super(XmlName(name), noteSizeTypeToString[noteSizeType]!);
+    : super(XmlName.parts(name), noteSizeTypeToString[noteSizeType]!);
 }

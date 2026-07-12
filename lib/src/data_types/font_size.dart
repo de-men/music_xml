@@ -58,5 +58,5 @@ class FontSizeAttr extends XmlAttribute {
   }
 
   FontSizeAttr(String name, this.fontSize)
-    : super(XmlName(name), fontSize.toXmlString());
+    : super(XmlName.parts(name), fontSize.toXmlString());
 }

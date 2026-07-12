@@ -195,7 +195,7 @@ class ChordSymbol extends XmlElement {
     required this.degreesTypeSafe,
     this.bass,
     this.bassTypeSafe,
-  }) : super(XmlName(Local.harmony), [], []);
+  }) : super(XmlName.parts(Local.harmony), [], []);
 
   /// Parse the `<root>` tag for a chord symbol.
   static String parseRoot(XmlElement child, MusicXMLParserState state) {

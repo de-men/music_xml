@@ -28,5 +28,5 @@ class XmlSpaceAttr extends XmlAttribute {
   final XmlSpace xmlSpace;
 
   XmlSpaceAttr(String name, this.xmlSpace)
-    : super(XmlName(name), serializeXmlSpace(xmlSpace));
+    : super(XmlName.parts(name), serializeXmlSpace(xmlSpace));
 }

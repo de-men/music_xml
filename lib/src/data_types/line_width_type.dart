@@ -83,7 +83,7 @@ class LineWidthTypeAttr extends XmlAttribute {
 
   LineWidthTypeAttr(String name, this.lineWidthType)
     : super(
-        XmlName(name),
+        XmlName.parts(name),
         lineWidthTypeToString[lineWidthType] ?? lineWidthType.name,
       );
 }

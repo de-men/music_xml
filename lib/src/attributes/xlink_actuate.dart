@@ -8,7 +8,7 @@ class XLinkActuateAttr extends XmlAttribute {
   final XLinkActuate actuate;
 
   XLinkActuateAttr(this.actuate)
-    : super(XmlName(Local.xlinkActuate), actuate.name);
+    : super(XmlName.parts(Local.xlinkActuate), actuate.name);
 
   factory XLinkActuateAttr.parse(String value) {
     final actuate = parseXLinkActuate(value);
