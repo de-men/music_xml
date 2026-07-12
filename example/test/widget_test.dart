@@ -1,30 +1,58 @@
-// This is a basic Flutter widget test.
+// Widget test for the MusicXML example app.
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// The app (example/lib/main.dart) shows an AppBar titled
+// "Flutter Demo Home Page" and two MusicItem widgets that each
+// asynchronously parse a MusicXML asset (assets/musicXML.xml and
+// assets/test.xml) via a FutureBuilder, rendering
+// "movement-title: ..." and "totalTimeSecs: ..." once loading completes.
+//
+// Note: rootBundle.loadString for the larger asset (musicXML.xml, ~75KB)
+// does not resolve under fake-async tester.pump() alone; the test uses
+// tester.runAsync() to let the real async asset load complete between
+// pumps.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:example/main.dart';
 
+Future<void> _pumpUntilLoaded(WidgetTester tester) async {
+  for (var i = 0; i < 20; i++) {
+    if (find.byType(CircularProgressIndicator).evaluate().isEmpty) {
+      return;
+    }
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 100)),
+    );
+    await tester.pump();
+  }
+}
+
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets(
+      'shows AppBar title and parsed MusicXML content for both assets',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Initially both MusicItem widgets show a loading spinner.
+    expect(find.byType(CircularProgressIndicator), findsWidgets);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await _pumpUntilLoaded(tester);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // The AppBar title is unchanged from the Flutter template.
+    expect(find.text('Flutter Demo Home Page'), findsOneWidget);
+
+    // No more spinners once both assets have finished loading.
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+
+    // assets/musicXML.xml has movement-title "It's All In The Game" and,
+    // per the music_xml package, a totalTimeSecs of 49.5.
+    expect(find.text("movement-title: It's All In The Game"), findsOneWidget);
+    expect(find.text('totalTimeSecs: 49.500000000000014'), findsOneWidget);
+
+    // assets/test.xml has no <movement-title> element and a
+    // totalTimeSecs of 8.0.
+    expect(find.text('movement-title: null'), findsOneWidget);
+    expect(find.text('totalTimeSecs: 8.0'), findsOneWidget);
   });
 }
