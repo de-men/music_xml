@@ -1,11 +1,5 @@
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/group-symbol-value/
-enum GroupSymbolValue {
-  brace,
-  bracket,
-  line,
-  none,
-  square,
-}
+enum GroupSymbolValue { brace, bracket, line, none, square }
 
 const _groupSymbolValueMap = {
   'brace': GroupSymbolValue.brace,

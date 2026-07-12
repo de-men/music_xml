@@ -22,8 +22,9 @@ void main() {
 
   test('falls back to other for unrecognized accidental values', () {
     final unknown = KeyAccidental.parse(
-      XmlDocument.parse('<key-accidental>unknown-value</key-accidental>')
-          .rootElement,
+      XmlDocument.parse(
+        '<key-accidental>unknown-value</key-accidental>',
+      ).rootElement,
     );
     expect(unknown.accidentalValue, AccidentalValue.other);
   });

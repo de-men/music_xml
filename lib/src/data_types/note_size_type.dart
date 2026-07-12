@@ -3,12 +3,7 @@ import 'package:xml/xml.dart';
 import '../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/note-size-type/
-enum NoteSizeType {
-  cue,
-  grace,
-  graceCue,
-  large,
-}
+enum NoteSizeType { cue, grace, graceCue, large }
 
 const _noteSizeTypeMap = {
   'cue': NoteSizeType.cue,
@@ -34,5 +29,5 @@ class NoteSizeTypeAttr extends XmlAttribute {
   }
 
   NoteSizeTypeAttr(String name, this.noteSizeType)
-      : super(XmlName(name), noteSizeTypeToString[noteSizeType]!);
+    : super(XmlName(name), noteSizeTypeToString[noteSizeType]!);
 }

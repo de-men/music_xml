@@ -37,12 +37,12 @@ class MidiInstrument extends XmlElement {
   }
 
   MidiInstrument(this.id, {this.midiChannel, this.midiProgram})
-      : super.tag(
-          Local.midiInstrument,
-          attributes: [id],
-          children: [
-            if (midiChannel != null) midiChannel,
-            if (midiProgram != null) midiProgram,
-          ],
-        );
+    : super.tag(
+        Local.midiInstrument,
+        attributes: [id],
+        children: [
+          if (midiChannel != null) midiChannel,
+          if (midiProgram != null) midiProgram,
+        ],
+      );
 }

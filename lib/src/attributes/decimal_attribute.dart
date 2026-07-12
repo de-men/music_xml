@@ -9,5 +9,5 @@ class DecimalAttr extends XmlAttribute {
   }
 
   DecimalAttr(this.doubleValue, String name)
-      : super(XmlName(name), '$doubleValue');
+    : super(XmlName(name), '$doubleValue');
 }

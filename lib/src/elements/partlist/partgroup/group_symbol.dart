@@ -14,8 +14,8 @@ class GroupSymbol extends XmlElement {
   }
 
   GroupSymbol(this.groupSymbolValue)
-      : super.tag(
-          Local.groupSymbol,
-          children: [XmlText(groupSymbolValueToString[groupSymbolValue]!)],
-        );
+    : super.tag(
+        Local.groupSymbol,
+        children: [XmlText(groupSymbolValueToString[groupSymbolValue]!)],
+      );
 }

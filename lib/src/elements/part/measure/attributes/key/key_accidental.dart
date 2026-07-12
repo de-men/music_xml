@@ -15,8 +15,8 @@ class KeyAccidental extends XmlElement {
   }
 
   KeyAccidental(this.accidentalValue)
-      : super.tag(
-          Local.keyAccidental,
-          children: [XmlText(accidentalValueToString[accidentalValue]!)],
-        );
+    : super.tag(
+        Local.keyAccidental,
+        children: [XmlText(accidentalValueToString[accidentalValue]!)],
+      );
 }

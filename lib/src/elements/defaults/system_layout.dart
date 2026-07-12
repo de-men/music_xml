@@ -19,7 +19,7 @@ class SystemDistance extends XmlElement {
   }
 
   SystemDistance(this.tenths)
-      : super.tag(Local.systemDistance, children: [XmlText('$tenths')]);
+    : super.tag(Local.systemDistance, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/top-system-distance/
@@ -31,7 +31,7 @@ class TopSystemDistance extends XmlElement {
   }
 
   TopSystemDistance(this.tenths)
-      : super.tag(Local.topSystemDistance, children: [XmlText('$tenths')]);
+    : super.tag(Local.topSystemDistance, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/left-divider/
@@ -153,22 +153,22 @@ class Divider extends XmlElement {
     this.halign,
     this.valign,
   }) : super.tag(
-          tag,
-          attributes: [
-            printObject,
-            if (color != null) color,
-            if (defaultX != null) defaultX,
-            if (defaultY != null) defaultY,
-            if (relativeX != null) relativeX,
-            if (relativeY != null) relativeY,
-            if (fontFamily != null) fontFamily,
-            if (fontSize != null) fontSize,
-            if (fontStyle != null) fontStyle,
-            if (fontWeight != null) fontWeight,
-            if (halign != null) halign,
-            if (valign != null) valign,
-          ],
-        );
+         tag,
+         attributes: [
+           printObject,
+           if (color != null) color,
+           if (defaultX != null) defaultX,
+           if (defaultY != null) defaultY,
+           if (relativeX != null) relativeX,
+           if (relativeY != null) relativeY,
+           if (fontFamily != null) fontFamily,
+           if (fontSize != null) fontSize,
+           if (fontStyle != null) fontStyle,
+           if (fontWeight != null) fontWeight,
+           if (halign != null) halign,
+           if (valign != null) valign,
+         ],
+       );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-dividers/
@@ -184,10 +184,7 @@ class SystemDividers extends XmlElement {
   }
 
   SystemDividers({required this.leftDivider, required this.rightDivider})
-      : super.tag(
-          Local.systemDividers,
-          children: [leftDivider, rightDivider],
-        );
+    : super.tag(Local.systemDividers, children: [leftDivider, rightDivider]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-margins/
@@ -210,17 +207,11 @@ class SystemMargins extends XmlElement {
       }
     }
 
-    return SystemMargins(
-      leftMargin: leftMargin,
-      rightMargin: rightMargin,
-    );
+    return SystemMargins(leftMargin: leftMargin, rightMargin: rightMargin);
   }
 
   SystemMargins({required this.leftMargin, required this.rightMargin})
-      : super.tag(
-          Local.systemMargins,
-          children: [leftMargin, rightMargin],
-        );
+    : super.tag(Local.systemMargins, children: [leftMargin, rightMargin]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-layout/
@@ -267,12 +258,12 @@ class SystemLayout extends XmlElement {
     this.topSystemDistance,
     this.systemDividers,
   }) : super.tag(
-          Local.systemLayout,
-          children: [
-            if (systemMargins != null) systemMargins,
-            if (systemDistance != null) systemDistance,
-            if (topSystemDistance != null) topSystemDistance,
-            if (systemDividers != null) systemDividers,
-          ],
-        );
+         Local.systemLayout,
+         children: [
+           if (systemMargins != null) systemMargins,
+           if (systemDistance != null) systemDistance,
+           if (topSystemDistance != null) topSystemDistance,
+           if (systemDividers != null) systemDividers,
+         ],
+       );
 }

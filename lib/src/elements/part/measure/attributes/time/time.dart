@@ -87,11 +87,11 @@ class Time extends XmlElement {
     this.denominator = -1,
     this.timePosition = 0,
   }) : super.tag(
-          Local.time,
-          children: [
-            ...beatsBeatTypes.expand((e) => [e.beats, e.beatType]),
-          ],
-        );
+         Local.time,
+         children: [
+           ...beatsBeatTypes.expand((e) => [e.beats, e.beatType]),
+         ],
+       );
 }
 
 class BeatsBeatType {

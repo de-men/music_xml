@@ -1,8 +1,5 @@
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/upright-inverted/
-enum UprightInverted {
-  upright,
-  inverted,
-}
+enum UprightInverted { upright, inverted }
 
 const _uprightInvertedMap = {
   'upright': UprightInverted.upright,

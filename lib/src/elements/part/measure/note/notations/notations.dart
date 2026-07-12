@@ -93,17 +93,17 @@ class Notations extends XmlElement {
     this.technicals = const [],
     this.accidentalMarks = const [],
   }) : super.tag(
-          Local.notations,
-          children: [
-            ...tieds,
-            ...slurs,
-            ...tuplets,
-            ...fermatas,
-            ...articulations,
-            ...ornaments,
-            ...dynamics,
-            ...technicals,
-            ...accidentalMarks,
-          ],
-        );
+         Local.notations,
+         children: [
+           ...tieds,
+           ...slurs,
+           ...tuplets,
+           ...fermatas,
+           ...articulations,
+           ...ornaments,
+           ...dynamics,
+           ...technicals,
+           ...accidentalMarks,
+         ],
+       );
 }

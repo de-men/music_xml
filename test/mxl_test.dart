@@ -44,7 +44,9 @@ void main() {
         xmlDocument.score.parts.first.measures.length,
       );
       expect(
-          mxlDocument.totalTimeSecs, closeTo(xmlDocument.totalTimeSecs, 0.1));
+        mxlDocument.totalTimeSecs,
+        closeTo(xmlDocument.totalTimeSecs, 0.1),
+      );
     });
 
     test('falls back to first .xml file when container.xml is absent', () {
@@ -71,10 +73,7 @@ void main() {
     test('skips META-INF .xml files in fallback', () {
       final archive = Archive();
       archive.addFile(
-        ArchiveFile.bytes(
-          'META-INF/other.xml',
-          utf8.encode('<other/>'),
-        ),
+        ArchiveFile.bytes('META-INF/other.xml', utf8.encode('<other/>')),
       );
       archive.addFile(ArchiveFile.bytes('score.xml', utf8.encode(xmlContent)));
       final mxlBytes = ZipEncoder().encode(archive);

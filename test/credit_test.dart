@@ -26,15 +26,19 @@ void main() {
     expect(title.creditWords.first.defaultY?.doubleValue, 1725);
     expect(title.creditWords.first.fontSize?.fontSize.numericSize, 24);
     expect(title.creditWords.first.fontWeight?.fontWeight, FontWeight.bold);
-    expect(title.creditWords.first.halign?.leftCenterRight,
-        LeftCenterRight.center);
+    expect(
+      title.creditWords.first.halign?.leftCenterRight,
+      LeftCenterRight.center,
+    );
     expect(title.creditWords.first.valign?.valign, Valign.top);
 
     final composer = credits[1];
     expect(composer.creditTypes.first.content, CreditTypeValue.composer);
     expect(composer.creditWords.first.content, 'Ludwig van Beethoven');
-    expect(composer.creditWords.first.halign?.leftCenterRight,
-        LeftCenterRight.right);
+    expect(
+      composer.creditWords.first.halign?.leftCenterRight,
+      LeftCenterRight.right,
+    );
   });
 
   // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/credit-image-element/

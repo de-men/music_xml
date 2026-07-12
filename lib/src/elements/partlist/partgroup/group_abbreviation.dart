@@ -13,5 +13,5 @@ class GroupAbbreviation extends XmlElement {
   }
 
   GroupAbbreviation(this.content)
-      : super.tag(Local.groupAbbreviation, children: [XmlText(content)]);
+    : super.tag(Local.groupAbbreviation, children: [XmlText(content)]);
 }

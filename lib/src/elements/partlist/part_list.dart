@@ -44,9 +44,6 @@ class PartList extends XmlElement {
     this.partGroups = const [],
     required this.scoreParts,
     List<XmlElement>? items,
-  })  : items = items ?? [...scoreParts.values],
-        super.tag(
-          Local.partList,
-          children: items ?? [...scoreParts.values],
-        );
+  }) : items = items ?? [...scoreParts.values],
+       super.tag(Local.partList, children: items ?? [...scoreParts.values]);
 }

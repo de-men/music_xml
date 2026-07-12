@@ -14,5 +14,5 @@ class Ornaments extends XmlElement {
   }
 
   Ornaments({this.contents = const []})
-      : super.tag(Local.ornaments, children: [...contents]);
+    : super.tag(Local.ornaments, children: [...contents]);
 }

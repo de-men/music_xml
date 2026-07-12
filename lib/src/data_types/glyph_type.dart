@@ -65,5 +65,5 @@ class GlyphTypeAttr extends XmlAttribute {
   }
 
   GlyphTypeAttr(String name, this.glyphType)
-      : super(XmlName(name), glyphTypeToString[glyphType] ?? glyphType.name);
+    : super(XmlName(name), glyphTypeToString[glyphType] ?? glyphType.name);
 }

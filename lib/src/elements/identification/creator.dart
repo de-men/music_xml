@@ -9,16 +9,13 @@ class Creator extends XmlElement {
   final String? type;
 
   factory Creator.parse(XmlElement element) {
-    return Creator(
-      element.innerText,
-      type: element.getAttribute(Local.type),
-    );
+    return Creator(element.innerText, type: element.getAttribute(Local.type));
   }
 
   Creator(this.content, {this.type})
-      : super.tag(
-          Local.creator,
-          attributes: [if (type != null) TokenAttr(Local.type, type)],
-          children: [XmlText(content)],
-        );
+    : super.tag(
+        Local.creator,
+        attributes: [if (type != null) TokenAttr(Local.type, type)],
+        children: [XmlText(content)],
+      );
 }

@@ -10,5 +10,5 @@ class BeatType extends XmlElement {
   }
 
   BeatType(this.content)
-      : super.tag(Local.beatType, children: [XmlText(content)]);
+    : super.tag(Local.beatType, children: [XmlText(content)]);
 }

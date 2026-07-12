@@ -36,12 +36,12 @@ class Clef extends XmlElement {
   }
 
   Clef(this.sign, this.line, this.clefOctaveChange)
-      : super.tag(
-          Local.clef,
-          children: [
-            sign,
-            if (line != null) line,
-            if (clefOctaveChange != null) clefOctaveChange,
-          ],
-        );
+    : super.tag(
+        Local.clef,
+        children: [
+          sign,
+          if (line != null) line,
+          if (clefOctaveChange != null) clefOctaveChange,
+        ],
+      );
 }

@@ -40,10 +40,10 @@ class GroupAbbreviationDisplay extends XmlElement {
     this.displayTexts = const [],
     this.accidentalTexts = const [],
   }) : super.tag(
-          Local.groupAbbreviationDisplay,
-          attributes: [
-            if (printObject != null) YesNoAttr(Local.printObject, printObject),
-          ],
-          children: [...displayTexts, ...accidentalTexts],
-        );
+         Local.groupAbbreviationDisplay,
+         attributes: [
+           if (printObject != null) YesNoAttr(Local.printObject, printObject),
+         ],
+         children: [...displayTexts, ...accidentalTexts],
+       );
 }

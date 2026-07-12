@@ -53,13 +53,7 @@ class Print extends XmlElement {
       }
     }
 
-    return Print(
-      blankPage,
-      newPage,
-      newSystem,
-      pageNumber,
-      staffSpacing,
-    );
+    return Print(blankPage, newPage, newSystem, pageNumber, staffSpacing);
   }
 
   Print(
@@ -69,13 +63,13 @@ class Print extends XmlElement {
     this.pageNumber,
     this.staffSpacing,
   ) : super.tag(
-          Local.print,
-          attributes: [
-            if (blankPage != null) blankPage,
-            if (newPage != null) newPage,
-            if (newSystem != null) newSystem,
-            if (pageNumber != null) pageNumber,
-            if (staffSpacing != null) staffSpacing,
-          ],
-        );
+        Local.print,
+        attributes: [
+          if (blankPage != null) blankPage,
+          if (newPage != null) newPage,
+          if (newSystem != null) newSystem,
+          if (pageNumber != null) pageNumber,
+          if (staffSpacing != null) staffSpacing,
+        ],
+      );
 }

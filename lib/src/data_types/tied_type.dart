@@ -1,10 +1,5 @@
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/tied-type/
-enum TiedType {
-  start,
-  stop,
-  continueValue,
-  letRing,
-}
+enum TiedType { start, stop, continueValue, letRing }
 
 const _tiedTypeMap = {
   'start': TiedType.start,

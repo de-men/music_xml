@@ -49,8 +49,10 @@ void main() {
     expect(stringsStart.number?.value, '2');
     expect(stringsStart.groupName!.content, 'Strings');
     expect(stringsStart.groupSymbol!.groupSymbolValue, GroupSymbolValue.brace);
-    expect(stringsStart.groupBarline!.groupBarlineValue,
-        GroupBarlineValue.mensurstrich);
+    expect(
+      stringsStart.groupBarline!.groupBarlineValue,
+      GroupBarlineValue.mensurstrich,
+    );
     expect(stringsStart.groupTime, isA<GroupTime>());
   });
 
@@ -69,24 +71,27 @@ void main() {
     expect(items[7], isA<PartGroup>());
   });
 
-  test('existing multipleScoreParts.xml with <part-group> parses correctly',
-      () {
-    final document =
-        MusicXmlDocument.parse(multipleScorePartsAsset.readAsStringSync());
-    final partList = document.score.partList;
+  test(
+    'existing multipleScoreParts.xml with <part-group> parses correctly',
+    () {
+      final document = MusicXmlDocument.parse(
+        multipleScorePartsAsset.readAsStringSync(),
+      );
+      final partList = document.score.partList;
 
-    expect(partList.partGroups.length, 2);
-    expect(partList.scoreParts.length, 2);
+      expect(partList.partGroups.length, 2);
+      expect(partList.scoreParts.length, 2);
 
-    final start = partList.partGroups[0];
-    expect(start.type.startStop, StartStop.start);
-    expect(start.number?.value, '1');
-    expect(start.groupSymbol!.groupSymbolValue, GroupSymbolValue.bracket);
+      final start = partList.partGroups[0];
+      expect(start.type.startStop, StartStop.start);
+      expect(start.number?.value, '1');
+      expect(start.groupSymbol!.groupSymbolValue, GroupSymbolValue.bracket);
 
-    final stop = partList.partGroups[1];
-    expect(stop.type.startStop, StartStop.stop);
-    expect(stop.number?.value, '1');
-  });
+      final stop = partList.partGroups[1];
+      expect(stop.type.startStop, StartStop.stop);
+      expect(stop.number?.value, '1');
+    },
+  );
 
   test('<part-group> number attribute defaults to null when omitted', () {
     final group = PartGroup(type: StartStopAttr(Local.type, StartStop.start));

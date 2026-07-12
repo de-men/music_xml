@@ -17,5 +17,5 @@ class Dynamics extends XmlElement {
   }
 
   Dynamics({this.contents = const []})
-      : super.tag(Local.dynamics, children: [...contents]);
+    : super.tag(Local.dynamics, children: [...contents]);
 }

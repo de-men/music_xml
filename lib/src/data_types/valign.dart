@@ -46,10 +46,12 @@ class ValignImageAttr extends XmlAttribute {
   final ValignImage valignImage;
 
   factory ValignImageAttr.parse(XmlElement element) {
-    return ValignImageAttr(element.name.local,
-        ValignImage.values.firstWhere((e) => e.name == element.innerText));
+    return ValignImageAttr(
+      element.name.local,
+      ValignImage.values.firstWhere((e) => e.name == element.innerText),
+    );
   }
 
   ValignImageAttr(String name, this.valignImage)
-      : super(XmlName(name), valignImage.name);
+    : super(XmlName(name), valignImage.name);
 }

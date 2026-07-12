@@ -15,5 +15,5 @@ class DisplayText extends XmlElement {
   }
 
   DisplayText(this.content)
-      : super.tag(Local.displayText, children: [XmlText(content)]);
+    : super.tag(Local.displayText, children: [XmlText(content)]);
 }

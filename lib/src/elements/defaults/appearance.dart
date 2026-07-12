@@ -20,11 +20,11 @@ class LineWidth extends XmlElement {
   }
 
   LineWidth({required this.type, required this.tenths})
-      : super.tag(
-          Local.lineWidth,
-          attributes: [type],
-          children: [XmlText(tenths.toString())],
-        );
+    : super.tag(
+        Local.lineWidth,
+        attributes: [type],
+        children: [XmlText(tenths.toString())],
+      );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note-size/
@@ -40,11 +40,11 @@ class NoteSize extends XmlElement {
   }
 
   NoteSize({required this.type, required this.percentage})
-      : super.tag(
-          Local.noteSize,
-          attributes: [type],
-          children: [XmlText(percentage.toString())],
-        );
+    : super.tag(
+        Local.noteSize,
+        attributes: [type],
+        children: [XmlText(percentage.toString())],
+      );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/distance/
@@ -60,11 +60,11 @@ class Distance extends XmlElement {
   }
 
   Distance({required this.type, required this.tenths})
-      : super.tag(
-          Local.distance,
-          attributes: [type],
-          children: [XmlText(tenths.toString())],
-        );
+    : super.tag(
+        Local.distance,
+        attributes: [type],
+        children: [XmlText(tenths.toString())],
+      );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/glyph/
@@ -80,11 +80,11 @@ class Glyph extends XmlElement {
   }
 
   Glyph({required this.type, required this.smuflGlyphName})
-      : super.tag(
-          Local.glyph,
-          attributes: [type],
-          children: [XmlText(smuflGlyphName)],
-        );
+    : super.tag(
+        Local.glyph,
+        attributes: [type],
+        children: [XmlText(smuflGlyphName)],
+      );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-appearance/
@@ -100,11 +100,11 @@ class OtherAppearance extends XmlElement {
   }
 
   OtherAppearance({required this.type, required this.content})
-      : super.tag(
-          Local.otherAppearance,
-          attributes: [type],
-          children: [XmlText(content)],
-        );
+    : super.tag(
+        Local.otherAppearance,
+        attributes: [type],
+        children: [XmlText(content)],
+      );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/appearance/
@@ -158,13 +158,13 @@ class Appearance extends XmlElement {
     this.glyphs = const [],
     this.otherAppearances = const [],
   }) : super.tag(
-          Local.appearance,
-          children: [
-            ...lineWidths,
-            ...noteSizes,
-            ...distances,
-            ...glyphs,
-            ...otherAppearances,
-          ],
-        );
+         Local.appearance,
+         children: [
+           ...lineWidths,
+           ...noteSizes,
+           ...distances,
+           ...glyphs,
+           ...otherAppearances,
+         ],
+       );
 }

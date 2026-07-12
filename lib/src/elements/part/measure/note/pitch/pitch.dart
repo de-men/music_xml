@@ -35,10 +35,10 @@ class Pitch extends XmlElement {
   }
 
   Pitch({required this.step, this.alter, required this.octave})
-      : super.tag(
-          Local.pitch,
-          children: [step, if (alter != null) alter, octave],
-        );
+    : super.tag(
+        Local.pitch,
+        children: [step, if (alter != null) alter, octave],
+      );
 
   static const _stepToPitchClass = {
     dt.Step.C: 0,

@@ -120,21 +120,21 @@ class Link extends XmlElement {
     this.title,
     this.type,
   }) : super.tag(
-          Local.link,
-          attributes: [
-            href,
-            if (defaultX != null) defaultX,
-            if (defaultY != null) defaultY,
-            if (relativeX != null) relativeX,
-            if (relativeY != null) relativeY,
-            if (element != null) element,
-            if (linkName != null) linkName,
-            if (position != null) position,
-            if (actuate != null) actuate,
-            if (role != null) role,
-            if (show != null) show,
-            if (title != null) title,
-            if (type != null) type,
-          ],
-        );
+         Local.link,
+         attributes: [
+           href,
+           if (defaultX != null) defaultX,
+           if (defaultY != null) defaultY,
+           if (relativeX != null) relativeX,
+           if (relativeY != null) relativeY,
+           if (element != null) element,
+           if (linkName != null) linkName,
+           if (position != null) position,
+           if (actuate != null) actuate,
+           if (role != null) role,
+           if (show != null) show,
+           if (title != null) title,
+           if (type != null) type,
+         ],
+       );
 }

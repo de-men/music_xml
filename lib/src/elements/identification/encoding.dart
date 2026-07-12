@@ -12,7 +12,7 @@ class EncodingDate extends XmlElement {
   }
 
   EncodingDate(String content)
-      : super.tag(Local.encodingDate, children: [XmlText(content)]);
+    : super.tag(Local.encodingDate, children: [XmlText(content)]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoder/
@@ -29,11 +29,11 @@ class Encoder extends XmlElement {
   }
 
   Encoder(this.content, {this.type})
-      : super.tag(
-          Local.encoder,
-          attributes: [if (type != null) type],
-          children: [XmlText(content)],
-        );
+    : super.tag(
+        Local.encoder,
+        attributes: [if (type != null) type],
+        children: [XmlText(content)],
+      );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/software/
@@ -45,7 +45,7 @@ class Software extends XmlElement {
   }
 
   Software(this.content)
-      : super.tag(Local.software, children: [XmlText(content)]);
+    : super.tag(Local.software, children: [XmlText(content)]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoding-description/
@@ -57,7 +57,7 @@ class EncodingDescription extends XmlElement {
   }
 
   EncodingDescription(this.content)
-      : super.tag(Local.encodingDescription, children: [XmlText(content)]);
+    : super.tag(Local.encodingDescription, children: [XmlText(content)]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/supports/
@@ -106,14 +106,14 @@ class Supports extends XmlElement {
     this.attribute,
     this.valueAttr,
   }) : super.tag(
-          Local.supports,
-          attributes: [
-            element,
-            type,
-            if (attribute != null) attribute,
-            if (valueAttr != null) valueAttr,
-          ],
-        );
+         Local.supports,
+         attributes: [
+           element,
+           type,
+           if (attribute != null) attribute,
+           if (valueAttr != null) valueAttr,
+         ],
+       );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoding/
@@ -167,13 +167,13 @@ class Encoding extends XmlElement {
     this.encodingDescriptions = const [],
     this.supports = const [],
   }) : super.tag(
-          Local.encoding,
-          children: [
-            ...encodingDates,
-            ...encoders,
-            ...software,
-            ...encodingDescriptions,
-            ...supports,
-          ],
-        );
+         Local.encoding,
+         children: [
+           ...encodingDates,
+           ...encoders,
+           ...software,
+           ...encodingDescriptions,
+           ...supports,
+         ],
+       );
 }

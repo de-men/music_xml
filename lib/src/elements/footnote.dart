@@ -15,5 +15,5 @@ class Footnote extends XmlElement {
   }
 
   Footnote(this.content)
-      : super.tag(Local.footnote, children: [XmlText(content)]);
+    : super.tag(Local.footnote, children: [XmlText(content)]);
 }

@@ -40,10 +40,10 @@ class GroupNameDisplay extends XmlElement {
     this.displayTexts = const [],
     this.accidentalTexts = const [],
   }) : super.tag(
-          Local.groupNameDisplay,
-          attributes: [
-            if (printObject != null) YesNoAttr(Local.printObject, printObject),
-          ],
-          children: [...displayTexts, ...accidentalTexts],
-        );
+         Local.groupNameDisplay,
+         attributes: [
+           if (printObject != null) YesNoAttr(Local.printObject, printObject),
+         ],
+         children: [...displayTexts, ...accidentalTexts],
+       );
 }

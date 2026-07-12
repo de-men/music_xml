@@ -29,11 +29,5 @@ class Tie extends XmlElement {
   }
 
   Tie({required this.type, this.timeOnly})
-      : super.tag(
-          Local.tie,
-          attributes: [
-            type,
-            if (timeOnly != null) timeOnly,
-          ],
-        );
+    : super.tag(Local.tie, attributes: [type, if (timeOnly != null) timeOnly]);
 }

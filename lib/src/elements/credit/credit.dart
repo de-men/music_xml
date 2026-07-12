@@ -131,11 +131,13 @@ class Credit extends XmlElement {
           if (first == null) {
             first = content;
           } else {
-            rest.add(CreditContentGroup(
-              links: groupLinks,
-              bookmarks: groupBookmarks,
-              content: content,
-            ));
+            rest.add(
+              CreditContentGroup(
+                links: groupLinks,
+                bookmarks: groupBookmarks,
+                content: content,
+              ),
+            );
             groupLinks = <Link>[];
             groupBookmarks = <Bookmark>[];
           }
@@ -145,11 +147,13 @@ class Credit extends XmlElement {
           if (first == null) {
             first = content;
           } else {
-            rest.add(CreditContentGroup(
-              links: groupLinks,
-              bookmarks: groupBookmarks,
-              content: content,
-            ));
+            rest.add(
+              CreditContentGroup(
+                links: groupLinks,
+                bookmarks: groupBookmarks,
+                content: content,
+              ),
+            );
             groupLinks = <Link>[];
             groupBookmarks = <Bookmark>[];
           }
@@ -188,21 +192,13 @@ class Credit extends XmlElement {
     this.links = const [],
     this.bookmarks = const [],
     required CreditImage this.creditImage,
-  })  : first = null,
-        rest = const [],
-        super.tag(
-          Local.credit,
-          attributes: [
-            if (page != null) page,
-            if (id != null) id,
-          ],
-          children: [
-            ...creditTypes,
-            ...links,
-            ...bookmarks,
-            creditImage,
-          ],
-        );
+  }) : first = null,
+       rest = const [],
+       super.tag(
+         Local.credit,
+         attributes: [if (page != null) page, if (id != null) id],
+         children: [...creditTypes, ...links, ...bookmarks, creditImage],
+       );
 
   Credit.content({
     this.page,
@@ -212,28 +208,23 @@ class Credit extends XmlElement {
     this.bookmarks = const [],
     required CreditContent this.first,
     this.rest = const [],
-  })  : creditImage = null,
-        super.tag(
-          Local.credit,
-          attributes: [
-            if (page != null) page,
-            if (id != null) id,
-          ],
-          children: [
-            ...creditTypes,
-            ...links,
-            ...bookmarks,
-            _contentToElement(first),
-            ...rest.expand((g) => [
-                  ...g.links,
-                  ...g.bookmarks,
-                  _contentToElement(g.content),
-                ]),
-          ],
-        );
+  }) : creditImage = null,
+       super.tag(
+         Local.credit,
+         attributes: [if (page != null) page, if (id != null) id],
+         children: [
+           ...creditTypes,
+           ...links,
+           ...bookmarks,
+           _contentToElement(first),
+           ...rest.expand(
+             (g) => [...g.links, ...g.bookmarks, _contentToElement(g.content)],
+           ),
+         ],
+       );
 
   static XmlElement _contentToElement(CreditContent c) => switch (c) {
-        CreditWordsContent c => c.creditWords,
-        CreditSymbolContent c => c.creditSymbol,
-      };
+    CreditWordsContent c => c.creditWords,
+    CreditSymbolContent c => c.creditSymbol,
+  };
 }

@@ -14,8 +14,5 @@ class Stem extends XmlElement {
   }
 
   Stem(this.stemValue)
-      : super.tag(
-          Local.stem,
-          children: [XmlText(stemValueToString[stemValue]!)],
-        );
+    : super.tag(Local.stem, children: [XmlText(stemValueToString[stemValue]!)]);
 }

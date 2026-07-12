@@ -36,15 +36,15 @@ class Rest extends XmlElement {
   }
 
   Rest({this.isMeasureRest, this.displayStep, this.displayOctave})
-      : assert((displayStep == null) == (displayOctave == null)),
-        super.tag(
-          Local.rest,
-          attributes: [
-            if (isMeasureRest != null) YesNoAttr(Local.measure, isMeasureRest),
-          ],
-          children: [
-            if (displayStep != null) displayStep,
-            if (displayOctave != null) displayOctave,
-          ],
-        );
+    : assert((displayStep == null) == (displayOctave == null)),
+      super.tag(
+        Local.rest,
+        attributes: [
+          if (isMeasureRest != null) YesNoAttr(Local.measure, isMeasureRest),
+        ],
+        children: [
+          if (displayStep != null) displayStep,
+          if (displayOctave != null) displayOctave,
+        ],
+      );
 }

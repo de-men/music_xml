@@ -21,11 +21,12 @@ class LeftCenterRightAttr extends XmlAttribute {
   final LeftCenterRight leftCenterRight;
 
   factory LeftCenterRightAttr.parse(XmlElement element) {
-    final value =
-        LeftCenterRight.values.firstWhere((e) => e.name == element.innerText);
+    final value = LeftCenterRight.values.firstWhere(
+      (e) => e.name == element.innerText,
+    );
     return LeftCenterRightAttr(element.name.local, value);
   }
 
   LeftCenterRightAttr(String name, this.leftCenterRight)
-      : super(XmlName(name), leftCenterRight.name);
+    : super(XmlName(name), leftCenterRight.name);
 }

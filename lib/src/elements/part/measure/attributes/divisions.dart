@@ -11,5 +11,5 @@ class Divisions extends XmlElement {
   }
 
   Divisions(this.content)
-      : super.tag(Local.divisions, children: [XmlText('$content')]);
+    : super.tag(Local.divisions, children: [XmlText('$content')]);
 }

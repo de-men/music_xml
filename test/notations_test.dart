@@ -69,7 +69,9 @@ void main() {
     final notations = notes[4].notations.first;
     expect(notations.accidentalMarks.length, 1);
     expect(
-        notations.accidentalMarks.first.accidentalValue, AccidentalValue.sharp);
+      notations.accidentalMarks.first.accidentalValue,
+      AccidentalValue.sharp,
+    );
   });
 
   // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/fingering-element-notation/
@@ -89,9 +91,13 @@ void main() {
 
     expect(beamNotes[0].notations.first.tuplets.length, 1);
     expect(
-        beamNotes[0].notations.first.tuplets.first.tupletType, StartStop.start);
+      beamNotes[0].notations.first.tuplets.first.tupletType,
+      StartStop.start,
+    );
     expect(
-        beamNotes[2].notations.first.tuplets.first.tupletType, StartStop.stop);
+      beamNotes[2].notations.first.tuplets.first.tupletType,
+      StartStop.stop,
+    );
   });
 
   test('existing musicXML.xml parses with notations', () {

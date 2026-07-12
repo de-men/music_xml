@@ -47,14 +47,14 @@ class Opus extends XmlElement {
     this.title,
     this.type,
   }) : super.tag(
-          Local.opus,
-          attributes: [
-            href,
-            if (actuate != null) actuate,
-            if (role != null) role,
-            if (show != null) show,
-            if (title != null) title,
-            if (type != null) type,
-          ],
-        );
+         Local.opus,
+         attributes: [
+           href,
+           if (actuate != null) actuate,
+           if (role != null) role,
+           if (show != null) show,
+           if (title != null) title,
+           if (type != null) type,
+         ],
+       );
 }

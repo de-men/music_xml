@@ -19,10 +19,12 @@ class FontStyleAttr extends XmlAttribute {
   final FontStyle fontStyle;
 
   factory FontStyleAttr.parse(XmlElement element) {
-    return FontStyleAttr(element.name.local,
-        FontStyle.values.firstWhere((e) => e.name == element.innerText));
+    return FontStyleAttr(
+      element.name.local,
+      FontStyle.values.firstWhere((e) => e.name == element.innerText),
+    );
   }
 
   FontStyleAttr(String name, this.fontStyle)
-      : super(XmlName(name), fontStyle.name);
+    : super(XmlName(name), fontStyle.name);
 }

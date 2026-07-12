@@ -103,19 +103,19 @@ class CreditImage extends XmlElement {
     this.width,
     this.imageId,
   }) : super.tag(
-          Local.creditImage,
-          attributes: [
-            if (source != null) source,
-            if (imageType != null) imageType,
-            if (defaultX != null) defaultX,
-            if (defaultY != null) defaultY,
-            if (relativeX != null) relativeX,
-            if (relativeY != null) relativeY,
-            if (halign != null) halign,
-            if (valign != null) valign,
-            if (height != null) height,
-            if (width != null) width,
-            if (imageId != null) imageId,
-          ],
-        );
+         Local.creditImage,
+         attributes: [
+           if (source != null) source,
+           if (imageType != null) imageType,
+           if (defaultX != null) defaultX,
+           if (defaultY != null) defaultY,
+           if (relativeX != null) relativeX,
+           if (relativeY != null) relativeY,
+           if (halign != null) halign,
+           if (valign != null) valign,
+           if (height != null) height,
+           if (width != null) width,
+           if (imageId != null) imageId,
+         ],
+       );
 }

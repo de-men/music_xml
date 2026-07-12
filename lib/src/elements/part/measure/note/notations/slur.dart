@@ -21,11 +21,11 @@ class Slur extends XmlElement {
   }
 
   Slur({required this.slurType, this.number})
-      : super.tag(
-          Local.slur,
-          attributes: [
-            TokenAttr(Local.type, startStopContinueToString[slurType]!),
-            if (number != null) number,
-          ],
-        );
+    : super.tag(
+        Local.slur,
+        attributes: [
+          TokenAttr(Local.type, startStopContinueToString[slurType]!),
+          if (number != null) number,
+        ],
+      );
 }

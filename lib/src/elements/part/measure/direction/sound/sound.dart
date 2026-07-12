@@ -28,11 +28,8 @@ class Sound extends XmlElement {
   }
 
   Sound(this.tempo, this.dynamics)
-      : super.tag(
-          Local.sound,
-          attributes: [
-            if (dynamics != null) dynamics,
-            if (tempo != null) tempo,
-          ],
-        );
+    : super.tag(
+        Local.sound,
+        attributes: [if (dynamics != null) dynamics, if (tempo != null) tempo],
+      );
 }

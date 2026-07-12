@@ -19,10 +19,12 @@ class FontWeightAttr extends XmlAttribute {
   final FontWeight fontWeight;
 
   factory FontWeightAttr.parse(XmlElement element) {
-    return FontWeightAttr(element.name.local,
-        FontWeight.values.firstWhere((e) => e.name == element.innerText));
+    return FontWeightAttr(
+      element.name.local,
+      FontWeight.values.firstWhere((e) => e.name == element.innerText),
+    );
   }
 
   FontWeightAttr(String name, this.fontWeight)
-      : super(XmlName(name), fontWeight.name);
+    : super(XmlName(name), fontWeight.name);
 }

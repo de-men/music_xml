@@ -11,5 +11,5 @@ class Staff extends XmlElement {
   }
 
   Staff(this.staffNumber)
-      : super.tag(Local.staff, children: [XmlText('$staffNumber')]);
+    : super.tag(Local.staff, children: [XmlText('$staffNumber')]);
 }

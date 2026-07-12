@@ -94,18 +94,18 @@ class Defaults extends XmlElement {
     this.lyricFonts = const [],
     this.lyricLanguages = const [],
   }) : super.tag(
-          Local.defaults,
-          children: [
-            if (scaling != null) scaling,
-            if (concertScore) XmlElement.tag(Local.concertScore),
-            if (pageLayout != null) pageLayout,
-            if (systemLayout != null) systemLayout,
-            ...staffLayouts,
-            if (appearance != null) appearance,
-            if (musicFont != null) musicFont,
-            if (wordFont != null) wordFont,
-            ...lyricFonts,
-            ...lyricLanguages,
-          ],
-        );
+         Local.defaults,
+         children: [
+           if (scaling != null) scaling,
+           if (concertScore) XmlElement.tag(Local.concertScore),
+           if (pageLayout != null) pageLayout,
+           if (systemLayout != null) systemLayout,
+           ...staffLayouts,
+           if (appearance != null) appearance,
+           if (musicFont != null) musicFont,
+           if (wordFont != null) wordFont,
+           ...lyricFonts,
+           ...lyricLanguages,
+         ],
+       );
 }

@@ -1,9 +1,5 @@
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/start-stop-continue/
-enum StartStopContinue {
-  start,
-  stop,
-  continueValue,
-}
+enum StartStopContinue { start, stop, continueValue }
 
 const _startStopContinueMap = {
   'start': StartStopContinue.start,

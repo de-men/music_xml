@@ -16,7 +16,7 @@ class XLinkShowAttr extends XmlAttribute {
   };
 
   XLinkShowAttr(this.show)
-      : super(XmlName(Local.xlinkShow), _showToString[show]!);
+    : super(XmlName(Local.xlinkShow), _showToString[show]!);
 
   factory XLinkShowAttr.parse(String value) {
     final show = parseXLinkShow(value);

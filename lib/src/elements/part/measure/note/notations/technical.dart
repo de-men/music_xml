@@ -14,5 +14,5 @@ class Technical extends XmlElement {
   }
 
   Technical({this.contents = const []})
-      : super.tag(Local.technical, children: [...contents]);
+    : super.tag(Local.technical, children: [...contents]);
 }

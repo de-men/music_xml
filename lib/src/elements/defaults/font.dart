@@ -69,15 +69,15 @@ class MusicFont extends XmlElement {
   }
 
   MusicFont({this.fontFamily, this.fontSize, this.fontStyle, this.fontWeight})
-      : super.tag(
-          Local.musicFont,
-          attributes: [
-            if (fontFamily != null) fontFamily,
-            if (fontSize != null) fontSize,
-            if (fontStyle != null) fontStyle,
-            if (fontWeight != null) fontWeight,
-          ],
-        );
+    : super.tag(
+        Local.musicFont,
+        attributes: [
+          if (fontFamily != null) fontFamily,
+          if (fontSize != null) fontSize,
+          if (fontStyle != null) fontStyle,
+          if (fontWeight != null) fontWeight,
+        ],
+      );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/word-font/
@@ -98,15 +98,15 @@ class WordFont extends XmlElement {
   }
 
   WordFont({this.fontFamily, this.fontSize, this.fontStyle, this.fontWeight})
-      : super.tag(
-          Local.wordFont,
-          attributes: [
-            if (fontFamily != null) fontFamily,
-            if (fontSize != null) fontSize,
-            if (fontStyle != null) fontStyle,
-            if (fontWeight != null) fontWeight,
-          ],
-        );
+    : super.tag(
+        Local.wordFont,
+        attributes: [
+          if (fontFamily != null) fontFamily,
+          if (fontSize != null) fontSize,
+          if (fontStyle != null) fontStyle,
+          if (fontWeight != null) fontWeight,
+        ],
+      );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric-font/
@@ -154,16 +154,16 @@ class LyricFont extends XmlElement {
     this.number,
     this.lyricName,
   }) : super.tag(
-          Local.lyricFont,
-          attributes: [
-            if (number != null) number,
-            if (lyricName != null) lyricName,
-            if (fontFamily != null) fontFamily,
-            if (fontSize != null) fontSize,
-            if (fontStyle != null) fontStyle,
-            if (fontWeight != null) fontWeight,
-          ],
-        );
+         Local.lyricFont,
+         attributes: [
+           if (number != null) number,
+           if (lyricName != null) lyricName,
+           if (fontFamily != null) fontFamily,
+           if (fontSize != null) fontSize,
+           if (fontStyle != null) fontStyle,
+           if (fontWeight != null) fontWeight,
+         ],
+       );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric-language/
@@ -197,12 +197,12 @@ class LyricLanguage extends XmlElement {
   }
 
   LyricLanguage({this.number, this.lyricName, required this.lang})
-      : super.tag(
-          Local.lyricLanguage,
-          attributes: [
-            if (number != null) number,
-            if (lyricName != null) lyricName,
-            lang,
-          ],
-        );
+    : super.tag(
+        Local.lyricLanguage,
+        attributes: [
+          if (number != null) number,
+          if (lyricName != null) lyricName,
+          lang,
+        ],
+      );
 }

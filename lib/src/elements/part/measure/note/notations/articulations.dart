@@ -14,5 +14,5 @@ class Articulations extends XmlElement {
   }
 
   Articulations({this.contents = const []})
-      : super.tag(Local.articulations, children: [...contents]);
+    : super.tag(Local.articulations, children: [...contents]);
 }

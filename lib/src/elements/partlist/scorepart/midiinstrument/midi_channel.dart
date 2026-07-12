@@ -11,5 +11,5 @@ class MidiChannel extends XmlElement {
   }
 
   MidiChannel(this.content)
-      : super.tag(Local.midiChannel, children: [XmlText('$content')]);
+    : super.tag(Local.midiChannel, children: [XmlText('$content')]);
 }

@@ -87,13 +87,13 @@ class Attributes extends XmlElement {
     this.clefs = const [],
     this.transposes = const [],
   }) : super.tag(
-          Local.attributes,
-          children: [
-            if (divisions != null) divisions,
-            ...keys,
-            ...times,
-            ...clefs,
-            ...transposes,
-          ],
-        );
+         Local.attributes,
+         children: [
+           if (divisions != null) divisions,
+           ...keys,
+           ...times,
+           ...clefs,
+           ...transposes,
+         ],
+       );
 }
