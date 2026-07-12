@@ -45,8 +45,9 @@ class MusicXmlDocument extends XmlDocument {
   static String _extractMusicXml(Archive archive) {
     final container = archive.findFile('META-INF/container.xml');
     if (container != null) {
-      final containerXml =
-          XmlDocument.parse(utf8.decode(container.readBytes()!));
+      final containerXml = XmlDocument.parse(
+        utf8.decode(container.readBytes()!),
+      );
       final rootFile = containerXml
           .findAllElements('rootfile')
           .first
@@ -64,9 +65,8 @@ class MusicXmlDocument extends XmlDocument {
           f.name.endsWith('.xml') &&
           !f.name.startsWith('META-INF/') &&
           !f.isDirectory,
-      orElse: () => throw FormatException(
-        'No MusicXML file found in .mxl archive',
-      ),
+      orElse: () =>
+          throw FormatException('No MusicXML file found in .mxl archive'),
     );
     return utf8.decode(xmlFile.readBytes()!);
   }

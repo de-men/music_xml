@@ -9,5 +9,5 @@ class WorkNumber extends XmlElement {
   }
 
   WorkNumber(String content)
-      : super.tag(Local.workNumber, children: [XmlText(content)]);
+    : super.tag(Local.workNumber, children: [XmlText(content)]);
 }

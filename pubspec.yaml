@@ -1,14 +1,14 @@
 name: music_xml
 description: A Dart package to parse and serialize MusicXML 4.0.
-version: 2.7.0
+version: 2.8.0
 homepage: https://github.com/de-men/music_xml
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: ">=3.11.0 <4.0.0"
 
 dependencies:
   archive: ^4.0.9
-  xml: ^6.6.1
+  xml: ^7.0.1
 
 dev_dependencies:
   lints: ^6.1.0

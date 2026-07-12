@@ -12,5 +12,6 @@ class Slash extends XmlAttribute {
     return Slash((attribute.value == yes));
   }
 
-  Slash(this.yesNo) : super(XmlName(Local.makeTime), '${yesNo ? yes : no}');
+  Slash(this.yesNo)
+    : super(XmlName.parts(Local.makeTime), '${yesNo ? yes : no}');
 }

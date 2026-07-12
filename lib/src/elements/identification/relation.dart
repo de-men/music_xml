@@ -9,14 +9,13 @@ class Relation extends XmlElement {
   final String? type;
 
   factory Relation.parse(XmlElement element) {
-    return Relation(
-      element.innerText,
-      type: element.getAttribute(Local.type),
-    );
+    return Relation(element.innerText, type: element.getAttribute(Local.type));
   }
 
   Relation(this.content, {this.type})
-      : super.tag(Local.relation,
-            attributes: [if (type != null) TokenAttr(Local.type, type)],
-            children: [XmlText(content)]);
+    : super.tag(
+        Local.relation,
+        attributes: [if (type != null) TokenAttr(Local.type, type)],
+        children: [XmlText(content)],
+      );
 }

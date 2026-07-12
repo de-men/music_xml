@@ -21,12 +21,12 @@ class Fermata extends XmlElement {
   }
 
   Fermata({required this.fermataShape, this.fermataType})
-      : super.tag(
-          Local.fermata,
-          attributes: [
-            if (fermataType != null)
-              TokenAttr(Local.type, uprightInvertedToString[fermataType]!),
-          ],
-          children: [XmlText(fermataShapeToString[fermataShape]!)],
-        );
+    : super.tag(
+        Local.fermata,
+        attributes: [
+          if (fermataType != null)
+            TokenAttr(Local.type, uprightInvertedToString[fermataType]!),
+        ],
+        children: [XmlText(fermataShapeToString[fermataShape]!)],
+      );
 }

@@ -1,11 +1,5 @@
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/beam-value/
-enum BeamValue {
-  begin,
-  continueBeam,
-  end,
-  forwardHook,
-  backwardHook,
-}
+enum BeamValue { begin, continueBeam, end, forwardHook, backwardHook }
 
 const _beamValueMap = {
   'begin': BeamValue.begin,

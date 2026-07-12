@@ -25,8 +25,5 @@ class Direction extends XmlElement {
   }
 
   Direction(this.sound)
-      : super.tag(
-          Local.direction,
-          children: [if (sound != null) sound],
-        );
+    : super.tag(Local.direction, children: [if (sound != null) sound]);
 }

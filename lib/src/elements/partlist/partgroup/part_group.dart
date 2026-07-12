@@ -112,21 +112,18 @@ class PartGroup extends XmlElement {
     this.footnote,
     this.level,
   }) : super.tag(
-          Local.partGroup,
-          attributes: [
-            type,
-            if (number != null) number,
-          ],
-          children: [
-            if (groupName != null) groupName,
-            if (groupNameDisplay != null) groupNameDisplay,
-            if (groupAbbreviation != null) groupAbbreviation,
-            if (groupAbbreviationDisplay != null) groupAbbreviationDisplay,
-            if (groupSymbol != null) groupSymbol,
-            if (groupBarline != null) groupBarline,
-            if (groupTime != null) groupTime,
-            if (footnote != null) footnote,
-            if (level != null) level,
-          ],
-        );
+         Local.partGroup,
+         attributes: [type, if (number != null) number],
+         children: [
+           if (groupName != null) groupName,
+           if (groupNameDisplay != null) groupNameDisplay,
+           if (groupAbbreviation != null) groupAbbreviation,
+           if (groupAbbreviationDisplay != null) groupAbbreviationDisplay,
+           if (groupSymbol != null) groupSymbol,
+           if (groupBarline != null) groupBarline,
+           if (groupTime != null) groupTime,
+           if (footnote != null) footnote,
+           if (level != null) level,
+         ],
+       );
 }

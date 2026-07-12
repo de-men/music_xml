@@ -29,8 +29,7 @@ Future<void> _pumpUntilLoaded(WidgetTester tester) async {
 }
 
 void main() {
-  testWidgets(
-      'shows AppBar title and parsed MusicXML content for both assets',
+  testWidgets('shows AppBar title and parsed MusicXML content for both assets',
       (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 

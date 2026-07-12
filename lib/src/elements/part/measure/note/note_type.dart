@@ -28,15 +28,13 @@ class NoteType extends XmlElement {
   }
 
   NoteType(this.content, {this.size})
-      : super.tag(
-          Local.type,
-          attributes: [
-            if (size != null) SymbolSizeAttr(size),
-          ],
-          children: [XmlText(content)],
-        );
+    : super.tag(
+        Local.type,
+        attributes: [if (size != null) SymbolSizeAttr(size)],
+        children: [XmlText(content)],
+      );
 
   /// Builds a `<type>` from a typed value.
   NoteType.of(NoteTypeValue value, {SymbolSize? size})
-      : this(noteTypeValueToString[value]!, size: size);
+    : this(noteTypeValueToString[value]!, size: size);
 }

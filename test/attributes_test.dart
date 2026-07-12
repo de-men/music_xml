@@ -30,8 +30,11 @@ void main() {
     final time1 = measures[0].attributesList.first.times.first;
     final time2 = measures[1].attributesList.first.times.first;
 
-    expect(time1.numerator, isNot(time2.numerator),
-        reason: 'Time signature should change between measures');
+    expect(
+      time1.numerator,
+      isNot(time2.numerator),
+      reason: 'Time signature should change between measures',
+    );
     expect(time1.numerator, 4);
     expect(time2.numerator, 3);
     expect(time1.denominator, time2.denominator);

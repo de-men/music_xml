@@ -156,8 +156,10 @@ class Note extends XmlElement {
     );
 
     final pitchMap = pitch != null
-        ? MapEntry(pitch.toPitchString(),
-            pitch.toMidiPitch(transpose: state.transpose))
+        ? MapEntry(
+            pitch.toPitchString(),
+            pitch.toMidiPitch(transpose: state.transpose),
+          )
         : null;
 
     return Note(
@@ -208,24 +210,24 @@ class Note extends XmlElement {
     this.ties,
     this.type,
   ) : super.tag(
-          Local.note,
-          children: [
-            if (grace != null) grace,
-            if (chord != null) chord,
-            if (pitch != null) pitch,
-            if (unpitched != null) unpitched,
-            if (rest != null) rest,
-            if (duration != null) duration,
-            if (voice != null) voice,
-            if (type != null) type,
-            ...dots,
-            ...beams,
-            if (stem != null) stem,
-            if (staff != null) staff,
-            if (accidental != null) accidental,
-            ...notations,
-          ],
-        );
+        Local.note,
+        children: [
+          if (grace != null) grace,
+          if (chord != null) chord,
+          if (pitch != null) pitch,
+          if (unpitched != null) unpitched,
+          if (rest != null) rest,
+          if (duration != null) duration,
+          if (voice != null) voice,
+          if (type != null) type,
+          ...dots,
+          ...beams,
+          if (stem != null) stem,
+          if (staff != null) staff,
+          if (accidental != null) accidental,
+          ...notations,
+        ],
+      );
 
   /// Returns the combined duration of tied notes
   NoteDuration get noteDurationTied => _noteDurationTied ?? noteDuration;

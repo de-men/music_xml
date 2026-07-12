@@ -11,8 +11,7 @@ class Millimeters extends XmlElement {
   }
 
   Millimeters(this.millimeters)
-      : super.tag(Local.millimeters,
-            children: [XmlText(millimeters.toString())]);
+    : super.tag(Local.millimeters, children: [XmlText(millimeters.toString())]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tenths/
@@ -24,7 +23,7 @@ class Tenths extends XmlElement {
   }
 
   Tenths(this.tenths)
-      : super.tag(Local.tenths, children: [XmlText(tenths.toString())]);
+    : super.tag(Local.tenths, children: [XmlText(tenths.toString())]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/scaling/
@@ -45,12 +44,9 @@ class Scaling extends XmlElement {
           break;
       }
     }
-    return Scaling(
-      millimeters: millimeters,
-      tenths: tenths,
-    );
+    return Scaling(millimeters: millimeters, tenths: tenths);
   }
 
   Scaling({required this.millimeters, required this.tenths})
-      : super.tag(Local.scaling, children: [millimeters, tenths]);
+    : super.tag(Local.scaling, children: [millimeters, tenths]);
 }

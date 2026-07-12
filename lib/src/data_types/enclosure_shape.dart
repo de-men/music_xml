@@ -44,7 +44,7 @@ class EnclosureShapeAttr extends XmlAttribute {
   final EnclosureShape enclosureShape;
 
   EnclosureShapeAttr(String name, this.enclosureShape)
-      : super(XmlName(name), enclosureShapeToString[enclosureShape]!);
+    : super(XmlName.parts(name), enclosureShapeToString[enclosureShape]!);
 }
 
 const enclosureShapeToString = {

@@ -1,15 +1,7 @@
 import 'package:xml/xml.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/css-font-size/
-enum CssFontSize {
-  xxSmall,
-  xSmall,
-  small,
-  medium,
-  large,
-  xLarge,
-  xxLarge,
-}
+enum CssFontSize { xxSmall, xSmall, small, medium, large, xLarge, xxLarge }
 
 const _cssFontSizeMap = {
   'xx-small': CssFontSize.xxSmall,
@@ -66,5 +58,5 @@ class FontSizeAttr extends XmlAttribute {
   }
 
   FontSizeAttr(String name, this.fontSize)
-      : super(XmlName(name), fontSize.toXmlString());
+    : super(XmlName.parts(name), fontSize.toXmlString());
 }

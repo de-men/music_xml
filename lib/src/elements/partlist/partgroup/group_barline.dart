@@ -13,8 +13,8 @@ class GroupBarline extends XmlElement {
   }
 
   GroupBarline(this.groupBarlineValue)
-      : super.tag(
-          Local.groupBarline,
-          children: [XmlText(groupBarlineValueToString[groupBarlineValue]!)],
-        );
+    : super.tag(
+        Local.groupBarline,
+        children: [XmlText(groupBarlineValueToString[groupBarlineValue]!)],
+      );
 }

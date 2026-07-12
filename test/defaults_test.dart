@@ -20,8 +20,10 @@ void main() {
     expect(defaults.pageLayout!.pageHeight!.tenths, 1553);
     expect(defaults.pageLayout!.pageWidth!.tenths, 1200);
     expect(defaults.pageLayout!.pageMargins.length, 1);
-    expect(defaults.pageLayout!.pageMargins.first.type?.marginType,
-        MarginType.both);
+    expect(
+      defaults.pageLayout!.pageMargins.first.type?.marginType,
+      MarginType.both,
+    );
     expect(defaults.pageLayout!.pageMargins.first.leftMargin.tenths, 70);
     expect(defaults.pageLayout!.pageMargins.first.topMargin.tenths, 88);
 
@@ -54,8 +56,9 @@ void main() {
   // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/system-distance-element/
   test('<system-distance> element', () {
     final systemDistanceAsset = File('test/assets/system-distance-element.xml');
-    final document =
-        MusicXmlDocument.parse(systemDistanceAsset.readAsStringSync());
+    final document = MusicXmlDocument.parse(
+      systemDistanceAsset.readAsStringSync(),
+    );
 
     final systemLayout = document.score.defaults!.systemLayout!;
     expect(systemLayout.systemMargins!.leftMargin.tenths, 0);

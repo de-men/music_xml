@@ -50,12 +50,12 @@ class Bookmark extends XmlElement {
     this.bookmarkName,
     this.position,
   }) : super.tag(
-          Local.bookmark,
-          attributes: [
-            bookmarkId,
-            if (element != null) element,
-            if (bookmarkName != null) bookmarkName,
-            if (position != null) position,
-          ],
-        );
+         Local.bookmark,
+         attributes: [
+           bookmarkId,
+           if (element != null) element,
+           if (bookmarkName != null) bookmarkName,
+           if (position != null) position,
+         ],
+       );
 }

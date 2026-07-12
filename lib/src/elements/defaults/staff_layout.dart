@@ -12,7 +12,7 @@ class StaffDistance extends XmlElement {
   }
 
   StaffDistance(this.tenths)
-      : super.tag(Local.staffDistance, children: [XmlText('$tenths')]);
+    : super.tag(Local.staffDistance, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-layout/
@@ -38,9 +38,9 @@ class StaffLayout extends XmlElement {
   }
 
   StaffLayout({this.number, this.staffDistance})
-      : super.tag(
-          Local.staffLayout,
-          attributes: [if (number != null) number],
-          children: [if (staffDistance != null) staffDistance],
-        );
+    : super.tag(
+        Local.staffLayout,
+        attributes: [if (number != null) number],
+        children: [if (staffDistance != null) staffDistance],
+      );
 }

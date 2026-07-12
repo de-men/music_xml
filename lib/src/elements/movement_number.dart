@@ -8,5 +8,5 @@ class MovementNumber extends XmlElement {
   }
 
   MovementNumber(String content)
-      : super.tag(Local.movementNumber, children: [XmlText(content)]);
+    : super.tag(Local.movementNumber, children: [XmlText(content)]);
 }

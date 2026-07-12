@@ -34,12 +34,9 @@ class CreditType extends XmlElement {
   factory CreditType.parse(XmlElement element) {
     final creditTypeValue =
         _creditTypeValueMap[element.innerText] ?? CreditTypeValue.other;
-    return CreditType(
-      content: creditTypeValue,
-      text: element.innerText,
-    );
+    return CreditType(content: creditTypeValue, text: element.innerText);
   }
 
   CreditType({required this.content, required String text})
-      : super.tag(Local.creditType, children: [XmlText(text)]);
+    : super.tag(Local.creditType, children: [XmlText(text)]);
 }

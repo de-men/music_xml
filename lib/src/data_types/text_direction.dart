@@ -23,5 +23,5 @@ class TextDirectionAttr extends XmlAttribute {
   final TextDirection textDirection;
 
   TextDirectionAttr(String name, this.textDirection)
-      : super(XmlName(name), textDirection.name);
+    : super(XmlName.parts(name), textDirection.name);
 }

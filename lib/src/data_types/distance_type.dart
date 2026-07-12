@@ -3,11 +3,7 @@ import 'package:xml/xml.dart';
 import '../local.dart';
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/distance-type/
-enum DistanceType {
-  hyphen,
-  beam,
-  other,
-}
+enum DistanceType { hyphen, beam, other }
 
 const _distanceTypeMap = {
   'hyphen': DistanceType.hyphen,
@@ -25,5 +21,5 @@ class DistanceTypeAttr extends XmlAttribute {
   }
 
   DistanceTypeAttr(String name, this.distanceType)
-      : super(XmlName(name), distanceType.name);
+    : super(XmlName.parts(name), distanceType.name);
 }

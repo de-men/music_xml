@@ -68,8 +68,10 @@ class Part extends XmlElement {
         }
         // If note is a continuing note, add the note to tiedNotes
         else if (currentNote.continuesOtherNote) {
-          final notes = tiedNotes[currentNote.voice?.content]
-              ?[currentNote.pitchMap!.value];
+          final notes =
+              tiedNotes[currentNote.voice?.content]?[currentNote
+                  .pitchMap!
+                  .value];
           assert(notes != null);
           final startNote = notes!.first;
           currentNote.updateNoteId(startNote.noteId);
@@ -106,7 +108,7 @@ class Part extends XmlElement {
   }
 
   Part(this.id, this.measures)
-      : super.tag(Local.part, attributes: [id], children: [...measures]);
+    : super.tag(Local.part, attributes: [id], children: [...measures]);
 
   /// Repair a measure if it is empty by inserting a whole measure rest.
   ///

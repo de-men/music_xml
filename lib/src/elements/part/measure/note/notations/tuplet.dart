@@ -21,11 +21,11 @@ class Tuplet extends XmlElement {
   }
 
   Tuplet({required this.tupletType, this.number})
-      : super.tag(
-          Local.tuplet,
-          attributes: [
-            TokenAttr(Local.type, tupletType.name),
-            if (number != null) number,
-          ],
-        );
+    : super.tag(
+        Local.tuplet,
+        attributes: [
+          TokenAttr(Local.type, tupletType.name),
+          if (number != null) number,
+        ],
+      );
 }

@@ -91,8 +91,9 @@ void main() {
 
   // https://github.com/de-men/music_xml/issues/52
   test('<accidental> cautionary and editorial attributes', () {
-    final accidentalAsset =
-        File('test/assets/accidental-element-cautionary-editorial.xml');
+    final accidentalAsset = File(
+      'test/assets/accidental-element-cautionary-editorial.xml',
+    );
     final doc = MusicXmlDocument.parse(accidentalAsset.readAsStringSync());
     final accidentalNotes = doc.score.parts.first.measures.first.notes;
 

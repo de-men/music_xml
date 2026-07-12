@@ -5,5 +5,5 @@ import 'package:xml/xml.dart';
 /// General-purpose token attribute for simple name-value pairs
 /// like `type`, `number`, `name`, etc.
 class TokenAttr extends XmlAttribute {
-  TokenAttr(String name, String value) : super(XmlName(name), value);
+  TokenAttr(String name, String value) : super(XmlName.parts(name), value);
 }

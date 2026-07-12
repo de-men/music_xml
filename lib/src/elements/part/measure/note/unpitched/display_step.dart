@@ -12,5 +12,5 @@ class DisplayStep extends XmlElement {
   }
 
   DisplayStep(this.step)
-      : super.tag(Local.displayStep, children: [XmlText(step.name)]);
+    : super.tag(Local.displayStep, children: [XmlText(step.name)]);
 }

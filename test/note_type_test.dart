@@ -109,7 +109,8 @@ void main() {
 
   test('size attribute is parsed and serialized', () {
     final parsed = NoteType.parse(
-        XmlDocument.parse('<type size="cue">half</type>').rootElement);
+      XmlDocument.parse('<type size="cue">half</type>').rootElement,
+    );
     expect(parsed.noteTypeValue, NoteTypeValue.half);
     expect(parsed.size, SymbolSize.cue);
     expect(parsed.toXmlString(), '<type size="cue">half</type>');

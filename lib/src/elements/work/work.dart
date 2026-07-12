@@ -32,12 +32,12 @@ class Work extends XmlElement {
   }
 
   Work({this.workNumber, this.workTitle, this.opus})
-      : super.tag(
-          Local.work,
-          children: [
-            if (workNumber != null) workNumber,
-            if (workTitle != null) workTitle,
-            if (opus != null) opus,
-          ],
-        );
+    : super.tag(
+        Local.work,
+        children: [
+          if (workNumber != null) workNumber,
+          if (workTitle != null) workTitle,
+          if (opus != null) opus,
+        ],
+      );
 }

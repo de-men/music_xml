@@ -9,16 +9,13 @@ class Rights extends XmlElement {
   final String? type;
 
   factory Rights.parse(XmlElement element) {
-    return Rights(
-      element.innerText,
-      type: element.getAttribute(Local.type),
-    );
+    return Rights(element.innerText, type: element.getAttribute(Local.type));
   }
 
   Rights(this.content, {this.type})
-      : super.tag(
-          Local.rights,
-          attributes: [if (type != null) TokenAttr(Local.type, type)],
-          children: [XmlText(content)],
-        );
+    : super.tag(
+        Local.rights,
+        attributes: [if (type != null) TokenAttr(Local.type, type)],
+        children: [XmlText(content)],
+      );
 }

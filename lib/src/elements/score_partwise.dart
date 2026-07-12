@@ -103,17 +103,17 @@ class ScorePartwise extends XmlElement {
     required this.parts,
     required this.totalTimeSecs,
   }) : super.tag(
-          Local.scorePartwise,
-          attributes: [if (version != null) version],
-          children: [
-            if (work != null) work,
-            if (identification != null) identification,
-            if (defaults != null) defaults,
-            ...credits,
-            if (movementNumber != null) movementNumber,
-            if (movementTitle != null) movementTitle,
-            partList,
-            ...parts,
-          ],
-        );
+         Local.scorePartwise,
+         attributes: [if (version != null) version],
+         children: [
+           if (work != null) work,
+           if (identification != null) identification,
+           if (defaults != null) defaults,
+           ...credits,
+           if (movementNumber != null) movementNumber,
+           if (movementTitle != null) movementTitle,
+           partList,
+           ...parts,
+         ],
+       );
 }

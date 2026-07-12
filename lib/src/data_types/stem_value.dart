@@ -1,10 +1,5 @@
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/stem-value/
-enum StemValue {
-  down,
-  up,
-  none,
-  double,
-}
+enum StemValue { down, up, none, double }
 
 const _stemValueMap = {
   'down': StemValue.down,

@@ -10,5 +10,5 @@ class KeyAlter extends XmlElement {
   }
 
   KeyAlter(this.semitones)
-      : super.tag(Local.keyAlter, children: [XmlText('$semitones')]);
+    : super.tag(Local.keyAlter, children: [XmlText('$semitones')]);
 }

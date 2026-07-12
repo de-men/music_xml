@@ -150,19 +150,19 @@ class Measure extends XmlElement {
     this.tempos = const [],
     this.duration = 0,
   }) : super.tag(
-          Local.measure,
-          attributes: [number],
-          children: [
-            ...attributesList,
-            ...notes,
-            ...backups,
-            ...forwards,
-            ...directions,
-            ...chordSymbols,
-            ...prints,
-            ...barlines,
-          ],
-        );
+         Local.measure,
+         attributes: [number],
+         children: [
+           ...attributesList,
+           ...notes,
+           ...backups,
+           ...forwards,
+           ...directions,
+           ...chordSymbols,
+           ...prints,
+           ...barlines,
+         ],
+       );
 
   /// Correct the time signature for incomplete measures.
   /// If the measure is incomplete or a pickup, insert an appropriate
@@ -205,7 +205,8 @@ class Measure extends XmlElement {
       // Insert a new time signature only if it does not equal the global
       // time signature.
       // Cross-multiply: a/b != c/d iff a*d != b*c
-      final fractionsNotEqual = numerator * state.time!.denominator !=
+      final fractionsNotEqual =
+          numerator * state.time!.denominator !=
           denominator * state.time!.numerator;
       if (pickupMeasure || fractionsNotEqual) {
         newTimeSignature.timePosition = startTimePosition;

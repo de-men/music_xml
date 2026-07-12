@@ -15,8 +15,8 @@ class AccidentalMark extends XmlElement {
   }
 
   AccidentalMark(this.accidentalValue)
-      : super.tag(
-          Local.accidentalMark,
-          children: [XmlText(accidentalValueToString[accidentalValue]!)],
-        );
+    : super.tag(
+        Local.accidentalMark,
+        children: [XmlText(accidentalValueToString[accidentalValue]!)],
+      );
 }

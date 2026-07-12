@@ -86,17 +86,19 @@ class Key extends XmlElement {
     this.stepAlterAccidentals = const [],
     this.timePosition = -1,
   }) : super.tag(
-          Local.key,
-          children: [
-            fifths,
-            if (mode != null) mode,
-            ...stepAlterAccidentals.expand((e) => [
-                  e.keyStep,
-                  e.keyAlter,
-                  if (e.keyAccidental != null) e.keyAccidental!,
-                ]),
-          ],
-        );
+         Local.key,
+         children: [
+           fifths,
+           if (mode != null) mode,
+           ...stepAlterAccidentals.expand(
+             (e) => [
+               e.keyStep,
+               e.keyAlter,
+               if (e.keyAccidental != null) e.keyAccidental!,
+             ],
+           ),
+         ],
+       );
 }
 
 class StepAlterAccidental {

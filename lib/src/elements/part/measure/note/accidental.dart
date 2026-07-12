@@ -29,12 +29,12 @@ class Accidental extends XmlElement {
   }
 
   Accidental(this.accidentalValue, {this.cautionary, this.editorial})
-      : super.tag(
-          Local.accidental,
-          attributes: [
-            if (cautionary != null) YesNoAttr(Local.cautionary, cautionary),
-            if (editorial != null) YesNoAttr(Local.editorial, editorial),
-          ],
-          children: [XmlText(accidentalValueToString[accidentalValue]!)],
-        );
+    : super.tag(
+        Local.accidental,
+        attributes: [
+          if (cautionary != null) YesNoAttr(Local.cautionary, cautionary),
+          if (editorial != null) YesNoAttr(Local.editorial, editorial),
+        ],
+        children: [XmlText(accidentalValueToString[accidentalValue]!)],
+      );
 }

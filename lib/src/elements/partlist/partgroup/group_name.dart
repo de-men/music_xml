@@ -13,5 +13,5 @@ class GroupName extends XmlElement {
   }
 
   GroupName(this.content)
-      : super.tag(Local.groupName, children: [XmlText(content)]);
+    : super.tag(Local.groupName, children: [XmlText(content)]);
 }

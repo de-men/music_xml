@@ -12,7 +12,7 @@ class LeftMargin extends XmlElement {
   }
 
   LeftMargin(this.tenths)
-      : super.tag(Local.leftMargin, children: [XmlText('$tenths')]);
+    : super.tag(Local.leftMargin, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/right-margin/
@@ -24,7 +24,7 @@ class RightMargin extends XmlElement {
   }
 
   RightMargin(this.tenths)
-      : super.tag(Local.rightMargin, children: [XmlText('$tenths')]);
+    : super.tag(Local.rightMargin, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/top-margin/
@@ -36,7 +36,7 @@ class TopMargin extends XmlElement {
   }
 
   TopMargin(this.tenths)
-      : super.tag(Local.topMargin, children: [XmlText('$tenths')]);
+    : super.tag(Local.topMargin, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bottom-margin/
@@ -48,7 +48,7 @@ class BottomMargin extends XmlElement {
   }
 
   BottomMargin(this.tenths)
-      : super.tag(Local.bottomMargin, children: [XmlText('$tenths')]);
+    : super.tag(Local.bottomMargin, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-height/
@@ -60,7 +60,7 @@ class PageHeight extends XmlElement {
   }
 
   PageHeight(this.tenths)
-      : super.tag(Local.pageHeight, children: [XmlText('$tenths')]);
+    : super.tag(Local.pageHeight, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-width/
@@ -72,7 +72,7 @@ class PageWidth extends XmlElement {
   }
 
   PageWidth(this.tenths)
-      : super.tag(Local.pageWidth, children: [XmlText('$tenths')]);
+    : super.tag(Local.pageWidth, children: [XmlText('$tenths')]);
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-margins/
@@ -125,10 +125,10 @@ class PageMargins extends XmlElement {
     required this.topMargin,
     required this.bottomMargin,
   }) : super.tag(
-          Local.pageMargins,
-          attributes: [if (type != null) type],
-          children: [leftMargin, rightMargin, topMargin, bottomMargin],
-        );
+         Local.pageMargins,
+         attributes: [if (type != null) type],
+         children: [leftMargin, rightMargin, topMargin, bottomMargin],
+       );
 }
 
 /// https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-layout/
@@ -164,12 +164,12 @@ class PageLayout extends XmlElement {
   }
 
   PageLayout({this.pageHeight, this.pageWidth, this.pageMargins = const []})
-      : super.tag(
-          Local.pageLayout,
-          children: [
-            if (pageHeight != null) pageHeight,
-            if (pageWidth != null) pageWidth,
-            ...pageMargins,
-          ],
-        );
+    : super.tag(
+        Local.pageLayout,
+        children: [
+          if (pageHeight != null) pageHeight,
+          if (pageWidth != null) pageWidth,
+          ...pageMargins,
+        ],
+      );
 }

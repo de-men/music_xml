@@ -34,8 +34,8 @@ const _barStyleToString = {
 };
 
 BarStyle _parseBarStyle(String str) => BarStyle.values.firstWhere(
-      (e) => e.toString() == 'BarStyle.' + camelCase(str),
-    );
+  (e) => e.toString() == 'BarStyle.' + camelCase(str),
+);
 
 /// Internal representation of a MusicXML `<barline>` element.
 class Barline extends XmlElement {
@@ -73,15 +73,15 @@ class Barline extends XmlElement {
   }
 
   Barline(this.barStyle, this.location)
-      : super.tag(
-          Local.barline,
-          attributes: [
-            if (location != null) location,
-          ],
-          children: [
-            if (barStyle != null)
-              XmlElement.tag('bar-style',
-                  children: [XmlText(_barStyleToString[barStyle]!)]),
-          ],
-        );
+    : super.tag(
+        Local.barline,
+        attributes: [if (location != null) location],
+        children: [
+          if (barStyle != null)
+            XmlElement.tag(
+              'bar-style',
+              children: [XmlText(_barStyleToString[barStyle]!)],
+            ),
+        ],
+      );
 }

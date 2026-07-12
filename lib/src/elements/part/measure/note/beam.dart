@@ -21,9 +21,9 @@ class Beam extends XmlElement {
   }
 
   Beam({this.number, required this.beamValue})
-      : super.tag(
-          Local.beam,
-          attributes: [if (number != null) number],
-          children: [XmlText(beamValueToString[beamValue]!)],
-        );
+    : super.tag(
+        Local.beam,
+        attributes: [if (number != null) number],
+        children: [XmlText(beamValueToString[beamValue]!)],
+      );
 }

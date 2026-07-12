@@ -66,14 +66,14 @@ class Identification extends XmlElement {
     this.relations = const [],
     this.miscellaneous,
   }) : super.tag(
-          Local.identification,
-          children: [
-            ...creators,
-            ...rights,
-            if (encoding != null) encoding,
-            if (source != null) source,
-            ...relations,
-            if (miscellaneous != null) miscellaneous,
-          ],
-        );
+         Local.identification,
+         children: [
+           ...creators,
+           ...rights,
+           if (encoding != null) encoding,
+           if (source != null) source,
+           ...relations,
+           if (miscellaneous != null) miscellaneous,
+         ],
+       );
 }

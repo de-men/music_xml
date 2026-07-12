@@ -11,5 +11,5 @@ class Line extends XmlElement {
   }
 
   Line(this.staffLinePosition)
-      : super.tag(Local.line, children: [XmlText('$staffLinePosition')]);
+    : super.tag(Local.line, children: [XmlText('$staffLinePosition')]);
 }

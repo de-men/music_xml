@@ -9,5 +9,5 @@ class WorkTitle extends XmlElement {
   }
 
   WorkTitle(String content)
-      : super.tag(Local.workTitle, children: [XmlText(content)]);
+    : super.tag(Local.workTitle, children: [XmlText(content)]);
 }

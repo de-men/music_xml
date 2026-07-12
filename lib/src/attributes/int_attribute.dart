@@ -8,5 +8,5 @@ class IntAttr extends XmlAttribute {
     return IntAttr(int.parse(attribute.value), attribute.name.local);
   }
 
-  IntAttr(this.intValue, String name) : super(XmlName(name), '$intValue');
+  IntAttr(this.intValue, String name) : super(XmlName.parts(name), '$intValue');
 }

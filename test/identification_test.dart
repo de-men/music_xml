@@ -9,41 +9,43 @@ final asset = File('test/assets/identification-element.xml');
 final supportsAsset = File('test/assets/supports-element.xml');
 
 void main() {
-  test('<identification> with creators, rights, encoding, source, relation',
-      () {
-    final document = MusicXmlDocument.parse(asset.readAsStringSync());
+  test(
+    '<identification> with creators, rights, encoding, source, relation',
+    () {
+      final document = MusicXmlDocument.parse(asset.readAsStringSync());
 
-    final id = document.score.identification;
-    expect(id, isNotNull);
+      final id = document.score.identification;
+      expect(id, isNotNull);
 
-    expect(id!.creators.length, 2);
-    expect(id.creators[0].type, 'composer');
-    expect(id.creators[0].content, 'Claude Debussy');
-    expect(id.creators[1].type, 'lyricist');
-    expect(id.creators[1].content, 'Paul Bourget');
+      expect(id!.creators.length, 2);
+      expect(id.creators[0].type, 'composer');
+      expect(id.creators[0].content, 'Claude Debussy');
+      expect(id.creators[1].type, 'lyricist');
+      expect(id.creators[1].content, 'Paul Bourget');
 
-    expect(id.rights.length, 1);
-    expect(id.rights.first.content, contains('Recordare LLC'));
+      expect(id.rights.length, 1);
+      expect(id.rights.first.content, contains('Recordare LLC'));
 
-    expect(id.encoding, isNotNull);
-    expect(id.encoding!.software.length, greaterThan(0));
-    expect(id.encoding!.encodingDates.length, greaterThan(0));
-    expect(id.encoding!.encoders.first.content, 'Mark D. Lew');
-    expect(id.encoding!.encoders.first.type, isNull);
-    expect(id.encoding!.supports.length, 3);
-    expect(id.encoding!.supports.first.element.value, 'accidental');
-    expect(id.encoding!.supports.first.type.value, 'yes');
+      expect(id.encoding, isNotNull);
+      expect(id.encoding!.software.length, greaterThan(0));
+      expect(id.encoding!.encodingDates.length, greaterThan(0));
+      expect(id.encoding!.encoders.first.content, 'Mark D. Lew');
+      expect(id.encoding!.encoders.first.type, isNull);
+      expect(id.encoding!.supports.length, 3);
+      expect(id.encoding!.supports.first.element.value, 'accidental');
+      expect(id.encoding!.supports.first.type.value, 'yes');
 
-    expect(id.source!.content, contains('Girod'));
+      expect(id.source!.content, contains('Girod'));
 
-    expect(id.relations.length, 1);
-    expect(id.relations.first.content, 'urn:ISBN:0-486-24131-9');
+      expect(id.relations.length, 1);
+      expect(id.relations.first.content, 'urn:ISBN:0-486-24131-9');
 
-    expect(id.miscellaneous, isNotNull);
-    expect(id.miscellaneous!.fields.length, 1);
-    expect(id.miscellaneous!.fields.first.fieldName, 'difficulty-level');
-    expect(id.miscellaneous!.fields.first.content, '3');
-  });
+      expect(id.miscellaneous, isNotNull);
+      expect(id.miscellaneous!.fields.length, 1);
+      expect(id.miscellaneous!.fields.first.fieldName, 'difficulty-level');
+      expect(id.miscellaneous!.fields.first.content, '3');
+    },
+  );
 
   test('<supports> with attribute and value', () {
     final document = MusicXmlDocument.parse(supportsAsset.readAsStringSync());

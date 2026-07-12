@@ -21,11 +21,11 @@ class Tied extends XmlElement {
   }
 
   Tied({required this.tiedType, this.number})
-      : super.tag(
-          Local.tied,
-          attributes: [
-            TokenAttr(Local.type, tiedTypeToString[tiedType]!),
-            if (number != null) number,
-          ],
-        );
+    : super.tag(
+        Local.tied,
+        attributes: [
+          TokenAttr(Local.type, tiedTypeToString[tiedType]!),
+          if (number != null) number,
+        ],
+      );
 }

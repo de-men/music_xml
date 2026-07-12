@@ -14,5 +14,5 @@ class PartName extends XmlElement {
   }
 
   PartName(this.content)
-      : super.tag(Local.partName, children: [XmlText(content)]);
+    : super.tag(Local.partName, children: [XmlText(content)]);
 }

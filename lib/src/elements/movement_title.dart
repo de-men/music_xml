@@ -8,5 +8,5 @@ class MovementTitle extends XmlElement {
   }
 
   MovementTitle(String content)
-      : super.tag(Local.movementTitle, children: [XmlText(content)]);
+    : super.tag(Local.movementTitle, children: [XmlText(content)]);
 }

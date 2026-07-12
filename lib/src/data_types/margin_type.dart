@@ -21,10 +21,12 @@ class MarginTypeAttr extends XmlAttribute {
   final MarginType marginType;
 
   factory MarginTypeAttr.parse(XmlElement element) {
-    return MarginTypeAttr(element.name.local,
-        MarginType.values.firstWhere((e) => e.name == element.innerText));
+    return MarginTypeAttr(
+      element.name.local,
+      MarginType.values.firstWhere((e) => e.name == element.innerText),
+    );
   }
 
   MarginTypeAttr(String name, this.marginType)
-      : super(XmlName(name), marginType.name);
+    : super(XmlName.parts(name), marginType.name);
 }
