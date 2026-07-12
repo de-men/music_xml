@@ -1,3 +1,7 @@
+## Unreleased
+
+* [`<accidental>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental/) now supports the `cautionary` and `editorial` yes/no attributes [#52](https://github.com/de-men/music_xml/issues/52)
+
 ## 2.7.0
 
 * Support [compressed `.mxl` files](https://www.w3.org/2021/06/musicxml40/tutorial/compressed-mxl-files/) via `MusicXmlDocument.parseMxl(List<int> bytes)` [#37](https://github.com/de-men/music_xml/issues/37)
