@@ -18,3 +18,6 @@ export 'src/elements/partlist/scorepart/score_part.dart';
 export 'src/attributes/tempo.dart';
 export 'src/elements/part/measure/attributes/time/time.dart';
 export 'src/elements/part/measure/note/tie.dart';
+export 'src/elements/part/measure/note/note_type.dart';
+export 'src/data_types/note_type_value.dart';
+export 'src/data_types/symbol_size.dart';

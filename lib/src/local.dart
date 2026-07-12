@@ -9,6 +9,7 @@ class Local {
   static const xlinkTitle = 'xlink:title';
   static const xlinkType = 'xlink:type';
   static const type = 'type';
+  static const size = 'size';
   static const name = 'name';
   static const element = 'element';
   static const attribute = 'attribute';
