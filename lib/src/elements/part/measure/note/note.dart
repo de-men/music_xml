@@ -7,6 +7,7 @@ import 'chord.dart';
 import 'dot.dart';
 import 'grace.dart';
 import 'notations/notations.dart';
+import 'note_type.dart';
 import 'pitch/pitch.dart';
 import '../duration.dart' as music_xml;
 import 'rest.dart';
@@ -48,6 +49,10 @@ class Note extends XmlElement {
   final int velocity;
   final NoteDuration noteDuration;
 
+  /// The `<type>` element from the source, or null when it was missing.
+  /// Kept so serialization does not add a `<type>` that was not there.
+  final NoteType? type;
+
   bool get isRest => rest != null;
 
   /// Tied notes will have the same note id.
@@ -74,7 +79,7 @@ class Note extends XmlElement {
     Rest? rest;
     music_xml.Duration? duration;
     final dots = <Dot>[];
-    String? type;
+    NoteType? type;
     double? tupletRatio;
 
     final List<Beam> beams = [];
@@ -112,7 +117,7 @@ class Note extends XmlElement {
           dots.add(Dot.parse(child));
           break;
         case Local.type:
-          type = child.innerText;
+          type = NoteType.parse(child);
           break;
         case Local.timeModification:
           tupletRatio = _parseTuplet(child);
@@ -145,7 +150,7 @@ class Note extends XmlElement {
       grace != null,
       duration?.positiveDivisions,
       dots.length,
-      type,
+      type?.content,
       tupletRatio,
       state,
     );
@@ -176,6 +181,7 @@ class Note extends XmlElement {
       pitchMap,
       lyrics.isNotEmpty ? lyrics : null,
       ties,
+      type,
     );
   }
 
@@ -200,6 +206,7 @@ class Note extends XmlElement {
     this.pitchMap,
     this.lyrics,
     this.ties,
+    this.type,
   ) : super.tag(
           Local.note,
           children: [
@@ -210,6 +217,7 @@ class Note extends XmlElement {
             if (rest != null) rest,
             if (duration != null) duration,
             if (voice != null) voice,
+            if (type != null) type,
             ...dots,
             ...beams,
             if (stem != null) stem,
