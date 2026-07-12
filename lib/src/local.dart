@@ -116,6 +116,8 @@ class Local {
   static const displayText = 'display-text';
   static const accidentalText = 'accidental-text';
   static const printObject = 'print-object';
+  static const cautionary = 'cautionary';
+  static const editorial = 'editorial';
   static const footnote = 'footnote';
   static const level = 'level';
   static const groupSymbol = 'group-symbol';

@@ -88,4 +88,34 @@ void main() {
     expect(notes[1].accidental, isA<Accidental>());
     expect(notes[1].accidental!.accidentalValue, AccidentalValue.sharp);
   });
+
+  // https://github.com/de-men/music_xml/issues/52
+  test('<accidental> cautionary and editorial attributes', () {
+    final accidentalAsset =
+        File('test/assets/accidental-element-cautionary-editorial.xml');
+    final doc = MusicXmlDocument.parse(accidentalAsset.readAsStringSync());
+    final accidentalNotes = doc.score.parts.first.measures.first.notes;
+
+    // Plain accidental: both attributes are absent.
+    expect(accidentalNotes[0].accidental!.cautionary, isNull);
+    expect(accidentalNotes[0].accidental!.editorial, isNull);
+
+    // cautionary="yes"
+    expect(accidentalNotes[1].accidental!.cautionary, isTrue);
+    expect(accidentalNotes[1].accidental!.editorial, isNull);
+
+    // editorial="yes"
+    expect(accidentalNotes[2].accidental!.editorial, isTrue);
+    expect(accidentalNotes[2].accidental!.cautionary, isNull);
+
+    // Round-trip: the attributes are written back to XML.
+    expect(
+      accidentalNotes[1].accidental!.toXmlString(),
+      '<accidental cautionary="yes">sharp</accidental>',
+    );
+    expect(
+      accidentalNotes[2].accidental!.toXmlString(),
+      '<accidental editorial="yes">sharp</accidental>',
+    );
+  });
 }
