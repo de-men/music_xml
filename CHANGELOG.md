@@ -1,6 +1,9 @@
-## Unreleased
+## 2.8.0
 
+* [`<type>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/type/) element on notes now round-trips via `NoteType` (keeps raw text for non-standard values); adds `NoteTypeValue` enum and `symbol-size` attribute [#53](https://github.com/de-men/music_xml/issues/53)
 * [`<accidental>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental/) now supports the `cautionary` and `editorial` yes/no attributes [#52](https://github.com/de-men/music_xml/issues/52)
+* Example app: migrate iOS to Swift Package Manager, fix widget test for MusicXML content, update deployment target [#54](https://github.com/de-men/music_xml/pull/54)
+* Bump [`xml`](https://pub.dev/packages/xml) to `^7.0.1`; minimum Dart SDK is now `3.11.0`
 
 ## 2.7.0
 
