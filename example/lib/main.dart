@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:music_xml/music_xml.dart';
+import 'package:music_xml/music_xml.dart' hide Key;
 import 'package:xml/xml.dart';
+
+import 'mute_solo_extension.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,8 +54,18 @@ class MyHomePage extends StatelessWidget {
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MusicItem(xmlFile: 'musicXML.xml'),
-          MusicItem(xmlFile: 'test.xml'),
+          // Full score with movement-title and total time.
+          MusicItem(
+            label: 'musicXML.xml (full score)',
+            xmlFile: 'musicXML.xml',
+          ),
+          // Standard volume/pan plus a namespaced mute/solo extension.
+          MusicItem(
+            label: 'mute-solo.xml (volume/pan + mute/solo)',
+            xmlFile: 'mute-solo.xml',
+            showMidiInstrument: true,
+            showMuteSolo: true,
+          ),
         ],
       ),
     );
@@ -61,9 +73,18 @@ class MyHomePage extends StatelessWidget {
 }
 
 class MusicItem extends StatelessWidget {
+  final String label;
   final String xmlFile;
+  final bool showMidiInstrument;
+  final bool showMuteSolo;
 
-  const MusicItem({required this.xmlFile, Key? key}) : super(key: key);
+  const MusicItem({
+    required this.label,
+    required this.xmlFile,
+    this.showMidiInstrument = false,
+    this.showMuteSolo = false,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +98,26 @@ class MusicItem extends StatelessWidget {
           final score = document.score;
           final scorePartwise = score.getElement('score-partwise');
           final movementTitle = scorePartwise?.getElement('movement-title');
+          final midiInstrument = showMidiInstrument
+              ? score.partList.scoreParts.values.first.midiInstruments.first
+              : null;
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(label),
                 Text('movement-title: ${movementTitle?.innerText}'),
                 const SizedBox(height: 16),
                 Text('totalTimeSecs: ${document.totalTimeSecs}'),
+                if (midiInstrument != null) ...[
+                  Text('volume: ${midiInstrument.volume?.content.value}'),
+                  Text('pan: ${midiInstrument.pan?.content.value}'),
+                ],
+                if (showMuteSolo && midiInstrument != null) ...[
+                  Text('muted: ${midiInstrument.isMuted}'),
+                  Text('solo: ${midiInstrument.isSolo}'),
+                ],
               ],
             ),
           );

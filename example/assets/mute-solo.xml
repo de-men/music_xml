@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<score-partwise version="4.0">
+  <part-list>
+    <score-part id="P1">
+      <part-name>Music</part-name>
+      <midi-instrument
+          id="P1-I1"
+          xmlns:mute-solo="https://example.com/musicxml/mute-solo"
+          mute-solo:mute="yes"
+          mute-solo:solo="no">
+        <midi-channel>1</midi-channel>
+        <midi-program>1</midi-program>
+        <volume>80</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1"/>
+  </part>
+</score-partwise>
