@@ -44,6 +44,41 @@ print(pitch?.toPitchString()); // "C4"
 print(pitch?.toMidiPitch());   // 60
 ```
 
+### MIDI volume, pan, mute, and solo
+
+MusicXML supports `<volume>` and `<pan>` as children of
+`<midi-instrument>`. Mixer-style mute and solo are not part of the standard.
+Apps can store them as namespaced extension attributes. See
+`example/assets/mute-solo.xml` and `example/lib/mute_solo_extension.dart`.
+
+```xml
+<midi-instrument
+    id="P1-I1"
+    xmlns:mute-solo="https://example.com/musicxml/mute-solo"
+    mute-solo:mute="yes"
+    mute-solo:solo="no">
+  <volume>80</volume>
+  <pan>0</pan>
+</midi-instrument>
+```
+
+The library keeps these extension attributes when it parses and writes the file.
+You can read them through the `XmlElement` API:
+
+```dart
+const muteSoloNamespace = 'https://example.com/musicxml/mute-solo';
+final instrument = scorePart.midiInstruments.first;
+
+final volume = instrument.volume?.content.value;
+final pan = instrument.pan?.content.value;
+final isMuted =
+    instrument.getAttribute('mute', namespaceUri: muteSoloNamespace) == 'yes';
+final isSolo =
+    instrument.getAttribute('solo', namespaceUri: muteSoloNamespace) == 'yes';
+```
+
+Use your own namespace URL instead of the example URL above.
+
 ## Deployment
 
 Run the publish command in dry-run mode to see if everything passes analysis:

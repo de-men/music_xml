@@ -1,3 +1,9 @@
+## 2.9.0
+
+* Add standard `<volume>` and `<pan>` children to `<midi-instrument>`
+* Add [`percent`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/percent/) and [`rotation-degrees`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/rotation-degrees/) data types
+* Keep namespaced custom attributes on `<midi-instrument>` for app-specific playback state such as mute and solo [#58](https://github.com/de-men/music_xml/issues/58)
+
 ## 2.8.0
 
 * [`<type>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/type/) element on notes now round-trips via `NoteType` (keeps raw text for non-standard values); adds `NoteTypeValue` enum and `symbol-size` attribute [#53](https://github.com/de-men/music_xml/issues/53)

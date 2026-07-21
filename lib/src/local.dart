@@ -128,6 +128,8 @@ class Local {
   static const midiInstrument = 'midi-instrument';
   static const midiChannel = 'midi-channel';
   static const midiProgram = 'midi-program';
+  static const volume = 'volume';
+  static const pan = 'pan';
   static const part = 'part';
   static const measure = 'measure';
   static const number = 'number';
