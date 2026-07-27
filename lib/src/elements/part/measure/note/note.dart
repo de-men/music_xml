@@ -218,6 +218,7 @@ class Note extends XmlElement {
           if (unpitched != null) unpitched,
           if (rest != null) rest,
           if (duration != null) duration,
+          ...ties,
           if (voice != null) voice,
           if (type != null) type,
           ...dots,
@@ -228,6 +229,45 @@ class Note extends XmlElement {
           ...notations,
         ],
       );
+
+  void syncChildrenToXml() {
+    // sync ties
+    children.removeWhere((c) => c is Tie);
+    children.addAll(ties);
+    // sync notations
+    children.removeWhere((c) => c is Notations);
+    children.addAll(notations);
+    // sync notations chiildren（tieds, slurs ...）
+    for (final n in notations) {
+      n.syncChildrenToXml();
+    }
+  }
+
+  @override
+  String toXmlString({
+    bool pretty = false,
+    XmlEntityMapping? entityMapping,
+    int? level,
+    String? indent,
+    String? newLine,
+    bool Function(XmlNode)? preserveWhitespace,
+    bool Function(XmlAttribute)? indentAttribute,
+    Comparator<XmlAttribute>? sortAttributes,
+    bool Function(XmlNode)? spaceBeforeSelfClose,
+  }) {
+    syncChildrenToXml();
+    return super.toXmlString(
+      pretty: pretty,
+      entityMapping: entityMapping,
+      level: level,
+      indent: indent,
+      newLine: newLine,
+      preserveWhitespace: preserveWhitespace,
+      indentAttribute: indentAttribute,
+      sortAttributes: sortAttributes,
+      spaceBeforeSelfClose: spaceBeforeSelfClose,
+    );
+  }
 
   /// Returns the combined duration of tied notes
   NoteDuration get noteDurationTied => _noteDurationTied ?? noteDuration;

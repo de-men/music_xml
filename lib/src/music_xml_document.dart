@@ -18,6 +18,42 @@ class MusicXmlDocument extends XmlDocument {
   /// Total time in seconds
   double get totalTimeSecs => score.totalTimeSecs;
 
+  void _syncAllNotesToChildren() {
+    for (final part in score.parts) {
+      for (final measure in part.measures) {
+        for (final note in measure.notes) {
+          note.syncChildrenToXml();
+        }
+      }
+    }
+  }
+
+  @override
+  String toXmlString({
+    bool pretty = false,
+    XmlEntityMapping? entityMapping,
+    int? level,
+    String? indent,
+    String? newLine,
+    bool Function(XmlNode)? preserveWhitespace,
+    bool Function(XmlAttribute)? indentAttribute,
+    Comparator<XmlAttribute>? sortAttributes,
+    bool Function(XmlNode)? spaceBeforeSelfClose,
+  }) {
+    _syncAllNotesToChildren();
+    return super.toXmlString(
+      pretty: pretty,
+      entityMapping: entityMapping,
+      level: level,
+      indent: indent,
+      newLine: newLine,
+      preserveWhitespace: preserveWhitespace,
+      indentAttribute: indentAttribute,
+      sortAttributes: sortAttributes,
+      spaceBeforeSelfClose: spaceBeforeSelfClose,
+    );
+  }
+
   /// Parse an uncompressed MusicXML string.
   factory MusicXmlDocument.parse(String input) {
     return MusicXmlDocument.fromXml(XmlDocument.parse(input));

@@ -106,4 +106,51 @@ class Notations extends XmlElement {
            ...accidentalMarks,
          ],
        );
+
+  void syncChildrenToXml() {
+    children.removeWhere((c) => c is Tied);
+    children.addAll(tieds);
+    children.removeWhere((c) => c is Slur);
+    children.addAll(slurs);
+    children.removeWhere((c) => c is Tuplet);
+    children.addAll(tuplets);
+    children.removeWhere((c) => c is Fermata);
+    children.addAll(fermatas);
+    children.removeWhere((c) => c is Articulations);
+    children.addAll(articulations);
+    children.removeWhere((c) => c is Ornaments);
+    children.addAll(ornaments);
+    children.removeWhere((c) => c is Dynamics);
+    children.addAll(dynamics);
+    children.removeWhere((c) => c is Technical);
+    children.addAll(technicals);
+    children.removeWhere((c) => c is AccidentalMark);
+    children.addAll(accidentalMarks);
+  }
+
+  @override
+  String toXmlString({
+    bool pretty = false,
+    XmlEntityMapping? entityMapping,
+    int? level,
+    String? indent,
+    String? newLine,
+    bool Function(XmlNode)? preserveWhitespace,
+    bool Function(XmlAttribute)? indentAttribute,
+    Comparator<XmlAttribute>? sortAttributes,
+    bool Function(XmlNode)? spaceBeforeSelfClose,
+  }) {
+    syncChildrenToXml();
+    return super.toXmlString(
+      pretty: pretty,
+      entityMapping: entityMapping,
+      level: level,
+      indent: indent,
+      newLine: newLine,
+      preserveWhitespace: preserveWhitespace,
+      indentAttribute: indentAttribute,
+      sortAttributes: sortAttributes,
+      spaceBeforeSelfClose: spaceBeforeSelfClose,
+    );
+  }
 }
