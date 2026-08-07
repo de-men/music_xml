@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
+import 'package:music_xml/src/local.dart';
 import 'package:test/test.dart';
 import 'package:xml/xml.dart';
 
@@ -78,6 +79,67 @@ void main() {
       expect(lyric.name, 'verse1');
       expect(lyric.syllabic, Syllabic.single);
       expect(lyric.text, '1.');
+    });
+  });
+
+  // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/elision-element/
+  group('<elision> example', () {
+    // U+203F UNDERTIE, the character the example uses to join "cro" and "a".
+    const undertie = '\u203f';
+
+    final document = MusicXmlDocument.parse(
+      File('test/assets/elision-element.xml').readAsStringSync(),
+    );
+    final lyric =
+        document.score.parts.single.measures.first.notes.single.lyrics!.single;
+
+    test('splits the two syllables around the elision', () {
+      expect(lyric.items.length, 2);
+
+      expect(lyric.items[0].syllabic, Syllabic.end);
+      expect(lyric.items[0].text, 'cro');
+      expect(lyric.items[0].elision, isNull);
+
+      expect(lyric.items[1].syllabic, Syllabic.single);
+      expect(lyric.items[1].text, 'a');
+      // The elision belongs to the item it is written in front of.
+      expect(lyric.items[1].elision, undertie);
+    });
+
+    test('reads the number attribute', () {
+      expect(lyric.number, NmToken('1'));
+      expect(lyric.name, isNull);
+    });
+
+    test('writes the children back in the order the example uses', () {
+      final written = XmlDocument.parse(
+        document.toXmlString(),
+      ).findAllElements(Local.lyric).single;
+
+      expect(written.childElements.map((e) => e.name.local), [
+        'syllabic',
+        'text',
+        'elision',
+        'syllabic',
+        'text',
+      ]);
+      expect(written.childElements.map((e) => e.innerText), [
+        'end',
+        'cro',
+        undertie,
+        'single',
+        'a',
+      ]);
+      expect(written.getAttribute('number'), '1');
+    });
+
+    test('still drops the unsupported default-y attribute', () {
+      final written = XmlDocument.parse(
+        document.toXmlString(),
+      ).findAllElements(Local.lyric).single;
+
+      // Delete this test once <lyric> keeps its position attributes.
+      expect(written.getAttribute('default-y'), isNull);
     });
   });
 }

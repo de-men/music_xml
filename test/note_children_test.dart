@@ -159,6 +159,7 @@ void main() {
     'notations-element',
     'beam-element',
     'staff-element',
+    'elision-element',
   ]) {
     test('$name.xml keeps every supported <note> child on a round trip', () {
       final source = File('test/assets/$name.xml').readAsStringSync();
