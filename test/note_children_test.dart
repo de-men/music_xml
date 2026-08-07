@@ -8,9 +8,30 @@ import 'package:music_xml/src/elements/part/measure/note/accidental.dart';
 import 'package:music_xml/src/elements/part/measure/note/beam.dart';
 import 'package:music_xml/src/elements/part/measure/note/staff.dart';
 import 'package:music_xml/src/elements/part/measure/note/stem.dart';
+import 'package:music_xml/src/local.dart';
 import 'package:test/test.dart';
+import 'package:xml/xml.dart';
 
 final asset = File('test/assets/notations-element.xml');
+
+List<String> childNames(XmlElement element) =>
+    element.childElements.map((e) => e.name.local).toList();
+
+/// `<note>` children that [Note] still drops when it writes itself back out.
+/// `<time-modification>` and `<lyric>` are parsed but never serialized; the
+/// rest are not parsed at all. Remove a name here once it round-trips.
+const unwrittenChildren = {
+  Local.timeModification,
+  Local.lyric,
+  'cue',
+  'instrument',
+  'footnote',
+  'level',
+  'notehead',
+  'notehead-text',
+  'play',
+  'listen',
+};
 
 void main() {
   late List<Note> notes;
@@ -119,4 +140,43 @@ void main() {
       '<accidental editorial="yes">sharp</accidental>',
     );
   });
+
+  // The MusicXML content model puts <accidental> before <stem> and <beam>
+  // after <staff>. https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/
+  test('<note> children are serialized in spec order', () {
+    expect(childNames(notes[1]), [
+      'pitch',
+      'duration',
+      'type',
+      'accidental',
+      'stem',
+      'staff',
+      'beam',
+      'notations',
+    ]);
+  });
+
+  for (final name in const [
+    'notations-element',
+    'beam-element',
+    'staff-element',
+  ]) {
+    test('$name.xml keeps every supported <note> child on a round trip', () {
+      final source = File('test/assets/$name.xml').readAsStringSync();
+
+      List<List<String>> noteShapes(String xml) => XmlDocument.parse(xml)
+          .findAllElements(Local.note)
+          .map(
+            (note) => childNames(
+              note,
+            ).where((c) => !unwrittenChildren.contains(c)).toList(),
+          )
+          .toList();
+
+      expect(
+        noteShapes(MusicXmlDocument.parse(source).toXmlString()),
+        noteShapes(source),
+      );
+    });
+  }
 }

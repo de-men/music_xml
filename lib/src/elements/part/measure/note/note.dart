@@ -211,6 +211,8 @@ class Note extends XmlElement {
     this.type,
   ) : super.tag(
         Local.note,
+        // The MusicXML content model for <note> is a fixed sequence, so a
+        // child written in the wrong slot makes the document fail validation.
         children: [
           if (grace != null) grace,
           if (chord != null) chord,
@@ -222,10 +224,10 @@ class Note extends XmlElement {
           if (voice != null) voice,
           if (type != null) type,
           ...dots,
-          ...beams,
+          if (accidental != null) accidental,
           if (stem != null) stem,
           if (staff != null) staff,
-          if (accidental != null) accidental,
+          ...beams,
           ...notations,
         ],
       );
