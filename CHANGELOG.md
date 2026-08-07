@@ -1,7 +1,8 @@
 ## 3.0.0
 
 * Add standard `<volume>` and `<pan>` children to `<midi-instrument>`
-* Add [`percent`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/percent/) and [`rotation-degrees`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/rotation-degrees/) data types
+* Add [`percent`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/percent/), [`rotation-degrees`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/rotation-degrees/), [`xsd:NMTOKEN`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xsd-NMTOKEN/) and [`syllabic`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/syllabic/) data types
+* Add [`<text>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/text/), [`<syllabic>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/syllabic/) and [`<elision>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elision/) as elements; the `<text>` class is called `LyricText` so it does not clash with the Flutter `Text` widget
 * Keep namespaced custom attributes on `<midi-instrument>` for app-specific playback state such as mute and solo [#58](https://github.com/de-men/music_xml/issues/58)
 
 ### Round-trip fixes
@@ -14,6 +15,8 @@
 
 * `Lyric` now extends `XmlElement` so it can be written back into the document
 * `Lyric.name` renamed to `Lyric.lyricName`, because `XmlElement.name` is the tag name (matches `LyricFont.lyricName`)
+* The `Syllabic` enum is renamed `SyllabicValue`, so that `Syllabic` can be the `<syllabic>` element (matches `NoteTypeValue`/`NoteType` and `AccidentalValue`/`Accidental`)
+* `LyricItem.syllabic` is now a `SyllabicValue`, and `Lyric` moved to `src/elements/part/measure/note/lyric/lyric.dart`
 
 ## 2.8.0
 

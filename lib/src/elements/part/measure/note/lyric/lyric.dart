@@ -1,14 +1,17 @@
 import 'package:xml/xml.dart';
 
-import '../../../../attributes/token_attribute.dart';
-import '../../../../local.dart';
-import '../../../../music_xml_parser_state.dart';
-
-/// The value of the `<syllabic>` child element.
-enum Syllabic { single, begin, end, middle }
+import '../../../../../attributes/nmtoken_attribute.dart';
+import '../../../../../attributes/token_attribute.dart';
+import '../../../../../data_types/nmtoken.dart';
+import '../../../../../data_types/syllabic_value.dart';
+import '../../../../../local.dart';
+import '../../../../../music_xml_parser_state.dart';
+import 'elision.dart';
+import 'syllabic.dart';
+import 'text.dart';
 
 class LyricItem {
-  Syllabic? syllabic;
+  SyllabicValue? syllabic;
   String text;
   String? elision;
 
@@ -29,35 +32,33 @@ class Lyric extends XmlElement {
   String? lyricName;
 
   /// Distinguishes the verses when a note carries more than one `<lyric>`.
-  String? number;
-
-  /// Returns the elision of the first item
-  Syllabic? get syllabic => items.first.syllabic;
+  NmToken? number;
 
   /// Returns the syllabic of the first item
+  SyllabicValue? get syllabic => items.first.syllabic;
+
+  /// Returns the text of the first item
   String get text => items.first.text;
 
   /// Parse the MusicXML `<lyric>` element.
   factory Lyric.parse(XmlElement xmlLyric, MusicXMLParserState state) {
     final items = <LyricItem>[];
 
-    Syllabic? syllabic;
+    SyllabicValue? syllabic;
     String? text;
     String? elision;
 
     for (final child in xmlLyric.childElements) {
       switch (child.name.local) {
         case Local.syllabic:
-          syllabic = Syllabic.values.firstWhere(
-            (e) => e.toString() == 'Syllabic.' + child.innerText,
-          );
+          syllabic = Syllabic.parse(child).content;
           break;
         case Local.text:
-          text = child.innerText;
+          text = LyricText.parse(child).content;
           break;
         case Local.elision:
           items.add(LyricItem(syllabic, text!, elision));
-          elision = child.innerText;
+          elision = Elision.parse(child).content;
           syllabic = null;
           text = null;
           break;
@@ -70,10 +71,12 @@ class Lyric extends XmlElement {
     }
     items.add(LyricItem(syllabic, text, elision));
 
+    final number = xmlLyric.getAttribute(Local.number);
+
     return Lyric(
       items,
       xmlLyric.getAttribute(Local.name),
-      number: xmlLyric.getAttribute(Local.number),
+      number: number == null ? null : NmToken(number),
     );
   }
 
@@ -81,21 +84,16 @@ class Lyric extends XmlElement {
     : super.tag(
         Local.lyric,
         attributes: [
-          if (number != null) TokenAttr(Local.number, number),
+          if (number != null) NmTokenAttr(Local.number, number),
           if (lyricName != null) TokenAttr(Local.name, lyricName),
         ],
         // Content model: syllabic? text (elision? syllabic? text)*, so the
         // elision of an item is written before that item's own text.
         children: [
           for (final item in items) ...[
-            if (item.elision != null)
-              XmlElement.tag(Local.elision, children: [XmlText(item.elision!)]),
-            if (item.syllabic != null)
-              XmlElement.tag(
-                Local.syllabic,
-                children: [XmlText(item.syllabic!.name)],
-              ),
-            XmlElement.tag(Local.text, children: [XmlText(item.text)]),
+            if (item.elision != null) Elision(item.elision!),
+            if (item.syllabic != null) Syllabic(item.syllabic!),
+            LyricText(item.text),
           ],
         ],
       );
