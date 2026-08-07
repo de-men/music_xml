@@ -90,17 +90,17 @@ void main() {
         final note3 = document.score.parts.single.measures.first.notes[2];
         expect(note3.lyrics?.first.syllabic, Syllabic.end);
         expect(note3.lyrics?.first.text, 'ny');
-        expect(note3.lyrics?.first.name, 'verse1');
+        expect(note3.lyrics?.first.lyricName, 'verse1');
 
         expect(note3.lyrics?.last.syllabic, Syllabic.end);
         expect(note3.lyrics?.last.text, 're ...');
-        expect(note3.lyrics?.last.name, 'verse2');
+        expect(note3.lyrics?.last.lyricName, 'verse2');
       });
 
       test('with a note containing one lyric with multiple text items', () {
         final lyric =
             document.score.parts.single.measures.first.notes[1].lyrics!.first;
-        expect(lyric.name, 'verse1');
+        expect(lyric.lyricName, 'verse1');
 
         final firstTextItem = lyric.items.first;
         expect(firstTextItem.syllabic, Syllabic.single);

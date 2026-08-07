@@ -229,7 +229,7 @@ class Note extends XmlElement {
           if (staff != null) staff,
           ...beams,
           ...notations,
-          ...?lyrics?.map((lyric) => lyric.toXmlElement()),
+          ...?lyrics,
         ],
       );
 

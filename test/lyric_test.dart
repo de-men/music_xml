@@ -67,16 +67,18 @@ void main() {
     test('builds its children from the element classes', () {
       final lyric =
           document.score.parts.single.measures.first.notes[1].lyrics!.first;
-      final children = lyric.toXmlElement().childElements.toList();
+      final children = lyric.childElements.toList();
       expect(children.whereType<LyricSyllabic>().length, 2);
       expect(children.whereType<LyricText>().length, 2);
       expect(children.whereType<LyricElision>().length, 1);
     });
 
-    test('keeps the 2.8.0 name and syllabic API', () {
+    test('is itself the element the note writes out', () {
       final lyric =
           document.score.parts.single.measures.first.notes[1].lyrics!.first;
-      expect(lyric.name, 'verse1');
+      expect(lyric, isA<XmlElement>());
+      expect(lyric.name.local, Local.lyric);
+      expect(lyric.lyricName, 'verse1');
       expect(lyric.syllabic, Syllabic.single);
       expect(lyric.text, '1.');
     });
@@ -108,7 +110,7 @@ void main() {
 
     test('reads the number attribute', () {
       expect(lyric.number, NmToken('1'));
-      expect(lyric.name, isNull);
+      expect(lyric.lyricName, isNull);
     });
 
     test('writes the children back in the order the example uses', () {

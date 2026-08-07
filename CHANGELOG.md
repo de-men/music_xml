@@ -12,6 +12,10 @@
 * `<note>` children are written in the order the MusicXML content model requires; `<accidental>` came after `<staff>` and `<beam>` before `<stem>`, which made the output fail validation
 * [`<lyric>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/) round-trips with its `<syllabic>`, `<text>` and `<elision>` children and its `number` and `name` attributes
 
+### Renamed
+
+* `Lyric.name` is now `Lyric.lyricName`. `Lyric` extends `XmlElement` so that a note can write it back out, and `XmlElement.name` is already the tag name. This is the same naming `LyricFont.lyricName` and `LyricLanguage.lyricName` have always used. Replace `lyric.name` with `lyric.lyricName`.
+
 ## 2.8.0
 
 * [`<type>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/type/) element on notes now round-trips via `NoteType` (keeps raw text for non-standard values); adds `NoteTypeValue` enum and `symbol-size` attribute [#53](https://github.com/de-men/music_xml/issues/53)
