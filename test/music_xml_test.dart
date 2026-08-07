@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:music_xml/music_xml.dart';
 import 'package:test/test.dart';
+import 'package:xml/xml.dart';
 
 import 'package:music_xml/src/data_types/step.dart' as dts;
+import 'package:music_xml/src/local.dart';
 
 final file = File('test/assets/musicXML.xml');
 
@@ -88,17 +90,17 @@ void main() {
         final note3 = document.score.parts.single.measures.first.notes[2];
         expect(note3.lyrics?.first.syllabic, Syllabic.end);
         expect(note3.lyrics?.first.text, 'ny');
-        expect(note3.lyrics?.first.name, 'verse1');
+        expect(note3.lyrics?.first.lyricName, 'verse1');
 
         expect(note3.lyrics?.last.syllabic, Syllabic.end);
         expect(note3.lyrics?.last.text, 're ...');
-        expect(note3.lyrics?.last.name, 'verse2');
+        expect(note3.lyrics?.last.lyricName, 'verse2');
       });
 
       test('with a note containing one lyric with multiple text items', () {
         final lyric =
             document.score.parts.single.measures.first.notes[1].lyrics!.first;
-        expect(lyric.name, 'verse1');
+        expect(lyric.lyricName, 'verse1');
 
         final firstTextItem = lyric.items.first;
         expect(firstTextItem.syllabic, Syllabic.single);
@@ -107,6 +109,32 @@ void main() {
         final secondTextItem = lyric.items.last;
         expect(secondTextItem.syllabic, Syllabic.begin);
         expect(secondTextItem.text, 'Ma');
+      });
+
+      test('<lyric> is written back with its children and attributes', () {
+        final lyrics = XmlDocument.parse(
+          document.toXmlString(),
+        ).findAllElements(Local.lyric).toList();
+
+        expect(lyrics.length, 94);
+
+        final multiText = lyrics.firstWhere((l) => l.childElements.length > 3);
+        expect(multiText.getAttribute('number'), '1');
+        expect(multiText.getAttribute('name'), 'verse1');
+        expect(multiText.childElements.map((e) => e.name.local), [
+          'syllabic',
+          'text',
+          'elision',
+          'syllabic',
+          'text',
+        ]);
+        expect(multiText.childElements.map((e) => e.innerText), [
+          'single',
+          '1.',
+          '\u00a0', // the source uses a non-breaking space as the elision
+          'begin',
+          'Ma',
+        ]);
       });
     });
 

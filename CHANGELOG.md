@@ -1,8 +1,19 @@
-## 2.9.0
+## 3.0.0
 
 * Add standard `<volume>` and `<pan>` children to `<midi-instrument>`
 * Add [`percent`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/percent/) and [`rotation-degrees`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/rotation-degrees/) data types
 * Keep namespaced custom attributes on `<midi-instrument>` for app-specific playback state such as mute and solo [#58](https://github.com/de-men/music_xml/issues/58)
+
+### Round-trip fixes
+
+* [`<tie>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tie/) is no longer dropped when a `<note>` is written back out [#60](https://github.com/de-men/music_xml/issues/60)
+* `<note>` children are written in the order the MusicXML content model requires; `<accidental>` came after `<staff>` and `<beam>` before `<stem>`, which made the output fail validation
+* [`<lyric>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/) round-trips with its `<syllabic>`, `<text>` and `<elision>` children and its `number` and `name` attributes
+
+### Breaking Changes
+
+* `Lyric` now extends `XmlElement` so it can be written back into the document
+* `Lyric.name` renamed to `Lyric.lyricName`, because `XmlElement.name` is the tag name (matches `LyricFont.lyricName`)
 
 ## 2.8.0
 

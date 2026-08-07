@@ -188,6 +188,9 @@ class Local {
   static const dot = 'dot';
   static const timeModification = 'time-modification';
   static const lyric = 'lyric';
+  static const syllabic = 'syllabic';
+  static const text = 'text';
+  static const elision = 'elision';
   static const rest = 'rest';
   static const tie = 'tie';
   static const timeOnly = 'time-only';

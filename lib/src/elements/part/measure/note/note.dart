@@ -229,6 +229,7 @@ class Note extends XmlElement {
           if (staff != null) staff,
           ...beams,
           ...notations,
+          ...?lyrics,
         ],
       );
 
