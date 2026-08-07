@@ -139,6 +139,36 @@ void main() {
       expect(syllable.syllabicElement!.content, syllable.syllabic);
     });
 
+    test('refuses writes through the syllables read back', () {
+      final lyric = Lyric(LyricSyllable.of('Ma'));
+
+      // first, rest and syllables are rebuilt from the children on each read,
+      // so a write through them would quietly do nothing. It throws instead.
+      expect(
+        () => lyric.first.texts.add(LyricText('ry')),
+        throwsUnsupportedError,
+      );
+      expect(
+        () => lyric.rest.add(ElidedSyllable.of('-', 'ry')),
+        throwsUnsupportedError,
+      );
+      expect(
+        () => lyric.syllables.add(LyricSyllable.of('ry')),
+        throwsUnsupportedError,
+      );
+
+      expect(lyric.toXmlString(), '<lyric><text>Ma</text></lyric>');
+    });
+
+    test('does not keep the list it was built from', () {
+      final runs = [LyricText('Ma')];
+      final syllable = LyricSyllable(runs);
+      runs.add(LyricText('ry'));
+
+      expect(syllable.texts.length, 1);
+      expect(syllable.text, 'Ma');
+    });
+
     test('two <text> runs with no elision are one syllable', () {
       // "Two <text> elements that are not separated by an <elision> element
       // are part of the same syllable, but may have different text

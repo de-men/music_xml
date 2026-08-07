@@ -6,7 +6,7 @@
 * `Lyric` follows the content model `syllabic? text ((elision syllabic?)? text)*`. `Lyric.first` is the opening syllable, which cannot carry an elision, and `Lyric.rest` holds the later syllables, each with the `<elision>` that joins it. A `<syllabic>` with no `<elision>` in front of it is no longer possible to build
 * Two `<text>` runs with no `<elision>` between them are one syllable with two formatting runs, as the spec says, instead of two separate items
 * `LyricSyllable` and `ElidedSyllable` hold the `LyricSyllabic`, `LyricText` and `LyricElision` objects, so `<text>` attributes have somewhere to live; `syllabic` and `text` still read as plain values
-* The syllables are grouped from the children instead of stored next to them, so what is written out and what is read back can no longer disagree
+* The syllables are grouped from the children instead of stored next to them, so what is written out and what is read back can no longer disagree. They are read back fresh on every call, so `texts`, `rest` and `syllables` are unmodifiable; edit `children` to change a lyric
 * Malformed lyrics are repaired instead of crashing: an `<elision>` before the first `<text>` is dropped, and so is a second `<syllabic>` inside one syllable
 
 ### Round-trip fixes

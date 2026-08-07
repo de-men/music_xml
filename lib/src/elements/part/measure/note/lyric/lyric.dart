@@ -17,11 +17,13 @@ import 'text.dart';
 class LyricSyllable {
   final LyricSyllabic? syllabicElement;
 
-  /// The formatting runs of this syllable. Never empty.
+  /// The formatting runs of this syllable. Never empty, and unmodifiable
+  /// because a syllable is read back from the children of its [Lyric].
   final List<LyricText> texts;
 
-  LyricSyllable(this.texts, {this.syllabicElement})
-    : assert(texts.isNotEmpty, 'a syllable needs at least one <text>');
+  LyricSyllable(List<LyricText> texts, {this.syllabicElement})
+    : assert(texts.isNotEmpty, 'a syllable needs at least one <text>'),
+      texts = List.unmodifiable(texts);
 
   /// Builds a syllable from plain values instead of elements.
   factory LyricSyllable.of(String text, {Syllabic? syllabic}) => LyricSyllable([
@@ -81,13 +83,14 @@ class Lyric extends XmlElement {
   LyricSyllable get first => _group(children).first ?? LyricSyllable.of('');
 
   /// The syllables after [first], each with the elision that joins it.
-  List<ElidedSyllable> get rest => _group(children).rest;
+  ///
+  /// Read back from [children] on every call, so the list is unmodifiable.
+  /// Add or remove syllables by editing [children].
+  List<ElidedSyllable> get rest => List.unmodifiable(_group(children).rest);
 
   /// Every syllable, in order.
-  List<LyricSyllable> get syllables => [
-    first,
-    for (final elided in rest) elided.syllable,
-  ];
+  List<LyricSyllable> get syllables =>
+      List.unmodifiable([first, for (final elided in rest) elided.syllable]);
 
   /// Returns the syllabic of the first syllable
   Syllabic? get syllabic => first.syllabic;
