@@ -3,6 +3,9 @@
 * Add [`<text>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/text/), [`<syllabic>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/syllabic/) and [`<elision>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elision/) as `LyricText`, `LyricSyllabic` and `LyricElision`, named after the existing `LyricFont` and `LyricLanguage`
 * Add the [`xsd:NMTOKEN`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xsd-NMTOKEN/) data type
 * Add `Lyric.number`, the `number` attribute that tells the verses apart
+* `Lyric.items` is grouped from the children instead of stored next to them, so the elements written out and the items read back can no longer disagree
+* `LyricItem` holds the `LyricSyllabic`, `LyricText` and `LyricElision` objects, so `<text>` attributes have somewhere to live; `syllabic`, `text` and `elision` still read as plain values
+* A `<lyric>` that starts with `<elision>` no longer crashes the parser
 
 ### Round-trip fixes
 
@@ -10,8 +13,9 @@
 * `<note>` children are written in the order the MusicXML content model requires; `<accidental>` came after `<staff>` and `<beam>` before `<stem>`, which made the output fail validation
 * [`<lyric>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/) round-trips with its `<syllabic>`, `<text>` and `<elision>` children and its `number` and `name` attributes
 
-### Renamed
+### API changes
 
+* `LyricItem` takes named arguments and its fields are final. Build one from plain values with `LyricItem.of('Ma', syllabic: Syllabic.begin)`. Writing to an item did nothing to the output before, so it is now a compile error instead of a silent no-op.
 * `Lyric.name` is now `Lyric.lyricName`. `Lyric` extends `XmlElement` so that a note can write it back out, and `XmlElement.name` is already the tag name. This is the same naming `LyricFont.lyricName` and `LyricLanguage.lyricName` have always used. Replace `lyric.name` with `lyric.lyricName`.
 
 ## 2.9.0
