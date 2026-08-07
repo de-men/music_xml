@@ -102,13 +102,12 @@ void main() {
             document.score.parts.single.measures.first.notes[1].lyrics!.first;
         expect(lyric.lyricName, 'verse1');
 
-        final firstSyllable = lyric.syllables.first;
-        expect(firstSyllable.syllabic, Syllabic.single);
-        expect(firstSyllable.text, '1.');
+        expect(lyric.first.syllabic, Syllabic.single);
+        expect(lyric.first.text, '1.');
 
-        final secondSyllable = lyric.syllables.last;
-        expect(secondSyllable.syllabic, Syllabic.begin);
-        expect(secondSyllable.text, 'Ma');
+        final secondItem = lyric.rest.single;
+        expect(secondItem.syllabic, Syllabic.begin);
+        expect(secondItem.text, 'Ma');
       });
 
       test('<lyric> is written back with its children and attributes', () {
