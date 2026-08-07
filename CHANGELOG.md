@@ -1,10 +1,8 @@
-## 2.9.0
+## 2.10.0
 
-* Add standard `<volume>` and `<pan>` children to `<midi-instrument>`
-* Add [`percent`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/percent/), [`rotation-degrees`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/rotation-degrees/) and [`xsd:NMTOKEN`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xsd-NMTOKEN/) data types
 * Add [`<text>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/text/), [`<syllabic>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/syllabic/) and [`<elision>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elision/) as `LyricText`, `LyricSyllabic` and `LyricElision`, named after the existing `LyricFont` and `LyricLanguage`
+* Add the [`xsd:NMTOKEN`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xsd-NMTOKEN/) data type
 * Add `Lyric.number`, the `number` attribute that tells the verses apart
-* Keep namespaced custom attributes on `<midi-instrument>` for app-specific playback state such as mute and solo [#58](https://github.com/de-men/music_xml/issues/58)
 
 ### Round-trip fixes
 
@@ -15,6 +13,12 @@
 ### Renamed
 
 * `Lyric.name` is now `Lyric.lyricName`. `Lyric` extends `XmlElement` so that a note can write it back out, and `XmlElement.name` is already the tag name. This is the same naming `LyricFont.lyricName` and `LyricLanguage.lyricName` have always used. Replace `lyric.name` with `lyric.lyricName`.
+
+## 2.9.0
+
+* Add standard `<volume>` and `<pan>` children to `<midi-instrument>`
+* Add [`percent`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/percent/) and [`rotation-degrees`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/rotation-degrees/) data types
+* Keep namespaced custom attributes on `<midi-instrument>` for app-specific playback state such as mute and solo [#58](https://github.com/de-men/music_xml/issues/58)
 
 ## 2.8.0
 
