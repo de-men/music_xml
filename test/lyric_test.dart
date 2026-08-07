@@ -31,8 +31,8 @@ void main() {
       final element = XmlDocument.parse(
         '<syllabic>begin</syllabic>',
       ).rootElement;
-      final syllabic = Syllabic.parse(element);
-      expect(syllabic.content, SyllabicValue.begin);
+      final syllabic = LyricSyllabic.parse(element);
+      expect(syllabic.content, Syllabic.begin);
       expect(syllabic.toXmlString(), '<syllabic>begin</syllabic>');
     });
 
@@ -47,7 +47,7 @@ void main() {
       final element = XmlDocument.parse(
         '<elision>\u00a0</elision>',
       ).rootElement;
-      final elision = Elision.parse(element);
+      final elision = LyricElision.parse(element);
       expect(elision.content, '\u00a0');
       expect(elision.toXmlString(), '<elision>\u00a0</elision>');
     });
@@ -66,10 +66,18 @@ void main() {
     test('builds its children from the element classes', () {
       final lyric =
           document.score.parts.single.measures.first.notes[1].lyrics!.first;
-      final children = lyric.childElements.toList();
-      expect(children.whereType<Syllabic>().length, 2);
+      final children = lyric.toXmlElement().childElements.toList();
+      expect(children.whereType<LyricSyllabic>().length, 2);
       expect(children.whereType<LyricText>().length, 2);
-      expect(children.whereType<Elision>().length, 1);
+      expect(children.whereType<LyricElision>().length, 1);
+    });
+
+    test('keeps the 2.8.0 name and syllabic API', () {
+      final lyric =
+          document.score.parts.single.measures.first.notes[1].lyrics!.first;
+      expect(lyric.name, 'verse1');
+      expect(lyric.syllabic, Syllabic.single);
+      expect(lyric.text, '1.');
     });
   });
 }

@@ -30,4 +30,4 @@ export 'src/elements/part/measure/note/note_type.dart';
 export 'src/data_types/note_type_value.dart';
 export 'src/data_types/symbol_size.dart';
 export 'src/data_types/nmtoken.dart';
-export 'src/data_types/syllabic_value.dart';
+export 'src/data_types/syllabic.dart';
