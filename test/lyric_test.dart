@@ -59,10 +59,29 @@ void main() {
     Lyric parse(String xml) =>
         Lyric.parse(XmlDocument.parse(xml).rootElement, MusicXMLParserState());
 
-    test('survives a <lyric> that opens with an <elision>', () {
+    test('drops an <elision> written before the first <text>', () {
       final lyric = parse('<lyric><elision>-</elision><text>a</text></lyric>');
-      expect(lyric.items.single.text, 'a');
-      expect(lyric.items.single.elision, '-');
+      expect(lyric.first.text, 'a');
+      // The content model gives the first syllable no place for an elision.
+      expect(lyric.rest, isEmpty);
+      expect(lyric.toXmlString(), '<lyric><text>a</text></lyric>');
+    });
+
+    test('drops a second <syllabic> with no <elision> in front of it', () {
+      final lyric = parse(
+        '<lyric><syllabic>begin</syllabic><text>Ma</text>'
+        '<syllabic>end</syllabic><text>ry</text></lyric>',
+      );
+
+      // Both <text> runs belong to one syllable, so the second <syllabic> is
+      // not allowed and the output is repaired into a valid lyric.
+      expect(lyric.syllables.length, 1);
+      expect(lyric.first.syllabic, Syllabic.begin);
+      expect(lyric.first.text, 'Mary');
+      expect(
+        lyric.toXmlString(),
+        '<lyric><syllabic>begin</syllabic><text>Ma</text><text>ry</text></lyric>',
+      );
     });
 
     test('an empty <lyric> still reports one empty syllable', () {
@@ -91,31 +110,61 @@ void main() {
       expect(children.whereType<LyricElision>().length, 1);
     });
 
-    test('reads items straight out of the children', () {
-      final lyric = Lyric([
-        LyricItem.of('Ma', syllabic: Syllabic.begin),
-        LyricItem.of('ry', syllabic: Syllabic.end, elision: '\u00a0'),
-      ], 'verse1');
+    test('reads its syllables straight out of the children', () {
+      final lyric = Lyric(
+        LyricSyllable.of('Ma', syllabic: Syllabic.begin),
+        rest: [ElidedSyllable.of('\u00a0', 'ry', syllabic: Syllabic.end)],
+        lyricName: 'verse1',
+      );
 
-      expect(lyric.items.length, 2);
-      expect(lyric.items[1].elision, '\u00a0');
+      expect(lyric.syllables.length, 2);
+      expect(lyric.rest.single.elision, '\u00a0');
 
       // There is only one copy of the data, so editing the children shows up
-      // in the items straight away.
+      // in the syllables straight away.
+      lyric.children.add(LyricElision('-'));
       lyric.children.add(LyricText('had'));
-      expect(lyric.items.length, 3);
-      expect(lyric.items.last.text, 'had');
+      expect(lyric.syllables.length, 3);
+      expect(lyric.syllables.last.text, 'had');
       expect(lyric.toXmlString(), contains('<text>had</text>'));
     });
 
     test('keeps the element objects so attributes have somewhere to live', () {
       final lyric =
           document.score.parts.single.measures.first.notes[1].lyrics!.first;
-      final item = lyric.items.first;
-      expect(item.textElement, isA<LyricText>());
-      expect(item.syllabicElement, isA<LyricSyllabic>());
-      expect(item.textElement.content, item.text);
-      expect(item.syllabicElement!.content, item.syllabic);
+      final syllable = lyric.first;
+      expect(syllable.texts.single, isA<LyricText>());
+      expect(syllable.syllabicElement, isA<LyricSyllabic>());
+      expect(syllable.texts.single.content, syllable.text);
+      expect(syllable.syllabicElement!.content, syllable.syllabic);
+    });
+
+    test('two <text> runs with no elision are one syllable', () {
+      // "Two <text> elements that are not separated by an <elision> element
+      // are part of the same syllable, but may have different text
+      // formatting." https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/
+      final lyric = Lyric(LyricSyllable([LyricText('Ma'), LyricText('ry')]));
+
+      expect(lyric.syllables.length, 1);
+      expect(lyric.first.texts.length, 2);
+      expect(lyric.first.text, 'Mary');
+    });
+
+    test('a later syllable cannot be built without an elision', () {
+      // ElidedSyllable requires the elision, so the schema-invalid
+      // "syllabic text syllabic text" cannot be constructed at all.
+      final lyric = Lyric(
+        LyricSyllable.of('Ma', syllabic: Syllabic.begin),
+        rest: [ElidedSyllable.of('-', 'ry', syllabic: Syllabic.end)],
+      );
+
+      expect(lyric.childElements.map((e) => e.name.local), [
+        'syllabic',
+        'text',
+        'elision',
+        'syllabic',
+        'text',
+      ]);
     });
 
     test('is itself the element the note writes out', () {
@@ -141,16 +190,14 @@ void main() {
         document.score.parts.single.measures.first.notes.single.lyrics!.single;
 
     test('splits the two syllables around the elision', () {
-      expect(lyric.items.length, 2);
+      expect(lyric.syllables.length, 2);
 
-      expect(lyric.items[0].syllabic, Syllabic.end);
-      expect(lyric.items[0].text, 'cro');
-      expect(lyric.items[0].elision, isNull);
+      expect(lyric.first.syllabic, Syllabic.end);
+      expect(lyric.first.text, 'cro');
 
-      expect(lyric.items[1].syllabic, Syllabic.single);
-      expect(lyric.items[1].text, 'a');
-      // The elision belongs to the item it is written in front of.
-      expect(lyric.items[1].elision, undertie);
+      expect(lyric.rest.single.elision, undertie);
+      expect(lyric.rest.single.syllable.syllabic, Syllabic.single);
+      expect(lyric.rest.single.syllable.text, 'a');
     });
 
     test('reads the number attribute', () {

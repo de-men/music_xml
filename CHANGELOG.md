@@ -3,9 +3,11 @@
 * Add [`<text>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/text/), [`<syllabic>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/syllabic/) and [`<elision>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elision/) as `LyricText`, `LyricSyllabic` and `LyricElision`, named after the existing `LyricFont` and `LyricLanguage`
 * Add the [`xsd:NMTOKEN`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xsd-NMTOKEN/) data type
 * Add `Lyric.number`, the `number` attribute that tells the verses apart
-* `Lyric.items` is grouped from the children instead of stored next to them, so the elements written out and the items read back can no longer disagree
-* `LyricItem` holds the `LyricSyllabic`, `LyricText` and `LyricElision` objects, so `<text>` attributes have somewhere to live; `syllabic`, `text` and `elision` still read as plain values
-* A `<lyric>` that starts with `<elision>` no longer crashes the parser
+* `Lyric` follows the content model `syllabic? text ((elision syllabic?)? text)*`. `Lyric.first` is the opening syllable, which cannot carry an elision, and `Lyric.rest` holds the later syllables, each with the `<elision>` that joins it. A `<syllabic>` with no `<elision>` in front of it is no longer possible to build
+* Two `<text>` runs with no `<elision>` between them are one syllable with two formatting runs, as the spec says, instead of two separate items
+* `LyricSyllable` and `ElidedSyllable` hold the `LyricSyllabic`, `LyricText` and `LyricElision` objects, so `<text>` attributes have somewhere to live; `syllabic` and `text` still read as plain values
+* The syllables are grouped from the children instead of stored next to them, so what is written out and what is read back can no longer disagree
+* Malformed lyrics are repaired instead of crashing: an `<elision>` before the first `<text>` is dropped, and so is a second `<syllabic>` inside one syllable
 
 ### Round-trip fixes
 
@@ -15,7 +17,7 @@
 
 ### API changes
 
-* `LyricItem` takes named arguments and its fields are final. Build one from plain values with `LyricItem.of('Ma', syllabic: Syllabic.begin)`. Writing to an item did nothing to the output before, so it is now a compile error instead of a silent no-op.
+* `LyricItem` and `Lyric.items` are replaced by `LyricSyllable`, `ElidedSyllable` and `Lyric.syllables`. Build a lyric with `Lyric(LyricSyllable.of('Ma', syllabic: Syllabic.begin), rest: [ElidedSyllable.of('\u00a0', 'ry')])`. Reads move from `lyric.items.first.text` to `lyric.syllables.first.text`.
 * `Lyric.name` is now `Lyric.lyricName`. `Lyric` extends `XmlElement` so that a note can write it back out, and `XmlElement.name` is already the tag name. This is the same naming `LyricFont.lyricName` and `LyricLanguage.lyricName` have always used. Replace `lyric.name` with `lyric.lyricName`.
 
 ## 2.9.0
