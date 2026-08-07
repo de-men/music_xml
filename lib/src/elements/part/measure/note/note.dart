@@ -218,6 +218,7 @@ class Note extends XmlElement {
           if (unpitched != null) unpitched,
           if (rest != null) rest,
           if (duration != null) duration,
+          ...ties,
           if (voice != null) voice,
           if (type != null) type,
           ...dots,

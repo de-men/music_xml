@@ -4,10 +4,15 @@ import 'package:music_xml/music_xml.dart';
 import 'package:music_xml/src/data_types/stem_value.dart';
 import 'package:music_xml/src/data_types/tied_type.dart';
 import 'package:music_xml/src/elements/part/measure/note/stem.dart';
+import 'package:music_xml/src/local.dart';
 import 'package:test/test.dart';
+import 'package:xml/xml.dart';
 
 // https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/tied-element/
 final asset = File('test/assets/tied-element.xml');
+
+List<String> childNames(XmlElement element) =>
+    element.childElements.map((e) => e.name.local).toList();
 
 void main() {
   late List<Note> notes;
@@ -61,5 +66,40 @@ void main() {
     expect(notes[2].ties, isEmpty);
     expect(notes[3].notations, isEmpty);
     expect(notes[3].ties, isEmpty);
+  });
+
+  // https://github.com/de-men/music_xml/issues/60
+  test('<tie> and <tied> survive a round trip', () {
+    final output = MusicXmlDocument.parse(
+      asset.readAsStringSync(),
+    ).toXmlString();
+
+    expect('<tie '.allMatches(output).length, 2);
+    expect('<tied '.allMatches(output).length, 3);
+  });
+
+  test('<tie> is written between <duration> and <voice>', () {
+    expect(childNames(notes[0]), [
+      'pitch',
+      'duration',
+      'tie',
+      'voice',
+      'type',
+      'stem',
+      'notations',
+    ]);
+  });
+
+  test('every <note> keeps the children it was parsed from', () {
+    final source = asset.readAsStringSync();
+
+    List<List<String>> noteShapes(String xml) => XmlDocument.parse(
+      xml,
+    ).findAllElements(Local.note).map(childNames).toList();
+
+    expect(
+      noteShapes(MusicXmlDocument.parse(source).toXmlString()),
+      noteShapes(source),
+    );
   });
 }
