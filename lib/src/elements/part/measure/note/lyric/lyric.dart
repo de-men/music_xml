@@ -10,75 +10,22 @@ import 'elision.dart';
 import 'syllabic.dart';
 import 'text.dart';
 
-/// The opening item of a [Lyric]: `syllabic? text`.
+/// One item of a [Lyric]: `(elision syllabic?)? text`.
 ///
-/// It holds no elision, because the content model only allows one in front of
-/// a later `<text>`.
+/// The elision sits in front of the text and joins this syllable to the one
+/// before it, so only an item after the first can carry one. Which item this is
+/// decides what it may hold, and an item on its own does not know that, so
+/// [Lyric] is what keeps the order legal.
 class LyricItem {
+  final LyricElision? elisionElement;
   final LyricSyllabic? syllabicElement;
   final LyricText textElement;
 
-  LyricItem(this.textElement, {this.syllabicElement});
+  LyricItem(this.textElement, {this.elisionElement, this.syllabicElement});
 
-  /// Builds an item from plain values instead of elements.
-  factory LyricItem.of(String text, {Syllabic? syllabic}) => LyricItem(
-    LyricText(text),
-    syllabicElement: syllabic == null ? null : LyricSyllabic(syllabic),
-  );
+  String? get elision => elisionElement?.content;
 
   Syllabic? get syllabic => syllabicElement?.content;
-
-  String get text => textElement.content;
-}
-
-/// The `elision syllabic?` group that starts a new syllable.
-///
-/// The elision is required and the syllabic is optional, so a `<syllabic>`
-/// with no `<elision>` in front of it cannot be built.
-class SyllableStart {
-  final LyricElision elisionElement;
-  final LyricSyllabic? syllabicElement;
-
-  SyllableStart(this.elisionElement, {this.syllabicElement});
-
-  /// Builds a syllable start from plain values instead of elements.
-  factory SyllableStart.of(String elision, {Syllabic? syllabic}) =>
-      SyllableStart(
-        LyricElision(elision),
-        syllabicElement: syllabic == null ? null : LyricSyllabic(syllabic),
-      );
-
-  String get elision => elisionElement.content;
-
-  Syllabic? get syllabic => syllabicElement?.content;
-}
-
-/// A later item of a [Lyric]: `(elision syllabic?)? text`.
-class LyricNextItem {
-  /// The group that starts a new syllable. Null when this `<text>` is another
-  /// formatting run of the syllable in front of it.
-  final SyllableStart? start;
-
-  final LyricText textElement;
-
-  LyricNextItem(this.textElement, {this.start});
-
-  /// Another formatting run of the syllable in front of this one.
-  factory LyricNextItem.run(String text) => LyricNextItem(LyricText(text));
-
-  /// A new syllable, joined to the one before it by an elision.
-  factory LyricNextItem.elided(
-    String elision,
-    String text, {
-    Syllabic? syllabic,
-  }) => LyricNextItem(
-    LyricText(text),
-    start: SyllableStart.of(elision, syllabic: syllabic),
-  );
-
-  String? get elision => start?.elision;
-
-  Syllabic? get syllabic => start?.syllabic;
 
   String get text => textElement.content;
 }
@@ -102,116 +49,100 @@ class Lyric extends XmlElement {
   /// Distinguishes the verses when a note carries more than one `<lyric>`.
   NmToken? number;
 
-  /// The opening item, which never has an elision in front of it.
-  LyricItem get first => _group(children).first ?? LyricItem.of('');
-
-  /// The items after [first].
+  /// The items, one per `<text>`.
   ///
-  /// Read back from [children] on every call, so the list is unmodifiable.
-  /// Add or remove items by editing [children].
-  List<LyricNextItem> get rest => List.unmodifiable(_group(children).rest);
+  /// Grouped once, when the lyric is built, and unmodifiable from then on.
+  /// [children] holds the same element objects, so build a new [Lyric] to
+  /// change one. Editing [children] by hand does not update this list.
+  final List<LyricItem> items;
 
-  /// Returns the syllabic of the first item
-  Syllabic? get syllabic => first.syllabic;
-
-  /// Returns the text of the first item
-  String get text => first.text;
-
-  /// Groups a run of lyric children into the items of the content model.
-  ///
-  /// Input that the content model forbids is repaired rather than kept: an
-  /// `<elision>` before the first `<text>` is dropped, and so is a
-  /// `<syllabic>` that has no `<elision>` in front of it.
-  static ({LyricItem? first, List<LyricNextItem> rest}) _group(
-    Iterable<XmlNode> nodes,
-  ) {
-    LyricItem? first;
-    final rest = <LyricNextItem>[];
+  /// Parse the MusicXML `<lyric>` element.
+  factory Lyric.parse(XmlElement xmlLyric, MusicXMLParserState state) {
+    final items = <LyricItem>[];
 
     LyricElision? elision;
     LyricSyllabic? syllabic;
 
-    for (final node in nodes) {
-      switch (node) {
-        case LyricElision():
-          elision = node;
-        case LyricSyllabic():
-          syllabic = node;
-        case LyricText():
-          if (first == null) {
-            first = LyricItem(node, syllabicElement: syllabic);
-          } else {
-            rest.add(
-              LyricNextItem(
-                node,
-                start: elision == null
-                    ? null
-                    : SyllableStart(elision, syllabicElement: syllabic),
-              ),
-            );
-          }
-          elision = null;
-          syllabic = null;
-      }
-    }
-
-    return (first: first, rest: rest);
-  }
-
-  /// Parse the MusicXML `<lyric>` element.
-  factory Lyric.parse(XmlElement xmlLyric, MusicXMLParserState state) {
-    final parsed = <XmlNode>[];
-
     for (final child in xmlLyric.childElements) {
       switch (child.name.local) {
+        case Local.elision:
+          elision = LyricElision.parse(child);
+          break;
         case Local.syllabic:
-          parsed.add(LyricSyllabic.parse(child));
+          syllabic = LyricSyllabic.parse(child);
           break;
         case Local.text:
-          parsed.add(LyricText.parse(child));
-          break;
-        case Local.elision:
-          parsed.add(LyricElision.parse(child));
+          // The `<text>` closes the item, so whatever came in front of it
+          // belongs to it. Both are then cleared, or the next `<text>` with
+          // nothing of its own would take them a second time.
+          items.add(
+            LyricItem(
+              LyricText.parse(child),
+              elisionElement: elision,
+              syllabicElement: syllabic,
+            ),
+          );
+          syllabic = null;
+          elision = null;
           break;
         default:
       }
     }
 
-    final grouped = _group(parsed);
-    final number = xmlLyric.getAttribute(Local.number);
+    String? lyricName;
+    NmToken? number;
 
-    return Lyric(
-      // A `<lyric>` with no `<text>` still reports one empty item, so that
-      // [text] and [syllabic] stay safe to read.
-      grouped.first ?? LyricItem.of(''),
-      rest: grouped.rest,
-      lyricName: xmlLyric.getAttribute(Local.name),
-      number: number == null ? null : NmToken(number),
-    );
+    for (final attribute in xmlLyric.attributes) {
+      switch (attribute.name.local) {
+        case Local.name:
+          lyricName = attribute.value;
+          break;
+        case Local.number:
+          number = NmToken(attribute.value);
+          break;
+        default:
+      }
+    }
+
+    // Skips the asserts: a file is data, not a mistake in code, so a lyric that
+    // breaks the content model is written back the way its author wrote it.
+    return Lyric._(items, lyricName: lyricName, number: number);
   }
 
-  Lyric(
-    LyricItem first, {
-    List<LyricNextItem> rest = const [],
-    this.lyricName,
-    this.number,
-  }) : super.tag(
-         Local.lyric,
-         attributes: [
-           if (number != null) NmTokenAttr(Local.number, number),
-           if (lyricName != null) TokenAttr(Local.name, lyricName),
-         ],
-         children: [
-           if (first.syllabicElement != null) first.syllabicElement!,
-           first.textElement,
-           for (final item in rest) ...[
-             if (item.start != null) ...[
-               item.start!.elisionElement,
-               if (item.start!.syllabicElement != null)
-                 item.start!.syllabicElement!,
-             ],
-             item.textElement,
-           ],
-         ],
-       );
+  /// The items are written out as they are, so they have to be in the order the
+  /// content model asks for.
+  factory Lyric(List<LyricItem> items, {String? lyricName, NmToken? number}) {
+    assert(
+      items.isEmpty || items.first.elisionElement == null,
+      'no <elision> may sit in front of the first <text>',
+    );
+    assert(
+      items
+          .skip(1)
+          .every(
+            (item) =>
+                item.elisionElement != null || item.syllabicElement == null,
+          ),
+      'a later <syllabic> needs an <elision> in front of it',
+    );
+
+    return Lyric._(items, lyricName: lyricName, number: number);
+  }
+
+  Lyric._(List<LyricItem> items, {this.lyricName, this.number})
+    : items = List.unmodifiable(items),
+      super.tag(
+        Local.lyric,
+        attributes: [
+          if (number != null) NmTokenAttr(Local.number, number),
+          if (lyricName != null) TokenAttr(Local.name, lyricName),
+        ],
+        children: [
+          for (final item in items) ...[
+            if (item.elisionElement != null) item.elisionElement!,
+            if (item.syllabicElement != null) item.syllabicElement!,
+            item.textElement,
+          ],
+        ],
+      );
 }

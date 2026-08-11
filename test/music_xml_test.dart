@@ -88,12 +88,12 @@ void main() {
     group('Lyric.parse', () {
       test('with a note containing multiple lyrics', () {
         final note3 = document.score.parts.single.measures.first.notes[2];
-        expect(note3.lyrics?.first.syllabic, Syllabic.end);
-        expect(note3.lyrics?.first.text, 'ny');
+        expect(note3.lyrics?.first.items.single.syllabic, Syllabic.end);
+        expect(note3.lyrics?.first.items.single.text, 'ny');
         expect(note3.lyrics?.first.lyricName, 'verse1');
 
-        expect(note3.lyrics?.last.syllabic, Syllabic.end);
-        expect(note3.lyrics?.last.text, 're ...');
+        expect(note3.lyrics?.last.items.single.syllabic, Syllabic.end);
+        expect(note3.lyrics?.last.items.single.text, 're ...');
         expect(note3.lyrics?.last.lyricName, 'verse2');
       });
 
@@ -102,10 +102,11 @@ void main() {
             document.score.parts.single.measures.first.notes[1].lyrics!.first;
         expect(lyric.lyricName, 'verse1');
 
-        expect(lyric.first.syllabic, Syllabic.single);
-        expect(lyric.first.text, '1.');
+        expect(lyric.items.first.syllabic, Syllabic.single);
+        expect(lyric.items.first.text, '1.');
 
-        final secondItem = lyric.rest.single;
+        final secondItem = lyric.items.last;
+        expect(secondItem.elision, '\u00a0');
         expect(secondItem.syllabic, Syllabic.begin);
         expect(secondItem.text, 'Ma');
       });
