@@ -18,11 +18,10 @@ List<String> childNames(XmlElement element) =>
     element.childElements.map((e) => e.name.local).toList();
 
 /// `<note>` children that [Note] still drops when it writes itself back out.
-/// `<time-modification>` and `<lyric>` are parsed but never serialized; the
-/// rest are not parsed at all. Remove a name here once it round-trips.
+/// `<time-modification>` is parsed but never serialized; the rest are not
+/// parsed at all. Remove a name here once it round-trips.
 const unwrittenChildren = {
   Local.timeModification,
-  Local.lyric,
   'cue',
   'instrument',
   'footnote',
@@ -160,6 +159,7 @@ void main() {
     'notations-element',
     'beam-element',
     'staff-element',
+    'elision-element',
   ]) {
     test('$name.xml keeps every supported <note> child on a round trip', () {
       final source = File('test/assets/$name.xml').readAsStringSync();

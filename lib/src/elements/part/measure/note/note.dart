@@ -16,7 +16,7 @@ import 'stem.dart';
 import '../../../voice.dart';
 import '../../../../basic_attributes.dart';
 import '../../../../local.dart';
-import 'lyric.dart';
+import 'lyric/lyric.dart';
 import '../../../../music_xml_parser_state.dart';
 import '../../../../note_duration.dart';
 import 'tie.dart';
@@ -229,6 +229,7 @@ class Note extends XmlElement {
           if (staff != null) staff,
           ...beams,
           ...notations,
+          ...?lyrics,
         ],
       );
 

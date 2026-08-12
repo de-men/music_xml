@@ -1,3 +1,26 @@
+## 2.10.0
+
+* Add [`<text>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/text/), [`<syllabic>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/syllabic/) and [`<elision>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elision/) as `LyricText`, `LyricSyllabic` and `LyricElision`, named after the existing `LyricFont` and `LyricLanguage`
+* Add the [`xsd:NMTOKEN`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xsd-NMTOKEN/) data type
+* Add `Lyric.number`, the `number` attribute that tells the verses apart
+* `Lyric` follows the content model `syllabic? text ((elision syllabic?)? text)*`. One `LyricItem` covers one `<text>` with what the model allows in front of it, and it holds the `LyricSyllabic`, `LyricText` and `LyricElision` objects, so `<text>` attributes have somewhere to live; `syllabic`, `text` and `elision` still read as plain values
+* `Lyric.items` is grouped once, while the lyric is built, and holds the same element objects as `children`, so what is written out and what is read back say the same thing. It is unmodifiable, and editing `children` by hand does not update it; build a new `Lyric` to change one
+* A lyric read from a file is written back the way its author wrote it, even where it breaks the content model, because a file is data and not a mistake in code. A list handed to `Lyric()` in code is asserted instead, so the mistake shows up where it is made
+
+### Round-trip fixes
+
+* [`<tie>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tie/) is no longer dropped when a `<note>` is written back out [#60](https://github.com/de-men/music_xml/issues/60)
+* `<note>` children are written in the order the MusicXML content model requires; `<accidental>` came after `<staff>` and `<beam>` before `<stem>`, which made the output fail validation
+* [`<lyric>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/) round-trips with its `<syllabic>`, `<text>` and `<elision>` children and its `number` and `name` attributes
+
+### API changes
+
+* `LyricItem(syllabic, text, elision)` now takes its children as elements: `LyricItem(LyricText('ry'), elisionElement: LyricElision('\u00a0'), syllabicElement: LyricSyllabic(Syllabic.end))`. Reads such as `lyric.items.first.text`, `.syllabic` and `.elision` are unchanged.
+* `Lyric(items, name)` is now `Lyric(items, lyricName: ...)`. `Lyric.items` is read-only; build a new `Lyric` to add or remove items.
+* `Lyric.text` and `Lyric.syllabic` are gone; read `lyric.items.first.text` and `lyric.items.first.syllabic`. Take care with `text`: `Lyric` now extends `XmlElement`, so `lyric.text` still compiles and returns the deprecated `XmlNode.text`, which is the text of every child joined together, not the first syllable.
+* `Syllabic` moved to the data types, next to the other MusicXML value types. It is still exported from `music_xml.dart`, so only a direct import of the old file needs a change.
+* `Lyric.name` is now `Lyric.lyricName`. `Lyric` extends `XmlElement` so that a note can write it back out, and `XmlElement.name` is already the tag name. This is the same naming `LyricFont.lyricName` and `LyricLanguage.lyricName` have always used. Replace `lyric.name` with `lyric.lyricName`.
+
 ## 2.9.0
 
 * Add standard `<volume>` and `<pan>` children to `<midi-instrument>`
